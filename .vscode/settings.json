@@ -1,0 +1,6 @@
+{
+    "vscode-edge-devtools.headless": false,
+    "vscode-edge-devtools.browserArgs": [
+        "--allow-file-access-from-files"
+    ]
+}
