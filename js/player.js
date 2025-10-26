@@ -1,3 +1,6 @@
+import { deepCopy } from "./utils";
+import { CLOTHING_MODEL } from './clothing.js';
+
 export const PLAYER_MODEL = {
   id: null,
   name: null,
