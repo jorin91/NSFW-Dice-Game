@@ -4,5 +4,8 @@
   "settings.language.NL": "Nederlands",
   "settings.language.EN": "Engels",
   "app.mainmenu.title": "Hoofdmenu",
-  "app.mainmenu.welcome": "Welkom bij het spel"
+  "app.mainmenu.welcome.header": "Welkom bij het spel",
+  "app.mainmenu.welcome.content": "Dit spel combineert geluk, spanning en uitdaging. Met vijf dobbelstenen strijd je tegen elkaar om punten te verdienen, terwijl de verliezer telkens een opdracht uitvoert. De sfeer mag speels en uitdagend zijn, maar het blijft altijd gebaseerd opinstemming en respect.",
+  "app.mainmenu.goal.header": "Doel van het spel",
+  "app.mainmenu.goal.content": "Verzamel zoveel mogelijk punten door slim te dobbelen. Wie een ronde wint, krijgt één punt op zijn totaalscore. Zodra alle spelers behalve één “safe” zijn, voert de overgebleven speler een opdracht uit. Daarna begint een nieuwe cyclus met iedereen weer op nul."
 }
