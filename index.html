@@ -8,11 +8,19 @@
     <script type="module" src="js/lang_i18n.js"></script>
   </head>
   <body>
-    <header class="topbar">
+    <header>
       <select id="lang-switch" aria-label="Language">
         <option value="nl">Nederlands</option>
         <option value="en">English</option>
       </select>
+
+      <section class="panel">
+        <div class="hd" data-i18n-auto="settings.language"></div>
+        <div class="row">
+            <button class="btn" data-i18n-auto="settings.language.NL"></button>
+            <button class="btn" data-i18n-auto="settings.language.EN"></button>
+        </div>
+      </section>
     </header>
     <main>
       <div class="app"></div>

@@ -1,3 +1,6 @@
 {
-  "ui.title": "NSFW DiceGame"
+  "ui.title": "NSFW DiceGame",
+  "settings.language": "Taal",
+  "settings.language.NL": "Nederlands",
+  "settings.language.EN": "Engels"
 }
