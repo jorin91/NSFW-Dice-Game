@@ -1,22 +1,20 @@
-const LS_KEY_GAMESTATE = "NSFWDiceGame_GameState";
-
-function storageSaveGame(gameState) {
+export function storageSave(object, key) {
   try {
-    localStorage.setItem(LS_KEY_GAMESTATE, JSON.stringify(gameState));
+    localStorage.setItem(key, JSON.stringify(object));
   } catch {}
 }
 
-function storageLoadGame() {
+export function storageLoad(key) {
   try {
-    const raw = localStorage.getItem(LS_KEY_GAMESTATE);
+    const raw = localStorage.getItem(key);
     return raw ? JSON.parse(raw) : null;
   } catch {
     return null;
   }
 }
 
-function storageClearGame() {
+export function storageClear(key) {
   try {
-    localStorage.removeItem(LS_KEY_GAMESTATE);
+    localStorage.removeItem(key);
   } catch {}
 }

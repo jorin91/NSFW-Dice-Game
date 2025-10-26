@@ -1,30 +1,41 @@
-function gameGetState() {
+import { deepCopy } from "./utils";
+import { storageSave, storageLoad } from "./localstorage";
+
+const LS_KEY_GAMESTATE = "NSFWDiceGame_GameState";
+
+export const GAME_FLOW_MODEL = {
+  version: 1,
+  activePanel: "mainmenu",
+  round: 0,
+  turnIndex: 0,
+  players: [], // je kunt hier straks createPlayer() instances in zetten
+  settings: {}, // later: maxRolls, pointsToSafe, enz.
+  tasks: {},
+};
+
+export function gameGetState() {
   return deepCopy(window.GAME);
 }
 
-function gameApplyState(state) {
+export function gameApplyState(state) {
   // start vanuit het model om ontbrekende velden te vullen
   window.GAME = deepCopy(GAME_FLOW_MODEL);
   Object.assign(window.GAME, state || {});
 }
 
-function gameSetActivePanel(key) {
+export function gameSetActivePanel(key) {
   window.GAME.activePanel = key;
-  storageSaveGame(gameGetState());
+  storageSave(gameGetState(), LS_KEY_GAMESTATE);
 }
 
-function gameInitFromStorage() {
-  const saved = storageLoadGame();
+export function gameInitFromStorage() {
+  const saved = storageLoad(LS_KEY_GAMESTATE);
   if (saved) {
     gameApplyState(saved);
     showPanel(window.GAME.activePanel || "mainmenu");
   } else {
     // eerste keer: toon hoofdmenu en sla meteen initiele state op
     showPanel("mainmenu");
-    storageSaveGame(gameGetState());
+    storageSave(gameGetState(), LS_KEY_GAMESTATE);
   }
 }
-
-// Init bij laden
-window.GAME = deepCopy(GAME_FLOW_MODEL);
-document.addEventListener("DOMContentLoaded", gameInitFromStorage);

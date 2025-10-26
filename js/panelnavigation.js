@@ -1,4 +1,4 @@
-function showPanel(key) {
+export function showPanel(key) {
   document
     .querySelectorAll(".panel")
     .forEach((p) => p.classList.toggle("active", p.dataset.panel === key));
@@ -6,7 +6,7 @@ function showPanel(key) {
 
 // helper die je 1x (of vaker) kunt aanroepen; werkt ook voor nieuw toegevoegde buttons
 let _panelNavHandler = null;
-function attachPanelNavigation() {
+export function attachPanelNavigation() {
   if (_panelNavHandler) {
     document.removeEventListener("click", _panelNavHandler);
   }
@@ -20,6 +20,3 @@ function attachPanelNavigation() {
   };
   document.addEventListener("click", _panelNavHandler);
 }
-
-// eenmalig aanroepen na het renderen van je panels
-attachPanelNavigation();

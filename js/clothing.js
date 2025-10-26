@@ -1,34 +1,4 @@
-// ===== Game State =====
-const LS_KEY_GAMESTATE = "NSFWDiceGame_GameState";
-
-const GAME_FLOW_MODEL = {
-  version: 1,
-  activePanel: "mainmenu",
-  round: 0,
-  turnIndex: 0,
-  players: [], // je kunt hier straks createPlayer() instances in zetten
-  settings: {}, // later: maxRolls, pointsToSafe, enz.
-  tasks: {},
-};
-
-// ===== Tasks =====
-
-
-// ===== Player =====
-const PLAYER_MODEL = {
-  id: null,
-  name: null,
-  age: 18,
-  sex: null,
-  preferSex: null,
-  consent: false,
-  score: 0,
-  safe: false, //  <- Safe = ronde gewonnen dus geen opdracht
-  clothing: null, // <- niet vooraf invullen met kopie
-};
-
-// ===== Clothing =====
-const CLOTHING_MODEL = {
+export const CLOTHING_MODEL = {
   headwear: {
     name: "clothes.headwear.name",
     desc: "clothes.headwear.desc",
@@ -142,3 +112,15 @@ const CLOTHING_MODEL = {
   },
 };
 
+export function canRemoveClothingPiece(key, clothingState) {
+  const piece = clothingState[key];
+  if (!piece) return false;
+  const rules = piece.removeRules || [];
+  // alle regels moeten voldoen
+  return rules.every((rule) => {
+    const notWorn = rule?.notWorn || [];
+    return notWorn.every(
+      (k) => clothingState[k] && clothingState[k].worn === false
+    );
+  });
+}

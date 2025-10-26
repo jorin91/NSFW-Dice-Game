@@ -244,8 +244,3 @@ export async function initI18n() {
     });
   });
 }
-
-// auto-start
-document.addEventListener("DOMContentLoaded", () => {
-  initI18n();
-});
