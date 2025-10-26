@@ -72,7 +72,10 @@ export function applyI18nToElement(el) {
     if (target === "html") el.innerHTML = val;
     else if (target === "text" || !target) {
       if (target === "text" || canSetTextDirect(el)) el.textContent = val;
-      else (findLabelSlot(el)?.textContent = val);
+      else {
+        const slot = findLabelSlot(el);
+        if (slot) slot.textContent = val;
+      }
     } else {
       el.setAttribute(target, val); // bv "value" / "title" / "aria-label"
     }
