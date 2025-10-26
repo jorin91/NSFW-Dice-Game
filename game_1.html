@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <title>NSFW Dice — Local Offline</title>
+    <style>
+      :root {
+        --bg: #14161a;
+        --bg2: #1b1e24;
+        --panel: #20242c;
+        --panel2: #2a2f3a;
+        --text: #e8eaf0;
+        --muted: #aab0bd;
+        --accent: #5865f2; /* blurple */
+        --accent-2: #6f7bff;
+        --danger: #ff5d66;
+        --ok: #35c28a;
+        --warn: #f5a623;
+        --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+        --radius: 14px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        background: var(--bg);
+        color: var(--text);
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
+          Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      }
+      a {
+        color: var(--accent-2);
+        text-decoration: none;
+      }
+      .app {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 16px;
+      }
+      .hstack {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .vstack {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .card {
+        background: var(--panel);
+        border: 1px solid #2a2f3a;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+      }
+      .card .hd {
+        padding: 14px 16px;
+        border-bottom: 1px solid #2a2f3a;
+        background: linear-gradient(180deg, var(--panel2), var(--panel));
+        border-top-left-radius: var(--radius);
+        border-top-right-radius: var(--radius);
+      }
+      .card .bd {
+        padding: 16px;
+      }
+      .btn {
+        background: var(--accent);
+        color: white;
+        border: none;
+        padding: 10px 14px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.05s ease;
+      }
+      .btn:active {
+        transform: translateY(1px);
+      }
+      .btn.secondary {
+        background: #3a4152;
+        color: var(--text);
+      }
+      .btn.ghost {
+        background: transparent;
+        border: 1px solid #3a4152;
+        color: var(--text);
+      }
+      .btn.warn {
+        background: var(--warn);
+        color: #111;
+      }
+      .btn.ok {
+        background: var(--ok);
+      }
+      .btn.danger {
+        background: var(--danger);
+      }
+      .btn.small {
+        padding: 6px 10px;
+        border-radius: 8px;
+      }
+      input[type="text"],
+      input[type="number"],
+      select,
+      textarea {
+        width: 100%;
+        background: #0f1115;
+        color: var(--text);
+        border: 1px solid #2a2f3a;
+        border-radius: 10px;
+        padding: 10px 12px;
+        outline: none;
+      }
+      textarea {
+        min-height: 160px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas,
+          "Liberation Mono", monospace;
+        resize: vertical;
+      }
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #0f1115;
+        border: 1px solid #2a2f3a;
+        color: var(--muted);
+      }
+      .muted {
+        color: var(--muted);
+      }
+      .sep {
+        height: 1px;
+        background: #2a2f3a;
+        margin: 12px 0;
+      }
+      /* Player header bar */
+      .playersbar {
+        display: flex;
+        gap: 10px;
+        overflow: auto;
+        padding-bottom: 8px;
+      }
+      .player-tab {
+        background: var(--panel2);
+        border: 1px solid #2a2f3a;
+        border-radius: 12px;
+        padding: 8px 12px;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+      .player-tab.active {
+        outline: 2px solid var(--accent);
+      }
+      .player-panel {
+        margin-top: 10px;
+      }
+      /* Dice */
+      .dice-area {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .dice-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        min-height: 64px;
+        align-items: center;
+      }
+      .die {
+        width: 60px;
+        height: 60px;
+        background: #0f1115;
+        border: 2px solid #2a2f3a;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        font-size: 26px;
+        cursor: pointer;
+        position: relative;
+      }
+      .die.locked {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 2px rgba(88, 101, 242, 0.25) inset;
+      }
+      .die .badge {
+        position: absolute;
+        bottom: 4px;
+        right: 6px;
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .dice-legend {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .score-preview {
+        font-size: 20px;
+      }
+      .rowtitle {
+        color: var(--muted);
+        font-size: 14px;
+      }
+      /* Overlay */
+      .overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.75);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        z-index: 50;
+      }
+      .overlay.show {
+        display: flex;
+      }
+      .overlay .sheet {
+        width: min(960px, 96vw);
+        background: var(--panel);
+        border: 1px solid #2a2f3a;
+        border-radius: 18px;
+        box-shadow: var(--shadow);
+      }
+      .timer {
+        font-variant-numeric: tabular-nums;
+        font-size: 42px;
+      }
+      .scroll {
+        max-height: 260px;
+        overflow: auto;
+        border: 1px solid #2a2f3a;
+        border-radius: 10px;
+        padding: 10px;
+        background: #0f1115;
+      }
+      /* Toggles */
+      .toggle {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .toggle input {
+        width: 42px;
+        height: 24px;
+        appearance: none;
+        background: #3a4152;
+        border-radius: 999px;
+        position: relative;
+        outline: none;
+        cursor: pointer;
+      }
+      .toggle input::after {
+        content: "";
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 18px;
+        height: 18px;
+        background: white;
+        border-radius: 999px;
+        transition: all 0.15s ease;
+      }
+      .toggle input:checked {
+        background: var(--accent);
+      }
+      .toggle input:checked::after {
+        transform: translateX(18px);
+      }
+      /* Small badges */
+      .catchip {
+        display: inline-flex;
+        gap: 6px;
+        align-items: center;
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: #0f1115;
+        border: 1px solid #383f4f;
+        color: #cfd3de;
+        font-size: 12px;
+      }
+      .catchip .w {
+        color: #9fb3ff;
+      }
+      .nowrap {
+        white-space: nowrap;
+      }
+      @media (max-width: 720px) {
+        .grid-3 {
+          grid-template-columns: 1fr;
+        }
+        .grid-2 {
+          grid-template-columns: 1fr;
+        }
+        .die {
+          width: 54px;
+          height: 54px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app vstack">
+      <div class="card">
+        <div class="hd">Hoofdmenu & Instellingen</div>
+        <div class="bd vstack">
+          <div class="grid-3">
+            <div class="vstack">
+              <label class="muted">Max worpen per beurt</label>
+              <input
+                type="number"
+                id="setMaxRolls"
+                value="3"
+                min="1"
+                max="10"
+              />
+            </div>
+            <div class="vstack">
+              <label class="muted"
+                >Punten voor “safe” (speler slaat rondes over)</label
+              >
+              <input
+                type="number"
+                id="setPointsToSafe"
+                value="3"
+                min="1"
+                max="20"
+              />
+            </div>
+            <div class="vstack">
+              <label class="muted">Rondewinnaar per ronde</label>
+              <div class="pill">Hoogste score krijgt 1 punt</div>
+            </div>
+          </div>
+
+          <div class="sep"></div>
+
+          <div class="grid-2">
+            <div class="vstack">
+              <div class="hstack" style="justify-content: space-between">
+                <span class="muted"
+                  >Begin-kleding (voor alle spelers; aanpasbaar per speler
+                  tijdens spel)</span
+                >
+                <button class="btn small secondary" id="resetClothes">
+                  Reset
+                </button>
+              </div>
+              <div class="hstack" id="startClothes"></div>
+              <div class="muted">
+                Kleding blokkeert zones (shirt→borsten/torso,
+                broek→onderlichaam/groin, bh→borsten, ondergoed→groin,
+                sokken→geen).
+              </div>
+            </div>
+            <div class="vstack">
+              <div class="hstack" style="justify-content: space-between">
+                <span class="muted">Categorieën aan/uit</span>
+                <button class="btn small secondary" id="allCatsOn">
+                  Alles aan
+                </button>
+              </div>
+              <div
+                class="hstack"
+                id="catsToggles"
+                style="flex-wrap: wrap"
+              ></div>
+              <div class="muted">
+                Je kunt de set categorieën en taken hieronder volledig bewerken.
+              </div>
+            </div>
+          </div>
+
+          <div class="sep"></div>
+
+          <div class="vstack">
+            <label class="muted">Opdracht-config (JSON, dynamisch)</label>
+            <textarea id="configJson"></textarea>
+            <div class="hstack" style="justify-content: flex-start; gap: 8px">
+              <button class="btn" id="applyConfig">Config toepassen</button>
+              <span class="muted"
+                >Aanpassen kan live, zonder herladen. Fouten worden
+                gemeld.</span
+              >
+            </div>
+          </div>
+
+          <div class="sep"></div>
+
+          <div class="grid-2">
+            <div class="vstack">
+              <label class="muted">Aantal spelers</label>
+              <div class="hstack">
+                <input type="number" id="numPlayers" min="2" value="2" />
+                <button class="btn" id="buildPlayers">Velden maken</button>
+              </div>
+              <div
+                id="playersSetup"
+                class="vstack"
+                style="margin-top: 8px"
+              ></div>
+            </div>
+            <div class="vstack">
+              <label class="muted">Start het spel</label>
+              <button class="btn ok" id="startGame">Spel starten</button>
+              <div class="muted">
+                Alle spelers moeten 18+ zijn én instemmen. Spel draait volledig
+                offline in je browser.
+              </div>
+              <div id="setupErrors" class="muted" style="color: #ff9e9e"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="gameArea" class="card" style="display: none">
+        <div class="hd hstack" style="justify-content: space-between">
+          <div>Spel</div>
+          <div class="hstack">
+            <span id="roundInfo" class="pill"></span>
+            <span id="turnInfo" class="pill"></span>
+            <button class="btn ghost small" id="restartGame">Opnieuw</button>
+          </div>
+        </div>
+        <div class="bd vstack">
+          <!-- Players bar -->
+          <div class="playersbar" id="playersBar"></div>
+          <div id="playerPanel" class="player-panel card">
+            <div class="bd vstack" id="playerPanelBody"></div>
+          </div>
+
+          <div class="card">
+            <div class="hd">Dobbelstenen</div>
+            <div class="bd vstack">
+              <div class="dice-area">
+                <div class="rowtitle">Niet vastgezet</div>
+                <div class="dice-row" id="rowUnlocked"></div>
+                <div class="rowtitle">Vastgezet</div>
+                <div class="dice-row" id="rowLocked"></div>
+              </div>
+              <div
+                class="hstack"
+                style="justify-content: space-between; flex-wrap: wrap"
+              >
+                <div class="score-preview">
+                  Voorvertoning score: <span id="scorePreview">0</span>
+                </div>
+                <div class="hstack">
+                  <span class="pill nowrap"
+                    >Resterende worpen:
+                    <span id="rollsLeft" style="margin-left: 8px">0</span></span
+                  >
+                  <button class="btn" id="btnRoll">Werp opnieuw</button>
+                  <button class="btn secondary" id="btnEndTurn">
+                    Beurt afronden
+                  </button>
+                  <button class="btn ghost" id="btnResetLocks">
+                    Alles losmaken
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="log" class="card">
+            <div class="hd">Log</div>
+            <div class="bd scroll" id="logBody"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Assignment Overlay -->
+      <div class="overlay" id="overlay">
+        <div class="sheet">
+          <div class="hd hstack" style="justify-content: space-between">
+            <div>Actieve opdracht</div>
+            <button class="btn ghost small" id="closeOverlay">Sluiten</button>
+          </div>
+          <div class="bd vstack" id="overlayBody"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* ===========================================================
+   CONFIG (kan live bewerkt worden via het JSON-veld)
+   =========================================================== */
+
+      const DEFAULT_CONFIG = {
+        categories: [
+          { key: "undress", name: "Undress", enabled: true, weight: 1.0 },
+          { key: "tease", name: "Tease", enabled: true, weight: 0.7 },
+          { key: "interaction_self", name: "Self", enabled: true, weight: 0.5 },
+          {
+            key: "interaction_other",
+            name: "With other",
+            enabled: true,
+            weight: 0.4,
+          },
+          { key: "oral", name: "Oral", enabled: true, weight: 0.2 },
+          { key: "vaginal", name: "Vaginal", enabled: true, weight: 0.15 },
+          { key: "anal", name: "Anal", enabled: false, weight: 0.05 },
+        ],
+        /* clothing definitions -> which zones they block */
+        clothingMap: {
+          shirt: { name: "Shirt", blocks: ["torso", "breasts"] },
+          pants: { name: "Broek", blocks: ["lower", "groin"] },
+          bra: { name: "Bh", blocks: ["breasts"] },
+          underwear: { name: "Ondergoed", blocks: ["groin"] },
+          socks: { name: "Sokken", blocks: [] },
+        },
+        /* Tasks:
+     - id: unique
+     - category: one of categories.key
+     - type: "single" | "repeat" | "timer"
+     - amount: (repeat) number, (timer) seconds
+     - text: supports {loser} and (if used) {target}
+     - needsTarget: boolean when another player is required
+     - conditions: a declarative subset checked before selection
+         {
+           loserHasAnyClothes: ["shirt","pants",...],  // at least one still worn
+           loserHasClothes: ["bra"],                   // each listed must be worn
+           loserZoneFree: ["breasts","groin"],         // zones must NOT be blocked
+           targetZoneFree: ["breasts","groin"],        // when needsTarget=true
+           targetRequiredGender: ["female","male"],    // acceptable targets
+           targetMustPreferLoser: true|false           // optional
+         }
+     - effects: weightDeltas: { catKey: deltaNumber }
+  */
+        tasks: [
+          {
+            id: "undress_socks",
+            category: "undress",
+            type: "single",
+            text: "{loser} trekt sokken uit.",
+            needsTarget: false,
+            conditions: { loserHasClothes: ["socks"] },
+            effects: { weightDeltas: { undress: -0.05, tease: +0.05 } },
+          },
+          {
+            id: "undress_shirt",
+            category: "undress",
+            type: "single",
+            text: "{loser} trekt het shirt uit.",
+            needsTarget: false,
+            conditions: { loserHasClothes: ["shirt"] },
+            effects: { weightDeltas: { undress: -0.1, tease: +0.1 } },
+          },
+          {
+            id: "tease_show_breasts",
+            category: "tease",
+            type: "timer",
+            amount: 20,
+            text: "{loser} toont borsten (teasen) gedurende {amount}s.",
+            needsTarget: false,
+            conditions: { loserZoneFree: ["breasts"] },
+            effects: {
+              weightDeltas: { interaction_other: +0.05, tease: +0.05 },
+            },
+          },
+          {
+            id: "self_touch",
+            category: "interaction_self",
+            type: "timer",
+            amount: 30,
+            text: "{loser} raakt zichzelf aan (bovenlichaam) gedurende {amount}s.",
+            needsTarget: false,
+            conditions: { loserZoneFree: ["breasts", "torso"] },
+            effects: { weightDeltas: { interaction_other: +0.05 } },
+          },
+          {
+            id: "kiss_target",
+            category: "interaction_other",
+            type: "repeat",
+            amount: 5,
+            text: "{loser} kust {target} {amount}× (op lip/nek, consensueel).",
+            needsTarget: true,
+            conditions: { targetRequiredGender: ["female", "male"] },
+            effects: {
+              weightDeltas: { interaction_other: +0.05, oral: +0.02 },
+            },
+          },
+          {
+            id: "oral_tease",
+            category: "oral",
+            type: "timer",
+            amount: 30,
+            text: "{loser} geeft orale teasing aan {target} gedurende {amount}s.",
+            needsTarget: true,
+            conditions: { targetZoneFree: ["groin"] },
+            effects: {
+              weightDeltas: { oral: +0.03, vaginal: +0.02, anal: +0.01 },
+            },
+          },
+          {
+            id: "vaginal_interaction",
+            category: "vaginal",
+            type: "timer",
+            amount: 40,
+            text: "{loser} en {target} voeren vaginale interactie uit gedurende {amount}s.",
+            needsTarget: true,
+            conditions: {
+              loserZoneFree: ["groin"],
+              targetZoneFree: ["groin"],
+              targetRequiredGender: ["male"],
+            },
+            effects: { weightDeltas: { vaginal: +0.02 } },
+          },
+          {
+            id: "anal_interaction",
+            category: "anal",
+            type: "timer",
+            amount: 40,
+            text: "{loser} en {target} voeren anale interactie uit gedurende {amount}s.",
+            needsTarget: true,
+            conditions: { loserZoneFree: ["groin"], targetZoneFree: ["groin"] },
+            effects: { weightDeltas: { anal: +0.02 } },
+          },
+        ],
+      };
+
+      /* ===========================================================
+   STATE
+   =========================================================== */
+
+      let CONFIG = structuredClone(DEFAULT_CONFIG);
+
+      const STATE = {
+        settings: {
+          maxRolls: 3,
+          pointsToSafe: 3,
+          startClothes: ["shirt", "pants", "underwear", "socks"], // bra wordt per speler op basis van gender gesuggereerd
+        },
+        round: 1,
+        turnIndex: 0, // index in activePlayers
+        dice: [1, 1, 1, 1, 1],
+        locks: [false, false, false, false, false],
+        rollsLeft: 0,
+        players: [],
+        activePlayersIdx: [], // indices in STATE.players die nog meedoen (niet safe)
+        perTurnScores: {}, // round->playerId->score
+        overlayTask: null,
+      };
+
+      const dom = (sel) => document.querySelector(sel);
+      const el = (tag, cls, text) => {
+        const n = document.createElement(tag);
+        if (cls) n.className = cls;
+        if (text !== undefined) n.textContent = text;
+        return n;
+      };
+
+      /* ===========================================================
+   UI helpers
+   =========================================================== */
+
+      function toast(msg) {
+        appendLog(msg);
+      }
+
+      function appendLog(html) {
+        const p = document.createElement("div");
+        p.innerHTML = html;
+        dom("#logBody").prepend(p);
+      }
+
+      /* ===========================================================
+   SETUP UI
+   =========================================================== */
+
+      function renderStartClothes() {
+        const wrap = dom("#startClothes");
+        wrap.innerHTML = "";
+        Object.entries(CONFIG.clothingMap).forEach(([key, def]) => {
+          const chip = el("label", "pill");
+          const cb = el("input");
+          cb.type = "checkbox";
+          cb.checked = STATE.settings.startClothes.includes(key);
+          cb.addEventListener("change", () => {
+            if (cb.checked) {
+              if (!STATE.settings.startClothes.includes(key))
+                STATE.settings.startClothes.push(key);
+            } else {
+              STATE.settings.startClothes = STATE.settings.startClothes.filter(
+                (x) => x !== key
+              );
+            }
+          });
+          chip.append(cb, el("span", "", def.name));
+          wrap.appendChild(chip);
+        });
+      }
+      function renderCatsToggles() {
+        const wrap = dom("#catsToggles");
+        wrap.innerHTML = "";
+        CONFIG.categories.forEach((cat) => {
+          const chip = el("label", "pill");
+          const cb = el("input");
+          cb.type = "checkbox";
+          cb.checked = !!cat.enabled;
+          cb.addEventListener("change", () => {
+            cat.enabled = cb.checked;
+          });
+          chip.append(cb, el("span", "", cat.name));
+          wrap.appendChild(chip);
+        });
+      }
+      function fillConfigTextarea() {
+        dom("#configJson").value = JSON.stringify(CONFIG, null, 2);
+      }
+
+      dom("#resetClothes").addEventListener("click", () => {
+        STATE.settings.startClothes = ["shirt", "pants", "underwear", "socks"];
+        renderStartClothes();
+      });
+
+      dom("#allCatsOn").addEventListener("click", () => {
+        CONFIG.categories.forEach((c) => (c.enabled = true));
+        renderCatsToggles();
+      });
+
+      dom("#applyConfig").addEventListener("click", () => {
+        try {
+          const obj = JSON.parse(dom("#configJson").value);
+          // lichte validatie
+          if (!obj.categories || !obj.tasks)
+            throw new Error("categories/tasks ontbreken");
+          CONFIG = obj;
+          renderStartClothes();
+          renderCatsToggles();
+          toast("Config toegepast.");
+        } catch (e) {
+          alert("Config fout: " + e.message);
+        }
+      });
+
+      dom("#setMaxRolls").addEventListener("input", (e) => {
+        STATE.settings.maxRolls = Math.max(1, Number(e.target.value || 3));
+      });
+      dom("#setPointsToSafe").addEventListener("input", (e) => {
+        STATE.settings.pointsToSafe = Math.max(1, Number(e.target.value || 3));
+      });
+
+      /* Players setup */
+      dom("#buildPlayers").addEventListener("click", () => {
+        const n = Math.max(2, Number(dom("#numPlayers").value || 2));
+        const host = dom("#playersSetup");
+        host.innerHTML = "";
+        for (let i = 0; i < n; i++) {
+          host.appendChild(playerSetupCard(i));
+        }
+      });
+
+      function playerSetupCard(i) {
+        const card = el("div", "card");
+        const hd = el("div", "hd", `Speler ${i + 1}`);
+        const bd = el("div", "bd");
+        const row1 = el("div", "grid-3");
+        const name = inputField("Naam", "text", `Speler ${i + 1}`);
+        const age = inputField("Leeftijd (18+)", "number", "18");
+        age.input.min = "18";
+        const sex = selectField("Geslacht", [
+          { v: "female", t: "Vrouw" },
+          { v: "male", t: "Man" },
+          { v: "other", t: "Anders" },
+        ]);
+        row1.append(name.wrap, age.wrap, sex.wrap);
+
+        const row2 = el("div", "grid-3");
+        const pref = selectField("Voorkeur (doel)", [
+          { v: "any", t: "Iedereen" },
+          { v: "female", t: "Vrouw" },
+          { v: "male", t: "Man" },
+        ]);
+        const consent = checkboxField(
+          "Ik ben 18+ en stem in met álle opdrachten (geen weigering, tenzij onveilig)"
+        );
+        const clothes = multiClothesField("Start-kleding");
+        row2.append(pref.wrap, consent.wrap, clothes.wrap);
+
+        bd.append(row1, row2);
+        card.append(hd, bd);
+        card.dataset.index = i;
+
+        function get() {
+          const base = {
+            name: name.input.value.trim() || `Speler ${i + 1}`,
+            age: Number(age.input.value || 18),
+            sex: sex.input.value,
+            prefer: pref.input.value,
+            consent: consent.input.checked,
+            clothes: clothes.get(),
+          };
+          // auto bh bij female als shirt aanwezig
+          if (base.sex === "female" && !base.clothes.includes("bra")) {
+            // alleen toevoegen als shirt of iets boven aanwezig is
+            if (STATE.settings.startClothes.includes("shirt"))
+              base.clothes.push("bra");
+          }
+          // unique
+          base.clothes = [...new Set(base.clothes)];
+          return base;
+        }
+        card.get = get;
+        return card;
+      }
+
+      function inputField(label, type, value) {
+        const wrap = el("div", "vstack");
+        const lab = el("label", "muted", label);
+        const input = el("input");
+        input.type = type;
+        input.value = value || "";
+        wrap.append(lab, input);
+        return { wrap, input };
+      }
+      function selectField(label, options) {
+        const wrap = el("div", "vstack");
+        const lab = el("label", "muted", label);
+        const select = el("select");
+        options.forEach((o) => {
+          const opt = el("option");
+          opt.value = o.v;
+          opt.textContent = o.t;
+          select.appendChild(opt);
+        });
+        wrap.append(lab, select);
+        return { wrap, input: select };
+      }
+      function checkboxField(text) {
+        const wrap = el("div", "vstack");
+        const lab = el("label", "toggle");
+        const input = el("input");
+        input.type = "checkbox";
+        const span = el("span", "", text);
+        lab.append(input, span);
+        wrap.append(lab);
+        return { wrap, input };
+      }
+      function multiClothesField(label) {
+        const wrap = el("div", "vstack");
+        const lab = el("label", "muted", label);
+        const bar = el("div", "hstack");
+        wrap.append(lab, bar);
+        const checks = {};
+        Object.keys(CONFIG.clothingMap).forEach((key) => {
+          const chip = el("label", "pill");
+          const cb = el("input");
+          cb.type = "checkbox";
+          cb.checked = STATE.settings.startClothes.includes(key);
+          checks[key] = cb;
+          chip.append(cb, el("span", "", CONFIG.clothingMap[key].name));
+          bar.appendChild(chip);
+        });
+        function get() {
+          return Object.entries(checks)
+            .filter(([k, cb]) => cb.checked)
+            .map(([k]) => k);
+        }
+        return { wrap, get };
+      }
+
+      dom("#startGame").addEventListener("click", () => {
+        const cards = [...dom("#playersSetup").children];
+        if (!cards.length) {
+          dom("#setupErrors").textContent = "Maak eerst spelersvelden.";
+          return;
+        }
+        const players = cards.map((c) => c.get());
+        // validation
+        const errs = [];
+        players.forEach((p, i) => {
+          if (isNaN(p.age) || p.age < 18)
+            errs.push(`Speler ${i + 1} moet 18+ zijn.`);
+          if (!p.consent)
+            errs.push(`Speler ${i + 1} moet expliciet instemmen.`);
+        });
+        if (errs.length) {
+          dom("#setupErrors").innerHTML = errs
+            .map((e) => `• ${e}`)
+            .join("<br>");
+          return;
+        }
+        dom("#setupErrors").textContent = "";
+        initGame(players);
+      });
+
+      dom("#restartGame").addEventListener("click", () => {
+        if (confirm("Spel resetten? Alle voortgang gaat verloren.")) {
+          location.reload();
+        }
+      });
+
+      /* ===========================================================
+   GAME LOGIC
+   =========================================================== */
+
+      function initGame(players) {
+        STATE.players = players.map((p, idx) => ({
+          id: idx,
+          name: p.name,
+          age: p.age,
+          sex: p.sex,
+          prefer: p.prefer, // target preference
+          consent: p.consent,
+          clothes: [...p.clothes],
+          score: 0, // totaal “winst”punten naar safe
+          safe: false,
+          catCounts: {}, // uitgevoerde opdrachten per categorie
+          probCache: {}, // actuele kansen (show only)
+        }));
+        STATE.round = 1;
+        STATE.turnIndex = 0;
+        STATE.perTurnScores = {};
+        STATE.activePlayersIdx = STATE.players.map((_, i) => i);
+        resetDiceForTurn();
+
+        dom("#gameArea").style.display = "";
+        renderPlayersBar();
+        selectPlayerTab(STATE.activePlayersIdx[STATE.turnIndex]);
+        updateRoundTurnChips();
+        renderDice();
+        appendLog("Spel gestart.");
+      }
+
+      function resetDiceForTurn() {
+        STATE.dice = [1, 1, 1, 1, 1].map((_) => rollOne());
+        STATE.locks = [false, false, false, false, false];
+        STATE.rollsLeft = STATE.settings.maxRolls - 1; // al 1 worp gedaan bij start
+      }
+
+      function rollOne() {
+        return 1 + Math.floor(Math.random() * 6);
+      }
+
+      function doRoll() {
+        if (STATE.rollsLeft <= 0) {
+          toast("Geen worpen meer.");
+          return;
+        }
+        for (let i = 0; i < STATE.dice.length; i++) {
+          if (!STATE.locks[i]) STATE.dice[i] = rollOne();
+        }
+        STATE.rollsLeft--;
+        renderDice();
+      }
+
+      function toggleLock(idx) {
+        STATE.locks[idx] = !STATE.locks[idx];
+        renderDice();
+      }
+
+      function resetLocks() {
+        STATE.locks = STATE.locks.map((_) => false);
+        renderDice();
+      }
+
+      /* score:
+   Groepeer per waarde v (1..6); count = n
+   score += v * 10^(n-1)
+*/
+      function computeScore(arr) {
+        const counts = {};
+        arr.forEach((v) => {
+          counts[v] = (counts[v] || 0) + 1;
+        });
+        let total = 0;
+        Object.entries(counts).forEach(([v, count]) => {
+          const face = Number(v);
+          const zeros = Math.max(0, count - 1);
+          total += face * Math.pow(10, zeros);
+        });
+        return total;
+      }
+
+      function endTurn() {
+        const pid = STATE.activePlayersIdx[STATE.turnIndex];
+        const s = computeScore(STATE.dice);
+        if (!STATE.perTurnScores[STATE.round])
+          STATE.perTurnScores[STATE.round] = {};
+        STATE.perTurnScores[STATE.round][pid] = s;
+        appendLog(
+          `Beurt klaar: ${STATE.players[pid].name} scoort <b>${s}</b>.`
+        );
+
+        // volgende speler
+        STATE.turnIndex++;
+        if (STATE.turnIndex >= STATE.activePlayersIdx.length) {
+          // ronde einde
+          endRound();
+        } else {
+          resetDiceForTurn();
+          updateRoundTurnChips();
+          renderDice();
+          selectPlayerTab(STATE.activePlayersIdx[STATE.turnIndex]);
+        }
+      }
+
+      function endRound() {
+        // bepaal winnaar (hoogste score). Bij gelijke hoogste → alle gedeelde krijgen 1 punt.
+        const scores = STATE.perTurnScores[STATE.round] || {};
+        let max = -Infinity;
+        Object.values(scores).forEach((v) => {
+          if (v > max) max = v;
+        });
+        const winners = Object.entries(scores)
+          .filter(([pid, sc]) => sc === max)
+          .map(([pid]) => Number(pid));
+
+        winners.forEach((pid) => {
+          STATE.players[pid].score += 1;
+          appendLog(
+            `Ronde ${STATE.round}: ${STATE.players[pid].name} wint 1 punt (totaal ${STATE.players[pid].score}).`
+          );
+        });
+
+        // safe check
+        STATE.players.forEach((p) => {
+          if (!p.safe && p.score >= STATE.settings.pointsToSafe) {
+            p.safe = true;
+            appendLog(`${p.name} is nu SAFE en slaat volgende rondes over.`);
+          }
+        });
+
+        // wie blijft er over?
+        const stillActive = STATE.players.filter((p) => !p.safe);
+        if (stillActive.length === 1) {
+          const loser = stillActive[0];
+          appendLog(
+            `Er blijft één speler over: ${loser.name} verliest deze cyclus en krijgt een opdracht.`
+          );
+          // alle globale punten resetten
+          STATE.players.forEach((p) => {
+            p.score = 0;
+            p.safe = false;
+          });
+          // opdracht
+          triggerAssignment(loser.id);
+          // nieuwe cyclus
+          STATE.round = 1;
+          STATE.activePlayersIdx = STATE.players.map((_, i) => i);
+          STATE.turnIndex = 0;
+        } else {
+          // nieuwe ronde
+          STATE.round++;
+          STATE.activePlayersIdx = STATE.players
+            .map((p, i) => (p.safe ? null : i))
+            .filter((x) => x !== null);
+          STATE.turnIndex = 0;
+        }
+        // nieuwe beurt klaarzetten
+        resetDiceForTurn();
+        updateRoundTurnChips();
+        renderPlayersBar();
+        selectPlayerTab(STATE.activePlayersIdx[STATE.turnIndex]);
+        renderDice();
+      }
+
+      /* ===========================================================
+   ASSIGNMENTS (select valid -> weighted pick -> overlay)
+   =========================================================== */
+
+      function clothingBlocks(clothes) {
+        const zones = new Set();
+        clothes.forEach((c) => {
+          const def = CONFIG.clothingMap[c];
+          if (def && def.blocks) def.blocks.forEach((z) => zones.add(z));
+        });
+        return zones;
+      }
+
+      function isZoneFree(player, zone) {
+        return !clothingBlocks(player.clothes).has(zone);
+      }
+
+      function checkConditions(task, loser, target) {
+        const c = task.conditions || {};
+        // loserHasAnyClothes: at least one item present
+        if (c.loserHasAnyClothes) {
+          const ok = c.loserHasAnyClothes.some((k) =>
+            loser.clothes.includes(k)
+          );
+          if (!ok) return false;
+        }
+        if (c.loserHasClothes) {
+          for (const k of c.loserHasClothes)
+            if (!loser.clothes.includes(k)) return false;
+        }
+        if (c.loserZoneFree) {
+          for (const z of c.loserZoneFree)
+            if (!isZoneFree(loser, z)) return false;
+        }
+        if (task.needsTarget) {
+          if (!target) return false;
+          if (c.targetZoneFree) {
+            for (const z of c.targetZoneFree)
+              if (!isZoneFree(target, z)) return false;
+          }
+          if (c.targetRequiredGender && c.targetRequiredGender.length) {
+            if (!c.targetRequiredGender.includes(target.sex)) return false;
+          }
+          if (c.targetMustPreferLoser) {
+            if (!(target.prefer === "any" || target.prefer === loser.sex))
+              return false;
+          }
+        }
+        return true;
+      }
+
+      function enabledCategoriesMap() {
+        const map = {};
+        CONFIG.categories.forEach((c) => {
+          if (c.enabled) map[c.key] = c;
+        });
+        return map;
+      }
+
+      function candidateTasksForLoser(loserId) {
+        const loser = STATE.players[loserId];
+        const enabled = enabledCategoriesMap();
+        const tasks = [];
+        for (const t of CONFIG.tasks) {
+          if (!enabled[t.category]) continue;
+          if (t.needsTarget) {
+            // vind alle mogelijke targets
+            const targets = STATE.players.filter((p) => p.id !== loserId);
+            const validTargets = targets.filter((trg) =>
+              checkConditions(t, loser, trg)
+            );
+            if (validTargets.length) {
+              // we bewaren de lijst en kiezen later
+              tasks.push({ task: t, targets: validTargets.map((t) => t.id) });
+            }
+          } else {
+            if (checkConditions(t, loser, null)) {
+              tasks.push({ task: t, targets: null });
+            }
+          }
+        }
+        return tasks;
+      }
+
+      function currentCategoryWeight(key) {
+        const cat = CONFIG.categories.find((c) => c.key === key);
+        return cat ? Math.max(0, cat.weight) : 0;
+      }
+
+      function applyWeightDeltas(effects) {
+        if (!effects || !effects.weightDeltas) return;
+        Object.entries(effects.weightDeltas).forEach(([k, delta]) => {
+          const cat = CONFIG.categories.find((c) => c.key === k);
+          if (cat) {
+            cat.weight = Math.max(0, cat.weight + delta);
+          }
+        });
+      }
+
+      function pickWeightedTask(cands) {
+        // gewicht = category weight; je kunt uitbreiden met eigen formules
+        const items = [];
+        let sum = 0;
+        cands.forEach((it) => {
+          const w = Math.max(0.0001, currentCategoryWeight(it.task.category));
+          items.push({ it, w });
+          sum += w;
+        });
+        let r = Math.random() * sum;
+        for (const { it, w } of items) {
+          if ((r -= w) <= 0) return it;
+        }
+        return items[items.length - 1].it;
+      }
+
+      function triggerAssignment(loserId) {
+        // verzamel opties die nu mogelijk zijn
+        const cands = candidateTasksForLoser(loserId);
+        if (!cands.length) {
+          appendLog(
+            "Geen geldige opdrachten gevonden voor huidige toestand (kleding/voorkeuren)."
+          );
+          return;
+        }
+        const picked = pickWeightedTask(cands);
+        let targetId = null;
+        if (picked.targets && picked.targets.length) {
+          targetId =
+            picked.targets[Math.floor(Math.random() * picked.targets.length)];
+        }
+        const loser = STATE.players[loserId];
+        const target = targetId !== null ? STATE.players[targetId] : null;
+
+        // bouw overlay
+        STATE.overlayTask = {
+          loserId,
+          targetId,
+          task: picked.task,
+          progress: 0,
+          remaining: picked.task.type === "timer" ? picked.task.amount : 0,
+        };
+        openOverlayForCurrentTask();
+      }
+
+      function openOverlayForCurrentTask() {
+        const data = STATE.overlayTask;
+        if (!data) return;
+        const loser = STATE.players[data.loserId];
+        const target =
+          data.targetId !== null ? STATE.players[data.targetId] : null;
+        let txt = data.task.text.replaceAll("{loser}", loser.name);
+        if (target) txt = txt.replaceAll("{target}", target.name);
+        if (data.task.amount)
+          txt = txt.replaceAll("{amount}", String(data.task.amount));
+
+        const body = dom("#overlayBody");
+        body.innerHTML = "";
+        body.append(
+          el("div", "vstack").appendChild(el("div", "", txt)) && body.lastChild
+        );
+
+        const footer = el("div", "vstack");
+        if (data.task.type === "single") {
+          footer.append(el("div", "muted", "Type: enkele actie"));
+          const done = el("button", "btn ok", "Gereed");
+          done.addEventListener("click", () => completeCurrentTask());
+          footer.append(done);
+        } else if (data.task.type === "repeat") {
+          footer.append(el("div", "muted", `Herhalingen: ${data.task.amount}`));
+          const prog = el("div", "hstack");
+          const progText = el("span", "pill", `0 / ${data.task.amount}`);
+          const add = el("button", "btn", "+1");
+          add.addEventListener("click", () => {
+            data.progress = Math.min(data.task.amount, data.progress + 1);
+            progText.textContent = `${data.progress} / ${data.task.amount}`;
+          });
+          const done = el("button", "btn ok", "Klaar");
+          done.addEventListener("click", () => {
+            if (data.progress < data.task.amount) {
+              if (
+                !confirm("Nog niet alle herhalingen afgevinkt. Toch voltooien?")
+              )
+                return;
+            }
+            completeCurrentTask();
+          });
+          prog.append(progText, add, done);
+          footer.append(prog);
+        } else if (data.task.type === "timer") {
+          footer.append(el("div", "muted", "Timer"));
+          const t = el("div", "timer", secFmt(data.remaining));
+          const controls = el("div", "hstack");
+          let timer = null;
+          const start = el("button", "btn", "Start");
+          const pause = el("button", "btn secondary", "Pauze");
+          const reset = el("button", "btn ghost", "Reset");
+          const done = el("button", "btn ok", "Gereed");
+          start.addEventListener("click", () => {
+            if (timer) return;
+            timer = setInterval(() => {
+              data.remaining = Math.max(0, data.remaining - 1);
+              t.textContent = secFmt(data.remaining);
+              if (data.remaining === 0) {
+                clearInterval(timer);
+                timer = null;
+              }
+            }, 1000);
+          });
+          pause.addEventListener("click", () => {
+            if (timer) {
+              clearInterval(timer);
+              timer = null;
+            }
+          });
+          reset.addEventListener("click", () => {
+            data.remaining = data.task.amount;
+            t.textContent = secFmt(data.remaining);
+          });
+          done.addEventListener("click", () => {
+            if (data.remaining > 0) {
+              if (!confirm("Timer loopt nog. Toch afronden?")) return;
+            }
+            completeCurrentTask();
+          });
+          controls.append(start, pause, reset, done);
+          footer.append(t, controls);
+        }
+
+        body.append(footer);
+
+        dom("#overlay").classList.add("show");
+      }
+
+      function secFmt(n) {
+        const m = Math.floor(n / 60),
+          s = n % 60;
+        return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+      }
+
+      dom("#closeOverlay").addEventListener("click", () =>
+        dom("#overlay").classList.remove("show")
+      );
+
+      function completeCurrentTask() {
+        const data = STATE.overlayTask;
+        if (!data) return;
+        const loser = STATE.players[data.loserId];
+        const target =
+          data.targetId !== null ? STATE.players[data.targetId] : null;
+
+        // effects: gewichten aanpassen
+        applyWeightDeltas(data.task.effects);
+
+        // cat counts
+        loser.catCounts[data.task.category] =
+          (loser.catCounts[data.task.category] || 0) + 1;
+
+        // kleding updates voor eenvoudige undress taken
+        if (data.task.category === "undress") {
+          // heuristiek: strip het eerste nog beschikbare kledingstuk dat in voorwaarden genoemd is
+          const c = data.task.conditions || {};
+          const list = c.loserHasClothes || c.loserHasAnyClothes || [];
+          for (const k of list) {
+            const idx = loser.clothes.indexOf(k);
+            if (idx >= 0) {
+              loser.clothes.splice(idx, 1);
+              break;
+            }
+          }
+        }
+
+        appendLog(
+          `Opdracht voltooid: ${loser.name}${
+            target ? " ⇄ " + target.name : ""
+          } — ${data.task.id}`
+        );
+        STATE.overlayTask = null;
+        dom("#overlay").classList.remove("show");
+        renderPlayersBar();
+        // na opdracht gaat spel door met ronde 1 opnieuw in init flow; dit is al klaargezet in endRound()
+      }
+
+      /* ===========================================================
+   RENDER: Players bar + panel
+   =========================================================== */
+
+      function renderPlayersBar() {
+        const bar = dom("#playersBar");
+        bar.innerHTML = "";
+        STATE.players.forEach((p) => {
+          const tab = el(
+            "div",
+            "player-tab",
+            `${p.name} (${p.score}) ${p.safe ? "• SAFE" : ""}`
+          );
+          tab.dataset.id = String(p.id);
+          if (Number(bar.dataset.activeId) === p.id)
+            tab.classList.add("active");
+          tab.addEventListener("click", () => selectPlayerTab(p.id));
+          bar.appendChild(tab);
+        });
+        // re-activate
+        if (!bar.dataset.activeId && STATE.players.length)
+          selectPlayerTab(STATE.players[0].id);
+      }
+
+      function selectPlayerTab(pid) {
+        const bar = dom("#playersBar");
+        bar.dataset.activeId = String(pid);
+        [...bar.children].forEach((c) =>
+          c.classList.toggle("active", Number(c.dataset.id) === pid)
+        );
+        renderPlayerPanel(pid);
+      }
+
+      function renderPlayerPanel(pid) {
+        const p = STATE.players[pid];
+        const body = dom("#playerPanelBody");
+        body.innerHTML = "";
+        const top = el("div", "hstack");
+        top.append(
+          el("div", "pill", `Naam: ${p.name}`),
+          el("div", "pill", `Leeftijd: ${p.age}`),
+          el("div", "pill", `Geslacht: ${p.sex}`),
+          el("div", "pill", `Voorkeur: ${p.prefer}`)
+        );
+        const consent = el(
+          "div",
+          "pill",
+          `Instemming: ${p.consent ? "ja" : "nee"}`
+        );
+        if (!p.consent) consent.style.borderColor = "var(--danger)";
+        top.append(consent);
+        body.append(top);
+
+        const clothes = el("div", "hstack");
+        clothes.append(el("span", "muted", "Kleding:"));
+        Object.keys(CONFIG.clothingMap).forEach((k) => {
+          const on = p.clothes.includes(k);
+          const b = el(
+            "button",
+            "btn small " + (on ? "secondary" : "ghost"),
+            CONFIG.clothingMap[k].name + (on ? " ✓" : " ×")
+          );
+          b.addEventListener("click", () => {
+            const i = p.clothes.indexOf(k);
+            if (i >= 0) p.clothes.splice(i, 1);
+            else p.clothes.push(k);
+            renderPlayerPanel(pid);
+          });
+          clothes.append(b);
+        });
+        body.append(clothes);
+
+        const probs = el("div", "vstack");
+        probs.append(
+          el(
+            "div",
+            "muted",
+            "Kans-indicatie per categorie (afgeleid uit weights):"
+          )
+        );
+        const row = el("div", "hstack");
+        const enabled = CONFIG.categories.filter((c) => c.enabled);
+        const sumW =
+          enabled.reduce((a, c) => a + Math.max(0, c.weight), 0) || 1;
+        enabled.forEach((c) => {
+          const pr = Math.round((100 * Math.max(0, c.weight)) / sumW);
+          const chip = el("div", "catchip");
+          chip.innerHTML = `<span>${c.name}</span><span class="w">${pr}%</span>`;
+          row.append(chip);
+        });
+        probs.append(row);
+        body.append(probs);
+
+        const stats = el("div", "vstack");
+        stats.append(
+          el("div", "muted", "Uitgevoerde opdrachten per categorie:")
+        );
+        const row2 = el("div", "hstack");
+        CONFIG.categories.forEach((c) => {
+          const n = p.catCounts[c.key] || 0;
+          const chip = el("div", "catchip");
+          chip.innerHTML = `<span>${c.name}</span><span class="w">${n}</span>`;
+          row2.append(chip);
+        });
+        stats.append(row2);
+        body.append(stats);
+      }
+
+      /* ===========================================================
+   RENDER: Dice
+   =========================================================== */
+
+      function renderDice() {
+        const unlocked = dom("#rowUnlocked"),
+          locked = dom("#rowLocked");
+        unlocked.innerHTML = "";
+        locked.innerHTML = "";
+        STATE.dice.forEach((v, i) => {
+          const d = el(
+            "div",
+            "die" + (STATE.locks[i] ? " locked" : ""),
+            faceText(v)
+          );
+          d.addEventListener("click", () => toggleLock(i));
+          d.appendChild(el("div", "badge", "#" + (i + 1)));
+          (STATE.locks[i] ? locked : unlocked).appendChild(d);
+        });
+        dom("#scorePreview").textContent = String(computeScore(STATE.dice));
+        dom("#rollsLeft").textContent = String(STATE.rollsLeft);
+      }
+
+      function faceText(v) {
+        // Unicode dobbelsteen symbolen 1..6
+        const faces = ["", "⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
+        return faces[v] || String(v);
+      }
+
+      /* Controls */
+      dom("#btnRoll").addEventListener("click", doRoll);
+      dom("#btnEndTurn").addEventListener("click", endTurn);
+      dom("#btnResetLocks").addEventListener("click", resetLocks);
+
+      /* Round / turn chips */
+      function updateRoundTurnChips() {
+        dom("#roundInfo").textContent = `Ronde ${STATE.round}`;
+        const curIdx = STATE.activePlayersIdx[STATE.turnIndex];
+        dom("#turnInfo").textContent = `Beurt: ${STATE.players[curIdx].name}`;
+      }
+
+      /* ===========================================================
+   INIT UI defaults
+   =========================================================== */
+
+      (function bootstrap() {
+        STATE.settings.maxRolls = Number(dom("#setMaxRolls").value || 3);
+        STATE.settings.pointsToSafe = Number(
+          dom("#setPointsToSafe").value || 3
+        );
+        renderStartClothes();
+        renderCatsToggles();
+        fillConfigTextarea();
+        dom("#buildPlayers").click(); // maak 2 spelersvelden standaard
+      })();
+    </script>
+  </body>
+</html>
