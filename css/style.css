@@ -110,3 +110,7 @@ h6 {
   background: #2a2f3a;
   margin: 8px 0;
 }
+.list {
+  padding-left: 20px;
+  line-height: 1.6;
+}
