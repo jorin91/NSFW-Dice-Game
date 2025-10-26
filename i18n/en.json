@@ -18,8 +18,51 @@
   "app.mainmenu.agree.content": "Before starting, each player consciously agrees to participate fully within the boundaries chosen in the settings. By agreeing, a player declares that they will carry out every task assigned by the game as intended, regardless of who or what it involves. This ensures the game stays fair, consistent, and enjoyable for everyone involved.",
   "app.mainmenu.safety.header": "Warning and Safety",
   "app.mainmenu.safety.content": "This game has an explicitly adult nature and focuses on sexual tension and interaction between players. Participation means each player consciously takes responsibility for their own safety, health, and well-being, as well as that of others. Think in advance about protection and health measures (such as using condoms, birth control pills, or other forms of contraception) and communicate openly and honestly about them. Accept that physical responses, such as an orgasm as a result of sexual interaction, can be part of the game and may have personal and emotional effects. Always treat each other with respect, care, and mutual consent.",
-  
+
+  "app.game.title": "Game",
+
+  "app.task.title": "Task",
+
+  "app.settings.title": "Settings",
+
+  "app.newgame.title": "New Game",
+
+  "app.newplayer.title": "New Player",
+
   "button.settings": "Settings",
   "button.mainmenu": "Main Menu",
-  "button.startgame": "Start Game"
+  "button.startgame": "Start Game",
+
+  "clothes.headwear.name": "Headwear",
+  "clothes.headwear.desc": "Examples: hats, caps, beanies, headbands. Includes: all items worn on the head (all together count as one item).",
+  "clothes.accessories_glasses.name": "Glasses",
+  "clothes.accessories_glasses.desc": "Examples: (sun)glasses, fashion glasses without prescription. Includes: any type of glasses or sunglasses (all together count as one item).",
+  "clothes.accessories_neck.name": "Neck Accessories",
+  "clothes.accessories_neck.desc": "Examples: necklaces, chokers, scarves, bandanas. Includes: all accessories worn around the neck (all together count as one item).",
+  "clothes.accessories_arm.name": "Arm Accessories",
+  "clothes.accessories_arm.desc": "Examples: bracelets, wristbands, watches, cuffs. Includes: all accessories worn around the wrist or arm (all together count as one item).",
+  "clothes.jacket.name": "Jacket",
+  "clothes.jacket.desc": "Examples: winter coat, trench coat, leather jacket, raincoat. Includes: any outer upper layer intended as a jacket or coat.",
+  "clothes.sweater.name": "Sweater",
+  "clothes.sweater.desc": "Examples: sweater, cardigan, hoodie. Includes: upper layer worn over a shirt and under a jacket.",
+  "clothes.shirt.name": "Shirt",
+  "clothes.shirt.desc": "Examples: T-shirt, blouse, dress shirt, (short) dress. Includes: the primary upper clothing layer worn over an undershirt and under a sweater or jacket.",
+  "clothes.undershirt.name": "Undershirt",
+  "clothes.undershirt.desc": "Examples: undershirt, top, tank top (not meant as underwear). Includes: layer directly under the shirt but not a bra or underwear.",
+  "clothes.bra.name": "Bra",
+  "clothes.bra.desc": "Examples: bra, bikini top, upper part of a one-piece swimsuit. Includes: any supportive or swim upper piece.",
+  "clothes.pants.name": "Pants",
+  "clothes.pants.desc": "Examples: jeans, shorts, sweatpants, pajama pants, skirt. Includes: all clothing worn as the outer lower-body layer (pants and skirts).",
+  "clothes.leggings.name": "Leggings",
+  "clothes.leggings.desc": "Examples: leggings, tights, pantyhose. Includes: tight-fitting leg layer usually worn under pants, skirts, or dresses.",
+  "clothes.underwear.name": "Underwear",
+  "clothes.underwear.desc": "Examples: panties, boxers, thong, bikini bottom, lower part of a swimsuit. Includes: all undergarments for the lower body.",
+  "clothes.shoes.name": "Shoes",
+  "clothes.shoes.desc": "Examples: sneakers, boots, heels, sandals, slippers. Includes: all footwear (all together count as one item).",
+  "clothes.socks.name": "Socks",
+  "clothes.socks.desc": "Examples: ankle socks, knee-highs, stockings worn under shoes. Includes: all socks or stockings worn with footwear.",
+
+  "SEX_ENUM.Male": "Male",
+  "SEX_ENUM.Female": "Female",
+  "SEX_ENUM.Both": "Both"
 }
