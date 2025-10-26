@@ -1,8 +1,10 @@
 {
   "ui.title": "NSFW Dice Game",
+
   "settings.language": "Language",
   "settings.language.NL": "Dutch",
   "settings.language.EN": "English",
+
   "app.mainmenu.title": "Main Menu",
   "app.mainmenu.welcome.header": "Welcome to the Game",
   "app.mainmenu.welcome.content": "NSFW Dice Game is a playful and exciting dice game designed to bring fun, curiosity, and intimacy back to life. You can play it with your partner or with friends for an evening full of humor, excitement, and surprises. The game starts light and funny, gradually builds toward more sensual and cheeky challenges, and depending on the selected categories, may lead to real sexual interaction. By rolling the dice, you earn points, but if you lose a round, a task awaits that takes the atmosphere to the next level. No game ever plays out the same way; chance decides how far things go.",
@@ -18,6 +20,7 @@
   "app.mainmenu.agree.content": "Before starting, each player consciously agrees to participate fully within the boundaries chosen in the settings. By agreeing, a player declares that they will carry out every task assigned by the game as intended, regardless of who or what it involves. This ensures the game stays fair, consistent, and enjoyable for everyone involved.",
   "app.mainmenu.safety.header": "Warning and Safety",
   "app.mainmenu.safety.content": "This game has an explicitly adult nature and focuses on sexual tension and interaction between players. Participation means each player consciously takes responsibility for their own safety, health, and well-being, as well as that of others. Think in advance about protection and health measures (such as using condoms, birth control pills, or other forms of contraception) and communicate openly and honestly about them. Accept that physical responses, such as an orgasm as a result of sexual interaction, can be part of the game and may have personal and emotional effects. Always treat each other with respect, care, and mutual consent.",
+  
   "button.settings": "Settings",
   "button.mainmenu": "Main Menu",
   "button.startgame": "Start Game"

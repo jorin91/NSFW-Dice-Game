@@ -1,6 +1,6 @@
 // js/i18n.js  (laad als ES module: <script type="module" src="js/i18n.js"></script>)
-const LANG_KEY = "dice.lang";
-let currentLang = "en";
+const LANG_KEY = "NSFWDiceGame_lang";
+let currentLang = "nl";
 let dict = {};
 const cache = new Map();
 const listeners = new Set();
@@ -69,6 +69,7 @@ function findLabelSlot(el) {
     '[data-i18n-slot="text"], .label, .btn__label, .button__label, span, p'
   );
 }
+
 function canSetTextDirect(el) {
   if (el.children.length === 0) return true;
   const onlyText = [...el.childNodes].every(

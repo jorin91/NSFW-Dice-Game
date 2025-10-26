@@ -1,8 +1,10 @@
 {
   "ui.title": "NSFW Dice Game",
+
   "settings.language": "Taal",
   "settings.language.NL": "Nederlands",
   "settings.language.EN": "Engels",
+
   "app.mainmenu.title": "Hoofdmenu",
   "app.mainmenu.welcome.header": "Welkom bij het spel",
   "app.mainmenu.welcome.content": "NSFW Dice Game is een speels en spannend dobbelspel dat bedoeld is om plezier, nieuwsgierigheid en intimiteit nieuw leven in te blazen. Je kunt het spelen met je partner of met vrienden voor een avond vol humor, spanning en verrassingen. Het spel begint luchtig en grappig, bouwt langzaam op naar sensuele en ondeugende opdrachten en kan, afhankelijk van de gekozen categorieën, uitlopen op echte seksuele interactie. Door te dobbelen verdien je punten, maar verlies je een ronde, dan wacht er een opdracht die de sfeer naar een hoger niveau tilt. Geen enkel spel verloopt hetzelfde; het toeval bepaalt telkens hoe ver het gaat.",
@@ -18,7 +20,41 @@
   "app.mainmenu.agree.content": "Voorafgaand aan het spel stemt iedere speler er bewust mee in om volledig mee te spelen binnen de grenzen van wat in de instellingen is gekozen. Door in te stemmen verklaart een speler dat hij of zij elke opdracht die door het spel wordt gegeven zal uitvoeren zoals bedoeld, ongeacht met wie of wat deze betrekking heeft. Zo blijft het spel eerlijk, consequent en leuk voor iedereen die meedoet.",
   "app.mainmenu.safety.header": "Waarschuwing en veiligheid",
   "app.mainmenu.safety.content": "Dit spel heeft een expliciet volwassen karakter en richt zich op seksuele spanning en interactie tussen spelers. Deelname houdt in dat iedere speler bewust verantwoordelijkheid neemt voor zijn of haar eigen veiligheid, gezondheid en welzijn, evenals dat van anderen. Denk vooraf na over beschermingsmiddelen en gezondheidsmaatregelen (zoals het gebruik van condooms, de pil of andere vormen van anticonceptie) en zorg dat hierover open en eerlijk wordt gecommuniceerd. Accepteer dat lichamelijke reacties, zoals een orgasme als gevolg van seksuele interactie, onderdeel kunnen zijn van het spel en dat dit persoonlijke en emotionele gevolgen kan hebben. Ga altijd met respect, zorg en wederzijdse instemming met elkaar om.",
+
   "button.settings": "Instellingen",
   "button.mainmenu": "Hoofdmenu",
-  "button.startgame": "Start Spel"
+  "button.startgame": "Start Spel",
+
+  "clothes.headwear.name": "Headwear",
+  "clothes.headwear.desc": "Examples: hats, caps, beanies, headbands. Includes: all items worn on the head (all together count as one item).",
+  "clothes.accessories_glasses.name": "Glasses",
+  "clothes.accessories_glasses.desc": "Examples: (sun)glasses, fashion glasses without prescription. Includes: any type of glasses or sunglasses (all together count as one item).",
+  "clothes.accessories_neck.name": "Neck Accessories",
+  "clothes.accessories_neck.desc": "Examples: necklaces, chokers, scarves, bandanas. Includes: all accessories worn around the neck (all together count as one item).",
+  "clothes.accessories_arm.name": "Arm Accessories",
+  "clothes.accessories_arm.desc": "Examples: bracelets, wristbands, watches, cuffs. Includes: all accessories worn around the wrist or arm (all together count as one item).",
+  "clothes.jacket.name": "Jacket",
+  "clothes.jacket.desc": "Examples: winter coat, trench coat, leather jacket, raincoat. Includes: any outer upper layer intended as a jacket or coat.",
+  "clothes.sweater.name": "Sweater",
+  "clothes.sweater.desc": "Examples: sweater, cardigan, hoodie. Includes: upper layer worn over a shirt and under a jacket.",
+  "clothes.shirt.name": "Shirt",
+  "clothes.shirt.desc": "Examples: T-shirt, blouse, dress shirt, (short) dress. Includes: the primary upper clothing layer worn over an undershirt and under a sweater or jacket.",
+  "clothes.undershirt.name": "Undershirt",
+  "clothes.undershirt.desc": "Examples: undershirt, top, tank top (not meant as underwear). Includes: layer directly under the shirt but not a bra or underwear.",
+  "clothes.bra.name": "Bra",
+  "clothes.bra.desc": "Examples: bra, bikini top, upper part of a one-piece swimsuit. Includes: any supportive or swim upper piece.",
+  "clothes.pants.name": "Pants",
+  "clothes.pants.desc": "Examples: jeans, shorts, sweatpants, pajama pants, skirt. Includes: all clothing worn as the outer lower-body layer (pants and skirts).",
+  "clothes.leggings.name": "Leggings",
+  "clothes.leggings.desc": "Examples: leggings, tights, pantyhose. Includes: tight-fitting leg layer usually worn under pants, skirts, or dresses.",
+  "clothes.underwear.name": "Underwear",
+  "clothes.underwear.desc": "Examples: panties, boxers, thong, bikini bottom, lower part of a swimsuit. Includes: all undergarments for the lower body.",
+  "clothes.shoes.name": "Shoes",
+  "clothes.shoes.desc": "Examples: sneakers, boots, heels, sandals, slippers. Includes: all footwear (all together count as one item).",
+  "clothes.socks.name": "Socks",
+  "clothes.socks.desc": "Examples: ankle socks, knee-highs, stockings worn under shoes. Includes: all socks or stockings worn with footwear.",
+
+  "SEX_ENUM.Male": "Male",
+  "SEX_ENUM.Female": "Female",
+  "SEX_ENUM.Both": "Both"
 }

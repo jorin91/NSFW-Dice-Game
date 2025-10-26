@@ -4,8 +4,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title data-i18n="ui.title"></title>
+    <!-- Style -->
     <link rel="stylesheet" href="css/style.css" />
+    <!-- Translation -->
     <script type="module" src="js/lang_i18n.js"></script>
+    <!-- Data -->
+    <script type="module" src="js/data.js"></script>
+    <script type="module" src="js/enums.js"></script>
+    <!-- Helpers -->
+    <script type="module" src="js/utils.js"></script>
+    <!-- Functions -->
+    <script type="module" src="js/player.js"></script>
+    <script type="module" src="js/tasks.js"></script>
+    <script type="module" src="js/localstorage.js"></script>
+    <script type="module" src="js/panelnavigation.js"></script>
+    <script type="module" src="js/gamestate.js"></script>
   </head>
   <body>
     <!-- Menu Container -->
@@ -16,7 +29,7 @@
           <button
             data-lang="nl"
             class="btn lang-btn"
-            data-i18n-auto="settings.language.NL"
+            value="NL"
           ></button>
           <button
             data-lang="en"

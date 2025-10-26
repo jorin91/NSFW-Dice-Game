@@ -1,22 +1,3 @@
-// Basis spelverloop-model (kan je later uitbreiden)
-const GAME_FLOW_MODEL = {
-  version: 1,
-  activePanel: "hoofdmenu",
-  round: 1,
-  turnIndex: 0,
-  players: [], // je kunt hier straks createPlayer() instances in zetten
-  settings: {}, // later: maxRolls, pointsToSafe, enz.
-  tasks: {},
-};
-
-// Functions
-function deepCopy(o) {
-  return JSON.parse(JSON.stringify(o));
-}
-
-// Huidige game state in memory
-window.GAME = deepCopy(GAME_FLOW_MODEL);
-
 function gameGetState() {
   return deepCopy(window.GAME);
 }
@@ -36,13 +17,14 @@ function gameInitFromStorage() {
   const saved = storageLoadGame();
   if (saved) {
     gameApplyState(saved);
-    showPanel(window.GAME.activePanel || "hoofdmenu");
+    showPanel(window.GAME.activePanel || "mainmenu");
   } else {
     // eerste keer: toon hoofdmenu en sla meteen initiele state op
-    showPanel("hoofdmenu");
+    showPanel("mainmenu");
     storageSaveGame(gameGetState());
   }
 }
 
 // Init bij laden
+window.GAME = deepCopy(GAME_FLOW_MODEL);
 document.addEventListener("DOMContentLoaded", gameInitFromStorage);
