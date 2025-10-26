@@ -7,6 +7,7 @@
   --accent: #5865f2;
   --border: #2a2f3a;
   --radius: 14px;
+  --max-app-width: 95%;
 }
 * {
   box-sizing: border-box;
@@ -39,15 +40,15 @@ h6 {
   margin-bottom: 6px;
 }
 .menu {
-  max-width: 95%;
-  margin: 0 auto;
-  padding: 8px, 4px;
+  max-width: var(--max-app-width);
+  margin: 8 auto;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 .app {
-  max-width: 95%;
+  max-width: var(--max-app-width);
   margin: 0 auto;
   padding: 16px;
   display: flex;
