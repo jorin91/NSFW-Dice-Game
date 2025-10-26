@@ -1,4 +1,4 @@
-import { deepCopy } from "./utils";
+import { deepCopy } from "./utils.js";
 import { CLOTHING_MODEL } from './clothing.js';
 
 export const PLAYER_MODEL = {
