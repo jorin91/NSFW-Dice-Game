@@ -39,18 +39,17 @@ h5 {
 h6 {
   margin-bottom: 6px;
 }
-.menu {
+.container {
   max-width: var(--max-app-width);
-  margin: 8 auto;
+  margin: 8px auto;
   padding: 16px;
+}
+.menu {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 .app {
-  max-width: var(--max-app-width);
-  margin: 0 auto;
-  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 12px;
