@@ -16,14 +16,9 @@ function attachPanelNavigation() {
     const key = btn.dataset.panel;
     showPanel(key);
     // ⤵ sla de actieve panel op als gameSetActivePanel beschikbaar is
-    gameSetActivePanel(key);
+    if (window.gameSetActivePanel) gameSetActivePanel(key);
   };
   document.addEventListener("click", _panelNavHandler);
-}
-
-function gameSetActivePanel(key) {
-  window.GAME.activePanel = key;
-  storageSaveGame(gameGetState());
 }
 
 // eenmalig aanroepen na het renderen van je panels
