@@ -28,12 +28,21 @@ export function onLangChange(fn) {
   return () => listeners.delete(fn);
 }
 
+function updateLangButtons(activeLang) {
+  document.querySelectorAll(".lang-btn").forEach(btn => {
+    const lang = btn.dataset.lang;
+    // alleen de actieve knop is géén ghost
+    btn.classList.toggle("ghost", lang !== activeLang);
+  });
+}
+
 export async function setLang(lang) {
   currentLang = lang;
   localStorage.setItem(LANG_KEY, lang);
   document.documentElement.lang = lang;
   dict = await loadDict(lang);
   applyI18n(document); // update zichtbare nodes
+  updateLangButtons(lang);
   listeners.forEach((fn) => {
     try {
       fn(lang);
@@ -226,12 +235,13 @@ export async function initI18n() {
   });
   mo.observe(document.body, { childList: true, subtree: true });
 
-  // optionele topbar language switch
-  const sel = document.getElementById("lang-switch");
-  if (sel) {
-    sel.value = saved;
-    sel.addEventListener("change", () => setLang(sel.value));
-  }
+  // optionele topbar language buttons
+  document.querySelectorAll(".lang-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const lang = btn.getAttribute("data-lang");
+      if (lang) setLang(lang);
+    });
+  });
 }
 
 // auto-start

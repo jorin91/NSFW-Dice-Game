@@ -38,8 +38,16 @@ h5 {
 h6 {
   margin-bottom: 6px;
 }
+.menu {
+  max-width: 95%;
+  margin: 0 auto;
+  padding: 8px, 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 .app {
-  max-width: 90%;
+  max-width: 95%;
   margin: 0 auto;
   padding: 16px;
   display: flex;
@@ -73,6 +81,9 @@ h6 {
   background: transparent;
   border: 1px solid #3a4152;
   color: var(--text);
+}
+.btn:hover {
+  opacity: 0.85;
 }
 .row {
   display: flex;
