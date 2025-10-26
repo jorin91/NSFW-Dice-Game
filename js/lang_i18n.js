@@ -7,7 +7,7 @@ const listeners = new Set();
 
 async function loadDict(lang) {
   if (cache.has(lang)) return cache.get(lang);
-  const p = fetch(`i18n/${lang}.json`, { cache: "no-store" }).then(r => {
+  const p = fetch(`i18n/${lang}.json`, { cache: "no-store" }).then((r) => {
     if (!r.ok) throw new Error(`Failed to load i18n/${lang}.json`);
     return r.json();
   });
@@ -18,7 +18,7 @@ async function loadDict(lang) {
 export function t(key, vars) {
   let s = dict[key] ?? key; // fallback toont key
   if (vars && typeof s === "string") {
-    s = s.replace(/\{(\w+)\}/g, (_, k) => (vars[k] ?? ""));
+    s = s.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? "");
   }
   return s;
 }
@@ -33,20 +33,38 @@ export async function setLang(lang) {
   localStorage.setItem(LANG_KEY, lang);
   document.documentElement.lang = lang;
   dict = await loadDict(lang);
-  applyI18n(document);                // update zichtbare nodes
-  listeners.forEach(fn => { try { fn(lang); } catch(e){ console.error(e); } });
+  applyI18n(document); // update zichtbare nodes
+  listeners.forEach((fn) => {
+    try {
+      fn(lang);
+    } catch (e) {
+      console.error(e);
+    }
+  });
 }
 
-export function getLang() { return currentLang; }
+export function getLang() {
+  return currentLang;
+}
 
-function safeJsonParse(s) { try { return JSON.parse(s); } catch { return undefined; } }
+function safeJsonParse(s) {
+  try {
+    return JSON.parse(s);
+  } catch {
+    return undefined;
+  }
+}
 
 function findLabelSlot(el) {
-  return el.querySelector('[data-i18n-slot="text"], .label, .btn__label, .button__label, span, p');
+  return el.querySelector(
+    '[data-i18n-slot="text"], .label, .btn__label, .button__label, span, p'
+  );
 }
 function canSetTextDirect(el) {
   if (el.children.length === 0) return true;
-  const onlyText = [...el.childNodes].every(n => n.nodeType === Node.TEXT_NODE);
+  const onlyText = [...el.childNodes].every(
+    (n) => n.nodeType === Node.TEXT_NODE
+  );
   return onlyText;
 }
 
@@ -60,8 +78,8 @@ export function applyI18nToElement(el) {
 
   // 1) attribuut-mapping, bv: placeholder:settings.search,aria-label:hints.close
   if (attrMap) {
-    attrMap.split(",").forEach(pair => {
-      const [attr, k] = pair.split(":").map(s => s.trim());
+    attrMap.split(",").forEach((pair) => {
+      const [attr, k] = pair.split(":").map((s) => s.trim());
       if (attr && k) el.setAttribute(attr, t(k, vars));
     });
   }
@@ -109,7 +127,8 @@ export function applyI18nToElement(el) {
       break;
     }
     case "BUTTON": {
-      const k = el.getAttribute("data-i18n-auto") || el.getAttribute("aria-label");
+      const k =
+        el.getAttribute("data-i18n-auto") || el.getAttribute("aria-label");
       if (k) {
         const slot = findLabelSlot(el);
         const val = t(k, vars);
@@ -139,7 +158,10 @@ export function applyI18nToElement(el) {
       if (k) {
         const val = t(k, vars);
         if (canSetTextDirect(el)) el.textContent = val;
-        else (findLabelSlot(el)?.textContent = val);
+        else {
+          const slot = findLabelSlot(el);
+          if (slot) slot.textContent = val;
+        }
       }
       break;
     }
@@ -148,14 +170,18 @@ export function applyI18nToElement(el) {
       if (k) {
         let title = el.querySelector("title");
         if (!title) {
-          title = document.createElementNS("http://www.w3.org/2000/svg", "title");
+          title = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "title"
+          );
           el.prepend(title);
         }
         title.textContent = t(k, vars);
       }
       break;
     }
-    default: break;
+    default:
+      break;
   }
 }
 
@@ -167,27 +193,33 @@ export function applyI18n(root = document) {
     "[data-i18n-auto]",
     "[data-i18n-auto-placeholder]",
     "[data-i18n-auto-alt]",
-    "[data-i18n-auto-title]"
+    "[data-i18n-auto-title]",
   ].join(",");
   root.querySelectorAll(sel).forEach(applyI18nToElement);
 }
 
 // init: taal laden, observer voor nieuw toegevoegde nodes, switcher koppelen
 export async function initI18n() {
-  const saved = localStorage.getItem(LANG_KEY) || (navigator.language || "en").slice(0,2);
+  const saved =
+    localStorage.getItem(LANG_KEY) || (navigator.language || "en").slice(0, 2);
   await setLang(saved);
 
   // auto-apply voor dynamisch toegevoegde UI
-  const mo = new MutationObserver(muts => {
+  const mo = new MutationObserver((muts) => {
     for (const m of muts) {
-      m.addedNodes.forEach(node => {
+      m.addedNodes.forEach((node) => {
         if (node.nodeType === 1) {
           const el = node;
-          if (el.matches?.("[data-i18n], [data-i18n-attr], [data-i18n-auto], [data-i18n-auto-placeholder], [data-i18n-auto-alt], [data-i18n-auto-title]")) {
+          if (
+            el.matches?.(
+              "[data-i18n], [data-i18n-attr], [data-i18n-auto], [data-i18n-auto-placeholder], [data-i18n-auto-alt], [data-i18n-auto-title]"
+            )
+          ) {
             applyI18nToElement(el);
           }
-          el.querySelectorAll?.("[data-i18n], [data-i18n-attr], [data-i18n-auto], [data-i18n-auto-placeholder], [data-i18n-auto-alt], [data-i18n-auto-title]")
-            .forEach(applyI18nToElement);
+          el.querySelectorAll?.(
+            "[data-i18n], [data-i18n-attr], [data-i18n-auto], [data-i18n-auto-placeholder], [data-i18n-auto-alt], [data-i18n-auto-title]"
+          ).forEach(applyI18nToElement);
         }
       });
     }
@@ -203,4 +235,6 @@ export async function initI18n() {
 }
 
 // auto-start
-document.addEventListener("DOMContentLoaded", () => { initI18n(); });
+document.addEventListener("DOMContentLoaded", () => {
+  initI18n();
+});
