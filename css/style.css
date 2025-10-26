@@ -41,7 +41,7 @@ h6 {
 }
 .container {
   max-width: var(--max-app-width);
-  margin: 8px auto;
+  margin: 4px auto;
   padding: 16px;
 }
 .menu {
