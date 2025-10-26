@@ -1,5 +1,6 @@
 import { deepCopy } from "./utils.js";
 import { storageSave, storageLoad } from "./localstorage.js";
+import { showPanel } from "./panelnavigation.js";
 
 const LS_KEY_GAMESTATE = "NSFWDiceGame_GameState";
 
