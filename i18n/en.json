@@ -2,8 +2,6 @@
   "ui.title": "NSFW Dice Game",
 
   "settings.language": "Language",
-  "settings.language.NL": "Dutch",
-  "settings.language.EN": "English",
 
   "app.mainmenu.title": "Main Menu",
   "app.mainmenu.welcome.header": "Welcome to the Game",

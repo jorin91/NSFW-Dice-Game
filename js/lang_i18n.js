@@ -1,6 +1,6 @@
 // js/i18n.js  (laad als ES module: <script type="module" src="js/i18n.js"></script>)
 const LANG_KEY = "NSFWDiceGame_lang";
-let currentLang = "nl";
+let currentLang = "en";
 let dict = {};
 const cache = new Map();
 const listeners = new Set();
