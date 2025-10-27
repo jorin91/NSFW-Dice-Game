@@ -6,7 +6,9 @@ export function UpdatePlayersUI(targetId = "newgame-players") {
   const root = document.getElementById(targetId);
   if (!root) return;
 
-  const players = Array.isArray(window.GAME?.players) ? window.GAME.players : [];
+  const players = Array.isArray(window.GAME?.players)
+    ? window.GAME.players
+    : [];
   root.innerHTML = "";
   root.classList.add("row");
 
@@ -15,7 +17,11 @@ export function UpdatePlayersUI(targetId = "newgame-players") {
   players.forEach((p, index) => {
     // Bubble
     const bubble = document.createElement("div");
-    bubble.className = "bubble";
+    bubble.className = "bubble row";
+
+    // Sub-row: naam + icoon dicht bij elkaar
+    const nameGroup = document.createElement("div");
+    nameGroup.className = "row small";
 
     // Naam
     const nameSpan = document.createElement("span");
@@ -25,6 +31,9 @@ export function UpdatePlayersUI(targetId = "newgame-players") {
     const sexIcon = document.createElement("span");
     sexIcon.className = "player-sex";
     sexIcon.textContent = getSexIcon(p?.sex);
+
+    nameGroup.appendChild(nameSpan);
+    nameGroup.appendChild(sexIcon);
 
     // Verwijder-knop
     const btnRemove = document.createElement("button");
@@ -37,8 +46,7 @@ export function UpdatePlayersUI(targetId = "newgame-players") {
       removePlayerAt(index, targetId);
     });
 
-    bubble.appendChild(nameSpan);
-    bubble.appendChild(sexIcon);
+    bubble.appendChild(nameGroup);
     bubble.appendChild(btnRemove);
     frag.appendChild(bubble);
   });
