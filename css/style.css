@@ -82,6 +82,12 @@ h6 {
   border: 1px solid #3a4152;
   color: var(--text);
 }
+.btn.in-element {
+  background: transparent;
+  border: none;
+  padding: 1px;
+  color: var(--text);
+}
 .btn:hover {
   opacity: 0.85;
 }
