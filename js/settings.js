@@ -44,7 +44,7 @@ export function fillSettingsStage(targetId = "settings_stage") {
 
     // tweede regel: descShort
     const line2 = document.createElement("p");
-    line2.className = "muted list row";
+    line2.className = "muted list row sub";
     line2.setAttribute("data-i18n-auto", `${value}.descShort`);
 
     row.appendChild(line1);
