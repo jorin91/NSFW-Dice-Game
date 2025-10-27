@@ -136,11 +136,8 @@ h6 {
   opacity: 0.85;
   background: var(--accent);
 }
-.grow {
-  flex: 1;
-}
 .player-sex {
-  font-size: 0.9em;
+  font-size: 0.8em;
   line-height: 1;
   opacity: 0.9;
   display: inline-flex;
