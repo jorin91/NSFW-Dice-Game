@@ -55,7 +55,7 @@ export function fillSettingsStage(targetId = "settings_stage") {
     cb.addEventListener("change", (e) => {
       const k = e.currentTarget.dataset.stageKey;
       if (!window.GAME?.settings?.stages?.[k]) return;
-      window.GAME.settings.stages[stageKey].enabled = !!e.currentTarget.checked;
+      window.GAME.settings.stages[stageKey].enabled = e.currentTarget.checked;
       gameSaveState();
     });
   }
