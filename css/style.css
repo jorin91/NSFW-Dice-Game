@@ -178,3 +178,7 @@ form select {
   border-radius: 6px;
   padding: 6px 8px;
 }
+.input-invalid {
+  border-color: #ff4d4f !important;
+  box-shadow: 0 0 0 1px #ff4d4f inset;
+}

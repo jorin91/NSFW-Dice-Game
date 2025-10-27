@@ -27,3 +27,9 @@ export function gameSetActivePanel(key) {
   window.GAME.activePanel = key;
   gameSaveState();
 }
+
+export function switchPanel(key) {
+  if (!key) return;
+  showPanel(key);
+  gameSetActivePanel(key);
+}

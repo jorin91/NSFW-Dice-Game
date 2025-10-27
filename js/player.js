@@ -1,5 +1,6 @@
 import { deepCopy } from "./utils.js";
 import { CLOTHING_MODEL } from './clothing.js';
+import { gameSaveState } from "./gamestate.js";
 
 export const PLAYER_MODEL = {
   id: null,
@@ -23,5 +24,7 @@ export function createPlayer(name, sex, age, preferSex, consent) {
   player.consent = consent;
   
   player.clothing = deepCopy(CLOTHING_MODEL); // <- kopie hier
-  return player;
+
+  window.GAME.players.push(player);
+  gameSaveState();
 }

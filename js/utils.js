@@ -28,10 +28,12 @@ export function makeInputField(name, type, key, labelText, defaultValue = "") {
   input.type = type;
   input.name = name;
   input.placeholder = labelText;
-  if (defaultValue) input.value = defaultValue;
+  if (defaultValue !== undefined && defaultValue !== null)
+    input.value = defaultValue;
+  if (type === "number") input.inputMode = "numeric";
 
   wrap.append(span, input);
-  return wrap;
+  return { wrap, input };
 }
 
 export function makeSelectField(name, labelText, entries) {
@@ -52,5 +54,5 @@ export function makeSelectField(name, labelText, entries) {
   }
 
   wrap.append(span, select);
-  return wrap;
+  return { wrap, select };
 }

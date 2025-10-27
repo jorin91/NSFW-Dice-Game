@@ -1,6 +1,8 @@
 import { gameSaveState } from "./gamestate.js";
 import { getSexIcon, makeInputField, makeSelectField } from "./utils.js";
 import { SEX_ENUM } from "./enums.js";
+import { createPlayer } from "./player.js";
+import { switchPanel } from "./panelnavigation.js";
 
 // Players
 export function UpdatePlayersUI(targetId = "newgame-players") {
@@ -72,24 +74,41 @@ export function UpdatePlayersUI(targetId = "newgame-players") {
     // Bouw het formulier
     const form = document.createElement("form");
     form.className = "col gap-md";
+    form.noValidate = true;
 
     // Name
-    form.appendChild(makeInputField("name", "text", "name", "Naam"));
-
-    // Age
-    form.appendChild(makeInputField("age", "number", "age", "Leeftijd", 18));
-
-    // Sex (geslacht)
-    form.appendChild(
-      makeSelectField("sex", "Geslacht", Object.entries(SEX_ENUM))
+    const { wrap: nameWrap, input: nameInput } = makeInputField(
+      "name",
+      "text",
+      "name",
+      "Naam"
     );
 
-    // PreferSex (voorkeur)
-    form.appendChild(
-      makeSelectField("preferSex", "Voorkeur", Object.entries(SEX_ENUM))
+    // Age (minimaal 18 als zachte regel)
+    const { wrap: ageWrap, input: ageInput } = makeInputField(
+      "age",
+      "number",
+      "age",
+      "Leeftijd",
+      18
+    );
+    // ageInput.min = "18";
+
+    // Sex
+    const { wrap: sexWrap, select: sexSelect } = makeSelectField(
+      "sex",
+      "Geslacht",
+      Object.entries(SEX_ENUM)
     );
 
-    // Consent (instemming)
+    // PreferSex
+    const { wrap: prefWrap, select: prefSelect } = makeSelectField(
+      "preferSex",
+      "Voorkeur",
+      Object.entries(SEX_ENUM)
+    );
+
+    // Consent
     const consentWrap = document.createElement("label");
     consentWrap.className = "row small";
     const cbConsent = document.createElement("input");
@@ -98,42 +117,75 @@ export function UpdatePlayersUI(targetId = "newgame-players") {
     const lblConsent = document.createElement("span");
     lblConsent.textContent = "consent";
     consentWrap.append(cbConsent, lblConsent);
-    form.appendChild(consentWrap);
 
-    // Submit-knop
+    // Actieknoppen
+    const actions = document.createElement("div");
+    actions.className = "row small";
+
+    const btnCancel = document.createElement("button");
+    btnCancel.type = "button";
+    btnCancel.className = "bubble";
+    btnCancel.textContent = "Cancel";
+    btnCancel.setAttribute("data-panel", "newgame");
+    btnCancel.addEventListener("click", () => {
+      rootNewPlayer.innerHTML = ""; // formulier weg
+      // (optioneel) UpdatePlayersUI(); // lijst tonen/refreshen
+    });
+
     const btnSave = document.createElement("button");
     btnSave.type = "submit";
     btnSave.className = "bubble";
     btnSave.textContent = "Add Player";
 
-    form.appendChild(btnSave);
+    actions.append(btnCancel, btnSave);
+
+    // Opbouwen
+    form.append(nameWrap, ageWrap, sexWrap, prefWrap, consentWrap, actions);
     rootNewPlayer.appendChild(form);
+
+    // stille validatie helper
+    function mark(el, ok) {
+      if (!el) return true;
+      el.classList.toggle("input-invalid", !ok);
+      return ok;
+    }
 
     // Form behaviour
     form.addEventListener("submit", (e) => {
       e.preventDefault();
 
-      const data = new FormData(form);
-      const player = {
-        id: Date.now(),
-        name: data.get("name") || "Unknown",
-        age: parseInt(data.get("age")) || 18,
-        sex: data.get("sex") || SEX_ENUM.Male,
-        preferSex: data.get("preferSex") || SEX_ENUM.Both,
-        consent: !!data.get("consent"),
-        score: 0,
-        safe: false,
-        clothing: null,
-      };
+      // Validatie (stil, via rode rand)
+      const vName = mark(nameInput, !!nameInput.value.trim());
+      const ageVal = parseInt(ageInput.value, 10);
+      const vAge = mark(ageInput, Number.isFinite(ageVal) && ageVal >= 18);
 
-      // Voeg toe aan game state
-      if (!Array.isArray(window.GAME.players)) window.GAME.players = [];
-      window.GAME.players.push(player);
+      const sexVal = sexSelect.value;
+      const prefVal = prefSelect.value;
+      const validSex = Object.values(SEX_ENUM).includes(sexVal);
+      const validPref = Object.values(SEX_ENUM).includes(prefVal);
+      const vSex = mark(sexSelect, validSex);
+      const vPref = mark(prefSelect, validPref);
 
-      gameSaveState();
+      const vConsent = cbConsent.checked;
+      // optioneel: visuele hint bij consent (bijv. rode rand om label)
+      consentWrap.classList.toggle("input-invalid", !vConsent);
 
-      // Vernieuw de lijst met spelers
+      const allOk = vName && vAge && vSex && vPref && vConsent;
+      if (!allOk) return; // geen submit; geen meldingen
+
+      // Alles ok → speler aanmaken
+      createPlayer(
+        nameInput.value.trim(),
+        sexVal,
+        ageVal,
+        prefVal,
+        !!cbConsent.checked
+      );
+
+      // UI resetten/tonen
+      rootNewPlayer.innerHTML = "";
       UpdatePlayersUI();
+      switchPanel("newgame");
     });
   });
 
