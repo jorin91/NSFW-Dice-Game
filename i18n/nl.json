@@ -32,8 +32,8 @@
 
   "app.settings.title": "Spel Instellingen",
 
-  "app.settings.STAGE.header": "Opbouwfase",
-  "app.settings.STAGE.content": "Hoe verder in de fase, hoe intiemer, sensueler of seksueler het contact mag zijn.\nBepaal hier welke fases er gespeeld worden.",
+  "app.settings.STAGE.header": "Opbouw & contactniveau",
+"app.settings.STAGE.content": "Hoe verder de fase, hoe intiemer, sensueler of seksueler het contact kan zijn.<br>Selecteer welke fases je in deze sessie gebruikt.",
 
   "app.newgame.title": "Nieuw Spel",
 
