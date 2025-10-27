@@ -27,8 +27,7 @@ export function gameApplyState(state) {
   Object.assign(window.GAME, state || {});
 }
 
-export function gameSetActivePanel(key) {
-  window.GAME.activePanel = key;
+export function gameSaveState() {
   storageSave(gameGetState(), LS_KEY_GAMESTATE);
 }
 

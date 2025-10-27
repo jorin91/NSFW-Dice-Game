@@ -1,4 +1,4 @@
-import { gameSetActivePanel } from "./gamestate.js";
+import { gameSaveState } from "./gamestate.js";
 
 export function showPanel(key) {
   document
@@ -21,4 +21,9 @@ export function attachPanelNavigation() {
     gameSetActivePanel(key);
   };
   document.addEventListener("click", _panelNavHandler);
+}
+
+export function gameSetActivePanel(key) {
+  window.GAME.activePanel = key;
+  gameSaveState();
 }
