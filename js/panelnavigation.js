@@ -1,3 +1,5 @@
+import { gameSetActivePanel } from "./gamestate.js";
+
 export function showPanel(key) {
   document
     .querySelectorAll(".panel")
@@ -16,7 +18,7 @@ export function attachPanelNavigation() {
     const key = btn.dataset.panel;
     showPanel(key);
     // ⤵ sla de actieve panel op als gameSetActivePanel beschikbaar is
-    if (window.gameSetActivePanel) gameSetActivePanel(key);
+    gameSetActivePanel(key);
   };
   document.addEventListener("click", _panelNavHandler);
 }
