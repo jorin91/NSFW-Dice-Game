@@ -26,10 +26,6 @@ export function UpdatePlayersUI(targetId = "newgame-players") {
     sexIcon.className = "player-sex";
     sexIcon.textContent = getSexIcon(p?.sex);
 
-    // Spacer zodat de X rechts komt
-    const spacer = document.createElement("span");
-    spacer.className = "grow";
-
     // Verwijder-knop
     const btnRemove = document.createElement("button");
     btnRemove.type = "button";
@@ -43,7 +39,6 @@ export function UpdatePlayersUI(targetId = "newgame-players") {
 
     bubble.appendChild(nameSpan);
     bubble.appendChild(sexIcon);
-    bubble.appendChild(spacer);
     bubble.appendChild(btnRemove);
     frag.appendChild(bubble);
   });
