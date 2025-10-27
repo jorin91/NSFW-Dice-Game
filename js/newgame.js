@@ -29,7 +29,7 @@ export function UpdatePlayersUI(targetId = "newgame-players") {
     // Verwijder-knop
     const btnRemove = document.createElement("button");
     btnRemove.type = "button";
-    btnRemove.className = "btn in-element";
+    btnRemove.className = "btn in-element ml-auto";
     btnRemove.setAttribute("aria-label", "Remove");
     btnRemove.textContent = "×";
     btnRemove.addEventListener("click", (e) => {
