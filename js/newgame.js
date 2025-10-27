@@ -15,7 +15,7 @@ export function UpdatePlayersUI(targetId = "newgame-players") {
   players.forEach((p, index) => {
     // Bubble
     const bubble = document.createElement("div");
-    bubble.className = "bubble row small";
+    bubble.className = "bubble";
 
     // Naam
     const nameSpan = document.createElement("span");
@@ -29,9 +29,9 @@ export function UpdatePlayersUI(targetId = "newgame-players") {
     // Verwijder-knop
     const btnRemove = document.createElement("button");
     btnRemove.type = "button";
-    btnRemove.className = "btn in-element ml-auto";
+    btnRemove.className = "bubble-x";
     btnRemove.setAttribute("aria-label", "Remove");
-    btnRemove.textContent = "x";
+    btnRemove.textContent = "×";
     btnRemove.addEventListener("click", (e) => {
       e.stopPropagation();
       removePlayerAt(index, targetId);

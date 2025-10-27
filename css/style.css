@@ -125,6 +125,10 @@ h6 {
   line-height: 1.6;
 }
 .bubble {
+  display: inline-flex;        
+  align-items: center;         
+  gap: 8px;                    
+  line-height: 1;              
   background: var(--panel2);
   color: #fff;
   border: 1px solid var(--accent);
@@ -137,12 +141,17 @@ h6 {
   background: var(--accent);
 }
 .player-sex {
-  font-size: 0.7em;
+  font-size: 0.85em;
   line-height: 1;
   opacity: 0.9;
   display: inline-flex;
   align-items: center;
 }
-.ml-auto {
-  margin-left: auto;
+.bubble-x {
+  background: transparent;
+  border: 0;
+  color: var(--text);
+  padding: 0 4px;
+  line-height: 1;
+  font-size: 14px;          
 }
