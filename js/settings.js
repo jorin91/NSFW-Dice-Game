@@ -28,27 +28,21 @@ export function fillSettingsStage(targetId = "settings_stage") {
     cb.dataset.stageKey = key;
     cb.className = "stage-toggle";
 
-    // Label + tekst
+    // label (alleen voor naam, niet voor desc)
     const label = document.createElement("label");
     label.setAttribute("for", id);
-    // label.className = "flex gap-2 items-center";
+    label.setAttribute("data-i18n-auto", `${value}.name`);
 
-    const nameSpan = document.createElement("span");
-    nameSpan.setAttribute("data-i18n-auto", `${value}.name`);
+    // korte beschrijving los element
+    const desc = document.createElement("span");
+    desc.className = "muted";
+    desc.setAttribute("data-i18n-auto", `${value}.descShort`);
 
-    const descSpan = document.createElement("span");
-    descSpan.className = "muted";
-    descSpan.setAttribute("data-i18n-auto", `${value}.descShort`);
-
-    // Voeg beide spans aan label toe
-    label.appendChild(nameSpan);
-    label.appendChild(descSpan);
-
-    // Voeg checkbox en label toe aan row
+    // alles in één regel
     row.appendChild(cb);
     row.appendChild(label);
+    row.appendChild(desc);
 
-    // Voeg row toe aan root
     root.appendChild(row);
 
     // Checkbox event
