@@ -98,6 +98,9 @@ h6 {
   flex-wrap: wrap;
   align-items: center;
 }
+.row.small {
+  gap: 8px;
+}
 .panel {
   display: none;
 }

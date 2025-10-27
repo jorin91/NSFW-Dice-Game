@@ -15,7 +15,7 @@ export function UpdatePlayersUI(targetId = "newgame-players") {
   players.forEach((p, index) => {
     // Bubble
     const bubble = document.createElement("div");
-    bubble.className = "bubble row";
+    bubble.className = "bubble row small";
 
     // Naam
     const nameSpan = document.createElement("span");
