@@ -16,7 +16,7 @@ export function fillSettingsStage(targetId = "settings_stage") {
     const { value, enabled } = cfg;
 
     const row = document.createElement("div");
-    row.className = "col";
+    // row.className = "col";
 
     const id = `stage_${key.toLowerCase()}`;
 
