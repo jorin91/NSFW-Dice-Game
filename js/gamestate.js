@@ -1,7 +1,14 @@
 import { deepCopy } from "./utils.js";
 import { storageSave, storageLoad } from "./localstorage.js";
 import { showPanel } from "./panelnavigation.js";
-import { getSettingStages, getSettingIntensity, getSettingExtremity, getSettingAct } from "./settings.js";
+import {
+  getSettingStages,
+  getSettingIntensity,
+  getSettingExtremity,
+  getSettingAct,
+} from "./settings.js";
+import { SEX_ENUM } from "./enums.js";
+import { CLOTHING_MODEL } from "./clothing.js";
 
 const LS_KEY_GAMESTATE = "NSFWDiceGame_GameState";
 
@@ -10,12 +17,24 @@ export const GAME_FLOW_MODEL = {
   activePanel: "mainmenu",
   round: 0,
   turnIndex: 0,
-  players: [], // je kunt hier straks createPlayer() instances in zetten
+  players: [
+    {
+      id: 10077,
+      name: "Jan",
+      age: 24,
+      sex: SEX_ENUM.Male,
+      preferSex: SEX_ENUM.Female,
+      consent: true,
+      score: 0,
+      safe: false,
+      clothing: deepCopy(CLOTHING_MODEL),
+    },
+  ], // je kunt hier straks createPlayer() instances in zetten
   settings: {
     stage: getSettingStages(),
     intensity: getSettingIntensity(),
     extremity: getSettingExtremity(),
-    act: getSettingAct()
+    act: getSettingAct(),
   }, // later: maxRolls, pointsToSafe, enz.
   tasks: {},
 };
