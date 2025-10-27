@@ -9,7 +9,7 @@ export function fillSettingsStage(targetId = "settings_stage") {
     window.GAME.settings.stages = getSettingStages();
   }
 
-  root.innerHTML = "";
+  // root.innerHTML = "";
 
   // voor elke stage een rij met checkbox + naam + korte uitleg
   for (const [key, cfg] of Object.entries(window.GAME.settings.stages)) {
