@@ -141,6 +141,7 @@ export function UpdatePlayersUI(targetId = "newgame-players") {
     btnCancel.type = "button";
     btnCancel.className = "bubble";
     btnCancel.setAttribute("data-i18n-auto", "button.cancel");
+    btnCancel.setAttribute("data-panel", "newgame");
     btnCancel.addEventListener("click", () => {
       rootNewPlayer.innerHTML = "";
       // eventueel: switchPanel("mainmenu") of terug naar players-overzicht
