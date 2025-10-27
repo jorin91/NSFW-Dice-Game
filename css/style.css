@@ -87,6 +87,7 @@ h6 {
 }
 .row {
   display: flex;
+  flex-direction: row;
   gap: 16px;
   flex-wrap: wrap;
   align-items: center;
@@ -113,8 +114,4 @@ h6 {
 .list {
   padding-left: 20px;
   line-height: 1.6;
-}
-.sub {
-  margin-top: 0;
-  margin-bottom: 2px;
 }
