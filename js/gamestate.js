@@ -1,7 +1,7 @@
 import { deepCopy } from "./utils.js";
 import { storageSave, storageLoad } from "./localstorage.js";
 import { showPanel } from "./panelnavigation.js";
-import { getSettingStages } from "./settings.js";
+import { getSettingStages, getSettingIntensity, getSettingExtremity, getSettingAct } from "./settings.js";
 
 const LS_KEY_GAMESTATE = "NSFWDiceGame_GameState";
 
@@ -12,7 +12,10 @@ export const GAME_FLOW_MODEL = {
   turnIndex: 0,
   players: [], // je kunt hier straks createPlayer() instances in zetten
   settings: {
-    stages: getSettingStages()
+    stage: getSettingStages(),
+    intensity: getSettingIntensity(),
+    extremity: getSettingExtremity(),
+    act: getSettingAct()
   }, // later: maxRolls, pointsToSafe, enz.
   tasks: {},
 };
