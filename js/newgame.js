@@ -1,4 +1,5 @@
 import { gameSaveState } from "./gamestate.js";
+import { getSexIcon } from "./utils.js";
 
 // Players
 export function UpdatePlayersUI(targetId = "newgame-players") {
@@ -7,20 +8,23 @@ export function UpdatePlayersUI(targetId = "newgame-players") {
 
   const players = Array.isArray(window.GAME?.players) ? window.GAME.players : [];
   root.innerHTML = "";
-
-  // Zorg dat de container de bubbles laat wrappen
-  root.classList.add("row"); // jouw .row heeft flex + wrap
+  root.classList.add("row");
 
   const frag = document.createDocumentFragment();
 
   players.forEach((p, index) => {
     // Bubble
     const bubble = document.createElement("div");
-    bubble.className = "bubble"; // jouw bestaande stijl
+    bubble.className = "bubble";
 
-    // Inhoud links (naam of fallback)
+    // Naam
     const nameSpan = document.createElement("span");
     nameSpan.textContent = p?.name || `Player ${index + 1}`;
+
+    // Geslachticoon
+    const sexIcon = document.createElement("span");
+    sexIcon.className = "player-sex";
+    sexIcon.textContent = getSexIcon(p?.sex);
 
     // Spacer zodat de X rechts komt
     const spacer = document.createElement("span");
@@ -29,7 +33,7 @@ export function UpdatePlayersUI(targetId = "newgame-players") {
     // Verwijder-knop
     const btnRemove = document.createElement("button");
     btnRemove.type = "button";
-    btnRemove.className = "bubble-remove";
+    btnRemove.className = "bubble";
     btnRemove.setAttribute("aria-label", "Remove");
     btnRemove.textContent = "×";
     btnRemove.addEventListener("click", (e) => {
@@ -47,8 +51,8 @@ export function UpdatePlayersUI(targetId = "newgame-players") {
   // Add Player bubble (laat functionaliteit later invullen)
   const add = document.createElement("button");
   add.type = "button";
-  add.className = "bubble bubble-add";
-  add.textContent = "+ Add Player"; // evt. data-i18n-auto meegeven
+  add.className = "bubble";
+  add.setAttribute("data-i18n-auto", "button.addplayer");
   add.addEventListener("click", () => {
     // TODO: jouw add-flow
     // document.dispatchEvent(new CustomEvent("players:add"));

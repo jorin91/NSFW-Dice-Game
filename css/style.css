@@ -126,8 +126,11 @@ h6 {
 .bubble:hover {
   opacity: 0.85;
   background: var(--accent);
-  border: none;
 }
 .grow {
   flex: 1;
+}
+.player-sex {
+  margin-left: 6px;
+  opacity: 0.9;
 }

@@ -53,6 +53,7 @@
   "button.settings": "Settings",
   "button.mainmenu": "Main Menu",
   "button.startgame": "Start Game",
+  "button.addplayer": "+ Add Player",
 
   "clothes.headwear.name": "Headwear",
   "clothes.headwear.desc": "Examples: hats, caps, beanies, headbands. Includes: all items worn on the head (all together count as one item).",
