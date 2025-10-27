@@ -42,7 +42,7 @@
   "app.settings.EXTREMITY.content": "Geeft aan in hoeverre rekening wordt gehouden met grenzen, comfort en pijn.<br>Hoe hoger de extremiteit, hoe ruwer de uitvoering en hoe verder grenzen kunnen worden opgerekt of genegeerd.<br><br>Selecteer welke levels van extremiteit je in deze sessie wil gebruiken.",
 
   "app.settings.ACT.header": "Acttype",
-  "app.settings.ACT.content": "Bepaalt het gebied of lichaamsdeel waarop of waarmee de handeling plaatsvindt.<br><br>Selecteer welke act types je in deze sessie wil gebruiken.",
+  "app.settings.ACT.content": "Bepaalt de vorm van fysieke of seksuele handeling, en waarop of waarmee deze wordt uitgevoerd.<br><br>Selecteer welke acttypes je in deze sessie wil gebruiken.",
 
   "app.newgame.title": "Nieuw Spel",
 
@@ -172,5 +172,13 @@
 
   "ACT_ENUM.ANAL.name": "Anaal",
   "ACT_ENUM.ANAL.descShort": "Anale zone en directe omgeving.",
-  "ACT_ENUM.ANAL.desc": "Betrekking op het anale gebied van het lichaam, inclusief de opening en de directe omliggende zone."
+  "ACT_ENUM.ANAL.desc": "Betrekking op het anale gebied van het lichaam, inclusief de opening en de directe omliggende zone.",
+
+  "ACT_ENUM.TOY.name": "Speeltje",
+  "ACT_ENUM.TOY.descShort": "Gebruik van seksspeeltjes of hulpmiddelen.",
+  "ACT_ENUM.TOY.desc": "Omvat het gebruik van seksspeeltjes die specifiek ontworpen zijn voor seksuele stimulatie of penetratie, zoals dildo’s, vibrators, buttplugs of vergelijkbare hulpmiddelen.",
+
+  "ACT_ENUM.OBJECT.name": "Voorwerp",
+  "ACT_ENUM.OBJECT.descShort": "Gebruik van gewone voorwerpen in seksuele context.",
+  "ACT_ENUM.OBJECT.desc": "Omvat het gebruik van niet-seksuele objecten die creatief of contextueel worden ingezet voor seksuele handelingen, bijvoorbeeld huishoudelijke voorwerpen of oppervlakken."
 }

@@ -152,4 +152,6 @@ export const ACT_ENUM = Object.freeze({
   ORAL: "ACT_ENUM.ORAL",
   GENITAL: "ACT_ENUM.GENITAL",
   ANAL: "ACT_ENUM.ANAL",
+  TOY: "ACT_ENUM.TOY",
+  OBJECT: "ACT_ENUM.OBJECT",
 });

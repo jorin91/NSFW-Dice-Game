@@ -42,7 +42,7 @@
   "app.settings.EXTREMITY.content": "Indicates how much consideration is given to limits, comfort, and pain.<br>The higher the extremity, the rougher the execution and the further boundaries may be stretched or ignored.<br><br>Select which extremity levels you want to use in this session.",
 
   "app.settings.ACT.header": "Act Type",
-  "app.settings.ACT.content": "Defines the area or body part on or through which the act takes place.<br><br>Select which act types you want to use in this session.",
+"app.settings.ACT.content": "Defines the form of physical or sexual interaction, and what it is performed on or with.<br><br>Select which act types you want to include in this session.",
 
   "app.newgame.title": "New Game",
 
@@ -172,5 +172,13 @@
 
   "ACT_ENUM.ANAL.name": "Anal",
   "ACT_ENUM.ANAL.descShort": "Anal zone and surrounding area.",
-  "ACT_ENUM.ANAL.desc": "Relates to the anal area of the body, including the opening and the immediate surrounding zone."
+  "ACT_ENUM.ANAL.desc": "Relates to the anal area of the body, including the opening and the immediate surrounding zone.",
+
+  "ACT_ENUM.TOY.name": "Toy",
+  "ACT_ENUM.TOY.descShort": "Use of sex toys or sexual aids.",
+  "ACT_ENUM.TOY.desc": "Covers the use of objects specifically designed for sexual stimulation or penetration, such as dildos, vibrators, butt plugs, or similar aids.",
+
+  "ACT_ENUM.OBJECT.name": "Object",
+  "ACT_ENUM.OBJECT.descShort": "Use of non-sexual items in a sexual context.",
+  "ACT_ENUM.OBJECT.desc": "Covers the use of ordinary, non-sexual objects creatively or contextually used for sexual acts, for example household items or surfaces."
 }
