@@ -155,3 +155,7 @@ h6 {
   line-height: 1;
   font-size: 14px;          
 }
+.bubble-x:hover {
+  opacity: 0.85;
+  cursor: pointer;
+}
