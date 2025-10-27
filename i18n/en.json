@@ -46,6 +46,8 @@
 
   "app.newgame.title": "New Game",
 
+  "app.newgame.players.header": "Players",
+
   "app.newplayer.title": "New Player",
 
   "button.settings": "Settings",

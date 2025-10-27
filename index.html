@@ -78,7 +78,7 @@
             ></button>
             <button
               class="btn"
-              data-panel="spel"
+              data-panel="newgame"
               data-i18n-auto="button.startgame"
             ></button>
           </div>
@@ -152,7 +152,10 @@
       <section class="panel card" data-panel="newgame">
         <div class="hd" data-i18n-auto="app.newgame.title"></div>
         <div class="bd col">
-          <div></div>
+          <div>
+            <h2 data-i18n-auto="app.newgame.players.header"></h2>
+            <div class="row" id="newgame-players"></div>
+          </div>
         </div>
       </section>
       <!-- New Player Panel -->
