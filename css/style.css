@@ -115,3 +115,19 @@ h6 {
   padding-left: 20px;
   line-height: 1.6;
 }
+.bubble {
+  background: var(--panel2);
+  color: #fff;
+  border: 1px solid var(--accent);
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.bubble:hover {
+  opacity: 0.85;
+  background: var(--accent);
+  border: none;
+}
+.grow {
+  flex: 1;
+}
