@@ -1,5 +1,6 @@
 import { gameSaveState } from "./gamestate.js";
 import { getSexIcon, makeInputField, makeSelectField } from "./utils.js";
+import { SEX_ENUM } from "./enums.js";
 
 // Players
 export function UpdatePlayersUI(targetId = "newgame-players") {
