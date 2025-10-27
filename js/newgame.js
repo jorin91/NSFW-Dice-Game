@@ -189,6 +189,7 @@ export function UpdateNewPlayerUI() {
     // reset UI
     rootNewPlayer.innerHTML = "";
     UpdatePlayersUI();
+    switchPanel("newgame");
   });
 }
 
