@@ -42,8 +42,8 @@
   "app.settings.EXTREMITY.content": "Geeft aan in hoeverre rekening wordt gehouden met grenzen, comfort en pijn.<br>Hoe hoger de extremiteit, hoe ruwer de uitvoering en hoe verder grenzen kunnen worden opgerekt of genegeerd.<br><br>Selecteer welke levels van extremiteit je in deze sessie wil gebruiken.",
 
   "app.settings.ACT.header": "Acttype",
-  "app.settings.ACT.content": "Bepaalt de vorm van fysieke of seksuele handeling, en waarop of waarmee deze wordt uitgevoerd.<br><br>Selecteer welke acttypes je in deze sessie wil gebruiken.",
-
+  "app.settings.ACT.content": "Bepaalt de vorm van fysieke of seksuele handeling, en waarop of waarmee deze wordt uitgevoerd.<br>Dit kan een lichaamsdeel zijn (zoals handen, mond of geslachtsdelen), maar ook het gebruik van seksspeeltjes of gewone voorwerpen omvatten.<br><br>Selecteer welke acttypes je in deze sessie wil gebruiken.",
+  
   "app.newgame.title": "Nieuw Spel",
 
   "app.newplayer.title": "Nieuwe Speler",

@@ -42,7 +42,7 @@
   "app.settings.EXTREMITY.content": "Indicates how much consideration is given to limits, comfort, and pain.<br>The higher the extremity, the rougher the execution and the further boundaries may be stretched or ignored.<br><br>Select which extremity levels you want to use in this session.",
 
   "app.settings.ACT.header": "Act Type",
-"app.settings.ACT.content": "Defines the form of physical or sexual interaction, and what it is performed on or with.<br><br>Select which act types you want to include in this session.",
+  "app.settings.ACT.content": "Defines the form of physical or sexual interaction, and what it is performed on or with.<br>This may involve body parts (such as hands, mouth, or genitals) as well as the use of sex toys or ordinary objects.<br><br>Select which act types you want to include in this session.",
 
   "app.newgame.title": "New Game",
 
