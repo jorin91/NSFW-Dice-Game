@@ -90,7 +90,6 @@ export function UpdatePlayersUI(targetId = "newgame-players") {
       labelI18n: "app.newplayer.form.age",
       placeholderI18n: "app.newplayer.form.age",
       defaultValue: 18,
-      attrs: { min: "18" },
     });
 
     // Geslacht
