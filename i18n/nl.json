@@ -48,6 +48,8 @@
 
   "app.newgame.players.header": "Spelers",
 
+  "app.newgame.options.header": "Opties",
+
   "app.newplayer.title": "Nieuwe Speler",
 
   "app.newplayer.form.name": "Naam",
@@ -62,6 +64,7 @@
   "button.startgame": "Start Spel",
   "button.addplayer": "Speler toevoegen",
   "button.cancel": "Annuleren",
+  "button.resetgame": "Reset Spel",
 
   "clothes.headwear.name": "Hoofdbedekking",
   "clothes.headwear.desc": "Voorbeelden: hoeden, petten, beanies, haarbanden. Omvat: alle items die op het hoofd worden gedragen (alles samen één item).",
