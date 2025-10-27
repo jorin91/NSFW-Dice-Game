@@ -44,7 +44,7 @@ export function fillSettingsStage(targetId = "settings_stage") {
 
     // tweede regel: descShort
     const line2 = document.createElement("p");
-    line2.className = "muted";
+    line2.className = "muted list row";
     line2.setAttribute("data-i18n-auto", `${value}.descShort`);
 
     row.appendChild(line1);
@@ -55,7 +55,7 @@ export function fillSettingsStage(targetId = "settings_stage") {
     cb.addEventListener("change", (e) => {
       const k = e.currentTarget.dataset.stageKey;
       if (!window.GAME?.settings?.stages?.[k]) return;
-      window.GAME.settings.stages[stageKey].enabled = e.currentTarget.checked;
+      window.GAME.settings.stages[k].enabled = e.currentTarget.checked;
       gameSaveState();
     });
   }
