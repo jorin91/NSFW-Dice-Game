@@ -159,3 +159,22 @@ h6 {
   opacity: 0.85;
   cursor: pointer;
 }
+form.col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+form label span {
+  color: var(--text-muted);
+  font-size: 0.9em;
+}
+
+form input,
+form select {
+  background: var(--panel2);
+  color: #fff;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  padding: 6px 8px;
+}
