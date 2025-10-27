@@ -27,12 +27,17 @@ export function UpdatePlayersUI(targetId = "newgame-players") {
     const nameSpan = document.createElement("span");
     nameSpan.textContent = p?.name || `Player ${index + 1}`;
 
+    // Leeftijd
+    const ageSpan = document.createElement("span");
+    ageSpan.textContent = `(${p?.age})` || "";
+
     // Geslachticoon
     const sexIcon = document.createElement("span");
     sexIcon.className = "player-sex";
     sexIcon.textContent = getSexIcon(p?.sex);
 
     nameGroup.appendChild(nameSpan);
+    nameGroup.appendChild(ageSpan);
     nameGroup.appendChild(sexIcon);
 
     // Verwijder-knop
