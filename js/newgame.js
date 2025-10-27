@@ -31,7 +31,7 @@ export function UpdatePlayersUI(targetId = "newgame-players") {
     btnRemove.type = "button";
     btnRemove.className = "btn in-element ml-auto";
     btnRemove.setAttribute("aria-label", "Remove");
-    btnRemove.textContent = "X";
+    btnRemove.textContent = "x";
     btnRemove.addEventListener("click", (e) => {
       e.stopPropagation();
       removePlayerAt(index, targetId);
