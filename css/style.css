@@ -85,8 +85,8 @@ h6 {
 .btn.in-element {
   background: transparent;
   border: none;
-  padding: 2px;
-  margin: 2px;
+  padding: auto;
+  margin-left: 6px;
   color: var(--text);
 }
 .btn:hover {
