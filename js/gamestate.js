@@ -1,5 +1,5 @@
 import { deepCopy } from "./utils.js";
-import { storageSave, storageLoad } from "./localstorage.js";
+import { storageSave, storageLoad, storageClear } from "./localstorage.js";
 import { showPanel } from "./panelnavigation.js";
 import {
   getSettingStages,
@@ -63,4 +63,9 @@ export function gameInitFromStorage() {
     showPanel("mainmenu");
     storageSave(gameGetState(), LS_KEY_GAMESTATE);
   }
+}
+
+export function resetGameState() {
+  storageClear(LS_KEY_GAMESTATE);
+  gameInitFromStorage();
 }
