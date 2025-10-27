@@ -61,6 +61,7 @@ export function UpdatePlayersUI(targetId = "newgame-players") {
   add.type = "button";
   add.className = "bubble";
   add.setAttribute("data-i18n-auto", "button.addplayer");
+  add.setAttribute("data-panel", "newgame");
   add.addEventListener("click", () => {
     // TODO: jouw add-flow
     // document.dispatchEvent(new CustomEvent("players:add"));
