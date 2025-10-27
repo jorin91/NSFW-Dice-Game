@@ -90,6 +90,7 @@ export function UpdatePlayersUI(targetId = "newgame-players") {
       labelI18n: "app.newplayer.form.age",
       placeholderI18n: "app.newplayer.form.age",
       defaultValue: 18,
+      attrs: { min: "1" }
     });
 
     // Geslacht
@@ -169,7 +170,7 @@ export function UpdatePlayersUI(targetId = "newgame-players") {
 
       const vName = mark(nameInput, !!nameInput.value.trim());
       const ageVal = parseInt(ageInput.value, 10);
-      const vAge = mark(ageInput, Number.isFinite(ageVal) && ageVal >= 18);
+      const vAge = mark(ageInput, Number.isFinite(ageVal) && ageVal > 0);
 
       const sexVal = sexSelect.value;
       const prefVal = prefSelect.value;
