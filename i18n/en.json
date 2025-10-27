@@ -50,10 +50,18 @@
 
   "app.newplayer.title": "New Player",
 
+  "app.newplayer.form.name": "Name",
+  "app.newplayer.form.age": "Age",
+  "app.newplayer.form.sex": "Sex",
+  "app.newplayer.form.preferSex": "Sexual preference",
+  "app.newplayer.form.consent": "Consent",
+  "app.newplayer.form.consent.content": "I agree to participate in the game under the configured rules for this session. I understand the explanation and accept that tasks cannot be refused.",
+
   "button.settings": "Settings",
   "button.mainmenu": "Main Menu",
   "button.startgame": "Start Game",
-  "button.addplayer": "+ Add Player",
+  "button.addplayer": "Add Player",
+  "button.cancel": "Cancel",
 
   "clothes.headwear.name": "Headwear",
   "clothes.headwear.desc": "Examples: hats, caps, beanies, headbands. Includes: all items worn on the head (all together count as one item).",
