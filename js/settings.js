@@ -16,14 +16,11 @@ export function fillSettingsStage(targetId = "settings_stage") {
     const { value, enabled } = cfg;
 
     const row = document.createElement("div");
-    // row.className = "col";
+    row.className = "list row";
 
     const id = `stage_${key.toLowerCase()}`;
 
-    // eerste regel: checkbox + label (naam)
-    const line1 = document.createElement("div");
-    line1.className = "list row";
-
+    // Checkbox
     const cb = document.createElement("input");
     cb.type = "checkbox";
     cb.id = id;
@@ -31,27 +28,30 @@ export function fillSettingsStage(targetId = "settings_stage") {
     cb.dataset.stageKey = key;
     cb.className = "stage-toggle";
 
+    // Label + tekst
     const label = document.createElement("label");
     label.setAttribute("for", id);
+    // label.className = "flex gap-2 items-center";
 
-    // naam via i18n-auto: `${value}.name`
     const nameSpan = document.createElement("span");
     nameSpan.setAttribute("data-i18n-auto", `${value}.name`);
+
+    const descSpan = document.createElement("span");
+    descSpan.className = "muted";
+    descSpan.setAttribute("data-i18n-auto", `${value}.descShort`);
+
+    // Voeg beide spans aan label toe
     label.appendChild(nameSpan);
+    label.appendChild(descSpan);
 
-    line1.appendChild(cb);
-    line1.appendChild(label);
+    // Voeg checkbox en label toe aan row
+    row.appendChild(cb);
+    row.appendChild(label);
 
-    // tweede regel: descShort
-    const line2 = document.createElement("p");
-    line2.className = "muted list row";
-    line2.setAttribute("data-i18n-auto", `${value}.descShort`);
-
-    row.appendChild(line1);
-    row.appendChild(line2);
+    // Voeg row toe aan root
     root.appendChild(row);
 
-    // wijziging opslaan bij togglen
+    // Checkbox event
     cb.addEventListener("change", (e) => {
       const k = e.currentTarget.dataset.stageKey;
       if (!window.GAME?.settings?.stages?.[k]) return;
