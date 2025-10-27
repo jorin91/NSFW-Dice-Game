@@ -1,6 +1,7 @@
 import { deepCopy } from "./utils.js";
 import { storageSave, storageLoad } from "./localstorage.js";
 import { showPanel } from "./panelnavigation.js";
+import { getSettingStages } from "./settings.js";
 
 const LS_KEY_GAMESTATE = "NSFWDiceGame_GameState";
 
@@ -10,7 +11,9 @@ export const GAME_FLOW_MODEL = {
   round: 0,
   turnIndex: 0,
   players: [], // je kunt hier straks createPlayer() instances in zetten
-  settings: {}, // later: maxRolls, pointsToSafe, enz.
+  settings: {
+    stages: getSettingStages()
+  }, // later: maxRolls, pointsToSafe, enz.
   tasks: {},
 };
 
