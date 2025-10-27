@@ -42,9 +42,9 @@ export function UpdatePlayersUI(targetId = "newgame-players") {
     });
 
     bubble.appendChild(nameSpan);
+    bubble.appendChild(sexIcon);
     bubble.appendChild(spacer);
     bubble.appendChild(btnRemove);
-
     frag.appendChild(bubble);
   });
 
