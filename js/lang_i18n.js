@@ -24,7 +24,7 @@ export function t(key, vars) {
 
   do {
     prev = s;
-    s = s.replace(re, (match, name) => {
+    s = s.replace(reg, (match, name) => {
       const k = name.trim();
 
       // 1) vars heeft voorrang als aanwezig
