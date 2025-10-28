@@ -9,6 +9,7 @@ import {
 } from "./settings.js";
 import { SEX_ENUM } from "./enums.js";
 import { CLOTHING_MODEL } from "./clothing.js";
+import { getTasksModel } from "./tasks.js";
 
 const LS_KEY_GAMESTATE = "NSFWDiceGame_GameState";
 
@@ -36,7 +37,7 @@ export const GAME_FLOW_MODEL = {
     extremity: getSettingExtremity(),
     act: getSettingAct(),
   }, // later: maxRolls, pointsToSafe, enz.
-  tasks: {},
+  tasks: getTasksModel(),
 };
 
 export function gameGetState() {
