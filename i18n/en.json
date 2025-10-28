@@ -191,5 +191,8 @@
 
   "ACT_ENUM.OBJECT.name": "Object",
   "ACT_ENUM.OBJECT.descShort": "Use of non-sexual items in a sexual context.",
-  "ACT_ENUM.OBJECT.desc": "Covers the use of ordinary, non-sexual objects creatively or contextually used for sexual acts, for example household items or surfaces."
+  "ACT_ENUM.OBJECT.desc": "Covers the use of ordinary, non-sexual objects creatively or contextually used for sexual acts, for example household items or surfaces.",
+
+  "TASK.Undress.Title": "Undress",
+  "TASK.Undress.Dynamic": "Take off or remove your {clothing}."
 }

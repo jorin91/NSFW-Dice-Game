@@ -194,5 +194,8 @@
 
   "ACT_ENUM.OBJECT.name": "Voorwerp",
   "ACT_ENUM.OBJECT.descShort": "Gebruik van gewone voorwerpen in seksuele context.",
-  "ACT_ENUM.OBJECT.desc": "Omvat het gebruik van niet-seksuele objecten die creatief of contextueel worden ingezet voor seksuele handelingen, bijvoorbeeld huishoudelijke voorwerpen of oppervlakken."
+  "ACT_ENUM.OBJECT.desc": "Omvat het gebruik van niet-seksuele objecten die creatief of contextueel worden ingezet voor seksuele handelingen, bijvoorbeeld huishoudelijke voorwerpen of oppervlakken.",
+
+  "TASK.Undress.Title": "Uitkleden",
+  "TASK.Undress.Dynamic": "Trek uit of verwijder je {clothing}."
 }

@@ -60,6 +60,7 @@ export function gameInitFromStorage() {
     showPanel(window.GAME.activePanel || "mainmenu");
   } else {
     // eerste keer: toon hoofdmenu en sla meteen initiele state op
+    window.GAME = deepCopy(GAME_FLOW_MODEL);
     showPanel("mainmenu");
     storageSave(gameGetState(), LS_KEY_GAMESTATE);
   }

@@ -1,10 +1,12 @@
+import { deepCopy } from "./utils.js";
+
 export const CLOTHING_MODEL = {
   headwear: {
     name: "clothes.headwear.name",
     desc: "clothes.headwear.desc",
     worn: true,
     enabled: false,
-    removeRules: [],
+    changeRules: [],
   },
 
   accessories_glasses: {
@@ -12,7 +14,7 @@ export const CLOTHING_MODEL = {
     desc: "clothes.accessories_glasses.desc",
     worn: true,
     enabled: false,
-    removeRules: [],
+    changeRules: [],
   },
 
   accessories_neck: {
@@ -20,7 +22,7 @@ export const CLOTHING_MODEL = {
     desc: "clothes.accessories_neck.desc",
     worn: true,
     enabled: false,
-    removeRules: [],
+    changeRules: [],
   },
 
   accessories_arm: {
@@ -28,7 +30,7 @@ export const CLOTHING_MODEL = {
     desc: "clothes.accessories_arm.desc",
     worn: true,
     enabled: false,
-    removeRules: [],
+    changeRules: [],
   },
 
   jacket: {
@@ -36,7 +38,7 @@ export const CLOTHING_MODEL = {
     desc: "clothes.jacket.desc",
     worn: true,
     enabled: false,
-    removeRules: [],
+    changeRules: [],
   },
 
   sweater: {
@@ -44,7 +46,7 @@ export const CLOTHING_MODEL = {
     desc: "clothes.sweater.desc",
     worn: true,
     enabled: false,
-    removeRules: [{ notWorn: ["jacket"] }],
+    changeRules: [{ notWorn: ["jacket"] }],
   },
 
   shirt: {
@@ -52,7 +54,7 @@ export const CLOTHING_MODEL = {
     desc: "clothes.shirt.desc",
     worn: true,
     enabled: true,
-    removeRules: [{ notWorn: ["jacket", "sweater"] }],
+    changeRules: [{ notWorn: ["jacket", "sweater"] }],
   },
 
   undershirt: {
@@ -60,7 +62,7 @@ export const CLOTHING_MODEL = {
     desc: "clothes.undershirt.desc",
     worn: true,
     enabled: false,
-    removeRules: [{ notWorn: ["jacket", "sweater", "shirt"] }],
+    changeRules: [{ notWorn: ["jacket", "sweater", "shirt"] }],
   },
 
   bra: {
@@ -68,7 +70,7 @@ export const CLOTHING_MODEL = {
     desc: "clothes.bra.desc",
     worn: true,
     enabled: true,
-    removeRules: [{ notWorn: ["jacket", "sweater", "shirt", "undershirt"] }],
+    changeRules: [{notWorn: ["jacket", "sweater", "shirt", "undershirt"]}],
   },
 
   pants: {
@@ -76,7 +78,7 @@ export const CLOTHING_MODEL = {
     desc: "clothes.pants.desc",
     worn: true,
     enabled: true,
-    removeRules: [{ notWorn: ["shoes"] }],
+    changeRules: [{ notWorn: ["shoes"] }],
   },
 
   leggings: {
@@ -84,7 +86,7 @@ export const CLOTHING_MODEL = {
     desc: "clothes.leggings.desc",
     worn: true,
     enabled: false,
-    removeRules: [{ notWorn: ["shoes", "pants"] }],
+    changeRules: [{ notWorn: ["shoes", "pants"] }],
   },
 
   underwear: {
@@ -92,7 +94,7 @@ export const CLOTHING_MODEL = {
     desc: "clothes.underwear.desc",
     worn: true,
     enabled: true,
-    removeRules: [{ notWorn: ["pants", "leggings"] }],
+    changeRules: [{ notWorn: ["pants", "leggings"] }],
   },
 
   shoes: {
@@ -100,7 +102,7 @@ export const CLOTHING_MODEL = {
     desc: "clothes.shoes.desc",
     worn: true,
     enabled: true,
-    removeRules: [],
+    changeRules: [],
   },
 
   socks: {
@@ -108,19 +110,60 @@ export const CLOTHING_MODEL = {
     desc: "clothes.socks.desc",
     worn: true,
     enabled: true,
-    removeRules: [{ notWorn: ["shoes"] }],
+    changeRules: [{ notWorn: ["shoes"] }],
   },
 };
 
-export function canRemoveClothingPiece(key, clothingState) {
-  const piece = clothingState[key];
-  if (!piece) return false;
-  const rules = piece.removeRules || [];
-  // alle regels moeten voldoen
-  return rules.every((rule) => {
-    const notWorn = rule?.notWorn || [];
-    return notWorn.every(
-      (k) => clothingState[k] && clothingState[k].worn === false
-    );
+function isEnabled(model, k) {
+  const p = model[k];
+  return !!(p && p.enabled === true);
+}
+
+function isWorn(model, k) {
+  const p = model[k];
+  return !!(p && p.worn === true);
+}
+
+// Controleer of alle regels voldoen
+// Ondersteunt:
+//   { notWorn: ["jacket", "sweater"] }
+//   { worn: ["underwear", "socks"] }
+function rulesSatisfiedFor(model, piece) {
+  const rules = Array.isArray(piece.changeRules) ? piece.changeRules : [];
+
+  return rules.every(rule => {
+    // notWorn: elk genoemd item mag niet aan zijn
+    const notWornList = Array.isArray(rule?.notWorn) ? rule.notWorn : [];
+    const notWornOK = notWornList.every(k => {
+      if (!isEnabled(model, k)) return true; // negeer disabled
+      return !isWorn(model, k);
+    });
+
+    // worn: elk genoemd item moet juist aan zijn
+    const wornList = Array.isArray(rule?.worn) ? rule.worn : [];
+    const wornOK = wornList.every(k => {
+      if (!isEnabled(model, k)) return true; // negeer disabled
+      return isWorn(model, k);
+    });
+
+    return notWornOK && wornOK;
   });
+}
+
+export function canWearClothingPiece(key, clothingModel) {
+  const piece = clothingModel[key];
+  if (!piece || !piece.enabled) return false;  // uitgeschakeld
+  if (piece.worn) return false;                // al aan
+  return rulesSatisfiedFor(clothingModel, piece);
+}
+
+export function canRemoveClothingPiece(key, clothingModel) {
+  const piece = clothingModel[key];
+  if (!piece || !piece.enabled) return false;  // uitgeschakeld
+  if (!piece.worn) return false;               // al uit
+  return rulesSatisfiedFor(clothingModel, piece);
+}
+
+export function getClothesModel(){
+  return deepCopy(CLOTHING_MODEL);
 }

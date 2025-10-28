@@ -17,9 +17,32 @@ async function loadDict(lang) {
 
 export function t(key, vars) {
   let s = dict[key] ?? key; // fallback toont key
-  if (vars && typeof s === "string") {
-    s = s.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? "");
-  }
+  if (typeof s !== "string") return s;
+
+  const reg = /\{([^}]+)\}/g;
+  let prev;
+
+  do {
+    prev = s;
+    s = s.replace(re, (match, name) => {
+      const k = name.trim();
+
+      // 1) vars heeft voorrang als aanwezig
+      if (vars && Object.prototype.hasOwnProperty.call(vars, k)) {
+        return String(vars[k]);
+      }
+
+      // 2) anders: probeer i18n-key
+      if (Object.prototype.hasOwnProperty.call(dict, k)) {
+        const v = dict[k];
+        return typeof v === "string" ? v : String(v);
+      }
+
+      // 3) onbekend -> placeholder laten staan
+      return match;
+    });
+  } while (s !== prev); // recursief door blijven gaan tot er niets meer verandert
+
   return s;
 }
 
@@ -29,7 +52,7 @@ export function onLangChange(fn) {
 }
 
 function updateLangButtons(activeLang) {
-  document.querySelectorAll(".lang-btn").forEach(btn => {
+  document.querySelectorAll(".lang-btn").forEach((btn) => {
     const lang = btn.dataset.lang;
     // alleen de actieve knop is géén ghost
     btn.classList.toggle("ghost", lang !== activeLang);

@@ -1,5 +1,4 @@
 import { deepCopy } from "./utils.js";
-import { CLOTHING_MODEL } from './clothing.js';
 import { gameSaveState } from "./gamestate.js";
 
 export const PLAYER_MODEL = {
@@ -14,17 +13,20 @@ export const PLAYER_MODEL = {
   clothing: null, // <- niet vooraf invullen met kopie
 };
 
-export function createPlayer(name, sex, age, preferSex, consent) {
-  const player = deepCopy(PLAYER_MODEL);
+export function createPlayer(name, sex, age, preferSex, consent, clothing) {
+  const player = getPlayerModel();
   player.id = crypto.randomUUID();
   player.name = name;
   player.sex = sex;
   player.age = age;
   player.preferSex = preferSex;
   player.consent = consent;
-  
-  player.clothing = deepCopy(CLOTHING_MODEL); // <- kopie hier
+  player.clothing = clothing;
 
   window.GAME.players.push(player);
   gameSaveState();
+}
+
+export function getPlayerModel() {
+  return deepCopy(PLAYER_MODEL);
 }

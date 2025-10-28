@@ -5,7 +5,7 @@ import { GAME_FLOW_MODEL, gameInitFromStorage } from './gamestate.js';
 import { fillSettingsStage, fillSettingsIntensity, fillSettingsExtremity, fillSettingsAct } from './settings.js';
 import { UpdatePlayersUI, UpdateNewPlayerUI } from './newgame.js';
 
-window.GAME = deepCopy(GAME_FLOW_MODEL);
+// window.GAME = deepCopy(GAME_FLOW_MODEL);
 
 document.addEventListener("DOMContentLoaded", () => {
   initI18n(); // Translation
