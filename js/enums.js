@@ -1,9 +1,15 @@
 // Eigen of gewenst ander geslacht
 export const SEX_ENUM = Object.freeze({
-    Male: "SEX_ENUM.Male",
-    Female: "SEX_ENUM.Female",
-    Both: "SEX_ENUM.Both"
-})
+  Male: "SEX_ENUM.Male",
+  Female: "SEX_ENUM.Female",
+  Both: "SEX_ENUM.Both",
+});
+
+// Type speler
+export const PLAYERTARGET_ENUM = Object.freeze({
+  Self: 0,
+  Other: 1,
+});
 
 // Opbouwfase — bepaalt zowel de sfeer als het toegestane niveau van fysiek contact.
 // Hoe verder in de fase, hoe intiemer, sensueler of seksueler het contact mag zijn.
@@ -81,10 +87,10 @@ export const STAGE_ENUM = Object.freeze({
            terugnemen alleen als EXTREMITY dat voorschrijft.
 */
 export const INTENSITY_ENUM = Object.freeze({
-  VERY_LOW: "INTENSITY_ENUM.VERY_LOW",   // minimale prikkeling; traag, zacht, lichte aanraking
-  LOW: "INTENSITY_ENUM.LOW",             // rustige prikkeling; bescheiden tempo/druk
-  MEDIUM: "INTENSITY_ENUM.MEDIUM",       // normale prikkeling; steady tempo/druk
-  HIGH: "INTENSITY_ENUM.HIGH",           // sterke prikkeling; snel/aanhoudend, duidelijk gericht op climax
+  VERY_LOW: "INTENSITY_ENUM.VERY_LOW", // minimale prikkeling; traag, zacht, lichte aanraking
+  LOW: "INTENSITY_ENUM.LOW", // rustige prikkeling; bescheiden tempo/druk
+  MEDIUM: "INTENSITY_ENUM.MEDIUM", // normale prikkeling; steady tempo/druk
+  HIGH: "INTENSITY_ENUM.HIGH", // sterke prikkeling; snel/aanhoudend, duidelijk gericht op climax
   VERY_HIGH: "INTENSITY_ENUM.VERY_HIGH", // maximale prikkeling; non-stop, zeer doelgericht op climax/overprikkeling
 });
 
