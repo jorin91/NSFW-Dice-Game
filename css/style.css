@@ -115,6 +115,9 @@ h6 {
   flex-direction: column;
   gap: 16px;
 }
+.col.small {
+  gap: 4px;
+}
 .sep {
   height: 1px;
   background: #2a2f3a;

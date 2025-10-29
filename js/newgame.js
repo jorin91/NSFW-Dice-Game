@@ -3,6 +3,7 @@ import { getSexIcon, makeInputField, makeSelectField } from "./utils.js";
 import { SEX_ENUM } from "./enums.js";
 import { createPlayer } from "./player.js";
 import { switchPanel } from "./panelnavigation.js";
+import { getClothesModel } from "./clothing.js";
 
 // Players
 export function UpdatePlayersUI(targetId = "newgame-players") {
@@ -110,6 +111,34 @@ export function UpdateNewPlayerUI() {
     entries: Object.entries(SEX_ENUM),
   });
 
+  // Kleding
+  const playerClothes = getClothesModel();
+  const clothesWrap = document.createElement("div");
+  clothesWrap.className = "col small";
+  Object.entries(playerClothes).forEach(([key, piece]) => {
+    const clothesRow = document.createElement("label");
+    clothesRow.className = "row small";
+
+    const cbClothingPiece = document.createElement("input");
+    cbClothingPiece.type = "checkbox";
+    cbClothingPiece.name = "clothing";
+
+    const lbClothingPiece = document.createElement("span");
+    lbClothingPiece.setAttribute("data-i18n-auto", piece.name);
+
+    const lbInfo = document.createElement("p");
+    lbInfo.className = "muted";
+    lbInfo.setAttribute("data-i18n-auto", piece.desc);
+
+    clothesRow.append(cbClothingPiece, lbClothingPiece, lbInfo);
+
+    clothesWrap.append(clothesRow);
+
+    cbClothingPiece.addEventListener("change", () => {
+      playerClothes[key].enabled = cbClothingPiece.checked;
+    });
+  });
+
   // Consent met muted uitleg
   const consentWrap = document.createElement("div");
   consentWrap.className = "col small";
@@ -184,7 +213,7 @@ export function UpdateNewPlayerUI() {
     if (!(vName && vAge && vSex && vPref && vConsent)) return;
 
     // Aanmaken via jouw bestaande helper
-    createPlayer(nameInput.value.trim(), sexVal, ageVal, prefVal, true);
+    createPlayer(nameInput.value.trim(), sexVal, ageVal, prefVal, vConsent, playerClothes);
 
     // reset UI
     rootNewPlayer.innerHTML = "";
