@@ -1,0 +1,65 @@
+{
+  "ui.title": "NSFW Dice Game",
+  "ui.language": "Language",
+
+  "app.mainmenu.title": "Main Menu",
+
+  "app.mainmenu.welcome.header": "Welcome to the Game",
+  "app.mainmenu.welcome.content": "NSFW Dice Game is a playful and exciting dice game designed to bring fun, curiosity, and intimacy back to life. You can play it with your partner or with friends for an evening full of humor, excitement, and surprises. The game starts light and funny, gradually builds toward more sensual and cheeky challenges, and depending on the selected categories, may lead to real sexual interaction. By rolling the dice, you earn points, but if you lose a round, a task awaits that takes the atmosphere to the next level. No game ever plays out the same way; chance decides how far things go.",
+
+  "app.mainmenu.goal.header": "Goal of the Game",
+  "app.mainmenu.goal.content": "Earn as many points as possible by rolling strategically. Each round winner gains one point toward their total score. Once a player reaches the set number of points, they are exempt from performing further tasks. The game continues until only one player remains who is not exempt. That player performs the task, after which a new cycle begins with everyone starting from zero.",
+
+  "app.mainmenu.game.header": "How the Game Works",
+  "app.mainmenu.game.content": "<li>Each player gets a fixed number of rolls per turn (e.g., 3).</li><li>After each roll, one or more dice can be held or released.</li><li>After the final roll, the score is calculated based on the resulting combinations.</li><li>The player with the highest score wins the round and earns 1 point.</li><li>When a player reaches the set number of points, they are considered “safe”.</li><li>When only one player remains, that player performs a task.</li>",
+
+  "app.mainmenu.score.header": "Scoring",
+  "app.mainmenu.score.content": "<li>Each die only counts once.</li><li>Dice showing the same number form a group.</li><li>The value is the number with one zero added for each extra die in the group.<br />Example: a 6 = 6 points, two 2’s = 20 points, three 1’s = 100 points.</li><li>All groups are added up to form one total score.</li>",
+
+  "app.mainmenu.tasks.header": "Tasks",
+  "app.mainmenu.tasks.content": "The loser of each round is assigned a task. These tasks range from light and funny to sensual, daring, and sexual. They are designed to build tension and desire, deepen the connection between players, and playfully lead toward real sexual interaction. Each task brings the game one step closer to an intimate climax, keeping the experience both surprising and exciting.",
+
+  "app.mainmenu.agree.header": "Consent and Game Rules",
+  "app.mainmenu.agree.content": "Before starting, each player consciously agrees to participate fully within the boundaries chosen in the settings. By agreeing, a player declares that they will carry out every task assigned by the game as intended, regardless of who or what it involves. This ensures the game stays fair, consistent, and enjoyable for everyone involved.",
+
+  "app.mainmenu.safety.header": "Warning and Safety",
+  "app.mainmenu.safety.content": "This game has an explicitly adult nature and focuses on sexual tension and interaction between players. Participation means each player consciously takes responsibility for their own safety, health, and well-being, as well as that of others. Think in advance about protection and health measures (such as using condoms, birth control pills, or other forms of contraception) and communicate openly and honestly about them. Accept that physical responses, such as an orgasm as a result of sexual interaction, can be part of the game and may have personal and emotional effects. Always treat each other with respect, care, and mutual consent.",
+
+  "app.game.title": "Game",
+
+  "app.task.title": "Task",
+
+  "app.settings.title": "Settings",
+
+  "app.settings.STAGE.header": "Progression and Contact Level",
+  "app.settings.STAGE.content": "The further the stage progresses, the more intimate, sensual, or sexual the contact may become.<br><br>Select which stages you want to use in this session.",
+
+  "app.settings.INTENSITY.header": "Intensity",
+  "app.settings.INTENSITY.content": "Determines the strength, speed, and consistency of physical actions.<br>The higher the intensity, the faster and more powerful the stimulation, and the stronger the build-up toward climax.<br><br>Select which intensity levels you want to use in this session.",
+
+  "app.settings.EXTREMITY.header": "Extremity",
+  "app.settings.EXTREMITY.content": "Indicates how much consideration is given to limits, comfort, and pain.<br>The higher the extremity, the rougher the execution and the further boundaries may be stretched or ignored.<br><br>Select which extremity levels you want to use in this session.",
+
+  "app.settings.ACT.header": "Act Type",
+  "app.settings.ACT.content": "Defines the form of physical or sexual interaction, and what it is performed on or with.<br>This may involve body parts (such as hands, mouth, or genitals) as well as the use of sex toys or ordinary objects.<br><br>Select which act types you want to include in this session.",
+
+  "app.newgame.title": "New Game",
+
+  "app.newgame.players.header": "Players",
+
+  "app.newplayer.title": "New Player",
+
+  "app.newplayer.form.name": "Name",
+  "app.newplayer.form.age": "Age",
+  "app.newplayer.form.sex": "Sex",
+  "app.newplayer.form.preferSex": "Sexual preference",
+  "app.newplayer.form.consent": "Consent",
+  "app.newplayer.form.consent.content": "I agree to participate in the game under the configured rules for this session. I understand the explanation and accept that tasks cannot be refused.",
+
+  "button.settings": "Settings",
+  "button.mainmenu": "Main Menu",
+  "button.startgame": "Start Game",
+  "button.addplayer": "Add Player",
+  "button.cancel": "Cancel",
+  "button.resetgame": "Reset Game"
+}

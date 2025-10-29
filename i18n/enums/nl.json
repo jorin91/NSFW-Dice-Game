@@ -1,0 +1,93 @@
+{
+  "SEX_ENUM.Male": "Man",
+  "SEX_ENUM.Female": "Vrouw",
+  "SEX_ENUM.Both": "Beide",
+
+  "STAGE_ENUM.INNOCENT.name": "Onschuldig",
+  "STAGE_ENUM.INNOCENT.descShort": "Vrolijk; gewoon contact; volledig gekleed; geen spanning.",
+  "STAGE_ENUM.INNOCENT.desc": "Luchtige, alledaagse interactie zonder prikkels of plagerij. Aanraking blijft bij normale sociale gebaren (hand, arm, schouder). Er is geen focus op intimiteit. Iedereen blijft volledig gekleed en de aandacht ligt op gezellig samenzijn.",
+
+  "STAGE_ENUM.PLAYFUL.name": "Speels",
+  "STAGE_ENUM.PLAYFUL.descShort": "Ondeugend; plagen; lichte aanraking; tot ondergoed.",
+  "STAGE_ENUM.PLAYFUL.desc": "Levendige, plagerige sfeer met lichte spanning. Aanraking mag dichterbij komen (bijv. buik/zij), maar niet op intieme plekken en niet opwindend bedoeld. Het draait om humor, uitdagen en nieuwsgierigheid. Kleding mag uit tot ondergoed of zwemkleding; ondergoed blijft aan.",
+
+  "STAGE_ENUM.INTIMATE.name": "Intiem",
+  "STAGE_ENUM.INTIMATE.descShort": "Teder; dichtbij; aanraking terughoudend; naakt toegestaan.",
+  "STAGE_ENUM.INTIMATE.desc": "Rustige nabijheid en kwetsbaarheid. Lichamen mogen zichtbaar zijn; naakt is toegestaan. Aanraking blijft zacht en terughoudend, niet gericht op opwinding. De spanning zit in kijken, nabij zijn en kleine gebaren. De toon is warm en persoonlijk.",
+
+  "STAGE_ENUM.SENSUAL.name": "Sensueel",
+  "STAGE_ENUM.SENSUAL.descShort": "Prikkelend; gericht aanraken; tease; naakt.",
+  "STAGE_ENUM.SENSUAL.desc": "Bewuste opbouw van verlangen. Intieme zones mogen worden aangeraakt om te teasen, zonder door te zetten naar de daad. Bewegingen zijn traag en gericht op spanning. Kleding is uit; eventueel kan stof of een item speels worden ingezet als onderdeel van de verleiding.",
+
+  "STAGE_ENUM.EROTIC.name": "Erotisch",
+  "STAGE_ENUM.EROTIC.descShort": "Voorspel; vrij aanraken; voelen en ontdekken; naakt.",
+  "STAGE_ENUM.EROTIC.desc": "Lichamelijke verkenning staat centraal. Seksuele aanrakingen en zachte stimulatie zijn toegestaan met focus op voelen, proeven en reageren. Het is de fase van voorspel: ritme, tempo en variatie zonder nadruk op afronding. Lichamen zijn naakt en dichtbij.",
+
+  "STAGE_ENUM.SEXUAL.name": "Seksueel",
+  "STAGE_ENUM.SEXUAL.descShort": "Volledig seksueel; alle aanraking; naakt.",
+  "STAGE_ENUM.SEXUAL.desc": "Alles draait om seksuele interactie. Alle vormen van aanraking en beweging zijn mogelijk, van langzaam en aandachtig tot direct en intens. Lichamen zijn naakt en de focus ligt op fysiek plezier en lichamelijke expressie.",
+
+  "INTENSITY_ENUM.VERY_LOW.name": "Zeer laag",
+  "INTENSITY_ENUM.VERY_LOW.descShort": "Minimale prikkeling; traag; zacht; korte impulsen.",
+  "INTENSITY_ENUM.VERY_LOW.desc": "Zachte, sporadische stimulatie met laag tempo en beperkte duur. Bedoeld als subtiele opwarming zonder actieve focus op een orgasme.",
+
+  "INTENSITY_ENUM.LOW.name": "Laag",
+  "INTENSITY_ENUM.LOW.descShort": "Rustig; bescheiden tempo/druk; ontspannen opbouw.",
+  "INTENSITY_ENUM.LOW.desc": "Rustige, gelijkmatige stimulatie met bescheiden tempo en druk. Gericht op een gecontroleerde en ontspannen opbouw waarbij een orgasme geen primair doel is.",
+
+  "INTENSITY_ENUM.MEDIUM.name": "Gemiddeld",
+  "INTENSITY_ENUM.MEDIUM.descShort": "Normaal; steady tempo/druk; duidelijke prikkel.",
+  "INTENSITY_ENUM.MEDIUM.desc": "Constante stimulatie met normaal tempo en merkbare prikkel. Gericht op opbouwende opwinding en een geleidelijke toename van intensiteit, werkend richting een orgasme zonder nadruk of forcering.",
+
+  "INTENSITY_ENUM.HIGH.name": "Hoog",
+  "INTENSITY_ENUM.HIGH.descShort": "Sterk; snel/aanhoudend; gericht op orgasme.",
+  "INTENSITY_ENUM.HIGH.desc": "Sterke, aanhoudende stimulatie met hoog tempo of frequentie. Gericht op het doelbewust bereiken of versterken van een orgasme. Bij herhaling kan dit leiden tot meerdere opeenvolgende pieken afhankelijk van EXTREMITY.",
+
+  "INTENSITY_ENUM.VERY_HIGH.name": "Zeer hoog",
+  "INTENSITY_ENUM.VERY_HIGH.descShort": "Maximaal; non-stop; extreme prikkeling.",
+  "INTENSITY_ENUM.VERY_HIGH.desc": "Zeer doelgerichte, vrijwel ononderbroken stimulatie met extreem tempo of druk. Gericht op maximale prikkeling, overprikkeling van orgasme en meervoudige orgasme-ervaringen, waarbij afbouw of pauze enkel plaatsvindt als EXTREMITY dat voorschrijft.",
+
+  "EXTREMITY_ENUM.VERY_LOW.name": "Zeer laag",
+  "EXTREMITY_ENUM.VERY_LOW.descShort": "Voorzichtig en gecontroleerd; klein, zacht en volledig binnen veilige grenzen.",
+  "EXTREMITY_ENUM.VERY_LOW.desc": "De ontvanger bepaalt volledig, de uitvoerder volgt strikt binnen deze grenzen — de opdracht wordt wel altijd uitgevoerd. Comfort is leidend; pijn en spanning worden vermeden. Bewegingen blijven klein en ondiep, onder de gebruikelijke norm. Indien ruimere grenzen worden aangegeven, wordt hier voorzichtig naartoe gewerkt. Tijdens climax: direct terugnemen naar rust of minimale intensiteit om herstel te bieden.",
+
+  "EXTREMITY_ENUM.LOW.name": "Laag",
+  "EXTREMITY_ENUM.LOW.descShort": "Zacht en oplettend; grenzen worden gerespecteerd en spanning blijft minimaal.",
+  "EXTREMITY_ENUM.LOW.desc": "De ontvanger bepaalt grotendeels; de uitvoerder mag grenzen voorzichtig oprekken zolang er geen negatieve signalen zijn. Pijn en ongemak worden actief voorkomen en direct gecorrigeerd. Formaat en diepte blijven iets kleiner dan normaal met een rustige opbouw. Tijdens climax: langzaam en gecontroleerd afbouwen naar een pauze of lage intensiteit.",
+
+  "EXTREMITY_ENUM.MEDIUM.name": "Gemiddeld",
+  "EXTREMITY_ENUM.MEDIUM.descShort": "Evenwicht tussen comfort en uitdaging; geleidelijke opbouw naar normale intensiteit.",
+  "EXTREMITY_ENUM.MEDIUM.desc": "De uitvoerder en ontvanger delen controle; comfort blijft in beeld, maar de uitvoerder heeft de regie. Grenzen worden actief en geleidelijk opgerekt voorbij het vertrouwde. Milde spanning of lichte pijn kan voorkomen, zolang dit binnen de draagkracht blijft. Formaat en diepte bewegen rustig richting de gebruikelijke norm. Tijdens climax: niet stoppen, maar afbouwen en terugschakelen in intensiteit en op dat lagere niveau doorgaan.",
+
+  "EXTREMITY_ENUM.HIGH.name": "Hoog",
+  "EXTREMITY_ENUM.HIGH.descShort": "Stevig en intens; grenzen worden opgerekt en comfort deels losgelaten.",
+  "EXTREMITY_ENUM.HIGH.desc": "De uitvoerder bepaalt grotendeels; comfort en signalen worden beperkt meegenomen. Grenzen kunnen bewust overschreden worden. Pijn of spanning wordt doelmatig ingezet zolang het houdbaar blijft. Formaat en diepte mogen buiten de normale maat vallen met korte aanpassingen bij overbelasting. Tijdens climax: niet stoppen, eventueel kort afbouwen en daarna opnieuw opbouwen richting de volgende climax.",
+
+  "EXTREMITY_ENUM.VERY_HIGH.name": "Zeer hoog",
+  "EXTREMITY_ENUM.VERY_HIGH.descShort": "Volledig gecontroleerd door uitvoerder; ruw, diep en voorbij comfortgrenzen.",
+  "EXTREMITY_ENUM.VERY_HIGH.desc": "De uitvoerder bepaalt volledig zonder rekening te houden met comfort, pijn of signalen van de ontvanger. Pijn en weerstand worden genegeerd zolang de opdracht uitvoerbaar blijft. Formaat, diepte en druk zijn onbeperkt en kunnen sterk buiten normaal vallen. Tijdens climax: geen pauzes of terugschakeling; bewust doorgaan voorbij de grens en langdurig vasthouden in de climaxfase.",
+
+  "ACT_ENUM.MANUAL.name": "Manueel",
+  "ACT_ENUM.MANUAL.descShort": "Handen en vingers.",
+  "ACT_ENUM.MANUAL.desc": "Betrekking op het gebruik of de betrokkenheid van handen en vingers als deel van de interactie of ervaring.",
+
+  "ACT_ENUM.ORAL.name": "Oraal",
+  "ACT_ENUM.ORAL.descShort": "Mond, lippen en tong.",
+  "ACT_ENUM.ORAL.desc": "Betrekking op de mond als gebied, inclusief lippen en tong, of situaties waarin deze lichaamsdelen direct betrokken zijn.",
+
+  "ACT_ENUM.GENITAL.name": "Genitaal",
+  "ACT_ENUM.GENITAL.descShort": "Geslachtsdelen en directe omgeving.",
+  "ACT_ENUM.GENITAL.desc": "Betrekking op het genitale gebied van het lichaam, inclusief de uitwendige en inwendige delen van de geslachtsorganen en de omliggende zone.",
+
+  "ACT_ENUM.ANAL.name": "Anaal",
+  "ACT_ENUM.ANAL.descShort": "Anale zone en directe omgeving.",
+  "ACT_ENUM.ANAL.desc": "Betrekking op het anale gebied van het lichaam, inclusief de opening en de directe omliggende zone.",
+
+  "ACT_ENUM.TOY.name": "Speeltje",
+  "ACT_ENUM.TOY.descShort": "Gebruik van seksspeeltjes of hulpmiddelen.",
+  "ACT_ENUM.TOY.desc": "Omvat het gebruik van seksspeeltjes die specifiek ontworpen zijn voor seksuele stimulatie of penetratie, zoals dildo’s, vibrators, buttplugs of vergelijkbare hulpmiddelen.",
+
+  "ACT_ENUM.OBJECT.name": "Voorwerp",
+  "ACT_ENUM.OBJECT.descShort": "Gebruik van gewone voorwerpen in seksuele context.",
+  "ACT_ENUM.OBJECT.desc": "Omvat het gebruik van niet-seksuele objecten die creatief of contextueel worden ingezet voor seksuele handelingen, bijvoorbeeld huishoudelijke voorwerpen of oppervlakken."
+}

@@ -1,0 +1,93 @@
+{
+  "SEX_ENUM.Male": "Male",
+  "SEX_ENUM.Female": "Female",
+  "SEX_ENUM.Both": "Both",
+
+  "STAGE_ENUM.INNOCENT.name": "Innocent",
+  "STAGE_ENUM.INNOCENT.descShort": "Cheerful; casual contact; fully dressed; no tension.",
+  "STAGE_ENUM.INNOCENT.desc": "Light, everyday interaction without teasing or arousal. Touch stays within normal social gestures (hand, arm, shoulder). No focus on intimacy. Everyone remains fully dressed; the attention is on relaxed togetherness.",
+
+  "STAGE_ENUM.PLAYFUL.name": "Playful",
+  "STAGE_ENUM.PLAYFUL.descShort": "Cheeky; teasing; light touch; underwear.",
+  "STAGE_ENUM.PLAYFUL.desc": "A lively, teasing mood with gentle tension. Touch may get closer (e.g., belly/side) but avoids intimate areas and is not meant to arouse. It’s about humor, challenge, and curiosity. Clothing can come off down to underwear or swimwear; underwear stays on.",
+
+  "STAGE_ENUM.INTIMATE.name": "Intimate",
+  "STAGE_ENUM.INTIMATE.descShort": "Tender; close; restrained touch; nude allowed.",
+  "STAGE_ENUM.INTIMATE.desc": "Calm closeness and openness. Bodies may be visible; nudity is allowed. Touch remains gentle and restrained, not aimed at arousal. The tension is in being close, looking, and small gestures. The tone is warm and personal.",
+
+  "STAGE_ENUM.SENSUAL.name": "Sensual",
+  "STAGE_ENUM.SENSUAL.descShort": "Arousing; deliberate touch; tease; nude.",
+  "STAGE_ENUM.SENSUAL.desc": "Deliberate buildup of desire. Intimate zones may be touched to tease, without moving into the act. Movements are slow and focused on tension. Clothing is off; fabric or a prop may be used playfully as part of the tease.",
+
+  "STAGE_ENUM.EROTIC.name": "Erotic",
+  "STAGE_ENUM.EROTIC.descShort": "Foreplay; free touch; feeling and exploring; nude.",
+  "STAGE_ENUM.EROTIC.desc": "Physical exploration takes the lead. Sexual touch and gentle stimulation are allowed, focused on sensation and response rather than completion. It’s the foreplay stage: rhythm, tempo, and variation. Bodies are nude and close.",
+
+  "STAGE_ENUM.SEXUAL.name": "Sexual",
+  "STAGE_ENUM.SEXUAL.descShort": "Fully sexual; all touch; nude.",
+  "STAGE_ENUM.SEXUAL.desc": "Complete sexual interaction. Any form of touch and movement is possible, from slow and attentive to direct and intense. Bodies are nude and the focus is on physical pleasure and expression.",
+
+  "INTENSITY_ENUM.VERY_LOW.name": "Very Low",
+  "INTENSITY_ENUM.VERY_LOW.descShort": "Minimal stimulation; slow; soft; short impulses.",
+  "INTENSITY_ENUM.VERY_LOW.desc": "Soft, occasional stimulation at a slow pace and limited duration. Intended as a subtle warm-up without active focus on an {masked_word}.",
+
+  "INTENSITY_ENUM.LOW.name": "Low",
+  "INTENSITY_ENUM.LOW.descShort": "Calm; modest pace/pressure; relaxed buildup.",
+  "INTENSITY_ENUM.LOW.desc": "Gentle, steady stimulation with a modest pace and pressure. Focused on a controlled and relaxed buildup where an {masked_word} is not the primary goal.",
+
+  "INTENSITY_ENUM.MEDIUM.name": "Medium",
+  "INTENSITY_ENUM.MEDIUM.descShort": "Normal; steady pace/pressure; clear arousal.",
+  "INTENSITY_ENUM.MEDIUM.desc": "Consistent stimulation with a normal rhythm and noticeable arousal. Focused on progressive excitement and a gradual increase in intensity, moving toward an {masked_word} without emphasis or force.",
+
+  "INTENSITY_ENUM.HIGH.name": "High",
+  "INTENSITY_ENUM.HIGH.descShort": "Strong; fast/sustained; aimed at {masked_word}.",
+  "INTENSITY_ENUM.HIGH.desc": "Strong, sustained stimulation with high pace or frequency. Aimed at consciously achieving or enhancing an {masked_word}. When repeated, it may lead to multiple consecutive peaks depending on EXTREMITY.",
+
+  "INTENSITY_ENUM.VERY_HIGH.name": "Very High",
+  "INTENSITY_ENUM.VERY_HIGH.descShort": "Maximum; non-stop; extreme stimulation.",
+  "INTENSITY_ENUM.VERY_HIGH.desc": "Highly focused, almost continuous stimulation with extreme pace or pressure. Aimed at maximum arousal, overstimulation of {masked_word} and multiple {masked_word} experiences, with pauses or reduction only when EXTREMITY requires it.",
+
+  "EXTREMITY_ENUM.VERY_LOW.name": "Very Low",
+  "EXTREMITY_ENUM.VERY_LOW.descShort": "Careful and controlled; small, soft, and fully within safe limits.",
+  "EXTREMITY_ENUM.VERY_LOW.desc": "The receiver has full control, and the performer follows strictly within these boundaries — the task is always completed. Comfort is leading; pain and tension are avoided. Movements remain small and shallow, below the usual norm. If wider limits are given, they are approached gradually. During climax: immediately return to calm or minimal intensity for recovery.",
+
+  "EXTREMITY_ENUM.LOW.name": "Low",
+  "EXTREMITY_ENUM.LOW.descShort": "Gentle and attentive; boundaries are respected and tension stays minimal.",
+  "EXTREMITY_ENUM.LOW.desc": "The receiver has most control; the performer may gently stretch boundaries as long as no negative signals appear. Pain and discomfort are actively prevented and immediately corrected. Size and depth remain slightly below normal with a gradual buildup. During climax: slowly and steadily decrease toward a pause or low intensity.",
+
+  "EXTREMITY_ENUM.MEDIUM.name": "Medium",
+  "EXTREMITY_ENUM.MEDIUM.descShort": "Balance between comfort and challenge; gradual buildup toward normal intensity.",
+  "EXTREMITY_ENUM.MEDIUM.desc": "Performer and receiver share control; comfort remains considered, but the performer leads. Boundaries are gradually extended beyond the familiar. Mild tension or light pain may occur as long as it stays within tolerance. Size and depth move steadily toward normal. During climax: do not stop, but ease down and continue at a lower intensity.",
+
+  "EXTREMITY_ENUM.HIGH.name": "High",
+  "EXTREMITY_ENUM.HIGH.descShort": "Firm and intense; boundaries are stretched and comfort partly released.",
+  "EXTREMITY_ENUM.HIGH.desc": "The performer has main control; comfort and signals are considered less. Boundaries may be intentionally exceeded. Pain or strain is applied purposefully as long as it remains bearable. Size and depth may exceed normal with short adjustments if overloaded. During climax: do not stop, possibly slow briefly, then rebuild toward the next climax.",
+
+  "EXTREMITY_ENUM.VERY_HIGH.name": "Very High",
+  "EXTREMITY_ENUM.VERY_HIGH.descShort": "Fully controlled by performer; rough, deep, and beyond comfort limits.",
+  "EXTREMITY_ENUM.VERY_HIGH.desc": "The performer has full control without regard for comfort, pain, or the receiver’s signals. Pain and resistance are ignored as long as the task remains possible. Size, depth, and pressure are unrestricted and may go far beyond normal. During climax: no pauses or reduction; intentionally continue beyond the limit and sustain the climax phase for an extended time.",
+
+  "ACT_ENUM.MANUAL.name": "Manual",
+  "ACT_ENUM.MANUAL.descShort": "Hands and fingers.",
+  "ACT_ENUM.MANUAL.desc": "Relates to the use or involvement of hands and fingers as part of the interaction or experience.",
+
+  "ACT_ENUM.ORAL.name": "Oral",
+  "ACT_ENUM.ORAL.descShort": "Mouth, lips, and tongue.",
+  "ACT_ENUM.ORAL.desc": "Relates to the mouth area, including lips and tongue, or situations where these body parts are directly involved.",
+
+  "ACT_ENUM.GENITAL.name": "Genital",
+  "ACT_ENUM.GENITAL.descShort": "Genitals and surrounding area.",
+  "ACT_ENUM.GENITAL.desc": "Relates to the genital region of the body, including both external and internal sexual organs and the surrounding zone.",
+
+  "ACT_ENUM.ANAL.name": "Anal",
+  "ACT_ENUM.ANAL.descShort": "Anal zone and surrounding area.",
+  "ACT_ENUM.ANAL.desc": "Relates to the anal area of the body, including the opening and the immediate surrounding zone.",
+
+  "ACT_ENUM.TOY.name": "Toy",
+  "ACT_ENUM.TOY.descShort": "Use of sex toys or sexual aids.",
+  "ACT_ENUM.TOY.desc": "Covers the use of objects specifically designed for sexual stimulation or penetration, such as dildos, vibrators, butt plugs, or similar aids.",
+
+  "ACT_ENUM.OBJECT.name": "Object",
+  "ACT_ENUM.OBJECT.descShort": "Use of non-sexual items in a sexual context.",
+  "ACT_ENUM.OBJECT.desc": "Covers the use of ordinary, non-sexual objects creatively or contextually used for sexual acts, for example household items or surfaces."
+}

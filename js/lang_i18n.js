@@ -4,14 +4,38 @@ let currentLang = "en";
 let dict = {};
 const cache = new Map();
 const listeners = new Set();
+export const I18N_MODULES = ["clothes", "enums", "tasks", "ui"];
+
+// Helper: veilig JSON laden uit submap; 404 wordt stilletjes overgeslagen
+async function fetchModuleDict(lang, mod) {
+  const path = mod ? `i18n/${mod}/${lang}.json` : `i18n/${lang}.json`;
+  const r = await fetch(path, { cache: "no-store" });
+  if (r.status === 404) return {}; // module ontbreekt: negeren
+  if (!r.ok) throw new Error(`Failed to load ${path}`);
+  return r.json();
+}
 
 async function loadDict(lang) {
-  if (cache.has(lang)) return cache.get(lang);
-  const p = fetch(`i18n/${lang}.json`, { cache: "no-store" }).then((r) => {
-    if (!r.ok) throw new Error(`Failed to load i18n/${lang}.json`);
-    return r.json();
-  });
-  cache.set(lang, p);
+  // Cache key hangt af van taal én de gekozen modules
+  const cacheKey = `${lang}::${(I18N_MODULES || []).join("|")}`;
+  if (cache.has(cacheKey)) return cache.get(cacheKey);
+
+  const p = (async () => {
+    // Als er geen modules gedefinieerd zijn, val terug op root i18n/{lang}.json
+    const modules = Array.isArray(I18N_MODULES) && I18N_MODULES.length ? I18N_MODULES : [""];
+    const parts = await Promise.all(
+      modules.map((m) =>
+        fetchModuleDict(lang, m).catch((e) => {
+          console.warn(`[i18n] overslaan wegens laadfout: ${m}/${lang}.json`, e);
+          return {};
+        })
+      )
+    );
+    // Platte merge: latere modules overschrijven eerdere keys
+    return Object.assign({}, ...parts);
+  })();
+
+  cache.set(cacheKey, p);
   return p;
 }
 

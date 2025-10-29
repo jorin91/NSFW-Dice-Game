@@ -1,0 +1,43 @@
+{
+  "clothes.headwear.name": "Hoofdbedekking",
+  "clothes.headwear.desc": "Voorbeelden: hoeden, petten, beanies, haarbanden. Omvat: alle items die op het hoofd worden gedragen (alles samen één item).",
+
+  "clothes.accessories_glasses.name": "Bril",
+  "clothes.accessories_glasses.desc": "Voorbeelden: (zonne)bril, modieuze bril zonder sterkte. Omvat: elk type bril of zonnebril (alles samen één item).",
+
+  "clothes.accessories_neck.name": "Nekversiering",
+  "clothes.accessories_neck.desc": "Voorbeelden: kettingen, chokers, sjaals, bandana’s, halsdoeken. Omvat: alle accessoires die om de nek worden gedragen (alles samen één item).",
+
+  "clothes.accessories_arm.name": "Armversiering",
+  "clothes.accessories_arm.desc": "Voorbeelden: armbanden, polsbandjes, horloges, cuffs. Omvat: alle accessoires die om pols of arm worden gedragen (alles samen één item).",
+
+  "clothes.jacket.name": "Jas",
+  "clothes.jacket.desc": "Voorbeelden: winterjas, trenchcoat, leren jas, regenjas. Omvat: elke buitenste bovenlaag bedoeld als jas of coat.",
+
+  "clothes.sweater.name": "Trui",
+  "clothes.sweater.desc": "Voorbeelden: trui, vest, hoodie, cardigan. Omvat: bovenlaag die over een shirt gaat en onder een jas valt.",
+
+  "clothes.shirt.name": "Shirt",
+  "clothes.shirt.desc": "Voorbeelden: T-shirt, overhemd, blouse, (korte) jurk. Omvat: de primaire bovenkledinglaag boven hemd of onderlaag en onder trui of jas.",
+
+  "clothes.undershirt.name": "Hemd",
+  "clothes.undershirt.desc": "Voorbeelden: hemd, topje, tanktop (niet als ondergoed bedoeld). Omvat: laag direct onder het shirt maar niet zijnde BH of ondergoed.",
+
+  "clothes.bra.name": "Bh",
+  "clothes.bra.desc": "Voorbeelden: BH, bikini-top, bovenhelft van een badpak (ééndelig). Omvat: elke ondersteunende of zwem-bovenhelft.",
+
+  "clothes.pants.name": "Broek",
+  "clothes.pants.desc": "Voorbeelden: jeans, korte broek, sport- of pyjamabroek, rok(je). Omvat: alle kleding die als buitenste onderlichaamslaag wordt gedragen (broeken én rokken).",
+
+  "clothes.leggings.name": "Legging",
+  "clothes.leggings.desc": "Voorbeelden: legging, panty, maillot. Omvat: aansluitende beenlaag die meestal onder broek, rok of jurk wordt gedragen.",
+
+  "clothes.underwear.name": "Onderbroek",
+  "clothes.underwear.desc": "Voorbeelden: slip, boxer, string, bikini-onderstuk, onderste helft van een badpak. Omvat: alle onderkleding voor het onderlichaam.",
+
+  "clothes.shoes.name": "Schoenen",
+  "clothes.shoes.desc": "Voorbeelden: sneakers, laarzen, hakken, sandalen, slippers, pantoffels. Omvat: al het schoeisel (alles samen één item).",
+
+  "clothes.socks.name": "Sokken",
+  "clothes.socks.desc": "Voorbeelden: enkelsokken, kniekousen, kousen die onder schoenen vallen. Omvat: alle sokken of kousen die bij schoeisel worden gedragen."
+}

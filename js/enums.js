@@ -9,58 +9,128 @@ export const SEX_ENUM = Object.freeze({
 export const PLAYERTARGET_ENUM = Object.freeze({
   Self: 0,
   Other: 1,
+  loser: 2,
+  winner: 3,
 });
 
-// Opbouwfase — bepaalt zowel de sfeer als het toegestane niveau van fysiek contact.
-// Hoe verder in de fase, hoe intiemer, sensueler of seksueler het contact mag zijn.
+// STAGE_ENUM — beschrijft het spanningsverloop van het spel.
+// Van onschuldig contact tot volledig seksuele interactie.
 export const STAGE_ENUM = Object.freeze({
+
   INNOCENT: "STAGE_ENUM.INNOCENT",
   /*
-     Algemeen, veilig en onschuldig.
-     - Doel: neutraal sociaal contact, zonder enige ondertoon van plagen, ondeugd of prikkeling.
-     - Fysiek contact: volledig binnen veilige, alledaagse grenzen — wat je ook buiten het spel zou kunnen doen.
-       Denk aan: hand geven, high five, een vriendschappelijke aai op arm of schouder, of een lichte aanraking bij een grap.
-     - Geen aanraking van of nabij intieme zones. Geen speelse of suggestieve bedoelingen.
+    Doel:
+      Neutraal en sociaal veilig; luchtig, gezellig en zonder ondeugd of prikkels.
+    Mood:
+      Onschuldig, ontspannen, vriendelijk.
+    Fysiek:
+      Alledaags contact zoals een hand, schouder of high-five.
+      Geen spanning of plagerij bedoeld.
+    Intieme Zones:
+      Niet. Geen aanraking, geen nabijheid, geen verwijzing.
+    Focus:
+      Gewone interactie, lachen, simpele opdrachten zonder lichamelijke toon.
+    Kleding:
+      Volledig normaal gekleed.
+    Voorbeelden:
+      High-fiveketting, korte samenwerkingsoefening, oogcontactspel.
   */
 
   PLAYFUL: "STAGE_ENUM.PLAYFUL",
   /*
-     Speels, grappig, plagend of licht prikkelend.
-     - Doel: spanning of nieuwsgierigheid opbouwen door ondeugendheid, zonder dat het seksueel wordt.
-     - Fysiek contact: mag de focus leggen op of dichtbij intieme zones, maar zonder ze aan te raken.
-       Bijvoorbeeld: kietelen aan heupen of zij, spelen met kledingranden, of lichte aanrakingen met een speelse toon.
-     - De spanning ontstaat uit plagen, nabijheid of dubbelzinnige situaties — niet uit daadwerkelijke seksuele aanraking.
+    Doel:
+      Ondeugend, plagend, licht prikkelend — zonder seksuele ondertoon.
+    Mood:
+      Speels, uitdagend, charmant, humoristisch.
+    Fysiek:
+      Mag voorbij sociaal veilige aanraking gaan, zoals kietelen op buik of zij,
+      maar blijft weg van intieme zones.
+    Intieme Zones:
+      Niet. Niet aanraken of benaderen.
+    Focus:
+      Uitdagen, lachen, spanning creëren door plagen of timing.
+    Kleding:
+      Gedeeltelijk uitkleden toegestaan tot ondergoed of zwemkleding.
+    Voorbeelden:
+      Kietelopdracht, speelse houding, “doe je {piece} af” tot ondergoed.
   */
 
-  ROMANTIC: "STAGE_ENUM.ROMANTIC",
+  INTIMATE: "STAGE_ENUM.INTIMATE",
   /*
-     Teder en intiem, gericht op affectie en verbondenheid.
-     - Doel: emotionele en lichamelijke nabijheid zonder dat het expliciet seksueel wordt.
-     - Fysiek contact: aanraken van intieme zones is toegestaan, maar niet seksueel.
-       Bijvoorbeeld: strelen over borsten of rug, zacht wrijven over buik of buitenzijde van geslachtsdelen
-       zonder directe stimulatie van schaamlippen, clitoris of eikel.
-     - Het contact draait om warmte, spanning en verbinding, niet om prikkeling of {masked_word}.
+    Doel:
+      Ontdekkend en nabij; spanning door blootstelling en nabijheid, niet door aanraking.
+    Mood:
+      Teder, warm, nieuwsgierig.
+    Fysiek:
+      Dichtbij staan, langzaam bewegen, zachte aanraking mogelijk maar niet opwindend.
+      Intieme zones worden vermeden of slechts toevallig geraakt.
+    Intieme Zones:
+      Niet doelbewust. “Zien mag, aanraken niet.”
+    Focus:
+      Kwetsbaarheid tonen, kijken, poseren, spanning in nabijheid.
+    Kleding:
+      Volledig uitkleden toegestaan; naakt en kijken is onderdeel van het spel.
+    Voorbeelden:
+      Naakt poseren op afstand, traag uitkleden, kijkopdrachten zonder aanraking.
   */
 
   SENSUAL: "STAGE_ENUM.SENSUAL",
   /*
-     Sensueel, verleidelijk en uitdagend met een duidelijke seksuele toon.
-     - Doel: bewust prikkelen, verlangen opwekken en spanning vergroten zonder expliciete seks.
-     - Fysiek contact: intieme zones mogen gericht worden aangeraakt of gestimuleerd,
-       maar het blijft in de sfeer van teasen en opbouwen — niet van ontlading of daadwerkelijke daad.
-       Bijvoorbeeld: langzame of suggestieve aanrakingen, zachte orale of handmatige verkenning,
-       uitdagende houdingen of opdrachten met seksuele spanning.
-     - De kern van deze fase is opwinding en verleiding — het spel van controle, tempo en verlangen,
-       zonder dat er al penetratie of volledige seksuele handelingen plaatsvinden.
+    Doel:
+      Verleiding en opwinding opwekken zonder daadwerkelijke seksuele handeling.
+    Mood:
+      Intens, prikkelend, verleidelijk.
+    Fysiek:
+      Aanrakingen kunnen intiem zijn, maar blijven teasend of oppervlakkig.
+      Bijvoorbeeld borst aanraken zonder nadruk op tepel, of buitenzijde van het geslacht aanraken zonder verder te gaan.
+    Intieme Zones:
+      Ja, aanraken toegestaan, maar zonder expliciete stimulatie.
+    Focus:
+      Dichtbij komen, laten zien, verleiden, uitdagen zonder door te zetten.
+    Kleding:
+      Naakt; kleding kan speels worden ingezet.
+    Voorbeelden:
+      Exposure-opdracht, “net-niet”-aanraking, tease met oogcontact of houding.
+  */
+
+  EROTIC: "STAGE_ENUM.EROTIC",
+  /*
+    Doel:
+      Seksuele aanraking en voorspel; voelen en ervaren staan centraal.
+    Mood:
+      Zinnelijk, intiem, verlangend.
+    Fysiek:
+      Zachte stimulatie en lichte seksuele handelingen mogelijk, zoals handmatig of licht oraal.
+      Nog gericht op ervaren en opbouwen, niet op afronding.
+    Intieme Zones:
+      Volledig toegankelijk; aanraken en stimuleren toegestaan.
+    Focus:
+      Verkennen, voelen, proeven, spelen met tempo en reactie.
+    Kleding:
+      Naakt; kleding kan creatief worden gebruikt als decoratie of hulpmiddel.
+    Voorbeelden:
+      Handmatige verkenning, lichte orale aanraking, langzame ritmische tease.
   */
 
   SEXUAL: "STAGE_ENUM.SEXUAL",
   /*
-     Volledig seksueel en zonder beperking in aanraking.
-     - Doel: seksuele interactie en orgasme.
-     - Fysiek contact: alles is toegestaan.
+    Doel:
+      Volledig seksuele interactie.
+    Mood:
+      Passioneel, fysiek, direct.
+    Fysiek:
+      Alle seksuele handelingen toegestaan; tempo en intensiteit vrij.
+    Intieme Zones:
+      Volledig vrij.
+    Focus:
+      Seksuele daad, ritme, opbouw en afronding.
+    Kleding:
+      Naakt.
+    Voorbeelden:
+      Penetratie, gericht stimuleren, wisselen tussen ritmes, samen tot hoogtepunt komen.
   */
 });
+
 
 /* INTENSITY_ENUM — prikkelsterkte en aanhoudendheid (handelingen-kant).
    • Alleen voor fysieke/seksuele acts (niet voor sfeer).

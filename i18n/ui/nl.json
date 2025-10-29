@@ -1,0 +1,67 @@
+{
+  "ui.title": "NSFW Dice Game",
+  "ui.language": "Taal",
+
+  "app.mainmenu.title": "Hoofdmenu",
+
+  "app.mainmenu.welcome.header": "Welkom bij het spel",
+  "app.mainmenu.welcome.content": "NSFW Dice Game is een speels en spannend dobbelspel dat bedoeld is om plezier, nieuwsgierigheid en intimiteit nieuw leven in te blazen. Je kunt het spelen met je partner of met vrienden voor een avond vol humor, spanning en verrassingen. Het spel begint luchtig en grappig, bouwt langzaam op naar sensuele en ondeugende opdrachten en kan, afhankelijk van de gekozen categorieën, uitlopen op echte seksuele interactie. Door te dobbelen verdien je punten, maar verlies je een ronde, dan wacht er een opdracht die de sfeer naar een hoger niveau tilt. Geen enkel spel verloopt hetzelfde; het toeval bepaalt telkens hoe ver het gaat.",
+
+  "app.mainmenu.goal.header": "Doel van het spel",
+  "app.mainmenu.goal.content": "Verdien zoveel mogelijk punten door slim te dobbelen. Wie een ronde wint, krijgt één punt bij zijn totaalscore. Zodra een speler het ingestelde aantal punten heeft behaald, is die speler vrijgesteld van verdere opdrachten. Het spel gaat door totdat er nog maar één speler overblijft die niet vrijgesteld is. Die speler voert de opdracht uit, waarna een nieuwe cyclus begint met iedereen weer op nul.",
+
+  "app.mainmenu.game.header": "Zo gaat het spel",
+  "app.mainmenu.game.content": "<li>Elke speler krijgt per beurt een vast aantal worpen (bijv. 3).</li><li>Na elke worp kunnen één of meer dobbelstenen worden vastgezet of losgelaten.</li><li>Na de laatste worp wordt de score bepaald op basis van de gegooide combinaties.</li><li>De speler met de hoogste score wint de ronde en krijgt 1 punt.</li><li>Wanneer een speler het ingestelde aantal punten bereikt, is die “safe”.</li><li>Wanneer er nog één speler overblijft, voert deze een opdracht uit.</li>",
+
+  "app.mainmenu.score.header": "Puntentelling",
+  "app.mainmenu.score.content": "<li>Elke dobbelsteen telt slechts één keer mee.</li><li>Dobbelstenen met hetzelfde getal vormen een groep.</li><li>De waarde is het getal met een nul per extra dobbelsteen in die groep.<br />Voorbeeld: een 6 = 6 punten, twee 2’en = 20 punten, drie 1’en = 100 punten.</li><li>Alle groepen worden opgeteld tot één totaalscore.</li>",
+
+  "app.mainmenu.tasks.header": "Opdrachten",
+  "app.mainmenu.tasks.content": "De verliezer van elke ronde krijgt een opdracht toegewezen. Deze opdrachten lopen uiteen van luchtig en grappig tot sensueel, uitdagend en seksueel. Ze zijn bedoeld om spanning en verlangen op te bouwen, het contact tussen spelers te verdiepen en speels toe te werken naar echte seksuele interactie. Elke opdracht brengt het spel een stap dichter bij een intieme climax, op een manier die zowel verrassend als opwindend blijft.",
+
+  "app.mainmenu.agree.header": "Instemming en Spelafspraken",
+  "app.mainmenu.agree.content": "Voorafgaand aan het spel stemt iedere speler er bewust mee in om volledig mee te spelen binnen de grenzen van wat in de instellingen is gekozen. Door in te stemmen verklaart een speler dat hij of zij elke opdracht die door het spel wordt gegeven zal uitvoeren zoals bedoeld, ongeacht met wie of wat deze betrekking heeft. Zo blijft het spel eerlijk, consequent en leuk voor iedereen die meedoet.",
+
+  "app.mainmenu.safety.header": "Waarschuwing en Veiligheid",
+  "app.mainmenu.safety.content": "Dit spel heeft een expliciet volwassen karakter en richt zich op seksuele spanning en interactie tussen spelers. Deelname houdt in dat iedere speler bewust verantwoordelijkheid neemt voor zijn of haar eigen veiligheid, gezondheid en welzijn, evenals dat van anderen. Denk vooraf na over beschermingsmiddelen en gezondheidsmaatregelen (zoals het gebruik van condooms, de pil of andere vormen van anticonceptie) en zorg dat hierover open en eerlijk wordt gecommuniceerd. Accepteer dat lichamelijke reacties, zoals een orgasme als gevolg van seksuele interactie, onderdeel kunnen zijn van het spel en dat dit persoonlijke en emotionele gevolgen kan hebben. Ga altijd met respect, zorg en wederzijdse instemming met elkaar om.",
+
+  "app.game.title": "Spel",
+
+  "app.task.title": "Opdracht",
+
+  "app.settings.title": "Spel Instellingen",
+
+  "app.settings.STAGE.header": "Opbouw en Contactniveau",
+  "app.settings.STAGE.content": "Hoe verder de fase, hoe intiemer, sensueler of seksueler het contact kan zijn.<br><br>Selecteer welke fases je in deze sessie wil gebruiken.",
+
+  "app.settings.INTENSITY.header": "Intensiteit",
+  "app.settings.INTENSITY.content": "Bepaalt de prikkelsterkte, snelheid en aanhoudendheid van fysieke handelingen.<br>Hoe hoger de intensiteit, hoe sneller en krachtiger de stimulatie en hoe sterker de opbouw richting een orgasme.<br><br>Selecteer welke levels van intensiteit je in deze sessie wil gebruiken.",
+
+  "app.settings.EXTREMITY.header": "Extremiteit",
+  "app.settings.EXTREMITY.content": "Geeft aan in hoeverre rekening wordt gehouden met grenzen, comfort en pijn.<br>Hoe hoger de extremiteit, hoe ruwer de uitvoering en hoe verder grenzen kunnen worden opgerekt of genegeerd.<br><br>Selecteer welke levels van extremiteit je in deze sessie wil gebruiken.",
+
+  "app.settings.ACT.header": "Acttype",
+  "app.settings.ACT.content": "Bepaalt de vorm van fysieke of seksuele handeling, en waarop of waarmee deze wordt uitgevoerd.<br>Dit kan een lichaamsdeel zijn (zoals handen, mond of geslachtsdelen), maar ook het gebruik van seksspeeltjes of gewone voorwerpen omvatten.<br><br>Selecteer welke acttypes je in deze sessie wil gebruiken.",
+
+  "app.newgame.title": "Nieuw Spel",
+
+  "app.newgame.players.header": "Spelers",
+
+  "app.newgame.options.header": "Opties",
+
+  "app.newplayer.title": "Nieuwe Speler",
+
+  "app.newplayer.form.name": "Naam",
+  "app.newplayer.form.age": "Leeftijd",
+  "app.newplayer.form.sex": "Geslacht",
+  "app.newplayer.form.preferSex": "Seksuele voorkeur",
+  "app.newplayer.form.consent": "Toestemming",
+  "app.newplayer.form.consent.content": "Ik ga akkoord met het spel en de ingestelde regels voor deze sessie. Ik begrijp de uitleg en accepteer dat opdrachten niet geweigerd worden.",
+
+  "button.settings": "Instellingen",
+  "button.mainmenu": "Hoofdmenu",
+  "button.startgame": "Start Spel",
+  "button.addplayer": "Speler toevoegen",
+  "button.cancel": "Annuleren",
+  "button.resetgame": "Reset Spel"
+}
