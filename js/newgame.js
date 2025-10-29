@@ -115,9 +115,14 @@ export function UpdateNewPlayerUI() {
   const playerClothes = getClothesModel();
   const clothesWrap = document.createElement("div");
   clothesWrap.className = "col small";
+
+  const headerClothes = document.createElement("p");
+  headerClothes.setAttribute("data-i18n-auto", "app.newplayer.form.clothes");
+  clothesWrap.append(headerClothes);
+
   Object.entries(playerClothes).forEach(([key, piece]) => {
     const clothesRow = document.createElement("label");
-    clothesRow.className = "row small";
+    clothesRow.className = "row";
 
     const cbClothingPiece = document.createElement("input");
     cbClothingPiece.type = "checkbox";
@@ -185,8 +190,22 @@ export function UpdateNewPlayerUI() {
 
   actions.append(btnCancel, btnSave);
 
+  // Seperator
+  const sep = document.createElement("div");
+  sep.className = "sep";
+
   // Samenstellen
-  form.append(nameWrap, ageWrap, sexWrap, prefWrap, clothesWrap, consentWrap, actions);
+  form.append(
+    nameWrap,
+    ageWrap,
+    sexWrap,
+    prefWrap,
+    sep,
+    clothesWrap,
+    sep,
+    consentWrap,
+    actions
+  );
   rootNewPlayer.appendChild(form);
 
   // Stille validatie (rode rand) — zoals eerder
@@ -213,7 +232,14 @@ export function UpdateNewPlayerUI() {
     if (!(vName && vAge && vSex && vPref && vConsent)) return;
 
     // Aanmaken via bestaande helper
-    createPlayer(nameInput.value.trim(), sexVal, ageVal, prefVal, vConsent, playerClothes);
+    createPlayer(
+      nameInput.value.trim(),
+      sexVal,
+      ageVal,
+      prefVal,
+      vConsent,
+      playerClothes
+    );
 
     // reset UI
     rootNewPlayer.innerHTML = "";

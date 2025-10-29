@@ -53,6 +53,7 @@
   "app.newplayer.form.age": "Age",
   "app.newplayer.form.sex": "Sex",
   "app.newplayer.form.preferSex": "Sexual preference",
+  "app.newplayer.form.clothes": "Clothes you wear",
   "app.newplayer.form.consent": "Consent",
   "app.newplayer.form.consent.content": "I agree to participate in the game under the configured rules for this session. I understand the explanation and accept that tasks cannot be refused.",
 
