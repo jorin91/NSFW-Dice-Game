@@ -1,5 +1,5 @@
 import { gameSaveState } from "./gamestate.js";
-import { getSexIcon, makeInputField, makeSelectField } from "./utils.js";
+import { getSexIcon, makeInputField, makeSelectField, makeSeperator } from "./utils.js";
 import { SEX_ENUM } from "./enums.js";
 import { createPlayer } from "./player.js";
 import { switchPanel } from "./panelnavigation.js";
@@ -190,20 +190,17 @@ export function UpdateNewPlayerUI() {
 
   actions.append(btnCancel, btnSave);
 
-  // Seperator
-  const sep = document.createElement("div");
-  sep.className = "sep";
-
   // Samenstellen
   form.append(
     nameWrap,
     ageWrap,
     sexWrap,
     prefWrap,
-    sep,
+    makeSeperator(),
     clothesWrap,
-    sep,
+    makeSeperator(),
     consentWrap,
+    makeSeperator(),
     actions
   );
   rootNewPlayer.appendChild(form);

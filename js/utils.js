@@ -85,3 +85,9 @@ export function makeSelectField(name, { labelI18n, entries } = {}) {
   wrap.append(span, select);
   return { wrap, select };
 }
+
+export function makeSeperator() {
+  const el = document.createElement("div");
+  el.className = "sep";
+  return el;
+}
