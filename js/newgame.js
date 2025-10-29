@@ -186,7 +186,7 @@ export function UpdateNewPlayerUI() {
   actions.append(btnCancel, btnSave);
 
   // Samenstellen
-  form.append(nameWrap, ageWrap, sexWrap, prefWrap, consentWrap, actions);
+  form.append(nameWrap, ageWrap, sexWrap, prefWrap, clothesWrap, consentWrap, actions);
   rootNewPlayer.appendChild(form);
 
   // Stille validatie (rode rand) — zoals eerder
@@ -212,7 +212,7 @@ export function UpdateNewPlayerUI() {
 
     if (!(vName && vAge && vSex && vPref && vConsent)) return;
 
-    // Aanmaken via jouw bestaande helper
+    // Aanmaken via bestaande helper
     createPlayer(nameInput.value.trim(), sexVal, ageVal, prefVal, vConsent, playerClothes);
 
     // reset UI
