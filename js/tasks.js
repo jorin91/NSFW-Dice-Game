@@ -38,7 +38,7 @@ const task = {
       id: ``, // Uniek ID voor elke Task
       titleKey: "", // Titel voor opdracht panel
       instructionKey: "", // globale instructies
-      instruction_args: { clothing: piece.name, p0: "" }, // Voeg args toe voor deelnemede participants namen p<participants index>, bijvoorbeeld p0.
+      instruction_args: { clothing: "", p0: "" }, // Voeg args toe voor deelnemede participants namen p<participants index>, bijvoorbeeld p0.
       conditions: {
         stage: [], // Leeg -> niet afhankelijk van
         intensity: [], // Leeg -> niet afhankelijk van
