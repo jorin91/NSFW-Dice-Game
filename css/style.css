@@ -108,6 +108,7 @@ h6 {
   align-items: center;
   border: 1px solid var(--accent);
   border-radius: 10px;
+  background-color: var(--panel2);
 }
 .row.grid3 > p {
   min-width: 0;
