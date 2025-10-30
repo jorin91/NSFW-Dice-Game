@@ -104,7 +104,6 @@ h6 {
 .row.grid3 {
   display: grid;
   grid-template-columns: auto auto 1fr;
-  gap: 16px;
   align-items: center;
   padding: 8px 12px;
 }
