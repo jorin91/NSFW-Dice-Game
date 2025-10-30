@@ -2,12 +2,9 @@ import { initI18n } from "./lang_i18n.js";
 import { attachPanelNavigation } from "./panelnavigation.js";
 import { GAME_FLOW_MODEL, gameInitFromStorage } from "./gamestate.js";
 import {
-  fillSettingsStage,
-  fillSettingsIntensity,
-  fillSettingsExtremity,
-  fillSettingsAct,
+  initGameSettings
 } from "./settings.js";
-import { UpdatePlayersUI, UpdateNewPlayerUI, ResetGame } from "./newgame.js";
+import { InitNewGame } from "./newgame.js";
 import { InitGame } from "./game.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -22,12 +19,7 @@ export function InitCreate() {
 
 export function InitUpdate() {
   gameInitFromStorage(); // GameState
-  fillSettingsStage(); // Fill settings section
-  fillSettingsIntensity(); // Fill settings section
-  fillSettingsExtremity(); // Fill settings section
-  fillSettingsAct(); // Fill settings section
-  UpdatePlayersUI(); // Fill players UI for new game
-  UpdateNewPlayerUI(); // Fill new player UI
-  ResetGame(); // Add game reset button
+  initGameSettings(); // Fill Settings Panels
+  InitNewGame(); // Init New Game Panel
   InitGame(); // Init Game Panel
 }

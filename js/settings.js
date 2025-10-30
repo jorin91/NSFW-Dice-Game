@@ -6,6 +6,13 @@ import {
 } from "./enums.js";
 import { gameSaveState } from "./gamestate.js";
 
+export function initGameSettings() {
+  fillSettingsStage(); // Fill settings section
+  fillSettingsIntensity(); // Fill settings section
+  fillSettingsExtremity(); // Fill settings section
+  fillSettingsAct(); // Fill settings section
+}
+
 /* ---------- 1) GENERIEKE BUILDER ---------- */
 function buildSettingsCollection(enumObj, defaultEnabled = true) {
   const out = {};
@@ -36,7 +43,7 @@ function ensureSettingsCollection(prop, enumObj, defaultEnabled = true) {
  *   - prop:      key in window.GAME.settings (bv. "stage", "intensity", "extremity", "act")
  *   - enumObj:   het ENUM object (bv. STAGE_ENUM)
  */
-export function fillSettingsList({ targetId, prop, enumObj }) {
+function fillSettingsList({ targetId, prop, enumObj }) {
   const root = document.getElementById(targetId);
   if (!root) return;
 
@@ -92,7 +99,7 @@ export function fillSettingsList({ targetId, prop, enumObj }) {
 /* ---------- CONVENIENCE CALLS ---------- */
 /* Gebruik deze waar je eerder de specifieke functies riep: */
 // Stages
-export function fillSettingsStage(targetId = "settings_stage") {
+function fillSettingsStage(targetId = "settings_stage") {
   fillSettingsList({ targetId, prop: "stage", enumObj: STAGE_ENUM });
 }
 
@@ -101,7 +108,7 @@ export function getSettingStages() {
 }
 
 // Intensity
-export function fillSettingsIntensity(targetId = "settings_intensity") {
+function fillSettingsIntensity(targetId = "settings_intensity") {
   fillSettingsList({ targetId, prop: "intensity", enumObj: INTENSITY_ENUM });
 }
 
@@ -110,7 +117,7 @@ export function getSettingIntensity() {
 }
 
 // Extremity
-export function fillSettingsExtremity(targetId = "settings_extremity") {
+function fillSettingsExtremity(targetId = "settings_extremity") {
   fillSettingsList({ targetId, prop: "extremity", enumObj: EXTREMITY_ENUM });
 }
 
@@ -119,7 +126,7 @@ export function getSettingExtremity() {
 }
 
 // Act (als je die óók als toggles wilt tonen)
-export function fillSettingsAct(targetId = "settings_act") {
+function fillSettingsAct(targetId = "settings_act") {
   fillSettingsList({ targetId, prop: "act", enumObj: ACT_ENUM });
 }
 

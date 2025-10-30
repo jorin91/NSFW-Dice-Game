@@ -37,6 +37,8 @@ export const GAME_FLOW_MODEL = {
     extremity: getSettingExtremity(),
     act: getSettingAct(),
     secretTasks: true, // hiermee bepalen we of de opdracht algemeen is of alleen voor de uitvoerder en de rest niets weet, verrassings element
+    rolls: 3,
+    score: 3,
   }, // later: maxRolls, pointsToSafe, enz.
   tasks: getTasksModel(),
 };
