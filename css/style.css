@@ -101,6 +101,15 @@ h6 {
 .row.small {
   gap: 4px;
 }
+.row.grid3 {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  gap: 16px;
+  align-items: center;
+}
+.row.grid.small {
+  gap: 4px;
+}
 .panel {
   display: none;
 }

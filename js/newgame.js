@@ -122,13 +122,13 @@ export function UpdateNewPlayerUI() {
 
   Object.entries(playerClothes).forEach(([key, piece]) => {
     const clothesRow = document.createElement("label");
-    clothesRow.className = "row";
+    clothesRow.className = "row grid3";
 
     const cbClothingPiece = document.createElement("input");
     cbClothingPiece.type = "checkbox";
     cbClothingPiece.name = "clothing";
     cbClothingPiece.checked = !!piece.enabled;
-    
+
     const lbClothingPiece = document.createElement("span");
     lbClothingPiece.setAttribute("data-i18n-auto", piece.name);
 
