@@ -21,7 +21,11 @@ function layout(targetId = "GamePanel") {
     "app.game.playerField.Header"
   );
 
-  playerField.append(playerFieldHeader);
+  const playerFieldPlayerRow = document.createElement("div");
+  playerFieldPlayerRow.id = "PlayerRow";
+  playerFieldPlayerRow.className = "row";
+
+  playerField.append(playerFieldHeader, playerFieldPlayerRow);
 
   // Roll Dice Field
   const rollDiceField = document.createElement("div");
@@ -79,7 +83,7 @@ function layout(targetId = "GamePanel") {
   // Panel Logic
 }
 
-export function UpdateGamePlayers(targetId = "playerField") {
+export function UpdateGamePlayers(targetId = "PlayerRow") {
   const root = document.getElementById(targetId);
   if (!root) return;
 
