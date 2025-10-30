@@ -90,7 +90,7 @@ export function UpdateGamePlayers(targetId = "playerField") {
     : [];
 
   players.forEach((p, index) => {
-    let bubble = root.querySelector(`#${p.id}`);
+    let bubble = root.querySelector(`[id="${p.id}"]`);
     let pointsSpan;
 
     if (!bubble) {
