@@ -41,7 +41,7 @@ export function fillSettingsList({ targetId, prop, enumObj }) {
     const { value, enabled } = cfg;
 
     const row = document.createElement("div");
-    row.className = "list row";
+    row.className = "list row grid3";
 
     const id = `${prop}_${key.toLowerCase()}`;
 
