@@ -103,15 +103,15 @@ h6 {
 }
 .row.grid3 {
   display: grid;
-  grid-template-columns: auto auto 1fr;
+  grid-template-columns: auto minmax(0, 1fr) max-content;
   gap: 16px;
   align-items: center;
   padding: 8px 12px;
 }
+.row.grid3 > span,
 .row.grid3 > p {
-  min-width: 0;
+  min-width: 0;              
   overflow-wrap: anywhere;
-  text-align: right;
 }
 .row.grid3.small {
   gap: 4px;
@@ -125,7 +125,8 @@ h6 {
   border: 1px solid var(--text);
   opacity: 0.75;
 }
-.row.grid3:has(input[type="checkbox"]):hover {
+.row.grid3:has(input[type="checkbox"]):hover,
+.row.grid3:has(input[type="checkbox"]):focus-within {
   opacity: 0.85;
   background: var(--accent);
 }
