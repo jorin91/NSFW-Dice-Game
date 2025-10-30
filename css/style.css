@@ -106,9 +106,6 @@ h6 {
   grid-template-columns: auto auto 1fr;
   gap: 16px;
   align-items: center;
-  border: 1px solid var(--accent);
-  border-radius: 10px;
-  background-color: var(--panel2);
   padding: 8px 12px;
 }
 .row.grid3 > p {
@@ -119,13 +116,18 @@ h6 {
 .row.grid3.small {
   gap: 4px;
 }
-.row.grid3:hover {
-  opacity: 0.85;
-  background: var(--accent);
+.row.grid3:has(input[type="checkbox"]) {
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  background-color: var(--panel2);
 }
 .row.grid3:has(input[type="checkbox"]:checked) {
-  background-color: var(--accent);
-  opacity: 0.5;
+  border: 1px solid var(--text);
+  opacity: 0.75;
+}
+.row.grid3:has(input[type="checkbox"]):hover {
+  opacity: 0.85;
+  background: var(--accent);
 }
 .panel {
   display: none;
