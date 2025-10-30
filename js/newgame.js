@@ -9,6 +9,7 @@ import { SEX_ENUM } from "./enums.js";
 import { createPlayer } from "./player.js";
 import { switchPanel } from "./panelnavigation.js";
 import { getClothesModel } from "./clothing.js";
+import { InitUpdate } from "./init.js";
 
 // Players
 export function UpdatePlayersUI(targetId = "newgame-players") {
@@ -271,6 +272,7 @@ export function ResetGame(targetId = "newgamebuttons") {
   resetButton.setAttribute("data-panel", "mainmenu");
   resetButton.addEventListener("click", () => {
     resetGameState();
+    InitUpdate();
   });
 
   root.append(resetButton);
