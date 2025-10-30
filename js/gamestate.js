@@ -21,12 +21,12 @@ export const GAME_FLOW_MODEL = {
   players: [
     {
       id: 10077,
-      name: "Jan",
+      name: "Debug",
       age: 24,
       sex: SEX_ENUM.Male,
-      preferSex: SEX_ENUM.Female,
+      preferSex: SEX_ENUM.Both,
       consent: true,
-      score: 0,
+      score: 3,
       safe: false,
       clothing: deepCopy(CLOTHING_MODEL),
     },
