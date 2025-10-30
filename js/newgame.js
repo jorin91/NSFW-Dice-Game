@@ -176,7 +176,7 @@ export function UpdateNewPlayerUI() {
 
   const btnCancel = document.createElement("button");
   btnCancel.type = "button";
-  btnCancel.className = "bubble";
+  btnCancel.className = "btn";
   btnCancel.setAttribute("data-i18n-auto", "button.cancel");
   btnCancel.setAttribute("data-panel", "newgame");
   btnCancel.addEventListener("click", () => {
@@ -186,7 +186,7 @@ export function UpdateNewPlayerUI() {
 
   const btnSave = document.createElement("button");
   btnSave.type = "submit";
-  btnSave.className = "bubble";
+  btnSave.className = "btn";
   btnSave.setAttribute("data-i18n-auto", "button.addplayer");
 
   actions.append(btnCancel, btnSave);
