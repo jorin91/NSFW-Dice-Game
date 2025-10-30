@@ -119,6 +119,8 @@ export function UpdateGamePlayers(targetId = "playerField") {
       bubble.appendChild(sexIcon);
       bubble.appendChild(nameSpan);
       bubble.appendChild(pointsSpan);
+
+      root.append(bubble);
     } else {
       pointsSpan = bubble.querySelector(`#${p.id}`);
     }
