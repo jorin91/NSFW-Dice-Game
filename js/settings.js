@@ -38,7 +38,7 @@ export function fillSettingsList({ targetId, prop, enumObj }) {
   // root.innerHTML = "";
 
   const Wrap = document.createElement("div");
-  Wrap.className = "col";
+  Wrap.className = "col small";
 
   for (const [key, cfg] of Object.entries(coll)) {
     const { value, enabled } = cfg;

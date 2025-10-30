@@ -113,9 +113,6 @@ h6 {
   overflow-wrap: anywhere;
   text-align: right;
 }
-.row.grid3.small {
-  gap: 4px;
-}
 .row.grid3:has(input[type="checkbox"]) {
   border: 1px solid var(--accent);
   border-radius: 10px;
