@@ -37,10 +37,13 @@ export function fillSettingsList({ targetId, prop, enumObj }) {
 
   // root.innerHTML = "";
 
+  const Wrap = document.createElement("div");
+  Wrap.className = "col";
+
   for (const [key, cfg] of Object.entries(coll)) {
     const { value, enabled } = cfg;
 
-    const row = document.createElement("div");
+    const row = document.createElement("label");
     row.className = "row grid3 list";
 
     const id = `${prop}_${key.toLowerCase()}`;
@@ -63,7 +66,7 @@ export function fillSettingsList({ targetId, prop, enumObj }) {
     row.appendChild(cb);
     row.appendChild(label);
     row.appendChild(desc);
-    root.appendChild(row);
+    Wrap.appendChild(row);
 
     cb.addEventListener("change", (e) => {
       const k = e.currentTarget.getAttribute("data-key");
@@ -73,6 +76,8 @@ export function fillSettingsList({ targetId, prop, enumObj }) {
       gameSaveState();
     });
   }
+
+  root.append(Wrap);
 }
 
 /* ---------- CONVENIENCE CALLS ---------- */
