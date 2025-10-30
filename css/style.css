@@ -106,6 +106,7 @@ h6 {
   grid-template-columns: auto auto 1fr;
   gap: 16px;
   align-items: center;
+  background-color: var(--panel2);
 }
 .row.grid3 > p {
   min-width: 0;
