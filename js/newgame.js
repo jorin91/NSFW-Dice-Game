@@ -264,9 +264,6 @@ export function ResetGame(targetId = "newgame-buttons") {
   const root = document.getElementById(targetId);
   if (!root) return;
 
-  const resetButtonWrapper = document.createElement("div");
-  resetButtonWrapper.className = "row";
-
   const resetButton = document.createElement("button");
   resetButton.type = "button";
   resetButton.className = "btn";
@@ -276,6 +273,5 @@ export function ResetGame(targetId = "newgame-buttons") {
     resetGameState();
   });
 
-  resetButtonWrapper.append(resetButton);
-  root.append(resetButtonWrapper);
+  root.append(resetButton);
 }
