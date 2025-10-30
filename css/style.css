@@ -119,6 +119,9 @@ h6 {
 .row.grid3.small {
   gap: 4px;
 }
+.row.grid3:hover {
+  opacity: 0.85;
+}
 .panel {
   display: none;
 }
