@@ -103,9 +103,14 @@ h6 {
 }
 .row.grid3 {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) max-content;
+  grid-template-columns: auto auto 1fr;
   gap: 16px;
   align-items: center;
+}
+.row.grid3 > p {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  text-align: right;
 }
 .row.grid.small {
   gap: 4px;
