@@ -121,6 +121,10 @@ h6 {
 }
 .row.grid3:hover {
   opacity: 0.85;
+  background: var(--accent);
+}
+.row.grid3:has(input[type="checkbox"]:checked) {
+  background-color: var(--accent);
 }
 .panel {
   display: none;
