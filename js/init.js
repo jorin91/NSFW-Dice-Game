@@ -3,7 +3,7 @@ import { attachPanelNavigation } from './panelnavigation.js';
 import { deepCopy } from './utils.js';
 import { GAME_FLOW_MODEL, gameInitFromStorage } from './gamestate.js';
 import { fillSettingsStage, fillSettingsIntensity, fillSettingsExtremity, fillSettingsAct } from './settings.js';
-import { UpdatePlayersUI, UpdateNewPlayerUI } from './newgame.js';
+import { UpdatePlayersUI, UpdateNewPlayerUI, ResetGame } from './newgame.js';
 
 // window.GAME = deepCopy(GAME_FLOW_MODEL);
 
@@ -17,4 +17,5 @@ document.addEventListener("DOMContentLoaded", () => {
   fillSettingsAct(); // Fill settings section
   UpdatePlayersUI(); // Fill players UI for new game
   UpdateNewPlayerUI();
+  ResetGame();
 });
