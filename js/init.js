@@ -8,6 +8,7 @@ import {
   fillSettingsAct,
 } from "./settings.js";
 import { UpdatePlayersUI, UpdateNewPlayerUI, ResetGame } from "./newgame.js";
+import { InitGame } from "./game.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   InitCreate();
@@ -28,4 +29,5 @@ export function InitUpdate() {
   UpdatePlayersUI(); // Fill players UI for new game
   UpdateNewPlayerUI(); // Fill new player UI
   ResetGame(); // Add game reset button
+  InitGame(); // Init Game Panel
 }

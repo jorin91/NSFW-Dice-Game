@@ -27,6 +27,14 @@
 
   "app.game.title": "Spel",
 
+  "app.game.playerField.Header": "Spelers",
+
+  "app.game.rollDiceField.Header": "Dobbelstenen",
+
+  "app.game.holdDiceField.Header": "Vast Gezette Dobbelstenen",
+
+  "app.game.scorePreview.Header": "Huidige Score",
+
   "app.task.title": "Opdracht",
 
   "app.settings.title": "Spel Instellingen",
