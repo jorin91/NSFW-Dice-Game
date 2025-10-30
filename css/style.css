@@ -126,8 +126,7 @@ h6 {
 .row.grid3:has(input[type="checkbox"]:checked) {
   border: 1px solid var(--text);
 }
-.row.grid3:has(input[type="checkbox"]):hover,
-.row.grid3:has(input[type="checkbox"]):focus-within {
+.row.grid3:has(input[type="checkbox"]):hover{
   opacity: 0.85;
   background: var(--accent);
 }
