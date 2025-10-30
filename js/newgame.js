@@ -1,5 +1,10 @@
-import { gameSaveState } from "./gamestate.js";
-import { getSexIcon, makeInputField, makeSelectField, makeSeperator } from "./utils.js";
+import { gameSaveState, resetGameState } from "./gamestate.js";
+import {
+  getSexIcon,
+  makeInputField,
+  makeSelectField,
+  makeSeperator,
+} from "./utils.js";
 import { SEX_ENUM } from "./enums.js";
 import { createPlayer } from "./player.js";
 import { switchPanel } from "./panelnavigation.js";
@@ -253,4 +258,24 @@ function removePlayerAt(index, targetId) {
   window.GAME.players.splice(index, 1);
   gameSaveState();
   UpdatePlayersUI(targetId);
+}
+
+export function ResetGame(targetId = "newgame-buttons") {
+  const root = document.getElementById(targetId);
+  if (!root) return;
+
+  const resetButtonWrapper = document.createElement("div");
+  resetButtonWrapper.className = "row";
+
+  const resetButton = document.createElement("button");
+  resetButton.type = "button";
+  resetButton.className = "btn";
+  resetButton.setAttribute("data-i18n-auto", "button.resetgame");
+  resetButton.setAttribute("data-panel", "mainmenu");
+  resetButton.addEventListener("click", () => {
+    resetGameState();
+  });
+
+  resetButtonWrapper.append(resetButton);
+  root.append(resetButtonWrapper);
 }
