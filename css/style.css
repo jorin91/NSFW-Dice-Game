@@ -103,7 +103,7 @@ h6 {
 }
 .row.grid3 {
   display: grid;
-  grid-template-columns: auto auto 1fr;
+  grid-template-columns: auto minmax(0, 1fr) max-content;
   gap: 16px;
   align-items: center;
 }
