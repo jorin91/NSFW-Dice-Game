@@ -260,7 +260,7 @@ function removePlayerAt(index, targetId) {
   UpdatePlayersUI(targetId);
 }
 
-export function ResetGame(targetId = "newgame-buttons") {
+export function ResetGame(targetId = "newgamebuttons") {
   const root = document.getElementById(targetId);
   if (!root) return;
 
