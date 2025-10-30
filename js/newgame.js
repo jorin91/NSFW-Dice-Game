@@ -114,7 +114,7 @@ export function UpdateNewPlayerUI() {
   // Kleding
   const playerClothes = getClothesModel();
   const clothesWrap = document.createElement("div");
-  clothesWrap.className = "col small";
+  clothesWrap.className = "col";
 
   const headerClothes = document.createElement("p");
   headerClothes.setAttribute("data-i18n-auto", "app.newplayer.form.clothes");
