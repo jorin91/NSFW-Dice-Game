@@ -114,13 +114,13 @@ h6 {
   text-align: right;
 }
 .row.grid3:has(input[type="checkbox"]) {
-  border: 1px solid var(--accent);
+  border: 1px solid var(--text);
   border-radius: 10px;
   background-color: var(--panel2);
   cursor: pointer;
 }
 .row.grid3:has(input[type="checkbox"]:checked) {
-  border: 1px solid var(--text);
+  border: 1px solid var(--accent);
 }
 .row.grid3:has(input[type="checkbox"]):hover{
   opacity: 0.85;
