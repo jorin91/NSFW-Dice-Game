@@ -127,7 +127,8 @@ export function UpdateNewPlayerUI() {
     const cbClothingPiece = document.createElement("input");
     cbClothingPiece.type = "checkbox";
     cbClothingPiece.name = "clothing";
-
+    cbClothingPiece.checked = !!piece.enabled;
+    
     const lbClothingPiece = document.createElement("span");
     lbClothingPiece.setAttribute("data-i18n-auto", piece.name);
 
