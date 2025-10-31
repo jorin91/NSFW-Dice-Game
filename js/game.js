@@ -249,6 +249,7 @@ export function updateGameControls(targetId = "gameControlsRow") {
   rollButton.setAttribute("data-i18n-auto", "button.rollDices");
   rollButton.addEventListener("click", () => {
     rollAllDice(DiceSet);
+    window.GAME.game.diceSet = DiceSet;
     gameSaveState();
   });
 
