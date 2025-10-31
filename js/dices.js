@@ -83,7 +83,7 @@ export async function rollAllDice(DiceSet = []) {
   await animateRollAllDiceRandom(DiceSet, {
     frameMs: 70,
     minDurationMs: 1000,
-    maxDurationMs: 2000,
+    maxDurationMs: 3000,
   });
 }
 
