@@ -8,6 +8,7 @@ export function InitGame() {
   layout();
   UpdateGamePlayers();
   updateDiceSet();
+  updateGameControls();
 }
 
 function layout(targetId = "GamePanel") {
