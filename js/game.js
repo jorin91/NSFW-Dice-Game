@@ -1,5 +1,6 @@
 import { getSexIcon } from "./utils.js";
 import { createDiceInstance, bindDiceToImage } from "./dices.js";
+import { gameSaveState } from "./gamestate.js";
 
 const DiceSet = [];
 
@@ -81,8 +82,17 @@ function layout(targetId = "GamePanel") {
 
   // Game Menu
   const gameMenu = document.createElement("div");
-  gameMenu.id = "gameMenu";
-  gameMenu.className = "row";
+  gameMenu.id = "gameControls";
+  gameMenu.className = "col";
+
+  const gameMenuHeader = document.createElement("h3");
+  gameMenuHeader.setAttribute("data-i18n-auto", "app.game.gameControls.Header");
+
+  const gameMenuRow = document.createElement("div");
+  gameMenuRow.id = "gameControlsRow";
+  gameMenuRow.className = "row grid3";
+
+  gameMenu.append(gameMenuHeader, gameMenuRow);
 
   // Append panels
   root.append(
@@ -193,6 +203,7 @@ function updateDiceSet(
 
     img.addEventListener("click", () => {
       dice.hold = !dice.hold;
+      gameSaveState();
 
       switch (dice.hold) {
         case true:
@@ -222,4 +233,38 @@ function updateDiceSet(
     // bewaar het model (zoals je vroeg) in DiceSet
     DiceSet.push(linked);
   });
+}
+
+export function updateGameControls(targetId = "gameControlsRow") {
+  const root = document.getElementById(targetId);
+  if (!root) return;
+
+  root.innerHTML = "";
+
+  const existing = root.querySelector(`#${elementID}`);
+  if (existing) existing.remove();
+
+  const rollButton = document.createElement("button");
+  rollButton.type = "button";
+  rollButton.className = "btn";
+  rollButton.id = "rollDicesButton";
+  rollButton.setAttribute("data-i18n-auto", "button.rollDices");
+  rollButton.addEventListener("click", () => {});
+
+  const endTurnButton = document.createElement("button");
+  endTurnButton.type = "button";
+  endTurnButton.className = "btn";
+  endTurnButton.id = "endTurnButton";
+  endTurnButton.setAttribute("data-i18n-auto", "button.endTurn");
+  endTurnButton.addEventListener("click", () => {});
+
+  const stopButton = document.createElement("button");
+  stopButton.type = "button";
+  stopButton.className = "btn";
+  stopButton.id = "stopButton";
+  stopButton.setAttribute("data-i18n-auto", "button.stopgame");
+  stopButton.setAttribute("data-panel", "mainmenu");
+  stopButton.addEventListener("click", () => {});
+
+  root.append(rollButton, endTurnButton, resetButton);
 }

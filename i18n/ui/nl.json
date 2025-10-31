@@ -35,6 +35,8 @@
 
   "app.game.scorePreview.Header": "Huidige Score",
 
+  "app.game.gameControls.Header": "Besturing",
+
   "app.task.title": "Opdracht",
 
   "app.settings.title": "Spel Instellingen",
@@ -72,5 +74,8 @@
   "button.startgame": "Start Spel",
   "button.addplayer": "Speler toevoegen",
   "button.cancel": "Annuleren",
-  "button.resetgame": "Reset Spel"
+  "button.resetgame": "Reset Spel",
+  "button.stopgame": "Stop Spel",
+  "button.rollDices": "Rol Dobbelstenen",
+  "button.endTurn": "Beëindig Beurt"
 }
