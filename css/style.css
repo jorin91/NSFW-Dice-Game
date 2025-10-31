@@ -109,6 +109,10 @@ h6 {
   align-items: center;
   padding: 8px 12px;
 }
+.row.grid3 > :nth-child(3) {
+  justify-self: end;  /* plaatst het element rechts */
+  width: auto;        /* voorkomt uitrekken */
+}
 .row.grid3 > span,
 .row.grid3 > p {
   min-width: 0;              
