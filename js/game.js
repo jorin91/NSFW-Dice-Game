@@ -205,6 +205,17 @@ function updateDiceSet(
       }
     });
 
+    // Initial Add
+    switch (dice.hold) {
+      case true:
+        containerHold.append(img);
+        break;
+
+      case false:
+        containerRoll.append(img);
+        break;
+    }
+
     // bind model ↔ element (patcht roll en voegt refresh/setValue toe)
     const linked = bindDiceToImage(dice, img);
 
