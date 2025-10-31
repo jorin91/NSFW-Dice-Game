@@ -17,7 +17,7 @@ const Dice = {
 
   getImagePath() {
     const v = this.getValue();
-    return `../media/dice_${v}.png`;
+    return `media/dice_${v}.png`;
   },
 
   rollAndGetImage() {
