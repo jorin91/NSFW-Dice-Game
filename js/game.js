@@ -280,7 +280,7 @@ export function updateGameControls(targetId = "gameControlsRow") {
 
     await rollAllDice(DiceSet);
     window.GAME.game.diceSet = DiceSet;
-    window.GAME?.game?.turnRoll ++;
+    window.GAME.game.turnRoll ++;
     gameSaveState();
     updateGameStatus();
   });
