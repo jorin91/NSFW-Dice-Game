@@ -34,6 +34,7 @@ export function createDiceInstance(id, value = null) {
   inst.id = id; // eigen id
   inst.value = value; // start zonder waarde
   inst.faces = Dice.faces.slice(0); // eigen kopie van faces-array
+  inst.hold = Dice.hold;
   return inst;
 }
 
