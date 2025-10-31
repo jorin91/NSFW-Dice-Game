@@ -175,7 +175,7 @@ function updateDiceSet(
   targetIdHoldField = "holdDiceRow"
 ) {
   const savedDiceSet = window.GAME?.game?.diceSet;
-  if (!Array.isArray(diceSet) || diceSet.length === 0) return;
+  if (!Array.isArray(savedDiceSet) || savedDiceSet.length === 0) return;
 
   const containerRoll = document.getElementById(targetIdRollField);
   const containerHold = document.getElementById(targetIdHoldField);
