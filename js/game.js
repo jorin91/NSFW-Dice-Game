@@ -1,9 +1,12 @@
 import { getSexIcon } from "./utils.js";
+import { createDiceInstance, bindDiceToImage } from "./dices.js";
+
+const DiceSet = [];
 
 export function InitGame() {
   layout();
   UpdateGamePlayers();
-  createDiceSet();
+  updateDiceSet();
 }
 
 function layout(targetId = "GamePanel") {
@@ -40,12 +43,16 @@ function layout(targetId = "GamePanel") {
     "app.game.rollDiceField.Header"
   );
 
-  rollDiceField.append(rollDiceFieldHeader);
+  const rollDiceRow = document.createElement("div");
+  rollDiceRow.id = "rollDiceRow";
+  rollDiceRow.className = "row";
+
+  rollDiceField.append(rollDiceFieldHeader, rollDiceRow);
 
   // Hold Dice Field
   const holdDiceField = document.createElement("div");
   holdDiceField.id = "holdDiceField";
-  holdDiceField.className = "row";
+  holdDiceField.className = "col";
 
   const holdDiceFieldHeader = document.createElement("h3");
   holdDiceFieldHeader.setAttribute(
@@ -53,7 +60,11 @@ function layout(targetId = "GamePanel") {
     "app.game.holdDiceField.Header"
   );
 
-  holdDiceField.append(holdDiceFieldHeader);
+  const holdDiceRow = document.createElement("div");
+  holdDiceRow.id = "holdDiceRow";
+  holdDiceRow.className = "row";
+
+  holdDiceField.append(holdDiceFieldHeader, holdDiceRow);
 
   // Score Preview
   const scorePreview = document.createElement("div");
@@ -159,6 +170,45 @@ function createPointsLabel(points = 0) {
   return `(${points || 0})`;
 }
 
-function createDiceSet(){
+function updateDiceSet(
+  targetIdRollField = "rollDiceRow",
+  targetIdHoldField = "holdDiceRow"
+) {
+  const savedDiceSet = window.GAME?.game?.diceSet;
+  if (!Array.isArray(diceSet) || diceSet.length === 0) return;
 
+  const containerRoll = document.getElementById(targetIdRollField);
+  const containerHold = document.getElementById(targetIdHoldField);
+  if (!containerRoll || !containerHold) return;
+
+  savedDiceSet.forEach((d, index) => {
+    const dice = createDiceInstance(d.id || `dice${index + 1}`, d.value ?? 6);
+
+    // Create html element
+    const img = document.createElement("img");
+    img.className = "dice-img";
+    img.style.width = "128px";
+    img.style.height = "128px";
+    img.style.objectFit = "contain";
+
+    img.addEventListener("click", () => {
+      dice.hold = !dice.hold;
+
+      switch (dice.hold) {
+        case true:
+          containerHold.append(img);
+          break;
+
+        case false:
+          containerRoll.append(img);
+          break;
+      }
+    });
+
+    // bind model ↔ element (patcht roll en voegt refresh/setValue toe)
+    const linked = bindDiceToImage(dice, img);
+
+    // bewaar het model (zoals je vroeg) in DiceSet
+    DiceSet.push(linked);
+  });
 }
