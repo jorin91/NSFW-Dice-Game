@@ -1,3 +1,5 @@
+import { randInt } from "./utils.js";
+
 // Bestaand basismodel
 const Dice = {
   id: 0,
@@ -83,71 +85,58 @@ export function rollAllDice(DiceSet = []) {
   });
   */
 
-  animateRollAllDice(DiceSet, {
-    frameMs: 70, // trager/sneller "ratelen"
-    durationMs: 1000, // totale duur per steen
-    staggerMs: 150, // hoeveel ms tussen elke start
-  });
+  animateRollAllDiceRandom(DiceSet, {
+  frameMs: 70,
+  minDurationMs: 1000,
+  maxDurationMs: 2000
+});
 
   gameSaveState(); // optioneel, zodat de waarden bewaard blijven
 }
 
-function animateSingleDice(
-  dice,
-  {
-    frameMs = 60, // hoe snel een nieuw "frame"
-    durationMs = 700, // totale animatieduur voor deze steen
-    respectHold = true, // sla hold-stenen over
-  } = {}
-) {
-  return new Promise((resolve) => {
+// Laat één dobbelsteen "ratelen" en eindigen met een echte roll()
+function animateSingleDice(dice, {
+  frameMs = 60,
+  durationMs = 700,
+  respectHold = true
+} = {}) {
+  return new Promise(resolve => {
     if (respectHold && dice.hold) {
-      // niet animeren; wel zorgen dat de UI klopt
       dice.refresh?.();
       return resolve(false);
     }
 
     const start = Date.now();
-    const tick = setInterval(() => {
-      // tussentijds willekeurige waarde laten 'flikkeren'
-      const rand = 1 + Math.floor(Math.random() * 6);
-      dice.value = rand;
+    const timer = setInterval(() => {
+      dice.value = 1 + Math.floor(Math.random() * 6);
       dice.refresh?.();
 
-      const elapsed = Date.now() - start;
-      if (elapsed >= durationMs) {
-        clearInterval(tick);
-        // echte worp als eindresultaat
-        dice.roll(); // jouw gepatchte roll() triggert refresh
+      if (Date.now() - start >= durationMs) {
+        clearInterval(timer);
+        dice.roll();     // eindwaarde + refresh via jouw patch
         resolve(true);
       }
     }, frameMs);
   });
 }
 
-// Roll alle dobbelstenen met een kleine "stagger" zodat ze 1 voor 1 eindigen
-export async function animateRollAllDice(
-  DiceSet = [],
-  {
-    frameMs = 60,
-    durationMs = 700,
-    staggerMs = 120, // vertraging tussen starten per steen
-    respectHold = true,
-  } = {}
-) {
+// Alle stenen tegelijk laten rollen, met random duur per steen
+export async function animateRollAllDiceRandom(DiceSet = [], {
+  frameMs = 60,
+  minDurationMs = 600,
+  maxDurationMs = 1200,
+  respectHold = true
+} = {}) {
   if (!Array.isArray(DiceSet) || DiceSet.length === 0) return;
 
-  const jobs = [];
-  DiceSet.forEach((dice, i) => {
-    const job = new Promise((resolve) => {
-      setTimeout(async () => {
-        await animateSingleDice(dice, { frameMs, durationMs, respectHold });
-        resolve();
-      }, i * staggerMs);
-    });
-    jobs.push(job);
-  });
+  const jobs = DiceSet.map(dice =>
+    animateSingleDice(dice, {
+      frameMs,
+      durationMs: randInt(minDurationMs, maxDurationMs),
+      respectHold
+    })
+  );
 
   await Promise.all(jobs);
-  gameSaveState?.(); // waarden bewaren na alle animaties
+  gameSaveState?.();
 }
