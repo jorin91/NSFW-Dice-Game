@@ -204,6 +204,8 @@ function updateDiceSet(
 
     img.addEventListener("click", () => {
       dice.hold = !dice.hold;
+
+      window.GAME.game.diceSet = DiceSet;
       gameSaveState();
 
       switch (dice.hold) {
@@ -247,7 +249,7 @@ export function updateGameControls(targetId = "gameControlsRow") {
   rollButton.className = "btn";
   rollButton.id = "rollDicesButton";
   rollButton.setAttribute("data-i18n-auto", "button.rollDices");
-  rollButton.addEventListener("click", async() => {
+  rollButton.addEventListener("click", async () => {
     await rollAllDice(DiceSet);
     window.GAME.game.diceSet = DiceSet;
     gameSaveState();
