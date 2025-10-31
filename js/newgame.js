@@ -10,7 +10,7 @@ import { createPlayer } from "./player.js";
 import { switchPanel } from "./panelnavigation.js";
 import { getClothesModel } from "./clothing.js";
 import { InitUpdate } from "./init.js";
-import { UpdateGamePlayers } from "./game.js";
+import { InitGame } from "./game.js";
 import { createDiceSet } from "./dices.js";
 
 export function InitNewGame() {
@@ -322,7 +322,7 @@ export function StartGame(targetId = "newgamebuttons", elementID = "StartGameBut
     window.GAME.game.diceSet = createDiceSet(window.GAME.game.dices);
 
     // init
-    UpdateGamePlayers();
+    InitGame();
 
     // save game state
     gameSaveState();
