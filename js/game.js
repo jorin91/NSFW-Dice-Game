@@ -248,7 +248,7 @@ export function updateGameControls(targetId = "gameControlsRow") {
   rollButton.id = "rollDicesButton";
   rollButton.setAttribute("data-i18n-auto", "button.rollDices");
   rollButton.addEventListener("click", () => {
-    rollAllDice();
+    rollAllDice(DiceSet);
   });
 
   const endTurnButton = document.createElement("button");
