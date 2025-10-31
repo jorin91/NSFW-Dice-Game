@@ -124,7 +124,7 @@ function layout(targetId = "GamePanel") {
     playerField,
     rollDiceField,
     holdDiceField,
-    scorePreview,
+    GameStatus,
     gameMenu
   );
 
