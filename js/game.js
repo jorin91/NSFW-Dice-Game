@@ -242,9 +242,6 @@ export function updateGameControls(targetId = "gameControlsRow") {
 
   root.innerHTML = "";
 
-  const existing = root.querySelector(`#${elementID}`);
-  if (existing) existing.remove();
-
   const rollButton = document.createElement("button");
   rollButton.type = "button";
   rollButton.className = "btn";
@@ -267,5 +264,5 @@ export function updateGameControls(targetId = "gameControlsRow") {
   stopButton.setAttribute("data-panel", "mainmenu");
   stopButton.addEventListener("click", () => {});
 
-  root.append(rollButton, endTurnButton, resetButton);
+  root.append(rollButton, endTurnButton, stopButton);
 }
