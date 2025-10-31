@@ -29,12 +29,12 @@ const Dice = {
 };
 
 // Maakt een nieuwe instance met eigen state, gebaseerd op Dice
-export function createDiceInstance(id, value = null) {
+export function createDiceInstance(id, value = null, hold = false) {
   const inst = Object.create(Dice); // erft methodes van Dice
   inst.id = id; // eigen id
   inst.value = value; // start zonder waarde
   inst.faces = Dice.faces.slice(0); // eigen kopie van faces-array
-  inst.hold = Dice.hold;
+  inst.hold = hold;
   return inst;
 }
 

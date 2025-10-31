@@ -193,7 +193,7 @@ function updateDiceSet(
   if (!containerRoll || !containerHold) return;
 
   savedDiceSet.forEach((d, index) => {
-    const dice = createDiceInstance(d.id || `dice${index + 1}`, d.value ?? 6);
+    const dice = createDiceInstance(d.id || `dice${index + 1}`, d.value ?? 6, d.hold ?? false);
 
     // Create html element
     const img = document.createElement("img");
