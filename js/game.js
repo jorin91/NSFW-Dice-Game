@@ -2,6 +2,7 @@ import { getSexIcon } from "./utils.js";
 
 export function InitGame() {
   layout();
+  UpdateGamePlayers();
 }
 
 function layout(targetId = "GamePanel") {
