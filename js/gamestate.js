@@ -16,8 +16,6 @@ const LS_KEY_GAMESTATE = "NSFWDiceGame_GameState";
 export const GAME_FLOW_MODEL = {
   version: 1,
   activePanel: "mainmenu",
-  round: 0,
-  turnIndex: 0,
   players: [
     {
       id: 111,
@@ -72,8 +70,24 @@ export const GAME_FLOW_MODEL = {
     secretTasks: true, // hiermee bepalen we of de opdracht algemeen is of alleen voor de uitvoerder en de rest niets weet, verrassings element
     rolls: 3,
     score: 3,
+    dices: 5,
   }, // later: maxRolls, pointsToSafe, enz.
   tasks: getTasksModel(),
+  game: {
+    // Settings game started with
+    stage: null,
+    intensity: null,
+    extremity: null,
+    act: null,
+    secretTasks: null,
+    rolls: null,
+    score: null,
+    dices: null,
+    // Game State
+    round: 0,
+    turnIndex: 0,
+    diceSet: [],
+  },
 };
 
 export function gameGetState() {

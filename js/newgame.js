@@ -11,6 +11,7 @@ import { switchPanel } from "./panelnavigation.js";
 import { getClothesModel } from "./clothing.js";
 import { InitUpdate } from "./init.js";
 import { UpdateGamePlayers } from "./game.js";
+import { createDiceSet } from "./dices.js";
 
 export function InitNewGame() {
   UpdatePlayersUI(); // Fill players UI for new game
@@ -305,7 +306,26 @@ export function StartGame(targetId = "newgamebuttons", elementID = "StartGameBut
   resetButton.setAttribute("data-i18n-auto", "button.startgame");
   resetButton.setAttribute("data-panel", "game");
   resetButton.addEventListener("click", () => {
+    // Copy settings to game instance
+    window.GAME?.game?.stage = window.GAME?.settings?.stage;
+    window.GAME?.game?.intensity = window.GAME?.settings?.intensity;
+    window.GAME?.game?.extremity = window.GAME?.settings?.extremity;
+    window.GAME?.game?.act = window.GAME?.settings?.act;
+    window.GAME?.game?.secretTasks = window.GAME?.settings?.secretTasks;
+    window.GAME?.game?.rolls = window.GAME?.settings?.rolls;
+    window.GAME?.game?.score = window.GAME?.settings?.score;
+    window.GAME?.game?.dices = window.GAME?.settings?.dices;
+
+    // Set initial values for new game
+    window.GAME?.game?.round = 0;
+    window.GAME?.game?.turnIndex = 0;
+    window.GAME?.game?.diceSet = createDiceSet(window.GAME?.game?.dices || window.GAME?.settings?.dices || 5);
+
+    // init
     UpdateGamePlayers();
+
+    // save game state
+    gameSaveState();
   });
 
   root.append(resetButton);

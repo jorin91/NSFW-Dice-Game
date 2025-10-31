@@ -3,6 +3,7 @@ import { getSexIcon } from "./utils.js";
 export function InitGame() {
   layout();
   UpdateGamePlayers();
+  createDiceSet();
 }
 
 function layout(targetId = "GamePanel") {
@@ -88,50 +89,57 @@ export function UpdateGamePlayers(targetId = "PlayerRow") {
   const root = document.getElementById(targetId);
   if (!root) return;
 
-  const winScore = window.GAME?.settings?.score || 3;
+  root.innerHTML = "";
+
+  const winScore = window.GAME?.game?.score || 3;
 
   const players = Array.isArray(window.GAME?.players)
     ? window.GAME.players
     : [];
 
   players.forEach((p, index) => {
+    /*
     let bubble = root.querySelector(`[id="${p.id}"]`);
     let pointsSpan;
+    
 
     if (!bubble) {
       // Not existing, creating
+      */
 
-      // Player Bubble
-      bubble = document.createElement("div");
-      bubble.className = "bubble row";
-      bubble.id = p?.id;
+    // Player Bubble
+    const bubble = document.createElement("div");
+    bubble.className = "bubble row";
+    bubble.id = p?.id;
 
-      // Naam
-      const nameSpan = document.createElement("span");
-      nameSpan.textContent = p?.name || `Player ${index + 1}`;
+    // Naam
+    const nameSpan = document.createElement("span");
+    nameSpan.textContent = p?.name || `Player ${index + 1}`;
 
-      // Geslachticoon
-      const sexIcon = document.createElement("span");
-      sexIcon.className = "player-sex";
-      sexIcon.textContent = getSexIcon(p?.sex);
+    // Geslachticoon
+    const sexIcon = document.createElement("span");
+    sexIcon.className = "player-sex";
+    sexIcon.textContent = getSexIcon(p?.sex);
 
-      // Points
-      pointsSpan = document.createElement("span");
-      pointsSpan.id = "points";
-      pointsSpan.textContent = createPointsLabel(p?.score);
+    // Points
+    const pointsSpan = document.createElement("span");
+    pointsSpan.id = "points";
+    pointsSpan.textContent = createPointsLabel(p?.score);
 
-      // Appending to name part
-      bubble.appendChild(sexIcon);
-      bubble.appendChild(nameSpan);
-      bubble.appendChild(pointsSpan);
+    // Appending to name part
+    bubble.appendChild(sexIcon);
+    bubble.appendChild(nameSpan);
+    bubble.appendChild(pointsSpan);
 
-      root.append(bubble);
+    root.append(bubble);
+    /*
     } else {
       pointsSpan = bubble.querySelector(`#${p.id}`);
     }
 
     // Update score
     pointsSpan.textContent = createPointsLabel(p?.score);
+    */
 
     if (p.score >= winScore) {
       p.safe = true;
@@ -149,4 +157,8 @@ export function UpdateGamePlayers(targetId = "PlayerRow") {
 
 function createPointsLabel(points = 0) {
   return `(${points || 0})`;
+}
+
+function createDiceSet(){
+
 }
