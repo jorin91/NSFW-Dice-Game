@@ -86,21 +86,18 @@ export function rollAllDice(DiceSet = []) {
   */
 
   animateRollAllDiceRandom(DiceSet, {
-  frameMs: 70,
-  minDurationMs: 1000,
-  maxDurationMs: 2000
-});
-
-  gameSaveState(); // optioneel, zodat de waarden bewaard blijven
+    frameMs: 70,
+    minDurationMs: 1000,
+    maxDurationMs: 2000,
+  });
 }
 
 // Laat één dobbelsteen "ratelen" en eindigen met een echte roll()
-function animateSingleDice(dice, {
-  frameMs = 60,
-  durationMs = 700,
-  respectHold = true
-} = {}) {
-  return new Promise(resolve => {
+function animateSingleDice(
+  dice,
+  { frameMs = 60, durationMs = 700, respectHold = true } = {}
+) {
+  return new Promise((resolve) => {
     if (respectHold && dice.hold) {
       dice.refresh?.();
       return resolve(false);
@@ -113,7 +110,7 @@ function animateSingleDice(dice, {
 
       if (Date.now() - start >= durationMs) {
         clearInterval(timer);
-        dice.roll();     // eindwaarde + refresh via jouw patch
+        dice.roll(); // eindwaarde + refresh via jouw patch
         resolve(true);
       }
     }, frameMs);
@@ -121,19 +118,22 @@ function animateSingleDice(dice, {
 }
 
 // Alle stenen tegelijk laten rollen, met random duur per steen
-export async function animateRollAllDiceRandom(DiceSet = [], {
-  frameMs = 60,
-  minDurationMs = 600,
-  maxDurationMs = 1200,
-  respectHold = true
-} = {}) {
+export async function animateRollAllDiceRandom(
+  DiceSet = [],
+  {
+    frameMs = 60,
+    minDurationMs = 600,
+    maxDurationMs = 1200,
+    respectHold = true,
+  } = {}
+) {
   if (!Array.isArray(DiceSet) || DiceSet.length === 0) return;
 
-  const jobs = DiceSet.map(dice =>
+  const jobs = DiceSet.map((dice) =>
     animateSingleDice(dice, {
       frameMs,
       durationMs: randInt(minDurationMs, maxDurationMs),
-      respectHold
+      respectHold,
     })
   );
 
