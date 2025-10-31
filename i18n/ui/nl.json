@@ -33,7 +33,10 @@
 
   "app.game.holdDiceField.Header": "Vast Gezette Dobbelstenen",
 
-  "app.game.scorePreview.Header": "Huidige Score",
+  "app.game.GameStatus.Header": "Spel Overzicht",
+  "app.game.GameStatus.PlayerTurn": "Het is jouw beurt {turnPlayer}!",
+  "app.game.GameStatus.CurrentScore": "Huidig aantal punten: {playerScore}",
+  "app.game.GameStatus.GameProgress": "Ronde: {gameRound}",
 
   "app.game.gameControls.Header": "Besturing",
 

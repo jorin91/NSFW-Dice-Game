@@ -68,18 +68,42 @@ function layout(targetId = "GamePanel") {
 
   holdDiceField.append(holdDiceFieldHeader, holdDiceRow);
 
-  // Score Preview
-  const scorePreview = document.createElement("div");
-  scorePreview.id = "scorePreview";
-  scorePreview.className = "col";
+  // Game Status
+  const GameStatus = document.createElement("div");
+  GameStatus.id = "GameStatus";
+  GameStatus.className = "col";
 
-  const scorePreviewHeader = document.createElement("h3");
-  scorePreviewHeader.setAttribute(
+  const GameStatusHeader = document.createElement("h3");
+  GameStatusHeader.setAttribute("data-i18n-auto", "app.game.GameStatus.Header");
+
+  const GameStatusPlayerTurn = document.createElement("p");
+  GameStatusPlayerTurn.id = "GameStatusPlayerTurn";
+  GameStatusPlayerTurn.setAttribute(
     "data-i18n-auto",
-    "app.game.scorePreview.Header"
+    "app.game.GameStatus.PlayerTurn"
   );
 
-  scorePreview.append(scorePreviewHeader);
+  const GameStatusCurrentScore = document.createElement("p");
+  GameStatusCurrentScore.id = "GameStatusCurrentScore";
+  GameStatusCurrentScore.setAttribute(
+    "data-i18n-auto",
+    "app.game.GameStatus.CurrentScore"
+  );
+
+  const GameStatusGameProgress = document.createElement("p");
+  GameStatusGameProgress.id = "GameStatusGameProgress";
+  GameStatusGameProgress.className = "muted";
+  GameStatusGameProgress.setAttribute(
+    "data-i18n-auto",
+    "app.game.GameStatus.GameProgress"
+  );
+
+  GameStatus.append(
+    GameStatusHeader,
+    GameStatusPlayerTurn,
+    GameStatusCurrentScore,
+    GameStatusGameProgress
+  );
 
   // Game Menu
   const gameMenu = document.createElement("div");
@@ -193,7 +217,11 @@ function updateDiceSet(
   if (!containerRoll || !containerHold) return;
 
   savedDiceSet.forEach((d, index) => {
-    const dice = createDiceInstance(d.id || `dice${index + 1}`, d.value ?? 6, d.hold ?? false);
+    const dice = createDiceInstance(
+      d.id || `dice${index + 1}`,
+      d.value ?? 6,
+      d.hold ?? false
+    );
 
     // Create html element
     const img = document.createElement("img");
