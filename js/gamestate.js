@@ -75,18 +75,13 @@ export const GAME_FLOW_MODEL = {
   tasks: getTasksModel(),
   game: {
     // Settings game started with
-    stage: null,
-    intensity: null,
-    extremity: null,
-    act: null,
-    secretTasks: null,
-    rolls: null,
-    score: null,
-    dices: null,
+    settings: {},
     // Game State
     round: 0,
     turnIndex: 0,
+    turnRoll: 0,
     diceSet: [],
+    players: [],
   },
 };
 

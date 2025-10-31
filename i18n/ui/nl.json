@@ -36,7 +36,7 @@
   "app.game.GameStatus.Header": "Spel Overzicht",
   "app.game.GameStatus.PlayerTurn": "Het is jouw beurt {turnPlayer}!",
   "app.game.GameStatus.CurrentScore": "Huidig aantal punten: {playerScore}",
-  "app.game.GameStatus.GameProgress": "Ronde: {gameRound}",
+  "app.game.GameStatus.GameProgress": "Worp: {gameRoll} <br>Ronde: {gameRound}",
 
   "app.game.gameControls.Header": "Besturing",
 

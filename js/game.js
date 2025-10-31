@@ -9,6 +9,7 @@ export function InitGame() {
   UpdateGamePlayers();
   updateDiceSet();
   updateGameControls();
+  updateGameStatus();
 }
 
 function layout(targetId = "GamePanel") {
@@ -120,13 +121,7 @@ function layout(targetId = "GamePanel") {
   gameMenu.append(gameMenuHeader, gameMenuRow);
 
   // Append panels
-  root.append(
-    playerField,
-    rollDiceField,
-    holdDiceField,
-    GameStatus,
-    gameMenu
-  );
+  root.append(playerField, rollDiceField, holdDiceField, GameStatus, gameMenu);
 
   // Panel Logic
 }
@@ -278,9 +273,16 @@ export function updateGameControls(targetId = "gameControlsRow") {
   rollButton.id = "rollDicesButton";
   rollButton.setAttribute("data-i18n-auto", "button.rollDices");
   rollButton.addEventListener("click", async () => {
+    const turnRoll = window.GAME?.game?.turnRoll ?? 0;
+    const maxRoll = window.GAME?.game?.settings?.rolls ?? 3;
+
+    if (turnRoll >= maxRoll) return;
+
     await rollAllDice(DiceSet);
     window.GAME.game.diceSet = DiceSet;
+    window.GAME?.game?.turnRoll ++;
     gameSaveState();
+    updateGameStatus();
   });
 
   const endTurnButton = document.createElement("button");
@@ -299,4 +301,26 @@ export function updateGameControls(targetId = "gameControlsRow") {
   stopButton.addEventListener("click", () => {});
 
   root.append(rollButton, endTurnButton, stopButton);
+}
+
+function updateGameStatus() {
+  const PlayerTurn = document.getElementById("GameStatusPlayerTurn");
+  const CurrentScore = document.getElementById("GameStatusCurrentScore");
+  const GameProgress = document.getElementById("GameStatusGameProgress");
+
+  if (!PlayerTurn || !CurrentScore || !GameProgress) return;
+
+  // PlayerTurn
+  const turnIndex = window.GAME?.game?.turnIndex;
+  const activePlayer = window.GAME?.game?.players[turnIndex];
+  PlayerTurn.innerHTML.replace("{turnPlayer}", activePlayer.name || `Player ${turnIndex + 1}`);
+
+  // CurrentScore
+
+  // GameProgress
+  const turnRoll = window.GAME?.game?.turnRoll ?? 0;
+  const maxRoll = window.GAME?.game?.settings?.rolls ?? 3;
+  const gameRound = window.GAME?.game?.round ?? 0;
+  GameProgress.innerHTML.replace("{gameRoll}", `${turnRoll}/${maxRoll}`);
+  GameProgress.innerHTML.replace("{gameRound}", `${gameRound}`);
 }
