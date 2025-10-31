@@ -1,47 +1,43 @@
+// Bestaand basismodel
 const Dice = {
   id: 0,
   faces: [1, 2, 3, 4, 5, 6],
   value: 6,
 
-  // Werpt de dobbelsteen en slaat de uitkomst op
   roll() {
     const rand = Math.floor(Math.random() * this.faces.length);
     this.value = this.faces[rand];
     return this.value;
   },
 
-  // Geeft het huidige nummer terug (zonder nieuwe worp)
   getValue() {
-    return this.value ?? this.roll(); // als nog niet gerold, doe dat nu
+    return this.value ?? this.roll();
   },
 
-  // Geeft het pad naar de juiste afbeelding terug
   getImagePath() {
     const v = this.getValue();
     return `../media/dice_${v}.png`;
   },
 
-  // Helper: voert roll uit en retourneert meteen de afbeelding
   rollAndGetImage() {
     this.roll();
     return this.getImagePath();
   },
 };
 
-// Functie: maakt een nieuwe dobbelsteeninstantie met id
+// Maakt een nieuwe instance met eigen state, gebaseerd op Dice
 export function createDiceInstance(id) {
-  const newDice = structuredClone(Dice); // maakt diepe kopie
-  newDice.id = id;
-  return newDice;
+  const inst = Object.create(Dice);     // erft methodes van Dice
+  inst.id = id;                         // eigen id
+  inst.value = null;                    // start zonder waarde
+  inst.faces = Dice.faces.slice(0);     // eigen kopie van faces-array
+  return inst;
 }
 
-// Functie: maakt een lijst van dobbelstenen met automatisch ID
 export function createDiceSet(amount = 1) {
   const diceSet = [];
   for (let i = 1; i <= amount; i++) {
-    const id = `dice${i}`;
-    const dice = createDiceInstance(id);
-    diceSet.push(dice);
+    diceSet.push(createDiceInstance(`dice${i}`));
   }
   return diceSet;
 }
