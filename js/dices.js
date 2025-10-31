@@ -76,16 +76,10 @@ export function bindDiceToImage(dice, imgEl) {
   return dice; // zelfde object, nu met img-binding
 }
 
-export function rollAllDice(DiceSet = []) {
+export async function rollAllDice(DiceSet = []) {
   if (!Array.isArray(DiceSet) || DiceSet.length === 0) return;
 
-  /*
-  DiceSet.forEach(dice => {
-    if (!dice.hold) dice.roll();   // alleen rollen als hold == false
-  });
-  */
-
-  animateRollAllDiceRandom(DiceSet, {
+  await animateRollAllDiceRandom(DiceSet, {
     frameMs: 70,
     minDurationMs: 1000,
     maxDurationMs: 2000,
