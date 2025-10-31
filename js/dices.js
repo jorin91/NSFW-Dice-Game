@@ -138,5 +138,4 @@ export async function animateRollAllDiceRandom(
   );
 
   await Promise.all(jobs);
-  gameSaveState?.();
 }
