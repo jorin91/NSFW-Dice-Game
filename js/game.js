@@ -247,7 +247,9 @@ export function updateGameControls(targetId = "gameControlsRow") {
   rollButton.className = "btn";
   rollButton.id = "rollDicesButton";
   rollButton.setAttribute("data-i18n-auto", "button.rollDices");
-  rollButton.addEventListener("click", () => {});
+  rollButton.addEventListener("click", () => {
+    rollAllDice();
+  });
 
   const endTurnButton = document.createElement("button");
   endTurnButton.type = "button";
@@ -265,4 +267,14 @@ export function updateGameControls(targetId = "gameControlsRow") {
   stopButton.addEventListener("click", () => {});
 
   root.append(rollButton, endTurnButton, stopButton);
+}
+
+function rollAllDice() {
+  if (!Array.isArray(DiceSet) || DiceSet.length === 0) return;
+
+  DiceSet.forEach(dice => {
+    if (!dice.hold) dice.roll();   // alleen rollen als hold == false
+  });
+
+  gameSaveState(); // optioneel, zodat de waarden bewaard blijven
 }
