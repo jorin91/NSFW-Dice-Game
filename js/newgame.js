@@ -313,7 +313,7 @@ export function StartGame(targetId = "newgamebuttons", elementID = "StartGameBut
     window.GAME.game.round = 0;
     window.GAME.game.turnIndex = 0;
     window.GAME.game.diceSet = createDiceSet(window.GAME.game.dices);
-    window.GAME.game.player = window.GAME?.players;
+    window.GAME.game.players = window.GAME?.players;
 
     // init
     InitGame();

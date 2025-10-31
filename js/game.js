@@ -313,7 +313,7 @@ function updateGameStatus() {
   // PlayerTurn
   const turnIndex = window.GAME?.game?.turnIndex;
   const activePlayer = window.GAME?.game?.players[turnIndex];
-  PlayerTurn.innerHTML.replace("{turnPlayer}", activePlayer.name || `Player ${turnIndex + 1}`);
+  PlayerTurn.innerHTML.replace("{turnPlayer}", activePlayer?.name ?? `Player ${turnIndex + 1}`);
 
   // CurrentScore
 
