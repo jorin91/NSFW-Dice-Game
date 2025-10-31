@@ -1,5 +1,5 @@
 import { getSexIcon } from "./utils.js";
-import { createDiceInstance, bindDiceToImage } from "./dices.js";
+import { createDiceInstance, bindDiceToImage, rollAllDice } from "./dices.js";
 import { gameSaveState } from "./gamestate.js";
 
 const DiceSet = [];
@@ -267,14 +267,4 @@ export function updateGameControls(targetId = "gameControlsRow") {
   stopButton.addEventListener("click", () => {});
 
   root.append(rollButton, endTurnButton, stopButton);
-}
-
-function rollAllDice() {
-  if (!Array.isArray(DiceSet) || DiceSet.length === 0) return;
-
-  DiceSet.forEach(dice => {
-    if (!dice.hold) dice.roll();   // alleen rollen als hold == false
-  });
-
-  gameSaveState(); // optioneel, zodat de waarden bewaard blijven
 }
