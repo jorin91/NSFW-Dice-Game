@@ -320,7 +320,9 @@ function updateGameStatus() {
     // PlayerTurn
     PlayerTurn.setAttribute(
       "data-i18n-args",
-      JSON.stringify({ turnPlayer: activePlayer?.name ?? `Player ${turnIndex + 1}` })
+      JSON.stringify({
+        turnPlayer: activePlayer?.name ?? `Player ${turnIndex + 1}`,
+      })
     );
     applyI18nToElement(PlayerTurn);
   }
@@ -379,6 +381,7 @@ function endTurn() {
     window.GAME.game.round = currentRound + 1;
     CheckForWinner();
     CheckForLoser();
+    ResetPlayers(true);
   }
 
   // Reset rolls voor nieuwe beurt
@@ -456,4 +459,20 @@ function CheckForLoser() {
     // voorbeeld:
     // triggerTaskForLoser(loser);
   }
+}
+
+function ResetPlayers(resetRound = false, resetGameCycle = false) {
+  const players = window.GAME?.game?.players ?? [];
+  const playerCount = players.length;
+  if (playerCount === 0) return; // geen spelers → niets doen
+
+  players.forEach((player) => {
+    if (resetRound) {
+      player.roundScore = 0;
+    }
+
+    if (resetGameCycle) {
+      player.score = 0;
+    }
+  });
 }
