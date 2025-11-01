@@ -6,7 +6,7 @@ import {
   getSettingIntensity,
   getSettingExtremity,
   getSettingActWith,
-  fillSettingsActOn
+  getSettingActOn
 } from "./settings.js";
 import { SEX_ENUM } from "./enums.js";
 import { CLOTHING_MODEL } from "./clothing.js";
