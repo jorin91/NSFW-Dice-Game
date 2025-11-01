@@ -183,6 +183,7 @@ function createPointsLabel(points = 0) {
 }
 
 function updateDiceSet(
+  resetDice = false,
   targetIdRollField = "rollDiceRow",
   targetIdHoldField = "holdDiceRow"
 ) {
@@ -193,26 +194,39 @@ function updateDiceSet(
   const containerHold = document.getElementById(targetIdHoldField);
   if (!containerRoll || !containerHold) return;
 
-  savedDiceSet.forEach((d, index) => {
-    const dice = createDiceInstance(
-      d.id || `dice${index + 1}`,
-      d.value ?? 6,
-      d.hold ?? false
-    );
+  if (!DiceSet || DiceSet.length === 0) {
+    savedDiceSet.forEach((d, index) => {
+      const dice = createDiceInstance(
+        d.id || `dice${index + 1}`,
+        d.value ?? 6,
+        d.hold ?? false
+      );
 
-    // Create html element
-    const img = document.createElement("img");
-    img.className = "dice-img";
-    img.style.width = "128px";
-    img.style.height = "128px";
-    img.style.objectFit = "contain";
+      // Create html element
+      const img = document.createElement("img");
+      img.className = "dice-img";
+      img.style.width = "128px";
+      img.style.height = "128px";
+      img.style.objectFit = "contain";
 
-    img.addEventListener("click", () => {
-      dice.hold = !dice.hold;
+      img.addEventListener("click", () => {
+        dice.hold = !dice.hold;
 
-      window.GAME.game.diceSet = DiceSet;
-      gameSaveState();
+        window.GAME.game.diceSet = DiceSet;
+        gameSaveState();
 
+        switch (dice.hold) {
+          case true:
+            containerHold.append(img);
+            break;
+
+          case false:
+            containerRoll.append(img);
+            break;
+        }
+      });
+
+      // Initial Add
       switch (dice.hold) {
         case true:
           containerHold.append(img);
@@ -222,25 +236,25 @@ function updateDiceSet(
           containerRoll.append(img);
           break;
       }
+
+      // bind model ↔ element (patcht roll en voegt refresh/setValue toe)
+      const linked = bindDiceToImage(dice, img);
+
+      // bewaar het model (zoals je vroeg) in DiceSet
+      DiceSet.push(linked);
     });
+  } else {
+    if (resetDice) {
+      DiceSet.forEach((d, index) => {
+        if (resetDice) {
+          d.hold = false;
+          d.setValue(1);
 
-    // Initial Add
-    switch (dice.hold) {
-      case true:
-        containerHold.append(img);
-        break;
-
-      case false:
-        containerRoll.append(img);
-        break;
+          containerRoll.append(dice.element);
+        }
+      });
     }
-
-    // bind model ↔ element (patcht roll en voegt refresh/setValue toe)
-    const linked = bindDiceToImage(dice, img);
-
-    // bewaar het model (zoals je vroeg) in DiceSet
-    DiceSet.push(linked);
-  });
+  }
 }
 
 export function updateGameControls(targetId = "gameControlsRow") {
@@ -370,6 +384,7 @@ function endTurn() {
   // Reset rolls voor nieuwe beurt
   window.GAME.game.turnRoll = 0;
 
+  updateDiceSet(true);
   gameSaveState();
   UpdateGamePlayers();
   updateGameStatus();

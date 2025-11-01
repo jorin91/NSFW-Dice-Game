@@ -4,8 +4,9 @@ import { randInt } from "./utils.js";
 const Dice = {
   id: 0,
   faces: [1, 2, 3, 4, 5, 6],
-  value: 6,
+  value: 1,
   hold: false,
+  element: null,
 
   roll() {
     const rand = Math.floor(Math.random() * this.faces.length);
@@ -35,6 +36,7 @@ export function createDiceInstance(id, value = null, hold = false) {
   inst.value = value; // start zonder waarde
   inst.faces = Dice.faces.slice(0); // eigen kopie van faces-array
   inst.hold = hold;
+  inst.element = null;
   return inst;
 }
 
@@ -73,6 +75,9 @@ export function bindDiceToImage(dice, imgEl) {
 
   // expose een refresh helper op het object
   dice.refresh = refresh;
+
+  // Store element for reference
+  dice.element = imgEl;
 
   return dice; // zelfde object, nu met img-binding
 }
