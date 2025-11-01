@@ -250,7 +250,7 @@ function updateDiceSet(
           d.hold = false;
           d.setValue(1);
 
-          containerRoll.append(dice.element);
+          containerRoll.append(d.element);
         }
       });
     }
