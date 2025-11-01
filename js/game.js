@@ -401,7 +401,7 @@ function CalculateScore() {
 }
 
 function CheckForWinner() {
-  const players = window.GAME?.players ?? [];
+  const players = window.GAME?.game?.players ?? [];
   const playerCount = players.length;
   if (playerCount === 0) return; // geen spelers → niets doen
 
@@ -425,16 +425,16 @@ function CheckForWinner() {
 }
 
 function CheckForLoser() {
-  const players = window.GAME?.players ?? [];
+  const players = window.GAME?.game?.players ?? [];
   if (players.length === 0) return; // geen spelers → niets doen
 
   // Filter alle spelers die nog niet 'safe' zijn
-  const activePlayers = players.filter(p => !p.safe);
+  const activePlayers = players.filter((p) => !p.safe);
 
   // Als er nog maar één over is, voer iets uit met die speler
   if (activePlayers.length === 1) {
     const loser = activePlayers[0];
-    
+
     // TODO: hier komt jouw logica, bijv. opdracht toewijzen
     console.log("Verliezer van de ronde:", loser.name);
 
