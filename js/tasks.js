@@ -5,8 +5,9 @@ import {
   STAGE_ENUM,
   INTENSITY_ENUM,
   EXTREMITY_ENUM,
-  ACT_ENUM,
   PLAYERTARGET_ENUM,
+  ACT_ON_ENUM,
+  ACT_WITH_ENUM,
 } from "./enums.js";
 
 import { tasks_undress_self } from "./tasks/undress_self.js";
@@ -38,5 +39,5 @@ export function getTasksModel() {
 }
 
 export function generateTask() {
-  
+
 }
