@@ -1,6 +1,7 @@
 import { getSexIcon } from "./utils.js";
 import { createDiceInstance, bindDiceToImage, rollAllDice } from "./dices.js";
 import { gameSaveState } from "./gamestate.js";
+import { applyI18nToElement } from "./lang_i18n.js";
 
 const DiceSet = [];
 
@@ -280,7 +281,7 @@ export function updateGameControls(targetId = "gameControlsRow") {
 
     await rollAllDice(DiceSet);
     window.GAME.game.diceSet = DiceSet;
-    window.GAME.game.turnRoll ++;
+    window.GAME.game.turnRoll++;
     gameSaveState();
     updateGameStatus();
   });
@@ -312,15 +313,55 @@ function updateGameStatus() {
 
   // PlayerTurn
   const turnIndex = window.GAME?.game?.turnIndex;
-  const activePlayer = window.GAME?.game?.players[turnIndex];
-  PlayerTurn.innerHTML.replace("{turnPlayer}", activePlayer?.name ?? `Player ${turnIndex + 1}`);
+  const activePlayer = window.GAME?.players?.[turnIndex];
+  PlayerTurn.setAttribute(
+    "data-i18n-args",
+    JSON.stringify({ turnPlayer: activePlayer.name })
+  );
+  applyI18nToElement(PlayerTurn);
 
   // CurrentScore
+  CurrentScore.setAttribute(
+    "data-i18n-args",
+    JSON.stringify({
+      playerScore: CalculateScore(),
+    })
+  );
+  applyI18nToElement(GameProgress);
 
-  // GameProgress
+  // GameProgress via i18n
   const turnRoll = window.GAME?.game?.turnRoll ?? 0;
   const maxRoll = window.GAME?.game?.settings?.rolls ?? 3;
   const gameRound = window.GAME?.game?.round ?? 0;
-  GameProgress.innerHTML.replace("{gameRoll}", `${turnRoll}/${maxRoll}`);
-  GameProgress.innerHTML.replace("{gameRound}", `${gameRound}`);
+
+  GameProgress.setAttribute(
+    "data-i18n-args",
+    JSON.stringify({
+      gameRoll: `${turnRoll}/${maxRoll}`,
+      gameRound: `${gameRound}`,
+    })
+  );
+  applyI18nToElement(GameProgress);
+}
+
+export function CalculateScore() {
+  const counts = {};
+
+  // Tel hoeveel keer elk getal voorkomt
+  DiceSet.forEach(dice => {
+    const v = dice.value;
+    if (!counts[v]) counts[v] = 0;
+    counts[v]++;
+  });
+
+  // Bereken de totale score
+  let total = 0;
+  for (const [valueStr, count] of Object.entries(counts)) {
+    const value = parseInt(valueStr);
+    // jouw regel: waarde × 10^(aantalZelfde - 1)
+    const score = value * Math.pow(10, count - 1);
+    total += score;
+  }
+
+  return total;
 }
