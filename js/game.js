@@ -153,9 +153,9 @@ export function UpdateGamePlayers(targetId = "PlayerRow") {
     sexIcon.textContent = getSexIcon(p?.sex);
 
     // turnScore
-    const turnScoreSpan = document.createElement("span");
-    turnScoreSpan.id = "turnScore";
-    turnScoreSpan.textContent = `${p.roundScore}`;
+    const roundScoreSpan = document.createElement("span");
+    roundScoreSpan.id = "roundScore";
+    roundScoreSpan.textContent = p?.roundScore ?? 0;
 
     // Points
     const pointsSpan = document.createElement("span");
@@ -163,7 +163,10 @@ export function UpdateGamePlayers(targetId = "PlayerRow") {
     pointsSpan.textContent = createPointsLabel(p?.score);
 
     // Appending to name part
-    bubble.appendChild(sexIcon, nameSpan, turnScoreSpan, pointsSpan);
+    bubble.appendChild(sexIcon);
+    bubble.appendChild(nameSpan);
+    bubble.appendChild(roundScoreSpan);
+    bubble.appendChild(pointsSpan);
 
     root.append(bubble);
 
