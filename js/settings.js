@@ -138,7 +138,7 @@ export function getSettingActWith() {
 
 // Act On
 function fillSettingsActOn(targetId = "settings_act_on") {
-  fillSettingsList({ targetId, prop: "act_with", enumObj: ACT_ON_ENUM });
+  fillSettingsList({ targetId, prop: "act_on", enumObj: ACT_ON_ENUM });
 }
 
 export function getSettingActOn() {
