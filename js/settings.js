@@ -37,7 +37,22 @@ function ensureSettingsCollection(prop, enumObj, defaultEnabled = true) {
   return window.GAME.settings[prop];
 }
 
-/* ---------- 2) GENERIEKE RENDERER ---------- */
+/* ---------- TASK-SETTING REFERENTIE CHECK ---------- */
+function isSettingReferenced(prop) {
+  // Check of ten minste één task in het model deze setting expliciet gebruikt
+  // (dwz conditions[prop] bestaat en heeft lengte > 0)
+  const cats = Object.values(TASKS_MODEL || {});
+  for (const cat of cats) {
+    const tasks = cat?.tasks || [];
+    for (const t of tasks) {
+      const arr = t?.conditions?.[prop];
+      if (Array.isArray(arr) && arr.length > 0) return true;
+    }
+  }
+  return false;
+}
+
+/* ---------- GENERIEKE RENDERER ---------- */
 /**
  * Render een lijst toggles op basis van een enum/collectie in game settings.
  * @param {Object} opts
@@ -48,6 +63,15 @@ function ensureSettingsCollection(prop, enumObj, defaultEnabled = true) {
 function fillSettingsList({ targetId, prop, enumObj }) {
   const root = document.getElementById(targetId);
   if (!root) return;
+
+  // NIEUW: als geen enkele task deze setting gebruikt, niet renderen en defaults uitzetten
+  if (!isSettingReferenced(prop)) {
+    const coll = ensureSettingsCollection(prop, enumObj, false);
+    for (const k of Object.keys(coll)) {
+      coll[k].enabled = false;
+    }
+    return; // niets tonen in de GUI
+  }
 
   const coll = ensureSettingsCollection(prop, enumObj, true);
 
