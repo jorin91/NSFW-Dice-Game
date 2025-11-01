@@ -345,7 +345,7 @@ function updateGameStatus() {
 }
 
 function endTurn() {
-  const players = window.GAME?.players ?? [];
+  const players = window.GAME?.game?.players ?? [];
   const playerCount = players.length;
   if (playerCount === 0) return; // geen spelers → niets doen
 
