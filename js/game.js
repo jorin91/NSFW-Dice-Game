@@ -133,10 +133,8 @@ export function UpdateGamePlayers(targetId = "PlayerRow") {
 
   root.innerHTML = "";
 
-  const winScore = window.GAME?.game?.score || 3;
-
-  const players = Array.isArray(window.GAME?.players)
-    ? window.GAME.players
+  const players = Array.isArray(window.GAME?.game?.players)
+    ? window.GAME?.game?.players
     : [];
 
   players.forEach((p, index) => {
@@ -157,7 +155,7 @@ export function UpdateGamePlayers(targetId = "PlayerRow") {
     // turnScore
     const turnScoreSpan = document.createElement("span");
     turnScoreSpan.id = "turnScore";
-    turnScoreSpan.textContent = p.roundScore;
+    turnScoreSpan.textContent = `${p.roundScore}`;
 
     // Points
     const pointsSpan = document.createElement("span");
@@ -168,12 +166,6 @@ export function UpdateGamePlayers(targetId = "PlayerRow") {
     bubble.appendChild(sexIcon, nameSpan, turnScoreSpan, pointsSpan);
 
     root.append(bubble);
-
-    if (p.score >= winScore) {
-      p.safe = true;
-    } else {
-      p.safe = false;
-    }
 
     if (p.safe) {
       bubble.classList.add("safe");
