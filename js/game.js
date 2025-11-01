@@ -140,15 +140,6 @@ export function UpdateGamePlayers(targetId = "PlayerRow") {
     : [];
 
   players.forEach((p, index) => {
-    /*
-    let bubble = root.querySelector(`[id="${p.id}"]`);
-    let pointsSpan;
-    
-
-    if (!bubble) {
-      // Not existing, creating
-      */
-
     // Player Bubble
     const bubble = document.createElement("div");
     bubble.className = "bubble row";
@@ -163,25 +154,20 @@ export function UpdateGamePlayers(targetId = "PlayerRow") {
     sexIcon.className = "player-sex";
     sexIcon.textContent = getSexIcon(p?.sex);
 
+    // turnScore
+    const turnScoreSpan = document.createElement("span");
+    turnScoreSpan.id = "turnScore";
+    turnScoreSpan.textContent = p.turnScore;
+
     // Points
     const pointsSpan = document.createElement("span");
     pointsSpan.id = "points";
     pointsSpan.textContent = createPointsLabel(p?.score);
 
     // Appending to name part
-    bubble.appendChild(sexIcon);
-    bubble.appendChild(nameSpan);
-    bubble.appendChild(pointsSpan);
+    bubble.appendChild(sexIcon, nameSpan, turnScoreSpan, pointsSpan);
 
     root.append(bubble);
-    /*
-    } else {
-      pointsSpan = bubble.querySelector(`#${p.id}`);
-    }
-
-    // Update score
-    pointsSpan.textContent = createPointsLabel(p?.score);
-    */
 
     if (p.score >= winScore) {
       p.safe = true;
@@ -207,10 +193,6 @@ function updateDiceSet(
 ) {
   const savedDiceSet = window.GAME?.game?.diceSet;
   if (!Array.isArray(savedDiceSet) || savedDiceSet.length === 0) return;
-
-  if (savedDiceSet.length === 0) {
-    
-  }
 
   const containerRoll = document.getElementById(targetIdRollField);
   const containerHold = document.getElementById(targetIdHoldField);
@@ -295,7 +277,9 @@ export function updateGameControls(targetId = "gameControlsRow") {
   endTurnButton.className = "btn";
   endTurnButton.id = "endTurnButton";
   endTurnButton.setAttribute("data-i18n-auto", "button.endTurn");
-  endTurnButton.addEventListener("click", () => {});
+  endTurnButton.addEventListener("click", () => {
+    endTurn();
+  });
 
   const stopButton = document.createElement("button");
   stopButton.type = "button";
@@ -309,50 +293,101 @@ export function updateGameControls(targetId = "gameControlsRow") {
 }
 
 function updateGameStatus() {
+  // elements
   const PlayerTurn = document.getElementById("GameStatusPlayerTurn");
   const CurrentScore = document.getElementById("GameStatusCurrentScore");
   const GameProgress = document.getElementById("GameStatusGameProgress");
+  const rollDicesButton = document.getElementById("rollDicesButton");
 
-  if (!PlayerTurn || !CurrentScore || !GameProgress) return;
-
-  // PlayerTurn
+  // properties
   const turnIndex = window.GAME?.game?.turnIndex;
   const activePlayer = window.GAME?.players?.[turnIndex];
-  PlayerTurn.setAttribute(
-    "data-i18n-args",
-    JSON.stringify({ turnPlayer: activePlayer.name })
-  );
-  applyI18nToElement(PlayerTurn);
-
-  // CurrentScore
-  CurrentScore.setAttribute(
-    "data-i18n-args",
-    JSON.stringify({
-      playerScore: CalculateScore(),
-    })
-  );
-  applyI18nToElement(CurrentScore);
-
-  // GameProgress via i18n
   const turnRoll = window.GAME?.game?.turnRoll ?? 0;
   const maxRoll = window.GAME?.game?.settings?.rolls ?? 3;
   const gameRound = window.GAME?.game?.round ?? 0;
+  const turnScore = CalculateScore();
 
-  GameProgress.setAttribute(
-    "data-i18n-args",
-    JSON.stringify({
-      gameRoll: `${turnRoll}/${maxRoll}`,
-      gameRound: `${gameRound}`,
-    })
-  );
-  applyI18nToElement(GameProgress);
+  if (PlayerTurn) {
+    // PlayerTurn
+    PlayerTurn.setAttribute(
+      "data-i18n-args",
+      JSON.stringify({ turnPlayer: activePlayer.name })
+    );
+    applyI18nToElement(PlayerTurn);
+  }
+
+  if (CurrentScore) {
+    // CurrentScore
+    CurrentScore.setAttribute(
+      "data-i18n-args",
+      JSON.stringify({
+        playerScore: turnScore,
+      })
+    );
+    applyI18nToElement(CurrentScore);
+  }
+
+  if (GameProgress) {
+    // GameProgress
+    GameProgress.setAttribute(
+      "data-i18n-args",
+      JSON.stringify({
+        gameRoll: `${turnRoll}/${maxRoll}`,
+        gameRound: `${gameRound}`,
+      })
+    );
+    applyI18nToElement(GameProgress);
+  }
+
+  if (rollDicesButton) {
+    // rollDicesButton
+    if (turnRoll >= maxRoll) {
+      rollDicesButton.classList.add("ghost");
+    } else {
+      rollDicesButton.classList.remove("ghost");
+    }
+  }
 }
 
-export function CalculateScore() {
+function endTurn() {
+  const players = window.GAME?.players ?? [];
+  const playerCount = players.length;
+  if (playerCount === 0) return; // geen spelers → niets doen
+
+  const currentTurnIndex = window.GAME?.game?.turnIndex ?? 0;
+  const currentRound = window.GAME?.game?.round ?? 0;
+  const turnScore = CalculateScore();
+
+  // Sla speler score op
+  players[currentTurnIndex].roundScore = turnScore;
+
+  // Volgende speler met wrap
+  const nextIndex = (currentTurnIndex + 1) % playerCount;
+  window.GAME.game.turnIndex = nextIndex;
+
+  // Als we terug springen naar 0, is de ronde voorbij
+  if (nextIndex === 0) {
+    window.GAME.game.round = currentRound + 1;
+    CheckForWinner();
+    CheckForLoser();
+  }
+
+  // Reset rolls voor nieuwe beurt
+  window.GAME.game.turnRoll = 0;
+
+  gameSaveState();
+  UpdateGamePlayers();
+  updateGameStatus();
+}
+
+function CalculateScore() {
   const counts = {};
 
+  const turnRoll = window.GAME?.game?.turnRoll ?? 0;
+  if (turnRoll <= 0) return 0;
+
   // Tel hoeveel keer elk getal voorkomt
-  DiceSet.forEach(dice => {
+  DiceSet.forEach((dice) => {
     const v = dice.value;
     if (!counts[v]) counts[v] = 0;
     counts[v]++;
@@ -368,4 +403,47 @@ export function CalculateScore() {
   }
 
   return total;
+}
+
+function CheckForWinner() {
+  const players = window.GAME?.players ?? [];
+  const playerCount = players.length;
+  if (playerCount === 0) return; // geen spelers → niets doen
+
+  const safeScore = window.GAME?.game?.score ?? 3;
+
+  // Zoek speler met hoogste roundScore
+  let winner = players[0];
+  for (let i = 1; i < playerCount; i++) {
+    if ((players[i].roundScore ?? 0) > (winner.roundScore ?? 0)) {
+      winner = players[i];
+    }
+  }
+
+  // Verhoog zijn score met 1
+  winner.score = (winner.score ?? 0) + 1;
+
+  // Controleer op safe-status
+  if (winner.score >= safeScore) {
+    winner.safe = true;
+  }
+}
+
+function CheckForLoser() {
+  const players = window.GAME?.players ?? [];
+  if (players.length === 0) return; // geen spelers → niets doen
+
+  // Filter alle spelers die nog niet 'safe' zijn
+  const activePlayers = players.filter(p => !p.safe);
+
+  // Als er nog maar één over is, voer iets uit met die speler
+  if (activePlayers.length === 1) {
+    const loser = activePlayers[0];
+    
+    // TODO: hier komt jouw logica, bijv. opdracht toewijzen
+    console.log("Verliezer van de ronde:", loser.name);
+
+    // voorbeeld:
+    // triggerTaskForLoser(loser);
+  }
 }
