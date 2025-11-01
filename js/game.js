@@ -296,7 +296,7 @@ function updateGameStatus() {
 
   // properties
   const turnIndex = window.GAME?.game?.turnIndex;
-  const activePlayer = window.GAME?.players?.[turnIndex];
+  const activePlayer = window.GAME?.game?.players?.[turnIndex];
   const turnRoll = window.GAME?.game?.turnRoll ?? 0;
   const maxRoll = window.GAME?.game?.settings?.rolls ?? 3;
   const gameRound = window.GAME?.game?.round ?? 0;
