@@ -6,6 +6,7 @@ import {
   ACT_ON_ENUM,
 } from "./enums.js";
 import { gameSaveState } from "./gamestate.js";
+import { getTasksModel } from "./tasks.js";
 
 export function initGameSettings() {
   fillSettingsStage(); // Fill settings section
@@ -41,7 +42,7 @@ function ensureSettingsCollection(prop, enumObj, defaultEnabled = true) {
 function isSettingReferenced(prop) {
   // Check of ten minste één task in het model deze setting expliciet gebruikt
   // (dwz conditions[prop] bestaat en heeft lengte > 0)
-  const cats = Object.values(TASKS_MODEL || {});
+  const cats = Object.values(getTasksModel() || {});
   for (const cat of cats) {
     const tasks = cat?.tasks || [];
     for (const t of tasks) {
