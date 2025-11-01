@@ -53,18 +53,6 @@ export const GAME_FLOW_MODEL = {
       safe: false,
       clothing: deepCopy(CLOTHING_MODEL),
     },
-    {
-      id: 444,
-      name: "Debug4",
-      age: 24,
-      sex: SEX_ENUM.Female,
-      preferSex: SEX_ENUM.Both,
-      consent: true,
-      score: 3,
-      roundScore: 0,
-      safe: false,
-      clothing: deepCopy(CLOTHING_MODEL),
-    },
   ], // je kunt hier straks createPlayer() instances in zetten
   settings: {
     stage: getSettingStages(),
