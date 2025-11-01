@@ -208,6 +208,10 @@ function updateDiceSet(
   const savedDiceSet = window.GAME?.game?.diceSet;
   if (!Array.isArray(savedDiceSet) || savedDiceSet.length === 0) return;
 
+  if (savedDiceSet.length === 0) {
+    
+  }
+
   const containerRoll = document.getElementById(targetIdRollField);
   const containerHold = document.getElementById(targetIdHoldField);
   if (!containerRoll || !containerHold) return;
