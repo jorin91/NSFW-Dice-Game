@@ -373,7 +373,7 @@ function endTurn() {
   players[currentTurnIndex].roundScore = turnScore;
 
   // Volgende speler zoeken, met wrap en skip voor 'safe' spelers
-  const { next, wrapped } = findNextActiveIndex(current, players);
+  const { next, wrapped } = findNextActivePlayerIndex(current, players);
   window.GAME.game.turnIndex = next;
 
   // Als we terug springen naar 0, is de ronde voorbij
