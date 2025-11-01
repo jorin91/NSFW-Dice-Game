@@ -60,7 +60,7 @@ export const GAME_FLOW_MODEL = {
     intensity: getSettingIntensity(),
     extremity: getSettingExtremity(),
     act_with: getSettingActWith(),
-    act_on: fillSettingsActOn(),
+    act_on: getSettingActOn(),
     secretTasks: true, // hiermee bepalen we of de opdracht algemeen is of alleen voor de uitvoerder en de rest niets weet, verrassings element
     rolls: 3,
     score: 3,
