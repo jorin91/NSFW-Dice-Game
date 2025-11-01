@@ -157,7 +157,7 @@ export function UpdateGamePlayers(targetId = "PlayerRow") {
     // turnScore
     const turnScoreSpan = document.createElement("span");
     turnScoreSpan.id = "turnScore";
-    turnScoreSpan.textContent = p.turnScore;
+    turnScoreSpan.textContent = p.roundScore;
 
     // Points
     const pointsSpan = document.createElement("span");
