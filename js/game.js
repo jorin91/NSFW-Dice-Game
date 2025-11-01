@@ -320,7 +320,7 @@ function updateGameStatus() {
     // PlayerTurn
     PlayerTurn.setAttribute(
       "data-i18n-args",
-      JSON.stringify({ turnPlayer: activePlayer.name })
+      JSON.stringify({ turnPlayer: activePlayer?.name ?? `Player ${turnIndex + 1}` })
     );
     applyI18nToElement(PlayerTurn);
   }
