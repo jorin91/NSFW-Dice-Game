@@ -453,11 +453,7 @@ function CheckForLoser() {
   if (activePlayers.length === 1) {
     const loser = activePlayers[0];
 
-    // TODO: hier komt jouw logica, bijv. opdracht toewijzen
-    console.log("Verliezer van de ronde:", loser.name);
-
-    // voorbeeld:
-    // triggerTaskForLoser(loser);
+    ResetPlayers(true, true);
   }
 }
 

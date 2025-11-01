@@ -67,27 +67,47 @@
   "EXTREMITY_ENUM.VERY_HIGH.descShort": "Volledig gecontroleerd door uitvoerder; ruw, diep en voorbij comfortgrenzen.",
   "EXTREMITY_ENUM.VERY_HIGH.desc": "De uitvoerder bepaalt volledig zonder rekening te houden met comfort, pijn of signalen van de ontvanger. Pijn en weerstand worden genegeerd zolang de opdracht uitvoerbaar blijft. Formaat, diepte en druk zijn onbeperkt en kunnen sterk buiten normaal vallen. Tijdens climax: geen pauzes of terugschakeling; bewust doorgaan voorbij de grens en langdurig vasthouden in de climaxfase.",
 
-  "ACT_ENUM.MANUAL.name": "Manueel",
-  "ACT_ENUM.MANUAL.descShort": "Handen en vingers.",
-  "ACT_ENUM.MANUAL.desc": "Betrekking op het gebruik of de betrokkenheid van handen en vingers als deel van de interactie of ervaring.",
+  "ACT_WITH_ENUM.BODY.name": "Lichaam",
+  "ACT_WITH_ENUM.BODY.descShort": "Lichaam als middel van de uitvoerder.",
+  "ACT_WITH_ENUM.BODY.desc": "Gebruik van het lichaam als geheel dat betrokken is bij de handeling die door de uitvoerder wordt gedaan, zoals wrijven, schuren of drukken zonder focus op één specifiek lichaamsdeel.",
 
-  "ACT_ENUM.ORAL.name": "Oraal",
-  "ACT_ENUM.ORAL.descShort": "Mond, lippen en tong.",
-  "ACT_ENUM.ORAL.desc": "Betrekking op de mond als gebied, inclusief lippen en tong, of situaties waarin deze lichaamsdelen direct betrokken zijn.",
+  "ACT_WITH_ENUM.HAND.name": "Handmatig",
+  "ACT_WITH_ENUM.HAND.descShort": "Handen en vingers van de uitvoerder.",
+  "ACT_WITH_ENUM.HAND.desc": "Gebruik van handen en vingers dat betrokken is bij de handeling die door de uitvoerder wordt gedaan, bijvoorbeeld aanraken, stimuleren, geleiden of ondersteunen.",
 
-  "ACT_ENUM.GENITAL.name": "Genitaal",
-  "ACT_ENUM.GENITAL.descShort": "Geslachtsdelen en directe omgeving.",
-  "ACT_ENUM.GENITAL.desc": "Betrekking op het genitale gebied van het lichaam, inclusief de uitwendige en inwendige delen van de geslachtsorganen en de omliggende zone.",
+  "ACT_WITH_ENUM.MOUTH.name": "Mond",
+  "ACT_WITH_ENUM.MOUTH.descShort": "Mond, lippen en tong van de uitvoerder.",
+  "ACT_WITH_ENUM.MOUTH.desc": "Gebruik van mond, lippen of tong dat betrokken is bij de handeling die door de uitvoerder wordt gedaan, zoals zoenen, likken of andere orale handelingen.",
 
-  "ACT_ENUM.ANAL.name": "Anaal",
-  "ACT_ENUM.ANAL.descShort": "Anale zone en directe omgeving.",
-  "ACT_ENUM.ANAL.desc": "Betrekking op het anale gebied van het lichaam, inclusief de opening en de directe omliggende zone.",
+  "ACT_WITH_ENUM.TOY.name": "Speeltje",
+  "ACT_WITH_ENUM.TOY.descShort": "Speeltje ingezet door de uitvoerder.",
+  "ACT_WITH_ENUM.TOY.desc": "Gebruik van seksspeeltjes dat betrokken is bij de handeling die door de uitvoerder wordt gedaan, zoals een vibrator, dildo of buttplug.",
 
-  "ACT_ENUM.TOY.name": "Speeltje",
-  "ACT_ENUM.TOY.descShort": "Gebruik van seksspeeltjes of hulpmiddelen.",
-  "ACT_ENUM.TOY.desc": "Omvat het gebruik van seksspeeltjes die specifiek ontworpen zijn voor seksuele stimulatie of penetratie, zoals dildo’s, vibrators, buttplugs of vergelijkbare hulpmiddelen.",
+  "ACT_WITH_ENUM.OBJECT.name": "Voorwerp",
+  "ACT_WITH_ENUM.OBJECT.descShort": "Gewoon voorwerp ingezet door de uitvoerder.",
+  "ACT_WITH_ENUM.OBJECT.desc": "Gebruik van niet-seksuele voorwerpen dat betrokken is bij de handeling die door de uitvoerder wordt gedaan.",
 
-  "ACT_ENUM.OBJECT.name": "Voorwerp",
-  "ACT_ENUM.OBJECT.descShort": "Gebruik van gewone voorwerpen in seksuele context.",
-  "ACT_ENUM.OBJECT.desc": "Omvat het gebruik van niet-seksuele objecten die creatief of contextueel worden ingezet voor seksuele handelingen, bijvoorbeeld huishoudelijke voorwerpen of oppervlakken."
+  "ACT_WITH_ENUM.GENITAL.name": "Genitaal",
+  "ACT_WITH_ENUM.GENITAL.descShort": "Gebruik van de geslachtsdelen van de uitvoerder.",
+  "ACT_WITH_ENUM.GENITAL.desc": "Gebruik van de geslachtsdelen, van de uitvoerder, bij de handeling.",
+
+  "ACT_ON_ENUM.NEUTRAL_BODY.name": "Neutraal lichaam",
+  "ACT_ON_ENUM.NEUTRAL_BODY.descShort": "Algemene zones bij de ontvanger.",
+  "ACT_ON_ENUM.NEUTRAL_BODY.desc": "Lichaamsdelen waar de handeling bij de ontvanger wordt ontvangen en die doorgaans sociaal veilig zijn, zonder specifieke erotische focus.",
+
+  "ACT_ON_ENUM.INTIMATE_BODY.name": "Intiem lichaam",
+  "ACT_ON_ENUM.INTIMATE_BODY.descShort": "Intiemere zones bij de ontvanger.",
+  "ACT_ON_ENUM.INTIMATE_BODY.desc": "Lichaamsdelen waar de handeling bij de ontvanger wordt ontvangen en die als intiem worden ervaren.",
+
+  "ACT_ON_ENUM.MOUTH.name": "Mond",
+  "ACT_ON_ENUM.MOUTH.descShort": "Mond, lippen en tong bij de ontvanger.",
+  "ACT_ON_ENUM.MOUTH.desc": "De mond, lippen of tong waarop de handeling bij de ontvanger wordt ontvangen.",
+
+  "ACT_ON_ENUM.GENITAL.name": "Genitaal gebied",
+  "ACT_ON_ENUM.GENITAL.descShort": "Geslachtsdelen van de ontvanger.",
+  "ACT_ON_ENUM.GENITAL.desc": "De geslachtsdelen van de ontvanger waarop de handeling wordt ontvangen, inclusief de buitenste en directe omgeving van het genitale gebied.",
+
+  "ACT_ON_ENUM.ANAL.name": "Anaal",
+  "ACT_ON_ENUM.ANAL.descShort": "Anale zone bij de ontvanger.",
+  "ACT_ON_ENUM.ANAL.desc": "De anale zone waarop de handeling bij de ontvanger wordt ontvangen, inclusief de opening en directe omgeving."
 }

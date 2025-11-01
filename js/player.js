@@ -10,6 +10,7 @@ export const PLAYER_MODEL = {
   consent: false,
   score: 0,
   roundScore: 0,
+  executedTasks: 0,
   safe: false, //  <- Safe = ronde gewonnen dus geen opdracht
   clothing: null, // <- niet vooraf invullen met kopie
 };

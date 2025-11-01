@@ -1,9 +1,11 @@
 {
-  "TASK.UndressSelf.Title": "Kleed je uit!",
+  "TASK.Undress.Self.Public": "{p0} trekt uit of verwijderd zijn/haar {clothing}.",
+  "TASK.Undress.Self.Secret": "Trek uit of verwijderd je {clothing}.",
+
+
   "TASK.UndressSelf.Instruction.Public": "{p0} trekt uit of verwijderd zijn/haar {clothing}.",
   "TASK.UndressSelf.Instruction.Secret": "Trek uit of verwijderd je {clothing}.",
 
-  "TASK.UndressOther.Title": "Kleed iemand anders uit!",
   "TASK.UndressOther.Instruction.Public": "{p0} trekt uit of verwijderd bij {p1} zijn/haar {clothing}.",
   "TASK.UndressOther.Instruction.Secret": "Trekt uit of verwijder bij {p1} zijn/haar {clothing}."
 }

@@ -2,7 +2,8 @@ import {
   STAGE_ENUM,
   INTENSITY_ENUM,
   EXTREMITY_ENUM,
-  ACT_ENUM,
+  ACT_WITH_ENUM,
+  ACT_ON_ENUM,
 } from "./enums.js";
 import { gameSaveState } from "./gamestate.js";
 
@@ -10,7 +11,8 @@ export function initGameSettings() {
   fillSettingsStage(); // Fill settings section
   fillSettingsIntensity(); // Fill settings section
   fillSettingsExtremity(); // Fill settings section
-  fillSettingsAct(); // Fill settings section
+  fillSettingsActWith();
+  fillSettingsActOn();
 }
 
 /* ---------- 1) GENERIEKE BUILDER ---------- */
@@ -125,11 +127,20 @@ export function getSettingExtremity() {
   return buildSettingsCollection(EXTREMITY_ENUM, true);
 }
 
-// Act (als je die óók als toggles wilt tonen)
-function fillSettingsAct(targetId = "settings_act") {
-  fillSettingsList({ targetId, prop: "act", enumObj: ACT_ENUM });
+// Act With
+function fillSettingsActWith(targetId = "settings_act_with") {
+  fillSettingsList({ targetId, prop: "act_with", enumObj: ACT_WITH_ENUM });
 }
 
-export function getSettingAct() {
-  return buildSettingsCollection(ACT_ENUM, true);
+export function getSettingActWith() {
+  return buildSettingsCollection(ACT_WITH_ENUM, true);
+}
+
+// Act On
+function fillSettingsActOn(targetId = "settings_act_on") {
+  fillSettingsList({ targetId, prop: "act_with", enumObj: ACT_ON_ENUM });
+}
+
+export function getSettingActOn() {
+  return buildSettingsCollection(ACT_ON_ENUM, true);
 }

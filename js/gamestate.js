@@ -5,7 +5,8 @@ import {
   getSettingStages,
   getSettingIntensity,
   getSettingExtremity,
-  getSettingAct,
+  getSettingActWith,
+  fillSettingsActOn
 } from "./settings.js";
 import { SEX_ENUM } from "./enums.js";
 import { CLOTHING_MODEL } from "./clothing.js";
@@ -58,7 +59,8 @@ export const GAME_FLOW_MODEL = {
     stage: getSettingStages(),
     intensity: getSettingIntensity(),
     extremity: getSettingExtremity(),
-    act: getSettingAct(),
+    act_with: getSettingActWith(),
+    act_on: fillSettingsActOn(),
     secretTasks: true, // hiermee bepalen we of de opdracht algemeen is of alleen voor de uitvoerder en de rest niets weet, verrassings element
     rolls: 3,
     score: 3,
@@ -74,6 +76,13 @@ export const GAME_FLOW_MODEL = {
     turnRoll: 0,
     diceSet: [],
     players: [],
+    weights: {
+      stage: [],
+      intensity: [],
+      extremity: [],
+      act_with: [],
+      act_on: [],
+    },
   },
 };
 

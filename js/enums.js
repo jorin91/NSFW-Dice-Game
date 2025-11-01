@@ -16,7 +16,6 @@ export const PLAYERTARGET_ENUM = Object.freeze({
 // STAGE_ENUM — beschrijft het spanningsverloop van het spel.
 // Van onschuldig contact tot volledig seksuele interactie.
 export const STAGE_ENUM = Object.freeze({
-
   INNOCENT: "STAGE_ENUM.INNOCENT",
   /*
     Doel:
@@ -131,7 +130,6 @@ export const STAGE_ENUM = Object.freeze({
   */
 });
 
-
 /* INTENSITY_ENUM — prikkelsterkte en aanhoudendheid (handelingen-kant).
    • Alleen voor fysieke/seksuele acts (niet voor sfeer).
    • Definieert: tempo, frequentie, duur/continuïteit en ervaren prikkel (druk/ritme).
@@ -222,12 +220,41 @@ export const EXTREMITY_ENUM = Object.freeze({
   VERY_HIGH: "EXTREMITY_ENUM.VERY_HIGH",
 });
 
-// Act-type (waarop/waardóór de handeling plaatsvindt)
-export const ACT_ENUM = Object.freeze({
-  MANUAL: "ACT_ENUM.MANUAL",
-  ORAL: "ACT_ENUM.ORAL",
-  GENITAL: "ACT_ENUM.GENITAL",
-  ANAL: "ACT_ENUM.ANAL",
-  TOY: "ACT_ENUM.TOY",
-  OBJECT: "ACT_ENUM.OBJECT",
+// Waarmee of met welk middel de handeling wordt uitgevoerd
+export const ACT_WITH_ENUM = Object.freeze({
+  BODY: "ACT_WITH_ENUM.BODY", // algemeen lichaamscontact (wrijven, schuren)
+  HAND: "ACT_WITH_ENUM.HAND", // handmatig (handen/vingers)
+  MOUTH: "ACT_WITH_ENUM.MOUTH", // mond/tong
+  TOY: "ACT_WITH_ENUM.TOY", // speeltje
+  OBJECT: "ACT_WITH_ENUM.OBJECT", // willekeurig voorwerp
+  GENITAL: "ACT_WITH_ENUM.GENITAL", // eigen geslachtsdeel
+});
+
+// Waarop / doellocatie – oplopend van veilig → seksueel beladen
+export const ACT_ON_ENUM = Object.freeze({
+  // Sociaal veilige/algemene zones (armen, schouders, rug, handen, benen buiten binnenkant, voeten, etc.)
+  NEUTRAL_BODY: "ACT_ON_ENUM.NEUTRAL_BODY",
+
+  // Intieme zones (zonder directe genitale/anaal focus).
+  // Richtlijn per zone (seksuele lading: light / medium / high) + unisex / geslachtspecifiek
+  //
+  // • Neck/nek (light–medium): zijkant/achterkant nek, unisex.
+  // • Collarbone/sleutelbeen (light): unisex.
+  // • Inner arms/binnenkant armen en pols (light): unisex.
+  // • Chest/borstkas niet-specifiek (light): unisex.
+  // • Breasts/borsten, inclusief tepels/areola (medium–high): typisch vrouwelijk (maar bij mannen: tepels bestaan ook; meestal light–medium afhankelijk van consent/context).
+  // • Sides/zij, flanken, ribben (light–medium): unisex, vaak kietel/sensitief.
+  // • Abdomen/buik, navelzone (light–medium): unisex.
+  // • Hips/heupen (light–medium): unisex; nabij kledingrand kan medium aanvoelen.
+  // • Inner thighs/binnenkant bovenbenen (medium–high): unisex, duidelijk intiem door nabijheid genitaliën.
+  // • Buttocks/billen, buitenkant (medium): unisex; over kleding meestal medium, direct huid contact kan high aanvoelen.
+  // • Lower back/onderrug en tailbone-streek (light–medium): unisex.
+  // • Lips/lippen (kussen/zoenen) (medium–high): unisex; mondcontact wordt vaak als intiem ervaren.
+  INTIMATE_BODY: "ACT_ON_ENUM.INTIMATE_BODY",
+  // Mond/Orale locatie als doel (bijv. iets op/aan/in de mond gericht: kussen, likken, orale handeling ontvangen).
+  MOUTH: "ACT_ON_ENUM.MOUTH",
+  // Geslachtsdelen
+  GENITAL: "ACT_ON_ENUM.GENITAL",
+  // Anale zone als doel (extern of intern; je kunt later subgradaties/flags toevoegen).
+  ANAL: "ACT_ON_ENUM.ANAL",
 });
