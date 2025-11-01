@@ -373,17 +373,11 @@ function endTurn() {
   players[currentTurnIndex].roundScore = turnScore;
 
   // Volgende speler zoeken, met wrap en skip voor 'safe' spelers
-  let nextIndex = currentTurnIndex;
-  for (let i = 0; i < playerCount; i++) {
-    nextIndex = (nextIndex + 1) % playerCount;
-    const nextPlayer = players[nextIndex];
-    if (!nextPlayer.safe) {
-      break; // gevonden: deze speler is niet safe
-    }
-  }
+  const { next, wrapped } = findNextActiveIndex(current, players);
+  window.GAME.game.turnIndex = next;
 
   // Als we terug springen naar 0, is de ronde voorbij
-  if (nextIndex === 0) {
+  if (wrapped) {
     window.GAME.game.round = currentRound + 1;
     CheckForWinner();
     CheckForLoser();
@@ -481,4 +475,25 @@ function ResetPlayers(resetRound = false, resetGameCycle = false) {
       player.score = 0;
     }
   });
+}
+
+function findNextActivePlayerIndex(currentIndex, players) {
+  const n = players.length;
+  if (n === 0) return { next: 0, wrapped: false };
+
+  let idx = currentIndex;
+  let wrapped = false;
+
+  // Max 1 volledige rondgang
+  for (let step = 0; step < n; step++) {
+    idx = (idx + 1) % n;
+    if (idx === 0) wrapped = true; // we zijn over het einde heen gegaan
+
+    if (!players[idx]?.safe) {
+      return { next: idx, wrapped };
+    }
+  }
+
+  // Niemand actief: forceer reset naar 0 en markeer als wrap
+  return { next: 0, wrapped: true };
 }
