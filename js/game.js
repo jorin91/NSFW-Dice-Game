@@ -372,9 +372,15 @@ function endTurn() {
   // Sla speler score op
   players[currentTurnIndex].roundScore = turnScore;
 
-  // Volgende speler met wrap
-  const nextIndex = (currentTurnIndex + 1) % playerCount;
-  window.GAME.game.turnIndex = nextIndex;
+  // Volgende speler zoeken, met wrap en skip voor 'safe' spelers
+  let nextIndex = currentTurnIndex;
+  for (let i = 0; i < playerCount; i++) {
+    nextIndex = (nextIndex + 1) % playerCount;
+    const nextPlayer = players[nextIndex];
+    if (!nextPlayer.safe) {
+      break; // gevonden: deze speler is niet safe
+    }
+  }
 
   // Als we terug springen naar 0, is de ronde voorbij
   if (nextIndex === 0) {
