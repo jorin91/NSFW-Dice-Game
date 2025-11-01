@@ -331,7 +331,7 @@ function updateGameStatus() {
       playerScore: CalculateScore(),
     })
   );
-  applyI18nToElement(GameProgress);
+  applyI18nToElement(CurrentScore);
 
   // GameProgress via i18n
   const turnRoll = window.GAME?.game?.turnRoll ?? 0;
