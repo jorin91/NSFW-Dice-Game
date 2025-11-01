@@ -124,7 +124,7 @@ export const tasks_undress_self = [
     instructionKey: "TASK.Undress.Self.Public",
     instruction_args: { clothing: "clothes.sweater.name", p0: "PLAYER0" },
     conditions: {
-      stage: [],
+      stage: [STAGE_ENUM.PLAYFUL],
       intensity: [],
       extremity: [],
       act_with: [],
@@ -146,7 +146,7 @@ export const tasks_undress_self = [
     instructionKey: "TASK.Undress.Self.Public",
     instruction_args: { clothing: "clothes.shirt.name", p0: "PLAYER0" },
     conditions: {
-      stage: [],
+      stage: [STAGE_ENUM.PLAYFUL],
       intensity: [],
       extremity: [],
       act_with: [],
@@ -168,7 +168,7 @@ export const tasks_undress_self = [
     instructionKey: "TASK.Undress.Self.Public",
     instruction_args: { clothing: "clothes.undershirt.name", p0: "PLAYER0" },
     conditions: {
-      stage: [],
+      stage: [STAGE_ENUM.PLAYFUL],
       intensity: [],
       extremity: [],
       act_with: [],
@@ -190,7 +190,7 @@ export const tasks_undress_self = [
     instructionKey: "TASK.Undress.Self.Public",
     instruction_args: { clothing: "clothes.bra.name", p0: "PLAYER0" },
     conditions: {
-      stage: [],
+      stage: [STAGE_ENUM.INTIMATE],
       intensity: [],
       extremity: [],
       act_with: [],
@@ -212,7 +212,7 @@ export const tasks_undress_self = [
     instructionKey: "TASK.Undress.Self.Public",
     instruction_args: { clothing: "clothes.pants.name", p0: "PLAYER0" },
     conditions: {
-      stage: [],
+      stage: [STAGE_ENUM.PLAYFUL],
       intensity: [],
       extremity: [],
       act_with: [],
@@ -234,7 +234,7 @@ export const tasks_undress_self = [
     instructionKey: "TASK.Undress.Self.Public",
     instruction_args: { clothing: "clothes.leggings.name", p0: "PLAYER0" },
     conditions: {
-      stage: [],
+      stage: [STAGE_ENUM.PLAYFUL],
       intensity: [],
       extremity: [],
       act_with: [],
@@ -256,7 +256,7 @@ export const tasks_undress_self = [
     instructionKey: "TASK.Undress.Self.Public",
     instruction_args: { clothing: "clothes.underwear.name", p0: "PLAYER0" },
     conditions: {
-      stage: [],
+      stage: [STAGE_ENUM.INTIMATE],
       intensity: [],
       extremity: [],
       act_with: [],
@@ -278,7 +278,7 @@ export const tasks_undress_self = [
     instructionKey: "TASK.Undress.Self.Public",
     instruction_args: { clothing: "clothes.shoes.name", p0: "PLAYER0" },
     conditions: {
-      stage: [],
+      stage: [STAGE_ENUM.INNOCENT],
       intensity: [],
       extremity: [],
       act_with: [],
@@ -300,7 +300,7 @@ export const tasks_undress_self = [
     instructionKey: "TASK.Undress.Self.Public",
     instruction_args: { clothing: "clothes.socks.name", p0: "PLAYER0" },
     conditions: {
-      stage: [],
+      stage: [STAGE_ENUM.PLAYFUL],
       intensity: [],
       extremity: [],
       act_with: [],
