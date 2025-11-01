@@ -11,6 +11,7 @@ import {
 } from "./enums.js";
 
 import { tasks_undress_self } from "./tasks/undress_self.js";
+import { tasks_undress_other } from "./tasks/undress_other.js";
 
 export const TASKS_MODEL = {
   undress_self: {
@@ -19,10 +20,23 @@ export const TASKS_MODEL = {
     tasks: tasks_undress_self,
   },
 
-  dress: {
-    name: "",
+  undress_other: {
     enabled: true,
     weight: 10,
+    tasks: tasks_undress_other,
+  },
+
+  dress_self: {
+    name: "",
+    enabled: true,
+    weight: 5,
+    tasks: [],
+  },
+
+  dress_other: {
+    name: "",
+    enabled: true,
+    weight: 5,
     tasks: [],
   },
 
