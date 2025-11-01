@@ -43,7 +43,7 @@ export function createDiceInstance(id, value = null, hold = false) {
 export function createDiceSet(amount = 1) {
   const diceSet = [];
   for (let i = 1; i <= amount; i++) {
-    diceSet.push(createDiceInstance(`dice${i}`));
+    diceSet.push(createDiceInstance(`dice${i}`, 1, false));
   }
   return diceSet;
 }
