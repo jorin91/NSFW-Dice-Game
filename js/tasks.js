@@ -919,7 +919,14 @@ function createSecretTaskElement(task) {
       p.setAttribute("data-i18n-auto", part.secretInstructionKey);
       p.setAttribute("data-i18n-args", JSON.stringify(task.instruction_args));
 
-      details.append(summary, taskDetailsWrapper, p, taskDetailsExWrapper);
+      // Body content
+      const b = document.createElement("div");
+      b.className = "col";
+
+      b.append(taskDetailsWrapper, p, taskDetailsExWrapper);
+      
+      details.append(summary, b);
+
       secretWrapper.append(details);
     }
 
