@@ -92,12 +92,10 @@ export const TASKS_MODEL = {
             secretInstructionKey: "Have fun watching the timer {loser}",
           },
         ],
-        effects: [
-          
-        ],
+        effects: [],
         flags: {
           checkPreferSex: false,
-          execution: {type: "timer", seconds: 30},
+          execution: { type: "timer", seconds: 30 },
         },
       },
     ],
@@ -699,7 +697,7 @@ export function generateTasks() {
 }
 
 function evaluateTaskEffects(task, partsAssigned) {
-  if (!task || !(task?.effects?.length > 0)) return false;
+  if (!task || !(task?.effects?.length > 0)) return true;
 
   for (const effect of task.effects) {
     switch (effect.type) {
