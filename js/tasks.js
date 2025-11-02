@@ -339,6 +339,13 @@ function needsPreferSex(task) {
   return task?.flags?.checkPreferSex === true;
 }
 
+function fillInstructionArgsForParticipants(task) {
+  for (const part of task.participants) {
+    const slot = part.slot  ?? "none";
+    task.instruction_args?.[slot] = part.player.name;
+  }
+}
+
 // Main
 
 export function getTasksModel() {
@@ -413,6 +420,10 @@ export function generateTasks() {
       // 6) taak is uitvoerbaar → in pool
       const taskCopy = structuredClone(task);
       taskCopy.participants = assigned; // ingevulde spelers
+
+      // 7) vul instruction args in
+      fillInstructionArgsForParticipants(taskCopy);
+
       pool.push({
         task: taskCopy,
         category: catKey,
