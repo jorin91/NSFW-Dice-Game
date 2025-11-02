@@ -10,9 +10,14 @@ import {
 
 export const tasks_dress_self_other = [
   {
+    enabled: true,
     id: `dress_self_other.headwear`,
     instructionKey: "TASK.Dress.Self_Other.Public",
-    instruction_args: { clothing: "clothes.headwear.name", loser: "Loser", winner1: "Winner1" },
+    instruction_args: {
+      clothing: "clothes.headwear.name",
+      loser: "Loser",
+      winner1: "Winner1",
+    },
     conditions: {
       stage: [],
       intensity: [],
@@ -39,11 +44,19 @@ export const tasks_dress_self_other = [
       },
     ],
     effects: [{ type: "clothing.add", slot: "winner1", item: "headwear" }],
+    flags: {
+      checkPreferSex: false,
+    },
   },
   {
+    enabled: true,
     id: `dress_self_other.accessories_glasses`,
     instructionKey: "TASK.Dress.Self_Other.Public",
-    instruction_args: { clothing: "clothes.accessories_glasses.name", loser: "Loser", winner1: "Winner1" },
+    instruction_args: {
+      clothing: "clothes.accessories_glasses.name",
+      loser: "Loser",
+      winner1: "Winner1",
+    },
     conditions: {
       stage: [],
       intensity: [],
@@ -69,12 +82,22 @@ export const tasks_dress_self_other = [
         secretInstructionKey: null,
       },
     ],
-    effects: [{ type: "clothing.add", slot: "winner1", item: "accessories_glasses" }],
+    effects: [
+      { type: "clothing.add", slot: "winner1", item: "accessories_glasses" },
+    ],
+    flags: {
+      checkPreferSex: false,
+    },
   },
   {
+    enabled: true,
     id: `dress_self_other.accessories_neck`,
     instructionKey: "TASK.Dress.Self_Other.Public",
-    instruction_args: { clothing: "clothes.accessories_neck.name", loser: "Loser", winner1: "Winner1" },
+    instruction_args: {
+      clothing: "clothes.accessories_neck.name",
+      loser: "Loser",
+      winner1: "Winner1",
+    },
     conditions: {
       stage: [],
       intensity: [],
@@ -100,12 +123,22 @@ export const tasks_dress_self_other = [
         secretInstructionKey: null,
       },
     ],
-    effects: [{ type: "clothing.add", slot: "winner1", item: "accessories_neck" }],
+    effects: [
+      { type: "clothing.add", slot: "winner1", item: "accessories_neck" },
+    ],
+    flags: {
+      checkPreferSex: false,
+    },
   },
   {
+    enabled: true,
     id: `dress_self_other.accessories_arm`,
     instructionKey: "TASK.Dress.Self_Other.Public",
-    instruction_args: { clothing: "clothes.accessories_arm.name", loser: "Loser", winner1: "Winner1" },
+    instruction_args: {
+      clothing: "clothes.accessories_arm.name",
+      loser: "Loser",
+      winner1: "Winner1",
+    },
     conditions: {
       stage: [],
       intensity: [],
@@ -131,12 +164,22 @@ export const tasks_dress_self_other = [
         secretInstructionKey: null,
       },
     ],
-    effects: [{ type: "clothing.add", slot: "winner1", item: "accessories_arm" }],
+    effects: [
+      { type: "clothing.add", slot: "winner1", item: "accessories_arm" },
+    ],
+    flags: {
+      checkPreferSex: false,
+    },
   },
   {
+    enabled: true,
     id: `dress_self_other.jacket`,
     instructionKey: "TASK.Dress.Self_Other.Public",
-    instruction_args: { clothing: "clothes.jacket.name", loser: "Loser", winner1: "Winner1" },
+    instruction_args: {
+      clothing: "clothes.jacket.name",
+      loser: "Loser",
+      winner1: "Winner1",
+    },
     conditions: {
       stage: [],
       intensity: [],
@@ -163,11 +206,19 @@ export const tasks_dress_self_other = [
       },
     ],
     effects: [{ type: "clothing.add", slot: "winner1", item: "jacket" }],
+    flags: {
+      checkPreferSex: false,
+    },
   },
   {
+    enabled: true,
     id: `dress_self_other.sweater`,
     instructionKey: "TASK.Dress.Self_Other.Public",
-    instruction_args: { clothing: "clothes.sweater.name", loser: "Loser", winner1: "Winner1" },
+    instruction_args: {
+      clothing: "clothes.sweater.name",
+      loser: "Loser",
+      winner1: "Winner1",
+    },
     conditions: {
       stage: [STAGE_ENUM.PLAYFUL],
       intensity: [],
@@ -194,11 +245,19 @@ export const tasks_dress_self_other = [
       },
     ],
     effects: [{ type: "clothing.add", slot: "winner1", item: "sweater" }],
+    flags: {
+      checkPreferSex: true,
+    },
   },
   {
+    enabled: true,
     id: `dress_self_other.shirt`,
     instructionKey: "TASK.Dress.Self_Other.Public",
-    instruction_args: { clothing: "clothes.shirt.name", loser: "Loser", winner1: "Winner1" },
+    instruction_args: {
+      clothing: "clothes.shirt.name",
+      loser: "Loser",
+      winner1: "Winner1",
+    },
     conditions: {
       stage: [STAGE_ENUM.PLAYFUL],
       intensity: [],
@@ -225,11 +284,19 @@ export const tasks_dress_self_other = [
       },
     ],
     effects: [{ type: "clothing.add", slot: "winner1", item: "shirt" }],
+    flags: {
+      checkPreferSex: true,
+    },
   },
   {
+    enabled: true,
     id: `dress_self_other.undershirt`,
     instructionKey: "TASK.Dress.Self_Other.Public",
-    instruction_args: { clothing: "clothes.undershirt.name", loser: "Loser", winner1: "Winner1" },
+    instruction_args: {
+      clothing: "clothes.undershirt.name",
+      loser: "Loser",
+      winner1: "Winner1",
+    },
     conditions: {
       stage: [STAGE_ENUM.PLAYFUL],
       intensity: [],
@@ -256,11 +323,19 @@ export const tasks_dress_self_other = [
       },
     ],
     effects: [{ type: "clothing.add", slot: "winner1", item: "undershirt" }],
+    flags: {
+      checkPreferSex: true,
+    },
   },
   {
+    enabled: true,
     id: `dress_self_other.bra`,
     instructionKey: "TASK.Dress.Self_Other.Public",
-    instruction_args: { clothing: "clothes.bra.name", loser: "Loser", winner1: "Winner1" },
+    instruction_args: {
+      clothing: "clothes.bra.name",
+      loser: "Loser",
+      winner1: "Winner1",
+    },
     conditions: {
       stage: [STAGE_ENUM.INTIMATE],
       intensity: [],
@@ -287,11 +362,19 @@ export const tasks_dress_self_other = [
       },
     ],
     effects: [{ type: "clothing.add", slot: "winner1", item: "bra" }],
+    flags: {
+      checkPreferSex: true,
+    },
   },
   {
+    enabled: true,
     id: `dress_self_other.pants`,
     instructionKey: "TASK.Dress.Self_Other.Public",
-    instruction_args: { clothing: "clothes.pants.name", loser: "Loser", winner1: "Winner1" },
+    instruction_args: {
+      clothing: "clothes.pants.name",
+      loser: "Loser",
+      winner1: "Winner1",
+    },
     conditions: {
       stage: [STAGE_ENUM.PLAYFUL],
       intensity: [],
@@ -318,11 +401,19 @@ export const tasks_dress_self_other = [
       },
     ],
     effects: [{ type: "clothing.add", slot: "winner1", item: "pants" }],
+    flags: {
+      checkPreferSex: true,
+    },
   },
   {
+    enabled: true,
     id: `dress_self_other.leggings`,
     instructionKey: "TASK.Dress.Self_Other.Public",
-    instruction_args: { clothing: "clothes.leggings.name", loser: "Loser", winner1: "Winner1" },
+    instruction_args: {
+      clothing: "clothes.leggings.name",
+      loser: "Loser",
+      winner1: "Winner1",
+    },
     conditions: {
       stage: [STAGE_ENUM.PLAYFUL],
       intensity: [],
@@ -349,11 +440,19 @@ export const tasks_dress_self_other = [
       },
     ],
     effects: [{ type: "clothing.add", slot: "winner1", item: "leggings" }],
+    flags: {
+      checkPreferSex: true,
+    },
   },
   {
+    enabled: true,
     id: `dress_self_other.underwear`,
     instructionKey: "TASK.Dress.Self_Other.Public",
-    instruction_args: { clothing: "clothes.underwear.name", loser: "Loser", winner1: "Winner1" },
+    instruction_args: {
+      clothing: "clothes.underwear.name",
+      loser: "Loser",
+      winner1: "Winner1",
+    },
     conditions: {
       stage: [STAGE_ENUM.INTIMATE],
       intensity: [],
@@ -380,13 +479,21 @@ export const tasks_dress_self_other = [
       },
     ],
     effects: [{ type: "clothing.add", slot: "winner1", item: "underwear" }],
+    flags: {
+      checkPreferSex: true,
+    },
   },
   {
+    enabled: true,
     id: `dress_self_other.shoes`,
     instructionKey: "TASK.Dress.Self_Other.Public",
-    instruction_args: { clothing: "clothes.shoes.name", loser: "Loser", winner1: "Winner1" },
+    instruction_args: {
+      clothing: "clothes.shoes.name",
+      loser: "Loser",
+      winner1: "Winner1",
+    },
     conditions: {
-      stage: [STAGE_ENUM.INNOCENT],
+      stage: [],
       intensity: [],
       extremity: [],
       act_with: [],
@@ -411,11 +518,19 @@ export const tasks_dress_self_other = [
       },
     ],
     effects: [{ type: "clothing.add", slot: "winner1", item: "shoes" }],
+    flags: {
+      checkPreferSex: false,
+    },
   },
   {
+    enabled: true,
     id: `dress_self_other.socks`,
     instructionKey: "TASK.Dress.Self_Other.Public",
-    instruction_args: { clothing: "clothes.socks.name", loser: "Loser", winner1: "Winner1" },
+    instruction_args: {
+      clothing: "clothes.socks.name",
+      loser: "Loser",
+      winner1: "Winner1",
+    },
     conditions: {
       stage: [STAGE_ENUM.PLAYFUL],
       intensity: [],
@@ -442,5 +557,8 @@ export const tasks_dress_self_other = [
       },
     ],
     effects: [{ type: "clothing.add", slot: "winner1", item: "socks" }],
+    flags: {
+      checkPreferSex: false,
+    },
   },
 ];
