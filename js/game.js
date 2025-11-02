@@ -382,7 +382,7 @@ function endTurn() {
     window.GAME.game.round = currentRound + 1;
     CheckForWinner();
     CheckForLoser();
-    // ResetPlayers(true);
+    ResetPlayers(true);
     const { next, wrapped } = findNextActivePlayerIndex(0, players);
   }
 
