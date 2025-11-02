@@ -53,6 +53,8 @@
   "app.task.secret.summary": "Instructies voor <b>{player}</b>",
   "app.task.secret.participatingPlayers": "Deelnemende spelers in deze opdracht:",
 
+  "app.task.global.instruction": "De opdracht:<br>{globalTaskInstruction}",
+
   "app.settings.title": "Spel Instellingen",
 
   "app.settings.STAGE.header": "Opbouw en Contactniveau",

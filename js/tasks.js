@@ -834,7 +834,10 @@ function createSecretTaskElement(task) {
     stageEx.setAttribute("data-i18n-target", "html");
     stageEx.setAttribute(
       "data-i18n-args",
-      JSON.stringify({ taskDetail: `{${ctx.stage}.name}`, taskDetailDesc: `{${ctx.stage}.desc}` })
+      JSON.stringify({
+        taskDetail: `{${ctx.stage}.name}`,
+        taskDetailDesc: `{${ctx.stage}.desc}`,
+      })
     );
     taskDetailsExWrapper.append(stageEx);
   }
@@ -853,7 +856,10 @@ function createSecretTaskElement(task) {
     intensityEx.setAttribute("data-i18n-target", "html");
     intensityEx.setAttribute(
       "data-i18n-args",
-      JSON.stringify({ taskDetail: `{${ctx.intensity}.name}`, taskDetailDesc: `{${ctx.intensity}.desc}` })
+      JSON.stringify({
+        taskDetail: `{${ctx.intensity}.name}`,
+        taskDetailDesc: `{${ctx.intensity}.desc}`,
+      })
     );
     taskDetailsExWrapper.append(intensityEx);
   }
@@ -872,7 +878,10 @@ function createSecretTaskElement(task) {
     extremityEx.setAttribute("data-i18n-target", "html");
     extremityEx.setAttribute(
       "data-i18n-args",
-      JSON.stringify({ taskDetail: `{${ctx.extremity}.name}`, taskDetailDesc: `{${ctx.extremity}.desc}` })
+      JSON.stringify({
+        taskDetail: `{${ctx.extremity}.name}`,
+        taskDetailDesc: `{${ctx.extremity}.desc}`,
+      })
     );
     taskDetailsExWrapper.append(extremityEx);
   }
@@ -924,7 +933,7 @@ function createSecretTaskElement(task) {
       b.className = "col";
 
       b.append(taskDetailsWrapper, p, taskDetailsExWrapper);
-      
+
       details.append(summary, b);
 
       secretWrapper.append(details);
@@ -960,17 +969,133 @@ function createSecretTaskElement(task) {
 function createTaskElement(task) {
   const wrapper = document.createElement("div");
   wrapper.className = "col";
-  wrapper.id = "taskContainer";
+  wrapper.id = "secretTaskContainer";
+
+  // loser panel
+  const loserSpan = document.createElement("span");
+  loserSpan.setAttribute("data-i18n", "app.task.secret.loser");
+  loserSpan.setAttribute("data-i18n-target", "html");
 
   // task details
   const taskDetailsWrapper = document.createElement("div");
   taskDetailsWrapper.id = "taskDetailsContainer";
   taskDetailsWrapper.className = "row muted";
 
-  const taskID = document.createElement("span");
-  taskID.textContent = `id: ${task.id}`;
+  // task detail explanation
+  const taskDetailsExWrapper = document.createElement("div");
+  taskDetailsExWrapper.id = "taskDetailsExContainer";
+  taskDetailsExWrapper.className = "col muted";
 
+  // Fill task details and explanation
+  const taskID = document.createElement("span");
+  taskID.setAttribute("data-i18n-auto", "app.task.detail.id");
+  taskID.setAttribute("data-i18n-args", JSON.stringify({ taskID: task.id }));
   taskDetailsWrapper.append(taskID);
+
+  const ctx = window.GAME?.game?.currentTask?.chosenCtx;
+
+  if (ctx?.stage) {
+    const stage = document.createElement("span");
+    stage.setAttribute("data-i18n-auto", "app.task.detail.stage");
+    stage.setAttribute(
+      "data-i18n-args",
+      JSON.stringify({ taskStage: `{${ctx.stage}.name}` })
+    );
+    taskDetailsWrapper.append(stage);
+
+    const stageEx = document.createElement("span");
+    stageEx.setAttribute("data-i18n", "app.task.detail.explanation");
+    stageEx.setAttribute("data-i18n-target", "html");
+    stageEx.setAttribute(
+      "data-i18n-args",
+      JSON.stringify({
+        taskDetail: `{${ctx.stage}.name}`,
+        taskDetailDesc: `{${ctx.stage}.desc}`,
+      })
+    );
+    taskDetailsExWrapper.append(stageEx);
+  }
+
+  if (ctx?.intensity) {
+    const intensity = document.createElement("span");
+    intensity.setAttribute("data-i18n-auto", "app.task.detail.intensity");
+    intensity.setAttribute(
+      "data-i18n-args",
+      JSON.stringify({ taskIntensity: `{${ctx.intensity}.name}` })
+    );
+    taskDetailsWrapper.append(intensity);
+
+    const intensityEx = document.createElement("span");
+    intensityEx.setAttribute("data-i18n", "app.task.detail.explanation");
+    intensityEx.setAttribute("data-i18n-target", "html");
+    intensityEx.setAttribute(
+      "data-i18n-args",
+      JSON.stringify({
+        taskDetail: `{${ctx.intensity}.name}`,
+        taskDetailDesc: `{${ctx.intensity}.desc}`,
+      })
+    );
+    taskDetailsExWrapper.append(intensityEx);
+  }
+
+  if (ctx?.extremity) {
+    const extremity = document.createElement("span");
+    extremity.setAttribute("data-i18n-auto", "app.task.detail.extremity");
+    extremity.setAttribute(
+      "data-i18n-args",
+      JSON.stringify({ taskExtremity: `{${ctx.extremity}.name}` })
+    );
+    taskDetailsWrapper.append(extremity);
+
+    const extremityEx = document.createElement("span");
+    extremityEx.setAttribute("data-i18n", "app.task.detail.explanation");
+    extremityEx.setAttribute("data-i18n-target", "html");
+    extremityEx.setAttribute(
+      "data-i18n-args",
+      JSON.stringify({
+        taskDetail: `{${ctx.extremity}.name}`,
+        taskDetailDesc: `{${ctx.extremity}.desc}`,
+      })
+    );
+    taskDetailsExWrapper.append(extremityEx);
+  }
+
+  // participating players
+  const participatingPlayers = document.createElement("div");
+  participatingPlayers.className = "row";
+
+  const participatingPlayersLabel = document.createElement("span");
+  participatingPlayersLabel.setAttribute(
+    "data-i18n-auto",
+    "app.task.secret.participatingPlayers"
+  );
+
+  participatingPlayers.append(participatingPlayersLabel);
+
+  // global instruction
+  const globalWrapper = document.createElement("div");
+  globalWrapper.id = "globalInstructionContainer";
+  globalWrapper.className = "col";
+
+  const p = document.createElement("p");
+  p.setAttribute("data-i18n", "app.task.global.instruction");
+  p.setAttribute("data-i18n-target", "html");
+  p.setAttribute(
+    "data-i18n-args",
+    JSON.stringify({ globalTaskInstruction: `{${task.instructionKey}}` })
+  );
+
+  globalWrapper.append(taskDetailsWrapper, p, taskDetailsExWrapper);
+
+  // Finish
+  wrapper.append(
+    loserSpan,
+    makeSeperator(),
+    participatingPlayers,
+    makeSeperator(),
+    globalWrapper
+  );
+  return wrapper;
 }
 
 export function buildTaskPanel(targetId = "task_content") {
