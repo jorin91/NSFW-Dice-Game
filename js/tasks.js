@@ -476,7 +476,6 @@ function applyGameWeightDelta(
   }
 }
 
-
 // ─────────────────────────────────────────────────────────────────────────────
 //  applyCategoryWeightDelta(category, op, value, min, max, decimals)
 //  ----------------------------------------------------
@@ -559,9 +558,9 @@ export function generateTasks() {
   const storedTask = window.GAME?.game?.currentTask ?? null;
   if (storedTask) return storedTask;
 
-  const tasksModel  = window.GAME?.tasks ?? {};
+  const tasksModel = window.GAME?.tasks ?? {};
   const gameSettings = window.GAME?.game?.settings ?? {};
-  const gameWeights  = window.GAME?.game?.weights ?? {};
+  const gameWeights = window.GAME?.game?.weights ?? {};
   const { loser, winners } = getRoundResult();
 
   // lokaal hulpfunctietje om de pool te bouwen voor een gegeven ctx
@@ -578,17 +577,32 @@ export function generateTasks() {
         if (task?.enabled === false) continue;
         if (!(task?.participants?.length > 0)) continue;
 
-        const catWeightEffective = effectiveCategoryWeight(categoryWeight, task, gameWeights);
+        const catWeightEffective = effectiveCategoryWeight(
+          categoryWeight,
+          task,
+          gameWeights
+        );
 
         // 1) conditions
         if (!matchesConditions(task, gameSettings, ctx)) continue;
 
         // 2) participants -> candidates
-        const partsWithCandidates = buildParticipantCandidates(task.participants, loser, winners);
+        const partsWithCandidates = buildParticipantCandidates(
+          task.participants,
+          loser,
+          winners
+        );
 
         // loser-slot moet exact de echte loser zijn
-        const loserPart = partsWithCandidates.find((p) => p.target === PLAYERTARGET_ENUM.loser);
-        if (!loserPart || loserPart.players.length !== 1 || loserPart.players[0].id !== loser.id) continue;
+        const loserPart = partsWithCandidates.find(
+          (p) => p.target === PLAYERTARGET_ENUM.loser
+        );
+        if (
+          !loserPart ||
+          loserPart.players.length !== 1 ||
+          loserPart.players[0].id !== loser.id
+        )
+          continue;
 
         // 3) greedy assignment
         const assigned = assignParticipants(partsWithCandidates);
@@ -615,7 +629,7 @@ export function generateTasks() {
     return pool;
   };
 
-  const maxAttempts = 3;      // 1 + 2 retries
+  const maxAttempts = 3; // 1 + 2 retries
   let attempts = 0;
   let chosenCtx = null;
   let pool = [];
@@ -794,13 +808,48 @@ function createSecretTaskElement(task) {
   taskDetailsWrapper.className = "row muted";
 
   const taskID = document.createElement("span");
-  taskID.textContent = `id: ${task.id}`;
-
+  taskID.setAttribute("data-i18n-auto", "app.task.detail.id");
+  taskID.setAttribute("data-i18n-args", JSON.stringify({ taskID: task.id }));
   taskDetailsWrapper.append(taskID);
+
+  const ctx = window.GAME?.game?.currentTask?.chosenCtx;
+
+  if (ctx?.stage) {
+    const stage = document.createElement("span");
+    stage.setAttribute("data-i18n-auto", "app.task.detail.stage");
+    stage.setAttribute(
+      "data-i18n-args",
+      JSON.stringify({ taskStage: `{${ctx.stage}}` })
+    );
+    taskDetailsWrapper.append(stage);
+  }
+
+  if (ctx?.intensity) {
+    const intensity = document.createElement("span");
+    intensity.setAttribute("data-i18n-auto", "app.task.detail.intensity");
+    intensity.setAttribute(
+      "data-i18n-args",
+      JSON.stringify({ taskIntensity: `{${ctx.intensity}}` })
+    );
+    taskDetailsWrapper.append(intensity);
+  }
+
+  if (ctx?.extremity) {
+    const extremity = document.createElement("span");
+    extremity.setAttribute("data-i18n-auto", "app.task.detail.extremity");
+    extremity.setAttribute(
+      "data-i18n-args",
+      JSON.stringify({ taskExtremity: `{${ctx.extremity}}` })
+    );
+    taskDetailsWrapper.append(extremity);
+  }
 
   // secretInstruction
   const secretTaskInstruction = document.createElement("p");
-  secretTaskInstruction.setAttribute("data-i18n", "app.task.secret.taskInstruction");
+  secretTaskInstruction.setAttribute(
+    "data-i18n",
+    "app.task.secret.taskInstruction"
+  );
   secretTaskInstruction.setAttribute("data-i18n-target", "html");
 
   // participating players
@@ -848,7 +897,10 @@ function createSecretTaskElement(task) {
 
     // loser label
     if (part.slot === "loser") {
-      loserSpan.setAttribute("data-i18n-args", JSON.stringify({loser: part.player.name}));
+      loserSpan.setAttribute(
+        "data-i18n-args",
+        JSON.stringify({ loser: part.player.name })
+      );
     }
   }
 
