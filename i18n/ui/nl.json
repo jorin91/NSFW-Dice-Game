@@ -45,6 +45,7 @@
   "app.task.detail.intensity": "Intensiteit: {taskIntensity}",
   "app.task.detail.extremity": "Extremiteit: {taskExtremity}",
   "app.task.detail.id": "ID: {taskID}",
+  "app.task.detail.explanation": "Uitleg {taskDetail}:<br>{taskDetailDesc}",
 
   "app.task.secret.title": "Geheime Opdracht",
   "app.task.secret.loser": "Verliezer: <b>{loser}</b>",

@@ -807,6 +807,12 @@ function createSecretTaskElement(task) {
   taskDetailsWrapper.id = "taskDetailsContainer";
   taskDetailsWrapper.className = "row muted";
 
+  // task detail explanation
+  const taskDetailsExWrapper = document.createElement("div");
+  taskDetailsExWrapper.id = "taskDetailsExContainer";
+  taskDetailsExWrapper.className = "col muted";
+
+  // Fill task details and explanation
   const taskID = document.createElement("span");
   taskID.setAttribute("data-i18n-auto", "app.task.detail.id");
   taskID.setAttribute("data-i18n-args", JSON.stringify({ taskID: task.id }));
@@ -822,6 +828,15 @@ function createSecretTaskElement(task) {
       JSON.stringify({ taskStage: `{${ctx.stage}.name}` })
     );
     taskDetailsWrapper.append(stage);
+
+    const stageEx = document.createElement("span");
+    stageEx.setAttribute("data-i18n", "app.task.detail.explanation");
+    stageEx.setAttribute("data-i18n-target", "html");
+    stageEx.setAttribute(
+      "data-i18n-args",
+      JSON.stringify({ taskDetail: `{${ctx.stage}.name}`, taskDetailDesc: `{${ctx.stage}.desc}` })
+    );
+    taskDetailsExWrapper.append(stageEx);
   }
 
   if (ctx?.intensity) {
@@ -832,6 +847,15 @@ function createSecretTaskElement(task) {
       JSON.stringify({ taskIntensity: `{${ctx.intensity}.name}` })
     );
     taskDetailsWrapper.append(intensity);
+
+    const intensityEx = document.createElement("span");
+    intensityEx.setAttribute("data-i18n", "app.task.detail.explanation");
+    intensityEx.setAttribute("data-i18n-target", "html");
+    intensityEx.setAttribute(
+      "data-i18n-args",
+      JSON.stringify({ taskDetail: `{${ctx.intensity}.name}`, taskDetailDesc: `{${ctx.intensity}.desc}` })
+    );
+    taskDetailsExWrapper.append(intensityEx);
   }
 
   if (ctx?.extremity) {
@@ -842,6 +866,15 @@ function createSecretTaskElement(task) {
       JSON.stringify({ taskExtremity: `{${ctx.extremity}.name}` })
     );
     taskDetailsWrapper.append(extremity);
+
+    const extremityEx = document.createElement("span");
+    extremityEx.setAttribute("data-i18n", "app.task.detail.explanation");
+    extremityEx.setAttribute("data-i18n-target", "html");
+    extremityEx.setAttribute(
+      "data-i18n-args",
+      JSON.stringify({ taskDetail: `{${ctx.extremity}.name}`, taskDetailDesc: `{${ctx.extremity}.desc}` })
+    );
+    taskDetailsExWrapper.append(extremityEx);
   }
 
   // secretInstruction
