@@ -550,7 +550,7 @@ function createSecretTaskElement(task) {
   }
 
   // Finish
-  wrapper.append(secretHint, partPlayers, secretWrapper);
+  wrapper.append(secretHint, partPlayersWrapper, secretWrapper);
   return wrapper;
 }
 
