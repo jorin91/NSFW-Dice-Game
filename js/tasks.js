@@ -10,6 +10,7 @@ import {
   ACT_WITH_ENUM,
 } from "./enums.js";
 import { getRoundResult } from "./game.js";
+import { switchPanel } from "./panelnavigation.js";
 
 import { tasks_undress_self } from "./tasks/undress_self.js";
 import { tasks_undress_other_self } from "./tasks/undress_other_self.js";
@@ -470,4 +471,90 @@ function executeTaskEffects(task, partsAssigned) {
       }
     }
   }
+}
+
+export function buildTaskPanel(targetId = "task_content") {
+  const root = document.getElementById(targetId);
+  if (!root) return;
+
+  root.innerHTML = "";
+
+  const generatedTask = generateTasks();
+  if (!generatedTask.picked) return;
+
+  // secret or normal
+  const useSecret = window.GAME?.game?.settings?.secretTasks ?? false;
+
+  switch (useSecret) {
+    case true:
+      root.append(createSecretTaskElement(generatedTask.picked));
+      break;
+    default:
+      root.append(createTaskElement(generatedTask.picked));
+      break;
+  }
+
+  switchPanel("task");
+}
+
+function createSecretTaskElement(task) {
+  const wrapper = document.createElement("div");
+  wrapper.className = "col";
+  wrapper.id = "secretTaskContainer";
+
+  // task details
+  const taskDetailsWrapper = document.createElement("div");
+  taskDetailsWrapper.id = "taskDetailsContainer";
+  taskDetailsWrapper.className = "row muted";
+
+  const taskID = document.createElement("span");
+  taskID.textContent = `id: ${task.id}`;
+
+  taskDetailsWrapper.append(taskID);
+
+  // secretInstruction
+  const secretHint = document.createElement("p");
+  secretHint.setAttribute("data-i18n-auto", "app.task.secret.hint");
+
+  // instruction per participant
+  const secretWrapper = document.createElement("div");
+  secretWrapper.id = "secretInstructionContainer";
+  secretWrapper.className = "col";
+
+  for (const part in task.participants) {
+    if (part.secretInstructionKey) {
+      const details = document.createElement("details");
+
+      const summary = document.createElement("summary");
+      summary.setAttribute("data-i18n-auto", "app.task.secret.summary");
+      summary.setAttribute("data-i18n-args", { player: part.player.name });
+
+      const p = document.createElement("p");
+      p.setAttribute("data-i18n-auto", part.secretInstructionKey);
+      p.setAttribute("data-i18n-args", task.instruction_args);
+
+      details.append(summary, p);
+      secretWrapper.append(details);
+    }
+  }
+
+  // Finish
+  wrapper.append(taskDetailsWrapper, secretHint, secretWrapper);
+  return wrapper;
+}
+
+function createTaskElement(task) {
+  const wrapper = document.createElement("div");
+  wrapper.className = "col";
+  wrapper.id = "taskContainer";
+
+  // task details
+  const taskDetailsWrapper = document.createElement("div");
+  taskDetailsWrapper.id = "taskDetailsContainer";
+  taskDetailsWrapper.className = "row muted";
+
+  const taskID = document.createElement("span");
+  taskID.textContent = `id: ${task.id}`;
+
+  taskDetailsWrapper.append(taskID);
 }

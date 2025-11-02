@@ -222,3 +222,23 @@ form select {
   border-color: #ff4d4f !important;
   box-shadow: 0 0 0 1px #ff4d4f inset;
 }
+/* Alleen gedrag: laat de browser het driehoekje zelf tonen */
+details.expando summary {
+  cursor: pointer;
+  user-select: none;       /* voorkomt tekstselectie bij klikken */
+  list-style: revert;      /* herstelt standaard marker */
+}
+
+/* Geen extra icon, geen achtergrond, geen border */
+details.expando {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+/* Iets ruimte tussen titel en content */
+details.expando > *:not(summary) {
+  margin-top: 6px;
+}

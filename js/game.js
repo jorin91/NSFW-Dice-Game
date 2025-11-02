@@ -2,6 +2,7 @@ import { getSexIcon } from "./utils.js";
 import { createDiceInstance, bindDiceToImage, rollAllDice } from "./dices.js";
 import { gameSaveState } from "./gamestate.js";
 import { applyI18nToElement } from "./lang_i18n.js";
+import { buildTaskPanel } from "./tasks.js";
 
 const DiceSet = [];
 
@@ -454,6 +455,7 @@ function CheckForLoser() {
     const loser = activePlayers[0];
 
     ResetPlayers(true, true);
+    buildTaskPanel();
   }
 }
 
