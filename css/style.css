@@ -8,8 +8,8 @@
   --border: #2a2f3a;
   --radius: 14px;
   --max-app-width: 95%;
-  --safe: #00FF00;
-  --lose: #FF0000;
+  --safe: #00ff00;
+  --lose: #ff0000;
 }
 * {
   box-sizing: border-box;
@@ -110,12 +110,12 @@ h6 {
   padding: 8px 12px;
 }
 .row.grid3 > :nth-child(3) {
-  justify-self: end;  /* plaatst het element rechts */
-  width: auto;        /* voorkomt uitrekken */
+  justify-self: end; /* plaatst het element rechts */
+  width: auto; /* voorkomt uitrekken */
 }
 .row.grid3 > span,
 .row.grid3 > p {
-  min-width: 0;              
+  min-width: 0;
   overflow-wrap: anywhere;
   text-align: right;
 }
@@ -128,7 +128,7 @@ h6 {
 .row.grid3:has(input[type="checkbox"]:checked) {
   border: 1px solid var(--accent);
 }
-.row.grid3:has(input[type="checkbox"]):hover{
+.row.grid3:has(input[type="checkbox"]):hover {
   opacity: 0.85;
   background: var(--accent);
 }
@@ -159,10 +159,10 @@ h6 {
   line-height: 1.6;
 }
 .bubble {
-  display: inline-flex;        
-  align-items: center;         
-  gap: 8px;                    
-  line-height: 1;              
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1;
   background: var(--panel2);
   color: #fff;
   border: 1px solid var(--accent);
@@ -193,7 +193,7 @@ h6 {
   color: var(--text);
   padding: 0 4px;
   line-height: 1;
-  font-size: 14px;          
+  font-size: 14px;
 }
 .bubble-x:hover {
   opacity: 0.85;
@@ -222,23 +222,35 @@ form select {
   border-color: #ff4d4f !important;
   box-shadow: 0 0 0 1px #ff4d4f inset;
 }
-/* Alleen gedrag: laat de browser het driehoekje zelf tonen */
-details.expando summary {
-  cursor: pointer;
-  user-select: none;       /* voorkomt tekstselectie bij klikken */
-  list-style: revert;      /* herstelt standaard marker */
-}
 
-/* Geen extra icon, geen achtergrond, geen border */
+/* Layout + spacing voor alle details-blokken met kolomopmaak */
+details.col,
 details.expando {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* regelt alle verticale ruimte */
   margin: 0;
   padding: 0;
-  border: none;
+  border: 0;
   background: none;
   color: inherit;
 }
 
-/* Iets ruimte tussen titel en content */
-details.expando > *:not(summary) {
-  margin-top: 6px;
+/* Klikgedrag en hover/open styling voor de summary */
+details > summary {
+  cursor: pointer; /* pointer alleen op de heading */
+  user-select: none;
+  padding: 4px 6px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  /* laat het standaard pijltje staan */
+  list-style: revert;
+}
+
+details[open] > summary {
+  background: var(--panel2);
+}
+
+details > summary:hover {
+  background: var(--accent);
+  color: #fff;
 }
