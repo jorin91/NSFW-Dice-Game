@@ -819,7 +819,7 @@ function createSecretTaskElement(task) {
     stage.setAttribute("data-i18n-auto", "app.task.detail.stage");
     stage.setAttribute(
       "data-i18n-args",
-      JSON.stringify({ taskStage: `{${ctx.stage}}` })
+      JSON.stringify({ taskStage: `{${ctx.stage}.name}` })
     );
     taskDetailsWrapper.append(stage);
   }
@@ -829,7 +829,7 @@ function createSecretTaskElement(task) {
     intensity.setAttribute("data-i18n-auto", "app.task.detail.intensity");
     intensity.setAttribute(
       "data-i18n-args",
-      JSON.stringify({ taskIntensity: `{${ctx.intensity}}` })
+      JSON.stringify({ taskIntensity: `{${ctx.intensity}.name}` })
     );
     taskDetailsWrapper.append(intensity);
   }
@@ -839,7 +839,7 @@ function createSecretTaskElement(task) {
     extremity.setAttribute("data-i18n-auto", "app.task.detail.extremity");
     extremity.setAttribute(
       "data-i18n-args",
-      JSON.stringify({ taskExtremity: `{${ctx.extremity}}` })
+      JSON.stringify({ taskExtremity: `{${ctx.extremity}.name}` })
     );
     taskDetailsWrapper.append(extremity);
   }
@@ -872,7 +872,7 @@ function createSecretTaskElement(task) {
   for (const part of task.participants) {
     if (part.secretInstructionKey) {
       const details = document.createElement("details");
-      details.className = "col small";
+      details.className = "col";
 
       const summary = document.createElement("summary");
       summary.setAttribute("data-i18n", "app.task.secret.summary");
