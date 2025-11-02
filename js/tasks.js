@@ -504,11 +504,14 @@ function createSecretTaskElement(task) {
 
       const summary = document.createElement("summary");
       summary.setAttribute("data-i18n-auto", "app.task.secret.summary");
-      summary.setAttribute("data-i18n-args", { player: part.player.name });
+      summary.setAttribute(
+        "data-i18n-args",
+        JSON.stringify({ player: part.player.name })
+      );
 
       const p = document.createElement("p");
       p.setAttribute("data-i18n-auto", part.secretInstructionKey);
-      p.setAttribute("data-i18n-args", task.instruction_args);
+      p.setAttribute("data-i18n-args", JSON.stringify(task.instruction_args));
 
       details.append(summary, p);
       secretWrapper.append(details);
