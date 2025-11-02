@@ -287,6 +287,7 @@ export function updateGameControls(targetId = "gameControlsRow") {
   endTurnButton.className = "btn";
   endTurnButton.id = "endTurnButton";
   endTurnButton.setAttribute("data-i18n-auto", "button.endTurn");
+  endTurnButton.setAttribute("data-panel", "!");
   endTurnButton.addEventListener("click", () => {
     endTurn();
   });

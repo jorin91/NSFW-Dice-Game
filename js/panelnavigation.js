@@ -16,6 +16,10 @@ export function attachPanelNavigation() {
     const btn = e.target.closest("[data-panel]");
     if (!btn) return;
     const key = btn.dataset.panel;
+
+    // Alles wat met "_" of "!" begint overslaan
+    if (key.startsWith("_") || key.startsWith("!")) return;
+
     showPanel(key);
     // ⤵ sla de actieve panel op als gameSetActivePanel beschikbaar is
     gameSetActivePanel(key);
