@@ -801,7 +801,7 @@ function createSecretTaskElement(task) {
 
   // loser panel
   const loserWrap = document.createElement("div");
-  loserWrap.className = "col";
+  loserWrap.className = "col small";
   loserWrap.id = "loserContainer";
 
   const loserHeader = document.createElement("h4");
@@ -897,7 +897,7 @@ function createSecretTaskElement(task) {
 
   // secretHint
   const secretHintWrap = document.createElement("div");
-  secretHintWrap.className = "col";
+  secretHintWrap.className = "col small";
   secretHintWrap.id = "secretHintContainer";
 
   const secretHintHeader = document.createElement("h4");
@@ -910,7 +910,7 @@ function createSecretTaskElement(task) {
 
   // participating players
   const participatingWrap = document.createElement("div");
-  participatingWrap.className = "col";
+  participatingWrap.className = "col small";
   participatingWrap.id = "participatingContainer";
 
   const participatingHeader = document.createElement("h4");
@@ -924,7 +924,7 @@ function createSecretTaskElement(task) {
   // per player instruction
   const instructionWrap = document.createElement("div");
   instructionWrap.id = "instructionContainer";
-  instructionWrap.className = "col";
+  instructionWrap.className = "col small";
 
   const instructionHeader = document.createElement("h4");
   setI18n(instructionHeader, "app.task.secret.title");
@@ -1095,7 +1095,7 @@ function createTaskElement(task) {
   // global instruction
   const instructionWrap = document.createElement("div");
   instructionWrap.id = "instructionContainer";
-  instructionWrap.className = "col";
+  instructionWrap.className = "col small";
 
   const instructionHeader = document.createElement("h4");
   setI18n(instructionHeader, "app.task.global.instructions.header");
