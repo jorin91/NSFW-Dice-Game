@@ -973,7 +973,7 @@ function createSecretTaskElement(task) {
     makeSeperator(),
     participatingWrap,
     makeSeperator(),
-    secretWrapper,
+    instructionWrap,
     makeSeperator(),
     execElement,
   );
