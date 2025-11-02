@@ -346,6 +346,13 @@ export function getTasksModel() {
 }
 
 export function generateTasks() {
+  const storedTask = window.GAME?.game?.currentTask ?? null;
+  if (storedTask) {
+    return {
+      picked: storedTask,
+    };
+  }
+
   const tasksModel = window.GAME?.tasks ?? {};
   const gameSettings = window.GAME?.game?.settings ?? {};
   const gameWeights = window.GAME?.game?.weights ?? {};
@@ -556,6 +563,9 @@ export function buildTaskPanel(targetId = "task_content") {
   } else {
     root.append(createTaskElement(generatedTask.picked));
   }
+
+  // Store current task to gamestate
+  window.GAME.game.currentTask = generatedTask.picked;
 
   switchPanel("task");
 }

@@ -83,6 +83,7 @@ export const GAME_FLOW_MODEL = {
       act_with: [],
       act_on: [],
     },
+    currentTask: null,
   },
 };
 
