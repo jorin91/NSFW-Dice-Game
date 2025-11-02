@@ -509,6 +509,15 @@ function createSecretTaskElement(task) {
   secretHint.setAttribute("data-i18n", "app.task.secret.hint");
   secretHint.setAttribute("data-i18n-target", "html");
 
+  // participating players
+  const partPlayersWrapper = document.createElement("div");
+  partPlayersWrapper.className = "row";
+
+  const partPlayersLabel = document.createElement("span");
+  partPlayersLabel.setAttribute("data-i18n-auto", "app.task.secret.partPlayers");
+
+  partPlayersWrapper.append(partPlayersLabel);
+
   // instruction per participant
   const secretWrapper = document.createElement("div");
   secretWrapper.id = "secretInstructionContainer";
@@ -533,11 +542,15 @@ function createSecretTaskElement(task) {
 
       details.append(summary, taskDetailsWrapper, p);
       secretWrapper.append(details);
+
+      const partPlayerLabel = document.createElement("span");
+      partPlayerLabel.innerHTML = `<b>${part.player.name}</b>`;
+      partPlayersWrapper.append(partPlayerLabel);
     }
   }
 
   // Finish
-  wrapper.append(secretHint, secretWrapper);
+  wrapper.append(secretHint, partPlayers, secretWrapper);
   return wrapper;
 }
 
