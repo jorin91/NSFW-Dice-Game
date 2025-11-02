@@ -979,8 +979,16 @@ function createTaskElement(task) {
   wrapper.id = "secretTaskContainer";
 
   // loser panel
-  const loserSpan = document.createElement("span");
-  setI18n(loserSpan, "app.task.secret.loser", null, "html");
+  const loserWrap = document.createElement("div");
+  loserWrap.className = "col small";
+  loserWrap.id = "loserContainer";
+
+  const loserHeader = document.createElement("h3");
+  setI18n(loserHeader, "app.task.secret.loser.header");
+
+  const loserContent = document.createElement("p");
+
+  loserWrap.append(loserHeader, loserContent);
 
   // task details
   const taskDetailsWrapper = document.createElement("div");
@@ -1093,7 +1101,7 @@ function createTaskElement(task) {
 
     // loser label
     if (part.slot === "loser") {
-      setI18n(loserSpan, null, { loser: part.player.name });
+      loserContent.textContent = part.player.name;
     }
   }
 
@@ -1104,7 +1112,7 @@ function createTaskElement(task) {
 
   // Finish
   wrapper.append(
-    loserSpan,
+    loserWrap,
     makeSeperator(),
     participatingPlayers,
     makeSeperator(),
