@@ -919,7 +919,7 @@ function createSecretTaskElement(task) {
       p.setAttribute("data-i18n-auto", part.secretInstructionKey);
       p.setAttribute("data-i18n-args", JSON.stringify(task.instruction_args));
 
-      details.append(summary, taskDetailsWrapper, taskDetailsExWrapper, p);
+      details.append(summary, taskDetailsWrapper, p, taskDetailsExWrapper);
       secretWrapper.append(details);
     }
 
