@@ -347,7 +347,6 @@ function fillInstructionArgsForParticipants(task) {
 }
 
 // Main
-
 export function getTasksModel() {
   return deepCopy(TASKS_MODEL);
 }
