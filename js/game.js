@@ -288,6 +288,8 @@ export function updateGameControls(targetId = "gameControlsRow") {
 
     endTurnButton.classList.add("ghost");
     endTurnButton.disabled = true;
+    rollButton.classList.add("ghost");
+    rollButton.disabled = true;
 
     await rollAllDice(DiceSet);
     window.GAME.game.diceSet = DiceSet;
@@ -363,8 +365,10 @@ function updateGameStatus() {
     // rollDicesButton
     if (turnRoll >= maxRoll) {
       rollDicesButton.classList.add("ghost");
+      rollDicesButton.disabled = true;
     } else {
       rollDicesButton.classList.remove("ghost");
+      rollDicesButton.disabled = false;
     }
   }
 }
