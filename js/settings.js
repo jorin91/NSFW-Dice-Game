@@ -137,7 +137,7 @@ function fillSettingsStage(targetId = "settings_stage") {
 }
 
 export function getSettingStages() {
-  return buildSettingsCollection(STAGE_ENUM, true);
+  return buildSettingsCollection(STAGE_ENUM, false);
 }
 
 // Intensity
@@ -146,7 +146,7 @@ function fillSettingsIntensity(targetId = "settings_intensity") {
 }
 
 export function getSettingIntensity() {
-  return buildSettingsCollection(INTENSITY_ENUM, true);
+  return buildSettingsCollection(INTENSITY_ENUM, false);
 }
 
 // Extremity
@@ -155,7 +155,7 @@ function fillSettingsExtremity(targetId = "settings_extremity") {
 }
 
 export function getSettingExtremity() {
-  return buildSettingsCollection(EXTREMITY_ENUM, true);
+  return buildSettingsCollection(EXTREMITY_ENUM, false);
 }
 
 // Act With
@@ -164,7 +164,7 @@ function fillSettingsActWith(targetId = "settings_act_with") {
 }
 
 export function getSettingActWith() {
-  return buildSettingsCollection(ACT_WITH_ENUM, true);
+  return buildSettingsCollection(ACT_WITH_ENUM, false);
 }
 
 // Act On
@@ -173,5 +173,5 @@ function fillSettingsActOn(targetId = "settings_act_on") {
 }
 
 export function getSettingActOn() {
-  return buildSettingsCollection(ACT_ON_ENUM, true);
+  return buildSettingsCollection(ACT_ON_ENUM, false);
 }
