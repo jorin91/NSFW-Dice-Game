@@ -955,6 +955,9 @@ function createSecretTaskElement(task) {
     }
   }
 
+  // Execution element
+  const execElement = buildTaskExecutionElement(task);
+
   // Finish
   wrapper.append(
     loserSpan,
@@ -963,7 +966,9 @@ function createSecretTaskElement(task) {
     makeSeperator(),
     participatingPlayers,
     makeSeperator(),
-    secretWrapper
+    secretWrapper,
+    makeSeperator(),
+    execElement,
   );
   return wrapper;
 }
@@ -1103,9 +1108,9 @@ function createTaskElement(task) {
     makeSeperator(),
     participatingPlayers,
     makeSeperator(),
-    execElement,
+    globalWrapper,
     makeSeperator(),
-    globalWrapper
+    execElement
   );
   return wrapper;
 }
