@@ -49,13 +49,27 @@
 
   "app.task.secret.title": "Geheime Opdracht",
   "app.task.secret.loser": "Verliezer: <b>{loser}</b>",
-  "app.task.secret.taskInstruction" : "<b>{app.task.secret.title}</b><br>De hieronder genoemde spelers lezen om de beurt zijn/haar instructies maar delen dit met niemand en houden dit dus geheim!<br>De niet deelnemende spelers mogen de instructies wel bekijken om de uitvoer van de opdracht te controleren.<br>Vergeet niet om de instructies weer te sluiten!",
+  "app.task.secret.taskInstruction": "<b>{app.task.secret.title}</b><br>De hieronder genoemde spelers lezen om de beurt zijn/haar instructies maar delen dit met niemand en houden dit dus geheim!<br>De niet deelnemende spelers mogen de instructies wel bekijken om de uitvoer van de opdracht te controleren.<br>Vergeet niet om de instructies weer te sluiten!",
   "app.task.secret.summary": "Instructies voor <b>{player}</b>",
   "app.task.secret.participatingPlayers": "Deelnemende spelers in deze opdracht:",
 
   "app.task.global.instruction": "De opdracht:<br>{globalTaskInstruction}",
 
   "app.settings.title": "Spel Instellingen",
+
+  "app.settings.general.header": "Algemene instellingen",
+
+  "app.settings.general.dices": "Aantal dobbelstenen",
+  "app.settings.general.dices.descShort": "Bepaalt met hoeveel dobbelstenen je speelt.",
+
+  "app.settings.general.rolls": "Aantal worpen per beurt",
+  "app.settings.general.rolls.descShort": "Hoe vaak een speler mag gooien in één beurt.",
+
+  "app.settings.general.score": "Punten om veilig te worden verklaard",
+  "app.settings.general.score.descShort": "Aantal gewonnen rondes nodig om ‘safe’ te zijn.",
+
+  "app.settings.general.secretTasks": "Geheime opdrachten per speler inschakelen",
+  "app.settings.general.secretTasks.descShort": "Maak instructies individueel en geheim voor extra spanning.",
 
   "app.settings.STAGE.header": "Opbouw en Contactniveau",
   "app.settings.STAGE.content": "Hoe verder de fase, hoe intiemer, sensueler of seksueler het contact kan zijn.<br><br>Selecteer welke fases je in deze sessie wil gebruiken.",
