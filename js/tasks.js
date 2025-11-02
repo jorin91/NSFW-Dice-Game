@@ -11,6 +11,7 @@ import {
 } from "./enums.js";
 import { getRoundResult } from "./game.js";
 import { switchPanel } from "./panelnavigation.js";
+import { buildTaskExecutionElement } from "./tasks_execution.js";
 
 import { tasks_undress_self } from "./tasks/undress_self.js";
 import { tasks_undress_other_self } from "./tasks/undress_other_self.js";
@@ -1106,13 +1107,18 @@ function createTaskElement(task) {
 
   globalWrapper.append(taskDetailsWrapper, p, taskDetailsExWrapper);
 
+  // Execution element
+  const execElement = buildTaskExecutionElement(task);
+
   // Finish
   wrapper.append(
     loserSpan,
     makeSeperator(),
     participatingPlayers,
     makeSeperator(),
-    globalWrapper
+    execElement,
+    makeSeperator(),
+    globalWrapper,
   );
   return wrapper;
 }
