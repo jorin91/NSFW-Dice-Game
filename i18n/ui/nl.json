@@ -41,6 +41,7 @@
   "app.game.gameControls.Header": "Besturing",
 
   "app.task.title": "Opdracht",
+  
   "app.task.detail.stage": "Fase: {taskStage}",
   "app.task.detail.intensity": "Intensiteit: {taskIntensity}",
   "app.task.detail.extremity": "Extremiteit: {taskExtremity}",
@@ -50,10 +51,10 @@
   "app.task.secret.title": "Geheime Opdracht",
   "app.task.secret.taskInstruction": "{app.task.secret.title}<br>De hieronder genoemde spelers lezen om de beurt zijn/haar instructies maar delen dit met niemand en houden dit dus geheim!<br>De niet deelnemende spelers mogen de instructies wel bekijken om de uitvoer van de opdracht te controleren.<br>Vergeet niet om de instructies weer te sluiten!",
   "app.task.secret.summary": "Instructies voor <b>{player}</b>",
-  "app.task.secret.participatingPlayers": "Deelnemende spelers in deze opdracht:",
 
   "app.task.global.instruction": "De opdracht:<br>{globalTaskInstruction}",
   "app.task.global.loser.header": "Verliezer",
+  "app.task.global.participating.header": "Deelnemende spelers in deze opdracht",
 
   "app.settings.title": "Spel Instellingen",
 
