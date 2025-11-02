@@ -1,5 +1,5 @@
 import { canWearClothingPiece, canRemoveClothingPiece } from "./clothing.js";
-import { deepCopy } from "./utils.js";
+import { deepCopy, makeSeperator } from "./utils.js";
 import {
   SEX_ENUM,
   STAGE_ENUM,
@@ -550,7 +550,7 @@ function createSecretTaskElement(task) {
   }
 
   // Finish
-  wrapper.append(secretHint, partPlayersWrapper, secretWrapper);
+  wrapper.append(secretHint, makeSeperator(), partPlayersWrapper, makeSeperator(), secretWrapper);
   return wrapper;
 }
 
