@@ -64,7 +64,6 @@ export const TASKS_MODEL = {
 };
 
 // ——— helpers ———
-
 // Gewogen pick van [{ value, weight }, ...]
 function weightedRandomEntry(entries) {
   const list = Array.isArray(entries)
