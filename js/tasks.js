@@ -916,10 +916,18 @@ function createSecretTaskElement(task) {
 
   participatingWrap.append(participatingHeader, participatingContent);
 
-  // instruction per participant
-  const secretWrapper = document.createElement("div");
-  secretWrapper.id = "secretInstructionContainer";
-  secretWrapper.className = "col";
+  // per player instruction
+  const instructionWrap = document.createElement("div");
+  instructionWrap.id = "instructionContainer";
+  instructionWrap.className = "col small";
+
+  const instructionHeader = document.createElement("h4");
+  setI18n(instructionHeader, "app.task.secret.title");
+
+  //const instructionContent = document.createElement("p");
+  //setI18n(instructionContent, task.instructionKey, task.instruction_args)
+
+  instructionWrap.append(instructionHeader);
 
   for (const part of task.participants) {
     if (part.secretInstructionKey) {
@@ -927,16 +935,10 @@ function createSecretTaskElement(task) {
       details.className = "col";
 
       const summary = document.createElement("summary");
-      summary.setAttribute("data-i18n", "app.task.secret.summary");
-      summary.setAttribute("data-i18n-target", "html");
-      summary.setAttribute(
-        "data-i18n-args",
-        JSON.stringify({ player: part.player.name })
-      );
+      setI18n(summary, "app.task.secret.summary", { player: part.player.name }, "html")
 
       const p = document.createElement("p");
-      p.setAttribute("data-i18n-auto", part.secretInstructionKey);
-      p.setAttribute("data-i18n-args", JSON.stringify(task.instruction_args));
+      setI18n(p, part.secretInstructionKey, task.instruction_args)
 
       // Body content
       const b = document.createElement("div");
@@ -946,7 +948,7 @@ function createSecretTaskElement(task) {
 
       details.append(summary, b);
 
-      secretWrapper.append(details);
+      instructionWrap.append(details);
     }
 
     // participatingPlayers
@@ -1086,20 +1088,17 @@ function createTaskElement(task) {
   participatingWrap.append(participatingHeader, participatingContent);
 
   // global instruction
-  const globalWrapper = document.createElement("div");
-  globalWrapper.id = "globalInstructionContainer";
-  globalWrapper.className = "col";
+  const instructionWrap = document.createElement("div");
+  instructionWrap.id = "instructionContainer";
+  instructionWrap.className = "col small";
 
-  const p = document.createElement("p");
-  setI18n(
-    p,
-    "app.task.global.instruction",
-    {
-      globalTaskInstruction: `{${task.instructionKey}}`,
-      ...task.instruction_args,
-    },
-    "html"
-  );
+  const instructionHeader = document.createElement("h4");
+  setI18n(instructionHeader, "app.task.global.instructions.header");
+
+  const instructionContent = document.createElement("p");
+  setI18n(instructionContent, task.instructionKey, task.instruction_args)
+
+  instructionWrap.append(instructionHeader, taskDetailsWrapper, instructionContent, taskDetailsExWrapper);
 
   // Find loser
   for (const part of task.participants) {
@@ -1114,8 +1113,6 @@ function createTaskElement(task) {
     }
   }
 
-  globalWrapper.append(taskDetailsWrapper, p, taskDetailsExWrapper);
-
   // Execution element
   const execElement = buildTaskExecutionElement(task);
 
@@ -1125,7 +1122,7 @@ function createTaskElement(task) {
     makeSeperator(),
     participatingWrap,
     makeSeperator(),
-    globalWrapper,
+    instructionWrap,
     makeSeperator(),
     execElement,
   );
