@@ -546,14 +546,10 @@ export function buildTaskPanel(targetId = "task_content") {
 
   // secret or normal
   const useSecret = window.GAME?.game?.settings?.secretTasks ?? false;
-
-  switch (useSecret) {
-    case true:
-      root.append(createSecretTaskElement(generatedTask.picked));
-      break;
-    default:
-      root.append(createTaskElement(generatedTask.picked));
-      break;
+  if (useSecret) {
+    root.append(createSecretTaskElement(generatedTask.picked));
+  } else {
+    root.append(createTaskElement(generatedTask.picked));
   }
 
   switchPanel("task");
