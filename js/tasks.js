@@ -79,37 +79,18 @@ function weightedRandomEntry(entries) {
   return list[list.length - 1];
 }
 
-function pickFromWeightsOrSettings(key, gameSettings, gameWeights) {
-  const enabled = Array.isArray(gameSettings[key]) ? gameSettings[key] : [];
-  if (enabled.length === 0) return null;
-
-  const weighted = (
-    Array.isArray(gameWeights[key]) ? gameWeights[key] : []
-  ).filter((e) => enabled.includes(e?.value) && (e?.weight ?? 0) > 0);
-
-  if (weighted.length > 0) {
-    const win = weightedRandomEntry(weighted);
-    return win ? win.value : null;
-  }
-  // fallback: uniforme keuze uit enabled
-  return enabled[Math.floor(Math.random() * enabled.length)];
+function getRandomGameContext(gameWeights) {
+  return {
+    stage: pickFromWeights(gameWeights.stage),
+    intensity: pickFromWeights(gameWeights.intensity),
+    extremity: pickFromWeights(gameWeights.extremity),
+  };
 }
 
-// Kies één willekeurige context op basis van weights + settings
-function getRandomGameContext(gameSettings, gameWeights) {
-  return {
-    stage: pickFromWeightsOrSettings("stage", gameSettings, gameWeights),
-    intensity: pickFromWeightsOrSettings(
-      "intensity",
-      gameSettings,
-      gameWeights
-    ),
-    extremity: pickFromWeightsOrSettings(
-      "extremity",
-      gameSettings,
-      gameWeights
-    ),
-  };
+function pickFromWeights(weightArray) {
+  if (!Array.isArray(weightArray) || weightArray.length === 0) return null;
+  const chosen = weightedRandomEntry(weightArray);
+  return chosen ? chosen.value : null;
 }
 
 function arraysIntersect(a, b) {
@@ -362,7 +343,7 @@ export function generateTasks() {
   const gameWeights = window.GAME?.game?.weights ?? {};
   const { loser, winners } = getRoundResult();
 
-  const chosenCtx = getRandomGameContext(gameSettings, gameWeights);
+  const chosenCtx = getRandomGameContext(gameWeights);
 
   const pool = [];
 
