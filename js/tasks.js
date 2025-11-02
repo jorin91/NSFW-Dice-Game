@@ -1101,7 +1101,6 @@ function createTaskElement(task) {
         "data-i18n-args",
         JSON.stringify({ loser: part.player.name })
       );
-      break;
     }
   }
 
