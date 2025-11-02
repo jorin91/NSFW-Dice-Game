@@ -1082,8 +1082,20 @@ function createTaskElement(task) {
   p.setAttribute("data-i18n-target", "html");
   p.setAttribute(
     "data-i18n-args",
-    JSON.stringify({ globalTaskInstruction: `{${task.instructionKey}}` })
+    JSON.stringify({ globalTaskInstruction: `{${task.instructionKey}}`, ...task.instruction_args })
   );
+
+  // Find loser
+  for (const part of task.participants) {
+    // loser label
+    if (part.slot === "loser") {
+      loserSpan.setAttribute(
+        "data-i18n-args",
+        JSON.stringify({ loser: part.player.name })
+      );
+      break;
+    }
+  }
 
   globalWrapper.append(taskDetailsWrapper, p, taskDetailsExWrapper);
 
