@@ -134,6 +134,8 @@ h6 {
 }
 .row.grid3:has(input[type="number"]) {
   border: 1px solid var(--accent);
+  border-radius: 10px;
+  background-color: var(--panel2);
 }
 .row.grid3:has(input[type="number"]):hover {
   opacity: 0.85;
@@ -142,6 +144,7 @@ h6 {
 .row.grid3:has(input[type="number"]) input[type="number"] {
   width: 70px; /* of 5ch / 6em, afhankelijk van look */
   text-align: right; /* cijfers mooi rechts */
+  cursor: pointer;
 }
 .panel {
   display: none;
