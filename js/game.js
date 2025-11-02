@@ -9,7 +9,7 @@ const DiceSet = [];
 export function InitGame() {
   layout();
   UpdateGamePlayers();
-  updateDiceSet();
+  updateDiceSet(true);
   updateGameControls();
   updateGameStatus();
   continueGame();
@@ -255,6 +255,10 @@ function updateDiceSet(
           containerRoll.append(d.element);
         }
       });
+    } else {
+      DiceSet.forEach((d, index) => {
+        d.refresh();
+      });
     }
   }
 }
@@ -311,9 +315,7 @@ export function updateGameControls(targetId = "gameControlsRow") {
 
   root.append(rollButton, endTurnButton, stopButton);
 }
-function resetGame() {
-  
-}
+function resetGame() {}
 
 function updateGameStatus() {
   // elements
@@ -390,7 +392,7 @@ function endTurn() {
 
   const currentTurnIndex = window.GAME?.game?.turnIndex ?? 0;
   const currentRound = window.GAME?.game?.round ?? 0;
-  
+
   // 1) Score opslaan
   const turnScore = CalculateScore();
   players[currentTurnIndex].roundScore = turnScore;
@@ -401,7 +403,7 @@ function endTurn() {
   if (nextSameRoundIndex === -1) {
     // 3) Ronde voorbij → eerst winner/loser/reset
     window.GAME.game.round = currentRound + 1;
-    CheckForWinner();   // let op: hierbinnen score cappen met Math.min(safeScore, score+1)
+    CheckForWinner(); // let op: hierbinnen score cappen met Math.min(safeScore, score+1)
     CheckForLoser();
     ResetPlayers(true); // reset roundScore
 
