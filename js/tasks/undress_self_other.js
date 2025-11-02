@@ -14,7 +14,7 @@ export const tasks_undress_self_other = [
     id: `undress_self_other.headwear`,
     instructionKey: "TASK.Undress.Self_Other.Public",
     instruction_args: {
-      clothing: "clothes.headwear.name",
+      clothing: "{clothes.headwear.name}",
       loser: "Loser",
       winner1: "Winner1",
     },
@@ -53,7 +53,7 @@ export const tasks_undress_self_other = [
     id: `undress_self_other.accessories_glasses`,
     instructionKey: "TASK.Undress.Self_Other.Public",
     instruction_args: {
-      clothing: "clothes.accessories_glasses.name",
+      clothing: "{clothes.accessories_glasses.name}",
       loser: "Loser",
       winner1: "Winner1",
     },
@@ -94,7 +94,7 @@ export const tasks_undress_self_other = [
     id: `undress_self_other.accessories_neck`,
     instructionKey: "TASK.Undress.Self_Other.Public",
     instruction_args: {
-      clothing: "clothes.accessories_neck.name",
+      clothing: "{clothes.accessories_neck.name}",
       loser: "Loser",
       winner1: "Winner1",
     },
@@ -135,7 +135,7 @@ export const tasks_undress_self_other = [
     id: `undress_self_other.accessories_arm`,
     instructionKey: "TASK.Undress.Self_Other.Public",
     instruction_args: {
-      clothing: "clothes.accessories_arm.name",
+      clothing: "{clothes.accessories_arm.name}",
       loser: "Loser",
       winner1: "Winner1",
     },
@@ -176,7 +176,7 @@ export const tasks_undress_self_other = [
     id: `undress_self_other.jacket`,
     instructionKey: "TASK.Undress.Self_Other.Public",
     instruction_args: {
-      clothing: "clothes.jacket.name",
+      clothing: "{clothes.jacket.name}",
       loser: "Loser",
       winner1: "Winner1",
     },
@@ -215,7 +215,7 @@ export const tasks_undress_self_other = [
     id: `undress_self_other.sweater`,
     instructionKey: "TASK.Undress.Self_Other.Public",
     instruction_args: {
-      clothing: "clothes.sweater.name",
+      clothing: "{clothes.sweater.name}",
       loser: "Loser",
       winner1: "Winner1",
     },
@@ -254,7 +254,7 @@ export const tasks_undress_self_other = [
     id: `undress_self_other.shirt`,
     instructionKey: "TASK.Undress.Self_Other.Public",
     instruction_args: {
-      clothing: "clothes.shirt.name",
+      clothing: "{clothes.shirt.name}",
       loser: "Loser",
       winner1: "Winner1",
     },
@@ -293,7 +293,7 @@ export const tasks_undress_self_other = [
     id: `undress_self_other.undershirt`,
     instructionKey: "TASK.Undress.Self_Other.Public",
     instruction_args: {
-      clothing: "clothes.undershirt.name",
+      clothing: "{clothes.undershirt.name}",
       loser: "Loser",
       winner1: "Winner1",
     },
@@ -332,7 +332,7 @@ export const tasks_undress_self_other = [
     id: `undress_self_other.bra`,
     instructionKey: "TASK.Undress.Self_Other.Public",
     instruction_args: {
-      clothing: "clothes.bra.name",
+      clothing: "{clothes.bra.name}",
       loser: "Loser",
       winner1: "Winner1",
     },
@@ -371,7 +371,7 @@ export const tasks_undress_self_other = [
     id: `undress_self_other.pants`,
     instructionKey: "TASK.Undress.Self_Other.Public",
     instruction_args: {
-      clothing: "clothes.pants.name",
+      clothing: "{clothes.pants.name}",
       loser: "Loser",
       winner1: "Winner1",
     },
@@ -410,7 +410,7 @@ export const tasks_undress_self_other = [
     id: `undress_self_other.leggings`,
     instructionKey: "TASK.Undress.Self_Other.Public",
     instruction_args: {
-      clothing: "clothes.leggings.name",
+      clothing: "{clothes.leggings.name}",
       loser: "Loser",
       winner1: "Winner1",
     },
@@ -449,7 +449,7 @@ export const tasks_undress_self_other = [
     id: `undress_self_other.underwear`,
     instructionKey: "TASK.Undress.Self_Other.Public",
     instruction_args: {
-      clothing: "clothes.underwear.name",
+      clothing: "{clothes.underwear.name}",
       loser: "Loser",
       winner1: "Winner1",
     },
@@ -488,7 +488,7 @@ export const tasks_undress_self_other = [
     id: `undress_self_other.shoes`,
     instructionKey: "TASK.Undress.Self_Other.Public",
     instruction_args: {
-      clothing: "clothes.shoes.name",
+      clothing: "{clothes.shoes.name}",
       loser: "Loser",
       winner1: "Winner1",
     },
@@ -527,7 +527,7 @@ export const tasks_undress_self_other = [
     id: `undress_self_other.socks`,
     instructionKey: "TASK.Undress.Self_Other.Public",
     instruction_args: {
-      clothing: "clothes.socks.name",
+      clothing: "{clothes.socks.name}",
       loser: "Loser",
       winner1: "Winner1",
     },

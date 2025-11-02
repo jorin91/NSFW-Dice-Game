@@ -14,7 +14,7 @@ export const tasks_dress_other_self = [
     id: `dress_other_self.headwear`,
     instructionKey: "TASK.Dress.Other_Self.Public",
     instruction_args: {
-      clothing: "clothes.headwear.name",
+      clothing: "{clothes.headwear.name}",
       loser: "Loser",
       winner1: "Winner1",
     },
@@ -53,7 +53,7 @@ export const tasks_dress_other_self = [
     id: `dress_other_self.accessories_glasses`,
     instructionKey: "TASK.Dress.Other_Self.Public",
     instruction_args: {
-      clothing: "clothes.accessories_glasses.name",
+      clothing: "{clothes.accessories_glasses.name}",
       loser: "Loser",
       winner1: "Winner1",
     },
@@ -94,7 +94,7 @@ export const tasks_dress_other_self = [
     id: `dress_other_self.accessories_neck`,
     instructionKey: "TASK.Dress.Other_Self.Public",
     instruction_args: {
-      clothing: "clothes.accessories_neck.name",
+      clothing: "{clothes.accessories_neck.name}",
       loser: "Loser",
       winner1: "Winner1",
     },
@@ -135,7 +135,7 @@ export const tasks_dress_other_self = [
     id: `dress_other_self.accessories_arm`,
     instructionKey: "TASK.Dress.Other_Self.Public",
     instruction_args: {
-      clothing: "clothes.accessories_arm.name",
+      clothing: "{clothes.accessories_arm.name}",
       loser: "Loser",
       winner1: "Winner1",
     },
@@ -174,7 +174,7 @@ export const tasks_dress_other_self = [
     id: `dress_other_self.jacket`,
     instructionKey: "TASK.Dress.Other_Self.Public",
     instruction_args: {
-      clothing: "clothes.jacket.name",
+      clothing: "{clothes.jacket.name}",
       loser: "Loser",
       winner1: "Winner1",
     },
@@ -213,7 +213,7 @@ export const tasks_dress_other_self = [
     id: `dress_other_self.sweater`,
     instructionKey: "TASK.Dress.Other_Self.Public",
     instruction_args: {
-      clothing: "clothes.sweater.name",
+      clothing: "{clothes.sweater.name}",
       loser: "Loser",
       winner1: "Winner1",
     },
@@ -252,7 +252,7 @@ export const tasks_dress_other_self = [
     id: `dress_other_self.shirt`,
     instructionKey: "TASK.Dress.Other_Self.Public",
     instruction_args: {
-      clothing: "clothes.shirt.name",
+      clothing: "{clothes.shirt.name}",
       loser: "Loser",
       winner1: "Winner1",
     },
@@ -291,7 +291,7 @@ export const tasks_dress_other_self = [
     id: `dress_other_self.undershirt`,
     instructionKey: "TASK.Dress.Other_Self.Public",
     instruction_args: {
-      clothing: "clothes.undershirt.name",
+      clothing: "{clothes.undershirt.name}",
       loser: "Loser",
       winner1: "Winner1",
     },
@@ -330,7 +330,7 @@ export const tasks_dress_other_self = [
     id: `dress_other_self.bra`,
     instructionKey: "TASK.Dress.Other_Self.Public",
     instruction_args: {
-      clothing: "clothes.bra.name",
+      clothing: "{clothes.bra.name}",
       loser: "Loser",
       winner1: "Winner1",
     },
@@ -369,7 +369,7 @@ export const tasks_dress_other_self = [
     id: `dress_other_self.pants`,
     instructionKey: "TASK.Dress.Other_Self.Public",
     instruction_args: {
-      clothing: "clothes.pants.name",
+      clothing: "{clothes.pants.name}",
       loser: "Loser",
       winner1: "Winner1",
     },
@@ -408,7 +408,7 @@ export const tasks_dress_other_self = [
     id: `dress_other_self.leggings`,
     instructionKey: "TASK.Dress.Other_Self.Public",
     instruction_args: {
-      clothing: "clothes.leggings.name",
+      clothing: "{clothes.leggings.name}",
       loser: "Loser",
       winner1: "Winner1",
     },
@@ -447,7 +447,7 @@ export const tasks_dress_other_self = [
     id: `dress_other_self.underwear`,
     instructionKey: "TASK.Dress.Other_Self.Public",
     instruction_args: {
-      clothing: "clothes.underwear.name",
+      clothing: "{clothes.underwear.name}",
       loser: "Loser",
       winner1: "Winner1",
     },
@@ -486,7 +486,7 @@ export const tasks_dress_other_self = [
     id: `dress_other_self.shoes`,
     instructionKey: "TASK.Dress.Other_Self.Public",
     instruction_args: {
-      clothing: "clothes.shoes.name",
+      clothing: "{clothes.shoes.name}",
       loser: "Loser",
       winner1: "Winner1",
     },
@@ -525,7 +525,7 @@ export const tasks_dress_other_self = [
     id: `dress_other_self.socks`,
     instructionKey: "TASK.Dress.Other_Self.Public",
     instruction_args: {
-      clothing: "clothes.socks.name",
+      clothing: "{clothes.socks.name}",
       loser: "Loser",
       winner1: "Winner1",
     },

@@ -13,7 +13,7 @@ export const tasks_undress_self = [
     enabled: true,
     id: `undress_self.headwear`,
     instructionKey: "TASK.Undress.Self.Public",
-    instruction_args: { clothing: "clothes.headwear.name", loser: "Loser" },
+    instruction_args: { clothing: "{clothes.headwear.name}", loser: "Loser" },
     conditions: {
       stage: [],
       intensity: [],
@@ -41,7 +41,7 @@ export const tasks_undress_self = [
     id: `undress_self.accessories_glasses`,
     instructionKey: "TASK.Undress.Self.Public",
     instruction_args: {
-      clothing: "clothes.accessories_glasses.name",
+      clothing: "{clothes.accessories_glasses.name}",
       loser: "Loser",
     },
     conditions: {
@@ -73,7 +73,7 @@ export const tasks_undress_self = [
     id: `undress_self.accessories_neck`,
     instructionKey: "TASK.Undress.Self.Public",
     instruction_args: {
-      clothing: "clothes.accessories_neck.name",
+      clothing: "{clothes.accessories_neck.name}",
       loser: "Loser",
     },
     conditions: {
@@ -105,7 +105,7 @@ export const tasks_undress_self = [
     id: `undress_self.accessories_arm`,
     instructionKey: "TASK.Undress.Self.Public",
     instruction_args: {
-      clothing: "clothes.accessories_arm.name",
+      clothing: "{clothes.accessories_arm.name}",
       loser: "Loser",
     },
     conditions: {
@@ -136,7 +136,7 @@ export const tasks_undress_self = [
     enabled: true,
     id: `undress_self.jacket`,
     instructionKey: "TASK.Undress.Self.Public",
-    instruction_args: { clothing: "clothes.jacket.name", loser: "Loser" },
+    instruction_args: { clothing: "{clothes.jacket.name}", loser: "Loser" },
     conditions: {
       stage: [],
       intensity: [],
@@ -163,7 +163,7 @@ export const tasks_undress_self = [
     enabled: true,
     id: `undress_self.sweater`,
     instructionKey: "TASK.Undress.Self.Public",
-    instruction_args: { clothing: "clothes.sweater.name", loser: "Loser" },
+    instruction_args: { clothing: "{clothes.sweater.name}", loser: "Loser" },
     conditions: {
       stage: [STAGE_ENUM.PLAYFUL],
       intensity: [],
@@ -190,7 +190,7 @@ export const tasks_undress_self = [
     enabled: true,
     id: `undress_self.shirt`,
     instructionKey: "TASK.Undress.Self.Public",
-    instruction_args: { clothing: "clothes.shirt.name", loser: "Loser" },
+    instruction_args: { clothing: "{clothes.shirt.name}", loser: "Loser" },
     conditions: {
       stage: [STAGE_ENUM.PLAYFUL],
       intensity: [],
@@ -217,7 +217,7 @@ export const tasks_undress_self = [
     enabled: true,
     id: `undress_self.undershirt`,
     instructionKey: "TASK.Undress.Self.Public",
-    instruction_args: { clothing: "clothes.undershirt.name", loser: "Loser" },
+    instruction_args: { clothing: "{clothes.undershirt.name}", loser: "Loser" },
     conditions: {
       stage: [STAGE_ENUM.PLAYFUL],
       intensity: [],
@@ -244,7 +244,7 @@ export const tasks_undress_self = [
     enabled: true,
     id: `undress_self.bra`,
     instructionKey: "TASK.Undress.Self.Public",
-    instruction_args: { clothing: "clothes.bra.name", loser: "Loser" },
+    instruction_args: { clothing: "{clothes.bra.name}", loser: "Loser" },
     conditions: {
       stage: [STAGE_ENUM.INTIMATE],
       intensity: [],
@@ -271,7 +271,7 @@ export const tasks_undress_self = [
     enabled: true,
     id: `undress_self.pants`,
     instructionKey: "TASK.Undress.Self.Public",
-    instruction_args: { clothing: "clothes.pants.name", loser: "Loser" },
+    instruction_args: { clothing: "{clothes.pants.name}", loser: "Loser" },
     conditions: {
       stage: [STAGE_ENUM.PLAYFUL],
       intensity: [],
@@ -298,7 +298,7 @@ export const tasks_undress_self = [
     enabled: true,
     id: `undress_self.leggings`,
     instructionKey: "TASK.Undress.Self.Public",
-    instruction_args: { clothing: "clothes.leggings.name", loser: "Loser" },
+    instruction_args: { clothing: "{clothes.leggings.name}", loser: "Loser" },
     conditions: {
       stage: [STAGE_ENUM.PLAYFUL],
       intensity: [],
@@ -325,7 +325,7 @@ export const tasks_undress_self = [
     enabled: true,
     id: `undress_self.underwear`,
     instructionKey: "TASK.Undress.Self.Public",
-    instruction_args: { clothing: "clothes.underwear.name", loser: "Loser" },
+    instruction_args: { clothing: "{clothes.underwear.name}", loser: "Loser" },
     conditions: {
       stage: [STAGE_ENUM.INTIMATE],
       intensity: [],
@@ -352,7 +352,7 @@ export const tasks_undress_self = [
     enabled: true,
     id: `undress_self.shoes`,
     instructionKey: "TASK.Undress.Self.Public",
-    instruction_args: { clothing: "clothes.shoes.name", loser: "Loser" },
+    instruction_args: { clothing: "{clothes.shoes.name}", loser: "Loser" },
     conditions: {
       stage: [],
       intensity: [],
@@ -379,7 +379,7 @@ export const tasks_undress_self = [
     enabled: true,
     id: `undress_self.socks`,
     instructionKey: "TASK.Undress.Self.Public",
-    instruction_args: { clothing: "clothes.socks.name", loser: "Loser" },
+    instruction_args: { clothing: "{clothes.socks.name}", loser: "Loser" },
     conditions: {
       stage: [STAGE_ENUM.PLAYFUL],
       intensity: [],

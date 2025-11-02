@@ -374,11 +374,10 @@ function endTurn() {
   players[currentTurnIndex].roundScore = turnScore;
 
   // Volgende speler zoeken, met wrap en skip voor 'safe' spelers
-  const { next, wrapped } = findNextActivePlayerIndex(
+  let { next, wrapped } = findNextActivePlayerIndex(
     currentTurnIndex,
     players
   );
-  window.GAME.game.turnIndex = next;
 
   // Als we terug springen naar 0, is de ronde voorbij
   if (wrapped) {
@@ -386,8 +385,12 @@ function endTurn() {
     CheckForWinner();
     CheckForLoser();
     ResetPlayers(true);
-    const { next, wrapped } = findNextActivePlayerIndex(0, players);
+    const { nextwr, wrappedwr } = findNextActivePlayerIndex(0, players);
+    next = nextwr;
+    wrapped = wrappedwr;
   }
+
+  window.GAME.game.turnIndex = next;
 
   // Reset rolls voor nieuwe beurt
   window.GAME.game.turnRoll = 0;
