@@ -542,11 +542,11 @@ function createSecretTaskElement(task) {
 
       details.append(summary, taskDetailsWrapper, p);
       secretWrapper.append(details);
-
-      const partPlayerLabel = document.createElement("span");
-      partPlayerLabel.innerHTML = `<b>${part.player.name}</b>`;
-      partPlayersWrapper.append(partPlayerLabel);
     }
+
+    const partPlayerLabel = document.createElement("span");
+      partPlayerLabel.innerHTML = `<b>${part.player.name}</b>`;
+      partPlayersWrapper.append(partPlayerLabel)
   }
 
   // Finish
