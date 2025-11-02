@@ -369,37 +369,51 @@ function endTurn() {
 
   const currentTurnIndex = window.GAME?.game?.turnIndex ?? 0;
   const currentRound = window.GAME?.game?.round ?? 0;
+  
+  // 1) Score opslaan
   const turnScore = CalculateScore();
-
-  // Sla speler score op
   players[currentTurnIndex].roundScore = turnScore;
 
-  // Volgende speler zoeken, met wrap en skip voor 'safe' spelers
-  let { next, wrapped } = findNextActivePlayerIndex(
-    currentTurnIndex,
-    players
-  );
+  // 2) Is er in deze ronde nog iemand NA de huidige index die niet safe is?
+  const nextSameRoundIndex = findNextInSameRound(currentTurnIndex, players);
 
-  // Als we terug springen naar 0, is de ronde voorbij
-  if (wrapped) {
+  if (nextSameRoundIndex === -1) {
+    // 3) Ronde voorbij → eerst winner/loser/reset
     window.GAME.game.round = currentRound + 1;
-    CheckForWinner();
+    CheckForWinner();   // let op: hierbinnen score cappen met Math.min(safeScore, score+1)
     CheckForLoser();
-    ResetPlayers(true);
-    const { nextwr, wrappedwr } = findNextActivePlayerIndex(0, players);
-    next = nextwr;
-    wrapped = wrappedwr;
+    ResetPlayers(true); // reset roundScore
+
+    // 4) Nieuwe ronde: kies eerste niet-safe vanaf index 0
+    const startIndex = findNextFromStart(players);
+    window.GAME.game.turnIndex = startIndex;
+  } else {
+    // Volgende speler binnen dezelfde ronde
+    window.GAME.game.turnIndex = nextSameRoundIndex;
   }
 
-  window.GAME.game.turnIndex = next;
-
-  // Reset rolls voor nieuwe beurt
+  // Nieuwe beurt
   window.GAME.game.turnRoll = 0;
-
   updateDiceSet(true);
   gameSaveState();
   UpdateGamePlayers();
   updateGameStatus();
+}
+
+// Helper: zoek eerstvolgende niet-safe speler NA currentIndex, zonder wrap
+function findNextInSameRound(currentIndex, players) {
+  for (let i = currentIndex + 1; i < players.length; i++) {
+    if (!players[i]?.safe) return i;
+  }
+  return -1; // geen volgende binnen deze ronde
+}
+
+// Helper: zoek eerste niet-safe speler vanaf index 0
+function findNextFromStart(players) {
+  for (let i = 0; i < players.length; i++) {
+    if (!players[i]?.safe) return i;
+  }
+  return 0; // fallback: niemand actief → 0; jouw andere logica (loser/nieuwe cyclus) pakt dit verder op
 }
 
 function CalculateScore() {
