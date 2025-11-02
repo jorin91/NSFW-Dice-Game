@@ -984,7 +984,7 @@ function createTaskElement(task) {
   loserWrap.id = "loserContainer";
 
   const loserHeader = document.createElement("h3");
-  setI18n(loserHeader, "app.task.secret.loser.header");
+  setI18n(loserHeader, "app.task.global.loser.header");
 
   const loserContent = document.createElement("p");
 
