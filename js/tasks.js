@@ -12,6 +12,7 @@ import {
 import { getRoundResult } from "./game.js";
 import { switchPanel } from "./panelnavigation.js";
 import { buildTaskExecutionElement } from "./tasks_execution.js";
+import { setI18n } from "./lang_i18n.js";
 
 import { tasks_undress_self } from "./tasks/undress_self.js";
 import { tasks_undress_other_self } from "./tasks/undress_other_self.js";
@@ -974,8 +975,7 @@ function createTaskElement(task) {
 
   // loser panel
   const loserSpan = document.createElement("span");
-  loserSpan.setAttribute("data-i18n", "app.task.secret.loser");
-  loserSpan.setAttribute("data-i18n-target", "html");
+  setI18n(loserSpan, "app.task.secret.loser", null, "html");
 
   // task details
   const taskDetailsWrapper = document.createElement("div");
@@ -989,74 +989,67 @@ function createTaskElement(task) {
 
   // Fill task details and explanation
   const taskID = document.createElement("span");
-  taskID.setAttribute("data-i18n-auto", "app.task.detail.id");
-  taskID.setAttribute("data-i18n-args", JSON.stringify({ taskID: task.id }));
+  setI18n(taskID, "app.task.detail.id", { taskID: task.id });
   taskDetailsWrapper.append(taskID);
 
   const ctx = window.GAME?.game?.currentTask?.chosenCtx;
 
   if (ctx?.stage) {
     const stage = document.createElement("span");
-    stage.setAttribute("data-i18n-auto", "app.task.detail.stage");
-    stage.setAttribute(
-      "data-i18n-args",
-      JSON.stringify({ taskStage: `{${ctx.stage}.name}` })
-    );
+    setI18n(stage, "app.task.detail.stage", {
+      taskStage: `{${ctx.stage}.name}`,
+    });
     taskDetailsWrapper.append(stage);
 
     const stageEx = document.createElement("span");
-    stageEx.setAttribute("data-i18n", "app.task.detail.explanation");
-    stageEx.setAttribute("data-i18n-target", "html");
-    stageEx.setAttribute(
-      "data-i18n-args",
-      JSON.stringify({
+    setI18n(
+      stageEx,
+      "app.task.detail.explanation",
+      {
         taskDetail: `{${ctx.stage}.name}`,
         taskDetailDesc: `{${ctx.stage}.desc}`,
-      })
+      },
+      "html"
     );
     taskDetailsExWrapper.append(stageEx);
   }
 
   if (ctx?.intensity) {
     const intensity = document.createElement("span");
-    intensity.setAttribute("data-i18n-auto", "app.task.detail.intensity");
-    intensity.setAttribute(
-      "data-i18n-args",
-      JSON.stringify({ taskIntensity: `{${ctx.intensity}.name}` })
-    );
+    setI18n(intensity, "app.task.detail.intensity", {
+      taskIntensity: `{${ctx.intensity}.name}`,
+    });
     taskDetailsWrapper.append(intensity);
 
     const intensityEx = document.createElement("span");
-    intensityEx.setAttribute("data-i18n", "app.task.detail.explanation");
-    intensityEx.setAttribute("data-i18n-target", "html");
-    intensityEx.setAttribute(
-      "data-i18n-args",
-      JSON.stringify({
+    setI18n(
+      intensityEx,
+      "app.task.detail.explanation",
+      {
         taskDetail: `{${ctx.intensity}.name}`,
         taskDetailDesc: `{${ctx.intensity}.desc}`,
-      })
+      },
+      "html"
     );
     taskDetailsExWrapper.append(intensityEx);
   }
 
   if (ctx?.extremity) {
     const extremity = document.createElement("span");
-    extremity.setAttribute("data-i18n-auto", "app.task.detail.extremity");
-    extremity.setAttribute(
-      "data-i18n-args",
-      JSON.stringify({ taskExtremity: `{${ctx.extremity}.name}` })
-    );
+    setI18n(extremity, "app.task.detail.extremity", {
+      taskExtremity: `{${ctx.extremity}.name}`,
+    });
     taskDetailsWrapper.append(extremity);
 
     const extremityEx = document.createElement("span");
-    extremityEx.setAttribute("data-i18n", "app.task.detail.explanation");
-    extremityEx.setAttribute("data-i18n-target", "html");
-    extremityEx.setAttribute(
-      "data-i18n-args",
-      JSON.stringify({
+    setI18n(
+      extremityEx,
+      "app.task.detail.explanation",
+      {
         taskDetail: `{${ctx.extremity}.name}`,
         taskDetailDesc: `{${ctx.extremity}.desc}`,
-      })
+      },
+      "html"
     );
     taskDetailsExWrapper.append(extremityEx);
   }
@@ -1066,10 +1059,7 @@ function createTaskElement(task) {
   participatingPlayers.className = "row";
 
   const participatingPlayersLabel = document.createElement("span");
-  participatingPlayersLabel.setAttribute(
-    "data-i18n-auto",
-    "app.task.secret.participatingPlayers"
-  );
+  setI18n(participatingPlayersLabel, "app.task.secret.participatingPlayers");
 
   participatingPlayers.append(participatingPlayersLabel);
 
@@ -1079,14 +1069,14 @@ function createTaskElement(task) {
   globalWrapper.className = "col";
 
   const p = document.createElement("p");
-  p.setAttribute("data-i18n", "app.task.global.instruction");
-  p.setAttribute("data-i18n-target", "html");
-  p.setAttribute(
-    "data-i18n-args",
-    JSON.stringify({
+  setI18n(
+    p,
+    "app.task.global.instruction",
+    {
       globalTaskInstruction: `{${task.instructionKey}}`,
       ...task.instruction_args,
-    })
+    },
+    "html"
   );
 
   // Find loser
@@ -1098,10 +1088,7 @@ function createTaskElement(task) {
 
     // loser label
     if (part.slot === "loser") {
-      loserSpan.setAttribute(
-        "data-i18n-args",
-        JSON.stringify({ loser: part.player.name })
-      );
+      setI18n(loserSpan, null, { loser: part.player.name });
     }
   }
 
@@ -1118,7 +1105,7 @@ function createTaskElement(task) {
     makeSeperator(),
     execElement,
     makeSeperator(),
-    globalWrapper,
+    globalWrapper
   );
   return wrapper;
 }

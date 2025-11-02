@@ -308,18 +308,28 @@ export async function initI18n() {
   });
 }
 
-export function setI18n(el, key, argsObj = null, target = null) {
+export function setI18n(el, key = null, argsObj = null, target = null, update = false, attr = null) {
   if (target) {
     // Gerichte binding, bijvoorbeeld: data-i18n="text" of data-i18n="placeholder"
     el.setAttribute("data-i18n", key);
     el.setAttribute("data-i18n-target", target);
-  } else {
+  } else if (key) {
     // Automatische vertaling (standaard)
     el.setAttribute("data-i18n-auto", key);
   }
 
   if (argsObj && typeof argsObj === "object") {
     el.setAttribute("data-i18n-args", JSON.stringify(argsObj));
+  }
+
+  if (update)
+  {
+    applyI18nToElement(el);
+  }
+
+  if (attr)
+  {
+    el.setAttribute("data-i18n-attr", attr);
   }
 
   return el;

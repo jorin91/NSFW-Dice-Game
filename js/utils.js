@@ -1,4 +1,5 @@
 import { SEX_ENUM } from "./enums.js";
+import { setI18n } from "./lang_i18n.js";
 
 export function deepCopy(o) {
   return JSON.parse(JSON.stringify(o));
@@ -31,7 +32,7 @@ export function makeInputField(
 
   const span = document.createElement("span");
   if (labelI18n) {
-    span.setAttribute("data-i18n-auto", labelI18n);
+    setI18n(span, labelI18n);
   } else {
     span.textContent = name;
   }
@@ -44,9 +45,7 @@ export function makeInputField(
 
   // i18n voor placeholder (attribuut)
   if (placeholderI18n) {
-    input.setAttribute("data-i18n", placeholderI18n);
-    input.setAttribute("data-i18n-target", "attr");
-    input.setAttribute("data-i18n-attr", "placeholder");
+    setI18n(input, labelI18n, null, "attr", false, "placeholder");
   }
 
   // extra attributen
@@ -63,7 +62,7 @@ export function makeSelectField(name, { labelI18n, entries } = {}) {
 
   const span = document.createElement("span");
   if (labelI18n) {
-    span.setAttribute("data-i18n-auto", labelI18n);
+    setI18n(span, labelI18n);
   } else {
     span.textContent = name;
   }
@@ -77,7 +76,7 @@ export function makeSelectField(name, { labelI18n, entries } = {}) {
     opt.value = value;
     // optie-label via i18n (als je keys voor enum hebt), anders fallback naar key
     // Probeer i18n automatisch: data-i18n-auto="SEX_ENUM.Male"
-    opt.setAttribute("data-i18n-auto", value);
+    setI18n(opt, value);
     opt.textContent = key;
     select.appendChild(opt);
   }

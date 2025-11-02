@@ -20,6 +20,7 @@ import {
   ACT_WITH_ENUM,
 } from "./enums.js";
 import { getTasksModel } from "./tasks.js";
+import { setI18n } from "./lang_i18n.js";
 
 export function InitNewGame() {
   UpdatePlayersUI(); // Fill players UI for new game
@@ -88,7 +89,7 @@ export function UpdatePlayersUI(targetId = "newgame-players") {
   const add = document.createElement("button");
   add.type = "button";
   add.className = "bubble";
-  add.setAttribute("data-i18n-auto", "button.addplayer");
+  setI18n(add, "button.addplayer");
   add.setAttribute("data-panel", "newplayer");
   add.addEventListener("click", () => {
     UpdateNewPlayerUI();
@@ -141,7 +142,7 @@ export function UpdateNewPlayerUI() {
   clothesWrap.className = "col small";
 
   const headerClothes = document.createElement("p");
-  headerClothes.setAttribute("data-i18n-auto", "app.newplayer.form.clothes");
+  setI18n(headerClothes, "app.newplayer.form.clothes");
   clothesWrap.append(headerClothes);
 
   Object.entries(playerClothes).forEach(([key, piece]) => {
@@ -154,11 +155,11 @@ export function UpdateNewPlayerUI() {
     cbClothingPiece.checked = !!piece.enabled;
 
     const lbClothingPiece = document.createElement("span");
-    lbClothingPiece.setAttribute("data-i18n-auto", piece.name);
+    setI18n(lbClothingPiece, piece.name);
 
     const lbInfo = document.createElement("p");
     lbInfo.className = "muted";
-    lbInfo.setAttribute("data-i18n-auto", piece.desc);
+    setI18n(lbInfo, piece.desc);
 
     clothesRow.append(cbClothingPiece, lbClothingPiece, lbInfo);
 
@@ -181,16 +182,13 @@ export function UpdateNewPlayerUI() {
   cbConsent.name = "consent";
 
   const lblConsent = document.createElement("span");
-  lblConsent.setAttribute("data-i18n-auto", "app.newplayer.form.consent");
+  setI18n(lblConsent, "app.newplayer.form.consent");
 
   consentRow.append(cbConsent, lblConsent);
 
   const consentInfo = document.createElement("p");
   consentInfo.className = "muted";
-  consentInfo.setAttribute(
-    "data-i18n-auto",
-    "app.newplayer.form.consent.content"
-  );
+  setI18n(consentInfo, "app.newplayer.form.consent.content");
 
   consentWrap.append(consentRow, consentInfo);
 
@@ -201,7 +199,7 @@ export function UpdateNewPlayerUI() {
   const btnCancel = document.createElement("button");
   btnCancel.type = "button";
   btnCancel.className = "btn";
-  btnCancel.setAttribute("data-i18n-auto", "button.cancel");
+  setI18n(btnCancel, "button.cancel");
   btnCancel.setAttribute("data-panel", "newgame");
   btnCancel.addEventListener("click", () => {
     rootNewPlayer.innerHTML = "";
@@ -211,7 +209,7 @@ export function UpdateNewPlayerUI() {
   const btnSave = document.createElement("button");
   btnSave.type = "submit";
   btnSave.className = "btn";
-  btnSave.setAttribute("data-i18n-auto", "button.addplayer");
+  setI18n(btnSave, "button.addplayer");
 
   actions.append(btnCancel, btnSave);
 
@@ -293,7 +291,7 @@ export function ResetGame(
   resetButton.type = "button";
   resetButton.className = "btn";
   resetButton.id = elementID;
-  resetButton.setAttribute("data-i18n-auto", "button.resetgame");
+  setI18n(resetButton, "button.resetgame");
   resetButton.setAttribute("data-panel", "mainmenu");
   resetButton.addEventListener("click", () => {
     resetGameState();
@@ -317,7 +315,7 @@ export function StartGame(
   resetButton.type = "button";
   resetButton.className = "btn";
   resetButton.id = elementID;
-  resetButton.setAttribute("data-i18n-auto", "button.startgame");
+  setI18n(resetButton, "button.startgame");
   resetButton.setAttribute("data-panel", "game");
   resetButton.addEventListener("click", () => {
     // Create Tasks Pool

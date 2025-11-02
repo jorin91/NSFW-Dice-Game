@@ -214,11 +214,13 @@ function fillSettingsList({ targetId, prop, enumObj }) {
 
     const label = document.createElement("label");
     label.setAttribute("for", id);
-    label.setAttribute("data-i18n-auto", `${value}.name`);
+    // label.setAttribute("data-i18n-auto", `${value}.name`);
+    setI18n(label, `${value}.name`);
 
     const desc = document.createElement("span");
     desc.className = "muted";
-    desc.setAttribute("data-i18n-auto", `${value}.descShort`);
+    // desc.setAttribute("data-i18n-auto", `${value}.descShort`);
+    setI18n(desc, `${value}.descShort`);
 
     row.appendChild(cb);
     row.appendChild(label);

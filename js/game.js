@@ -1,7 +1,7 @@
 import { getSexIcon } from "./utils.js";
 import { createDiceInstance, bindDiceToImage, rollAllDice } from "./dices.js";
 import { gameSaveState } from "./gamestate.js";
-import { applyI18nToElement } from "./lang_i18n.js";
+import { applyI18nToElement, setI18n } from "./lang_i18n.js";
 import { buildTaskPanel } from "./tasks.js";
 
 const DiceSet = [];
@@ -27,10 +27,7 @@ function layout(targetId = "GamePanel") {
   playerField.className = "col";
 
   const playerFieldHeader = document.createElement("h3");
-  playerFieldHeader.setAttribute(
-    "data-i18n-auto",
-    "app.game.playerField.Header"
-  );
+  setI18n(playerFieldHeader, "app.game.playerField.Header");
 
   const playerFieldPlayerRow = document.createElement("div");
   playerFieldPlayerRow.id = "PlayerRow";
@@ -44,10 +41,7 @@ function layout(targetId = "GamePanel") {
   rollDiceField.className = "col";
 
   const rollDiceFieldHeader = document.createElement("h3");
-  rollDiceFieldHeader.setAttribute(
-    "data-i18n-auto",
-    "app.game.rollDiceField.Header"
-  );
+  setI18n(rollDiceFieldHeader, "app.game.rollDiceField.Header");
 
   const rollDiceRow = document.createElement("div");
   rollDiceRow.id = "rollDiceRow";
@@ -61,10 +55,7 @@ function layout(targetId = "GamePanel") {
   holdDiceField.className = "col";
 
   const holdDiceFieldHeader = document.createElement("h3");
-  holdDiceFieldHeader.setAttribute(
-    "data-i18n-auto",
-    "app.game.holdDiceField.Header"
-  );
+  setI18n(holdDiceFieldHeader, "app.game.holdDiceField.Header");
 
   const holdDiceRow = document.createElement("div");
   holdDiceRow.id = "holdDiceRow";
@@ -78,32 +69,30 @@ function layout(targetId = "GamePanel") {
   GameStatus.className = "col";
 
   const GameStatusHeader = document.createElement("h3");
-  GameStatusHeader.setAttribute("data-i18n-auto", "app.game.GameStatus.Header");
+  setI18n(GameStatusHeader, "app.game.GameStatus.Header");
 
   const GameStatusPlayerTurn = document.createElement("p");
   GameStatusPlayerTurn.id = "GameStatusPlayerTurn";
-  GameStatusPlayerTurn.setAttribute(
-    "data-i18n",
-    "app.game.GameStatus.PlayerTurn"
-  );
-  GameStatusPlayerTurn.setAttribute("data-i18n-target", "html");
+  setI18n(GameStatusPlayerTurn, "app.game.GameStatus.PlayerTurn", null, "html");
 
   const GameStatusCurrentScore = document.createElement("p");
   GameStatusCurrentScore.id = "GameStatusCurrentScore";
-  GameStatusCurrentScore.setAttribute(
-    "data-i18n",
-    "app.game.GameStatus.CurrentScore"
+  setI18n(
+    GameStatusCurrentScore,
+    "app.game.GameStatus.CurrentScore",
+    null,
+    "html"
   );
-  GameStatusCurrentScore.setAttribute("data-i18n-target", "html");
 
   const GameStatusGameProgress = document.createElement("p");
   GameStatusGameProgress.id = "GameStatusGameProgress";
   GameStatusGameProgress.className = "muted";
-  GameStatusGameProgress.setAttribute(
-    "data-i18n",
-    "app.game.GameStatus.GameProgress"
+  setI18n(
+    GameStatusCurrentScore,
+    "app.game.GameStatus.GameProgress",
+    null,
+    "html"
   );
-  GameStatusGameProgress.setAttribute("data-i18n-target", "html");
 
   GameStatus.append(
     GameStatusHeader,
@@ -118,7 +107,7 @@ function layout(targetId = "GamePanel") {
   gameMenu.className = "col";
 
   const gameMenuHeader = document.createElement("h3");
-  gameMenuHeader.setAttribute("data-i18n-auto", "app.game.gameControls.Header");
+  setI18n(GameStatusCurrentScore, "app.game.gameControls.Header");
 
   const gameMenuRow = document.createElement("div");
   gameMenuRow.id = "gameControlsRow";
@@ -276,7 +265,7 @@ export function updateGameControls(targetId = "gameControlsRow") {
   endTurnButton.type = "button";
   endTurnButton.className = "btn";
   endTurnButton.id = "endTurnButton";
-  endTurnButton.setAttribute("data-i18n-auto", "button.endTurn");
+  setI18n(endTurnButton, "button.endTurn");
   endTurnButton.setAttribute("data-panel", "!");
   endTurnButton.addEventListener("click", () => {
     endTurn();
@@ -286,7 +275,7 @@ export function updateGameControls(targetId = "gameControlsRow") {
   rollButton.type = "button";
   rollButton.className = "btn";
   rollButton.id = "rollDicesButton";
-  rollButton.setAttribute("data-i18n-auto", "button.rollDices");
+  setI18n(rollButton, "button.rollDices");
   rollButton.addEventListener("click", async () => {
     const turnRoll = window.GAME?.game?.turnRoll ?? 0;
     const maxRoll = window.GAME?.game?.settings?.rolls ?? 3;
@@ -312,12 +301,13 @@ export function updateGameControls(targetId = "gameControlsRow") {
   stopButton.type = "button";
   stopButton.className = "btn";
   stopButton.id = "stopButton";
-  stopButton.setAttribute("data-i18n-auto", "button.stopgame");
+  setI18n(stopButton, "button.stopgame");
   stopButton.setAttribute("data-panel", "mainmenu");
   stopButton.addEventListener("click", () => {});
 
   root.append(rollButton, endTurnButton, stopButton);
 }
+
 function resetGame() {}
 
 function updateGameStatus() {
@@ -337,36 +327,42 @@ function updateGameStatus() {
 
   if (PlayerTurn) {
     // PlayerTurn
-    PlayerTurn.setAttribute(
-      "data-i18n-args",
-      JSON.stringify({
+    setI18n(
+      PlayerTurn,
+      null,
+      {
         turnPlayer: activePlayer?.name ?? `Player ${turnIndex + 1}`,
-      })
+      },
+      null,
+      true
     );
-    applyI18nToElement(PlayerTurn);
   }
 
   if (CurrentScore) {
     // CurrentScore
-    CurrentScore.setAttribute(
-      "data-i18n-args",
-      JSON.stringify({
+    setI18n(
+      CurrentScore,
+      null,
+      {
         playerScore: turnScore,
-      })
+      },
+      null,
+      true
     );
-    applyI18nToElement(CurrentScore);
   }
 
   if (GameProgress) {
     // GameProgress
-    GameProgress.setAttribute(
-      "data-i18n-args",
-      JSON.stringify({
+    setI18n(
+      GameProgress,
+      null,
+      {
         gameRoll: `${turnRoll}/${maxRoll}`,
         gameRound: `${gameRound}`,
-      })
+      },
+      null,
+      true
     );
-    applyI18nToElement(GameProgress);
   }
 
   if (rollDicesButton) {
