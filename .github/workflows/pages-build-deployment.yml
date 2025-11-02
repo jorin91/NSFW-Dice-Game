@@ -1,0 +1,48 @@
+name: GitHub Pages Build & Deploy
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+concurrency:
+  group: pages-deployment
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      artifact-path: ${{ steps.upload.outputs.artifact-path }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install & build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Upload Pages artifact
+        id: upload
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./public    # Pas dit aan als jouw build-directory anders heet
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: github-pages
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
