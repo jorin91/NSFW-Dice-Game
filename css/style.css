@@ -132,9 +132,16 @@ h6 {
   opacity: 0.85;
   background: var(--accent);
 }
+.row.grid3:has(input[type="number"]) {
+  border: 1px solid var(--accent);
+}
+.row.grid3:has(input[type="number"]):hover {
+  opacity: 0.85;
+  background: var(--accent);
+}
 .row.grid3:has(input[type="number"]) input[type="number"] {
-  width: 50px;        /* of 5ch / 6em, afhankelijk van look */
-  text-align: right;  /* cijfers mooi rechts */
+  width: 70px; /* of 5ch / 6em, afhankelijk van look */
+  text-align: right; /* cijfers mooi rechts */
 }
 .panel {
   display: none;
