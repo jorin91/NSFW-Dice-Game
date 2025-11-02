@@ -498,7 +498,8 @@ function createSecretTaskElement(task) {
 
   // secretInstruction
   const secretHint = document.createElement("p");
-  secretHint.setAttribute("data-i18n-auto", "app.task.secret.hint");
+  secretHint.setAttribute("data-i18n", "app.task.secret.hint");
+  secretHint.setAttribute("data-i18n-target", "html");
 
   // instruction per participant
   const secretWrapper = document.createElement("div");
@@ -511,7 +512,8 @@ function createSecretTaskElement(task) {
       details.className = "col small";
 
       const summary = document.createElement("summary");
-      summary.setAttribute("data-i18n-auto", "app.task.secret.summary");
+      summary.setAttribute("data-i18n", "app.task.secret.summary");
+      summary.setAttribute("data-i18n-target", "html");
       summary.setAttribute(
         "data-i18n-args",
         JSON.stringify({ player: part.player.name })

@@ -42,8 +42,9 @@
 
   "app.task.title": "Opdracht",
 
-  "app.task.secret.hint" : "Je hebt de optie 'geheime  opdracht' aan staan. De genoemde speler leest zijn instructie maar deelt dit met niemand! De niet deelnemende spelers mogen de instructies wel bekijken om de uitvoer van de opdracht te controleren.",
-  "app.task.secret.summary": "Instructies voor {player}",
+  "app.task.secret.title": "Geheime Opdracht",
+  "app.task.secret.hint" : "<b>{app.task.secret.title}</b><br>De hieronder genoemde spelers lezen om de beurt zijn/haar instructies maar delen dit met niemand en houden dit dus geheim!<br>De niet deelnemende spelers mogen de instructies wel bekijken om de uitvoer van de opdracht te controleren.<br>Vergeet niet om de instructies weer te sluiten!",
+  "app.task.secret.summary": "Instructies voor <b>{player}</b>",
 
   "app.settings.title": "Spel Instellingen",
 
