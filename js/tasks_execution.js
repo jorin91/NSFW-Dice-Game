@@ -123,7 +123,7 @@ function createTimerElement(totalSecondsInit = 60, src = { minutes: 0, seconds: 
  */
 export function buildTaskExecutionElement(task) {
   const wrapper = document.createElement("section");
-  wrapper.className = "task-execution col";
+  wrapper.className = "task-execution col small";
 
   const exec = normalizeExecution(task?.execution);
 
