@@ -382,7 +382,8 @@ function endTurn() {
     window.GAME.game.round = currentRound + 1;
     CheckForWinner();
     CheckForLoser();
-    ResetPlayers(true);
+    // ResetPlayers(true);
+    const { next, wrapped } = findNextActivePlayerIndex(0, players);
   }
 
   // Reset rolls voor nieuwe beurt
@@ -454,7 +455,7 @@ function CheckForLoser() {
   if (activePlayers.length === 1) {
     const loser = activePlayers[0];
 
-    ResetPlayers(true, true);
+    // ResetPlayers(true, true);
     buildTaskPanel();
   }
 }
@@ -463,14 +464,10 @@ export function getRoundResult() {
   const players = window.GAME?.game?.players ?? [];
   if (players.length === 0) return null; // geen spelers → niets doen
 
-  // Filter spelers die nog actief meedoen
-  const activePlayers = players.filter((p) => !p.safe);
-  if (activePlayers.length === 0) return null;
-
   // Als er nog maar één niet-safe speler over is, is dat de verliezer
   if (activePlayers.length === 1) {
-    const loser = activePlayers[0];
-    const winners = players.filter((p) => p !== loser);
+    const loser = players.find((p) => !p.safe);
+    const winners = players.filter((p) => p.safe);
     return { loser, winners };
   }
 
