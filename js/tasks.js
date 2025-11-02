@@ -354,9 +354,7 @@ export function getTasksModel() {
 export function generateTasks() {
   const storedTask = window.GAME?.game?.currentTask ?? null;
   if (storedTask) {
-    return {
-      picked: storedTask,
-    };
+    return storedTask;
   }
 
   const tasksModel = window.GAME?.tasks ?? {};
@@ -433,9 +431,9 @@ export function generateTasks() {
 
   // Kies nu 1 taak; wil je de hele pool bewaren, sla dan pool op in state
   const picked = weightedPick(pool);
-  console.log(picked.task);
+  console.log(picked);
   return {
-    pool,
+    chosenCtx: chosenCtx,
     picked: picked ? picked.task : null,
   };
 }
@@ -577,7 +575,7 @@ export function buildTaskPanel(targetId = "task_content") {
   }
 
   // Store current task to gamestate
-  window.GAME.game.currentTask = generatedTask.picked;
+  window.GAME.game.currentTask = generatedTask;
 
   switchPanel("task");
 }
