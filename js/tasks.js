@@ -785,9 +785,8 @@ function createSecretTaskElement(task) {
 
   // loser panel
   const loserSpan = document.createElement("span");
-  secretHint.setAttribute("data-i18n", "app.task.secret.loser");
-  secretHint.setAttribute("data-i18n-target", "html");
-
+  loserSpan.setAttribute("data-i18n", "app.task.secret.loser");
+  loserSpan.setAttribute("data-i18n-target", "html");
 
   // task details
   const taskDetailsWrapper = document.createElement("div");
