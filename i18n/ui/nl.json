@@ -110,5 +110,21 @@
   "button.resetgame": "Reset Spel",
   "button.stopgame": "Stop Spel",
   "button.rollDices": "Rol Dobbelstenen",
-  "button.endTurn": "Beëindig Beurt"
+  "button.endTurn": "Beëindig Beurt",
+
+  "app.task.exec.header": "Uitvoering",
+
+  "app.task.exec.once.label": "Eenmalige uitvoering",
+
+  "app.task.exec.multiple.label": "Voer deze taak {count} keer uit",
+  "app.task.exec.multiple.progress": "Uitvoering {completed} van {total}",
+
+  "app.task.exec.timer.header": "Tijdgebonden uitvoering",
+  "app.task.exec.timer.hint": "Ingesteld op {mm}m {ss}s",
+  "app.task.exec.timer.display.label": "Tijd",
+  "app.task.exec.timer.btn.start": "Start",
+  "app.task.exec.timer.btn.pause": "Pauze",
+  "app.task.exec.timer.btn.reset": "Reset",
+
+  "app.task.exec.unknown": "Onbekende uitvoeringsmodus"
 }
