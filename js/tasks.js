@@ -983,7 +983,7 @@ function createTaskElement(task) {
   loserWrap.className = "col small";
   loserWrap.id = "loserContainer";
 
-  const loserHeader = document.createElement("h3");
+  const loserHeader = document.createElement("h4");
   setI18n(loserHeader, "app.task.global.loser.header");
 
   const loserContent = document.createElement("p");
