@@ -435,6 +435,7 @@ export function generateTasks() {
   return {
     chosenCtx: chosenCtx,
     picked: picked ? picked.task : null,
+    pool: pool,
   };
 }
 
