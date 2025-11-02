@@ -919,7 +919,7 @@ function createSecretTaskElement(task) {
   // per player instruction
   const instructionWrap = document.createElement("div");
   instructionWrap.id = "instructionContainer";
-  instructionWrap.className = "col small";
+  instructionWrap.className = "col";
 
   const instructionHeader = document.createElement("h4");
   setI18n(instructionHeader, "app.task.secret.title");
@@ -1090,7 +1090,7 @@ function createTaskElement(task) {
   // global instruction
   const instructionWrap = document.createElement("div");
   instructionWrap.id = "instructionContainer";
-  instructionWrap.className = "col small";
+  instructionWrap.className = "col";
 
   const instructionHeader = document.createElement("h4");
   setI18n(instructionHeader, "app.task.global.instructions.header");
