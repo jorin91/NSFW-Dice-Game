@@ -1088,7 +1088,7 @@ function createTaskElement(task) {
   for (const part of task.participants) {
     // participatingPlayers
     const partPlayerLabel = document.createElement("span");
-    partPlayerLabel.innerHTML = `<b>${part.player.name}</b>`;
+    partPlayerLabel.innerHTML = `${part.player.name}`;
     participatingPlayers.append(partPlayerLabel);
 
     // loser label
