@@ -316,7 +316,7 @@ export function StartGame(targetId = "newgamebuttons", elementID = "StartGameBut
     window.GAME.game.diceSet = createDiceSet(window.GAME?.game?.settings?.dices ?? 5);
     window.GAME.game.players = window.GAME?.players;
 
-    setGameWeights(10, 1);
+    setGameWeights(2.00, 0.25);
 
     // init
     InitGame();
@@ -329,7 +329,7 @@ export function StartGame(targetId = "newgamebuttons", elementID = "StartGameBut
 }
 
 // Nieuw: weights automatisch bepalen obv enum-volgorde & enabled settings
-function setGameWeights(start = 2, step = 0.25) {
+function setGameWeights(start = 2.00, step = 0.25) {
   if (!window.GAME?.game?.settings) return;
 
   const enumMap = {
