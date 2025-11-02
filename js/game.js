@@ -490,6 +490,7 @@ function ResetPlayers(resetRound = false, resetGameCycle = false) {
 
     if (resetGameCycle) {
       player.score = 0;
+      player.safe = false;
     }
   });
 }

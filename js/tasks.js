@@ -497,7 +497,7 @@ function createSecretTaskElement(task) {
   secretWrapper.id = "secretInstructionContainer";
   secretWrapper.className = "col";
 
-  for (const part in task.participants) {
+  for (const part of task.participants) {
     if (part.secretInstructionKey) {
       const details = document.createElement("details");
 
