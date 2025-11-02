@@ -107,7 +107,7 @@ function layout(targetId = "GamePanel") {
   gameMenu.className = "col";
 
   const gameMenuHeader = document.createElement("h3");
-  setI18n(GameStatusCurrentScore, "app.game.gameControls.Header");
+  setI18n(gameMenuHeader, "app.game.gameControls.Header");
 
   const gameMenuRow = document.createElement("div");
   gameMenuRow.id = "gameControlsRow";
