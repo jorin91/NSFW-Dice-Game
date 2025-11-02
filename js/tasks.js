@@ -416,6 +416,7 @@ export function generateTasks() {
 
   // Kies nu 1 taak; wil je de hele pool bewaren, sla dan pool op in state
   const picked = weightedPick(pool);
+  console.log(picked.task);
   return {
     pool,
     picked: picked ? picked.task : null,
