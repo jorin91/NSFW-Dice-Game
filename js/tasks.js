@@ -63,6 +63,45 @@ export const TASKS_MODEL = {
     weight: 10,
     tasks: [],
   },
+
+  debug: {
+    enabled: true,
+    weight: 1000,
+    tasks: [
+      {
+        enabled: true,
+        id: `debug_timer`,
+        instructionKey: "Debug Timer Task",
+        instruction_args: {
+          loser: "Loser",
+        },
+        conditions: {
+          stage: [],
+          intensity: [],
+          extremity: [],
+          act_with: [],
+          act_on: [],
+        },
+        participants: [
+          {
+            slot: "loser",
+            player: null,
+            players: [],
+            target: PLAYERTARGET_ENUM.loser,
+            sex: [],
+            secretInstructionKey: "Have fun watching the timer {loser}",
+          },
+        ],
+        effects: [
+          
+        ],
+        flags: {
+          checkPreferSex: false,
+          execution: {type: "timer", seconds: 30},
+        },
+      },
+    ],
+  },
 };
 
 // ——— helpers ———
@@ -904,7 +943,7 @@ function createSecretTaskElement(task) {
   setI18n(secretHintHeader, "app.task.secret.hint.header");
 
   const secretHintContent = document.createElement("p");
-  setI18n(secretHintContent, "app.task.secret.hint.content")
+  setI18n(secretHintContent, "app.task.secret.hint.content");
 
   secretHintWrap.append(secretHintHeader, secretHintContent);
 
@@ -940,10 +979,15 @@ function createSecretTaskElement(task) {
       details.className = "col";
 
       const summary = document.createElement("summary");
-      setI18n(summary, "app.task.secret.summary", { player: part.player.name }, "html")
+      setI18n(
+        summary,
+        "app.task.secret.summary",
+        { player: part.player.name },
+        "html"
+      );
 
       const p = document.createElement("p");
-      setI18n(p, part.secretInstructionKey, task.instruction_args)
+      setI18n(p, part.secretInstructionKey, task.instruction_args);
 
       // Body content
       const b = document.createElement("div");
@@ -980,7 +1024,7 @@ function createSecretTaskElement(task) {
     makeSeperator(),
     instructionWrap,
     makeSeperator(),
-    execElement,
+    execElement
   );
   return wrapper;
 }
@@ -1101,9 +1145,14 @@ function createTaskElement(task) {
   setI18n(instructionHeader, "app.task.global.instructions.header");
 
   const instructionContent = document.createElement("p");
-  setI18n(instructionContent, task.instructionKey, task.instruction_args)
+  setI18n(instructionContent, task.instructionKey, task.instruction_args);
 
-  instructionWrap.append(instructionHeader, taskDetailsWrapper, instructionContent, taskDetailsExWrapper);
+  instructionWrap.append(
+    instructionHeader,
+    taskDetailsWrapper,
+    instructionContent,
+    taskDetailsExWrapper
+  );
 
   // Find loser
   for (const part of task.participants) {
@@ -1129,7 +1178,7 @@ function createTaskElement(task) {
     makeSeperator(),
     instructionWrap,
     makeSeperator(),
-    execElement,
+    execElement
   );
   return wrapper;
 }

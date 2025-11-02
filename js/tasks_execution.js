@@ -1,6 +1,6 @@
 import { setI18n } from "./lang_i18n.js";
 
-/* Notatie: task.execution = { type: 'once' | 'multiple' | 'timer', ...opts } */
+/* Notatie: task.flags.execution = { type: 'once' | 'multiple' | 'timer', ...opts } */
 function normalizeExecution(execution) {
   const type = (execution?.type ?? "once").toLowerCase();
 
@@ -125,7 +125,7 @@ export function buildTaskExecutionElement(task) {
   const wrapper = document.createElement("section");
   wrapper.className = "task-execution col small";
 
-  const exec = normalizeExecution(task?.execution);
+  const exec = normalizeExecution(task?.flags?.execution);
 
   // Algemene header
   const header = document.createElement("h4");
