@@ -22,11 +22,15 @@ async function loadDict(lang) {
 
   const p = (async () => {
     // Als er geen modules gedefinieerd zijn, val terug op root i18n/{lang}.json
-    const modules = Array.isArray(I18N_MODULES) && I18N_MODULES.length ? I18N_MODULES : [""];
+    const modules =
+      Array.isArray(I18N_MODULES) && I18N_MODULES.length ? I18N_MODULES : [""];
     const parts = await Promise.all(
       modules.map((m) =>
         fetchModuleDict(lang, m).catch((e) => {
-          console.warn(`[i18n] overslaan wegens laadfout: ${m}/${lang}.json`, e);
+          console.warn(
+            `[i18n] overslaan wegens laadfout: ${m}/${lang}.json`,
+            e
+          );
           return {};
         })
       )
@@ -211,6 +215,18 @@ export function applyI18nToElement(el) {
     case "LI":
     case "TH":
     case "TD": {
+      const k = el.getAttribute("data-i18n-auto");
+      if (k) {
+        const val = t(k, vars);
+        if (canSetTextDirect(el)) el.textContent = val;
+        else {
+          const slot = findLabelSlot(el);
+          if (slot) slot.textContent = val;
+        }
+      }
+      break;
+    }
+    case "SUMMARY": {
       const k = el.getAttribute("data-i18n-auto");
       if (k) {
         const val = t(k, vars);
