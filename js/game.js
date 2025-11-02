@@ -443,7 +443,7 @@ function CheckForWinner() {
   }
 
   // Verhoog zijn score met 1
-  winner.score = (winner.score ?? 0) + 1;
+  winner.score = Math.min(safeScore, (winner.score ?? 0) + 1);
 
   // Controleer op safe-status
   if (winner.score >= safeScore) {
