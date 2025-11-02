@@ -88,7 +88,7 @@ function layout(targetId = "GamePanel") {
   GameStatusGameProgress.id = "GameStatusGameProgress";
   GameStatusGameProgress.className = "muted";
   setI18n(
-    GameStatusCurrentScore,
+    GameStatusGameProgress,
     "app.game.GameStatus.GameProgress",
     null,
     "html"
