@@ -265,6 +265,16 @@ export function updateGameControls(targetId = "gameControlsRow") {
 
   root.innerHTML = "";
 
+  const endTurnButton = document.createElement("button");
+  endTurnButton.type = "button";
+  endTurnButton.className = "btn";
+  endTurnButton.id = "endTurnButton";
+  endTurnButton.setAttribute("data-i18n-auto", "button.endTurn");
+  endTurnButton.setAttribute("data-panel", "!");
+  endTurnButton.addEventListener("click", () => {
+    endTurn();
+  });
+
   const rollButton = document.createElement("button");
   rollButton.type = "button";
   rollButton.className = "btn";
@@ -276,21 +286,17 @@ export function updateGameControls(targetId = "gameControlsRow") {
 
     if (turnRoll >= maxRoll) return;
 
+    endTurnButton.classList.add("ghost");
+    endTurnButton.disabled = true;
+
     await rollAllDice(DiceSet);
     window.GAME.game.diceSet = DiceSet;
     window.GAME.game.turnRoll++;
     gameSaveState();
     updateGameStatus();
-  });
 
-  const endTurnButton = document.createElement("button");
-  endTurnButton.type = "button";
-  endTurnButton.className = "btn";
-  endTurnButton.id = "endTurnButton";
-  endTurnButton.setAttribute("data-i18n-auto", "button.endTurn");
-  endTurnButton.setAttribute("data-panel", "!");
-  endTurnButton.addEventListener("click", () => {
-    endTurn();
+    endTurnButton.classList.remove("ghost");
+    endTurnButton.disabled = false;
   });
 
   const stopButton = document.createElement("button");

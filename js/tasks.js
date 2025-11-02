@@ -346,6 +346,14 @@ function fillInstructionArgsForParticipants(task) {
   }
 }
 
+function shuffleInPlace(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
 // Main
 export function getTasksModel() {
   return deepCopy(TASKS_MODEL);
@@ -430,6 +438,7 @@ export function generateTasks() {
   }
 
   // Kies nu 1 taak; wil je de hele pool bewaren, sla dan pool op in state
+  // shuffleInPlace(pool); 
   const picked = weightedPick(pool);
   console.log(picked);
   return {
