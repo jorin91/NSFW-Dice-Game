@@ -126,6 +126,7 @@ function fillSettingsList({ targetId, prop, enumObj }) {
   }
 
   root.append(Wrap);
+  gameSaveState();
 }
 
 /* ---------- CONVENIENCE CALLS ---------- */
