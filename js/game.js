@@ -83,24 +83,27 @@ function layout(targetId = "GamePanel") {
   const GameStatusPlayerTurn = document.createElement("p");
   GameStatusPlayerTurn.id = "GameStatusPlayerTurn";
   GameStatusPlayerTurn.setAttribute(
-    "data-i18n-auto",
+    "data-i18n",
     "app.game.GameStatus.PlayerTurn"
   );
+  GameStatusPlayerTurn.setAttribute("data-i18n-target", "html");
 
   const GameStatusCurrentScore = document.createElement("p");
   GameStatusCurrentScore.id = "GameStatusCurrentScore";
   GameStatusCurrentScore.setAttribute(
-    "data-i18n-auto",
+    "data-i18n",
     "app.game.GameStatus.CurrentScore"
   );
+  GameStatusCurrentScore.setAttribute("data-i18n-target", "html");
 
   const GameStatusGameProgress = document.createElement("p");
   GameStatusGameProgress.id = "GameStatusGameProgress";
   GameStatusGameProgress.className = "muted";
   GameStatusGameProgress.setAttribute(
-    "data-i18n-auto",
+    "data-i18n",
     "app.game.GameStatus.GameProgress"
   );
+  GameStatusGameProgress.setAttribute("data-i18n-target", "html");
 
   GameStatus.append(
     GameStatusHeader,
