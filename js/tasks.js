@@ -844,7 +844,7 @@ function createSecretTaskElement(task) {
     // participatingPlayers
     const partPlayerLabel = document.createElement("span");
     partPlayerLabel.innerHTML = `<b>${part.player.name}</b>`;
-    partPlayersWrapper.append(partPlayerLabel);
+    participatingPlayers.append(partPlayerLabel);
 
     // loser label
     if (part.slot === "loser") {
