@@ -329,7 +329,7 @@ export function StartGame(targetId = "newgamebuttons", elementID = "StartGameBut
 }
 
 // Nieuw: weights automatisch bepalen obv enum-volgorde & enabled settings
-function setGameWeights(start = 10, step = 1) {
+function setGameWeights(start = 2, step = 0.25) {
   if (!window.GAME?.game?.settings) return;
 
   const enumMap = {
