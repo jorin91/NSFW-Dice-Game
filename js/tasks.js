@@ -342,7 +342,7 @@ function needsPreferSex(task) {
 function fillInstructionArgsForParticipants(task) {
   for (const part of task.participants) {
     const slot = part.slot  ?? "none";
-    task.instruction_args?.[slot] = part.player.name;
+    task.instruction_args[slot] = part.player.name;
   }
 }
 
