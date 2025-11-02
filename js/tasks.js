@@ -783,6 +783,12 @@ function createSecretTaskElement(task) {
   wrapper.className = "col";
   wrapper.id = "secretTaskContainer";
 
+  // loser panel
+  const loserSpan = document.createElement("span");
+  secretHint.setAttribute("data-i18n", "app.task.secret.loser");
+  secretHint.setAttribute("data-i18n-target", "html");
+
+
   // task details
   const taskDetailsWrapper = document.createElement("div");
   taskDetailsWrapper.id = "taskDetailsContainer";
@@ -794,21 +800,21 @@ function createSecretTaskElement(task) {
   taskDetailsWrapper.append(taskID);
 
   // secretInstruction
-  const secretHint = document.createElement("p");
-  secretHint.setAttribute("data-i18n", "app.task.secret.hint");
-  secretHint.setAttribute("data-i18n-target", "html");
+  const secretTaskInstruction = document.createElement("p");
+  secretTaskInstruction.setAttribute("data-i18n", "app.task.secret.taskInstruction");
+  secretTaskInstruction.setAttribute("data-i18n-target", "html");
 
   // participating players
-  const partPlayersWrapper = document.createElement("div");
-  partPlayersWrapper.className = "row";
+  const participatingPlayers = document.createElement("div");
+  participatingPlayers.className = "row";
 
-  const partPlayersLabel = document.createElement("span");
-  partPlayersLabel.setAttribute(
+  const participatingPlayersLabel = document.createElement("span");
+  participatingPlayersLabel.setAttribute(
     "data-i18n-auto",
-    "app.task.secret.partPlayers"
+    "app.task.secret.participatingPlayers"
   );
 
-  partPlayersWrapper.append(partPlayersLabel);
+  participatingPlayers.append(participatingPlayersLabel);
 
   // instruction per participant
   const secretWrapper = document.createElement("div");
@@ -836,16 +842,24 @@ function createSecretTaskElement(task) {
       secretWrapper.append(details);
     }
 
+    // participatingPlayers
     const partPlayerLabel = document.createElement("span");
     partPlayerLabel.innerHTML = `<b>${part.player.name}</b>`;
     partPlayersWrapper.append(partPlayerLabel);
+
+    // loser label
+    if (part.slot === "loser") {
+      loserSpan.setAttribute("data-i18n-args", JSON.stringify({loser: part.player.name}));
+    }
   }
 
   // Finish
   wrapper.append(
-    secretHint,
+    loserSpan,
     makeSeperator(),
-    partPlayersWrapper,
+    secretTaskInstruction,
+    makeSeperator(),
+    participatingPlayers,
     makeSeperator(),
     secretWrapper
   );
