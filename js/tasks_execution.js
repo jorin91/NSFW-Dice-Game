@@ -1,67 +1,68 @@
-/**
- * Normaliseert de execution-spec uit de task.
- * Toegestane vormen:
- *   { type: 'once' }
- *   { type: 'multiple', count: <int>=3 }
- *   { type: 'timer', minutes?: <int>=0, seconds?: <int>=60 }
- */
-function normalizeExecution(execution) {
-  const type = (execution?.type ?? 'once').toLowerCase();
+import { setI18n } from "./lang_i18n";
 
-  if (type === 'multiple') {
+/* Notatie: task.execution = { type: 'once' | 'multiple' | 'timer', ...opts } */
+function normalizeExecution(execution) {
+  const type = (execution?.type ?? "once").toLowerCase();
+
+  if (type === "multiple") {
     const raw = execution?.count;
     let count = Number.isFinite(raw) ? Math.trunc(raw) : 3;
     if (count < 1) count = 1;
-    return { type: 'multiple', count };
+    return { type: "multiple", count };
   }
 
-  if (type === 'timer') {
+  if (type === "timer") {
     const m = Number.isFinite(execution?.minutes) ? Math.trunc(execution.minutes) : 0;
     const s = Number.isFinite(execution?.seconds) ? Math.trunc(execution.seconds) : 60;
     let total = Math.max(0, m * 60 + s);
-    // Nooit 0: geef minimaal 1 seconde zodat UI logisch aanvoelt
-    if (total === 0) total = 1;
-    return { type: 'timer', totalSeconds: total, minutes: m, seconds: s };
+    if (total === 0) total = 1; // voorkom 0s
+    return { type: "timer", totalSeconds: total, minutes: m, seconds: s };
   }
 
-  return { type: 'once' };
+  return { type: "once" };
 }
 
 function formatTimeMMSS(totalSeconds) {
   const sec = Math.max(0, Math.trunc(totalSeconds));
   const mm = Math.floor(sec / 60);
   const ss = sec % 60;
-  return `${mm}:${String(ss).padStart(2, '0')}`;
+  return `${mm}:${String(ss).padStart(2, "0")}`;
 }
 
-/**
- * Bouwt de timer UI.
- * Retourneert een <div> met display + start/pauze/reset.
- * Dispatcht custom events:
- *  - 'task:timer:start'
- *  - 'task:timer:pause'
- *  - 'task:timer:reset'
- *  - 'task:timer:finish'  (bij 0)
- */
-function createTimerElement(totalSecondsInit = 60) {
-  const root = document.createElement('div');
-  root.className = 'task-timer row';
+/* Timer-UI met i18n-keys op header/knoppen */
+function createTimerElement(totalSecondsInit = 60, src = { minutes: 0, seconds: 60 }) {
+  const root = document.createElement("div");
+  root.className = "task-timer col";
 
-  const display = document.createElement('span');
-  display.className = 'timer-display';
+  const header = document.createElement("h4");
+  setI18n(header, "app.task.exec.timer.header"); // "Tijdgebonden uitvoering"
+
+  const hint = document.createElement("p");
+  setI18n(hint, "app.task.exec.timer.hint", {
+    mm: Math.trunc(src.minutes ?? 0),
+    ss: Math.trunc(src.seconds ?? 0),
+  }); // "Ingesteld op {mm}m {ss}s"
+
+  const row = document.createElement("div");
+  row.className = "row";
+
+  const display = document.createElement("span");
+  display.className = "timer-display";
+  // display-tekst is numeriek, maar we geven een i18n-label mee voor toegankelijkheid
+  setI18n(display, "app.task.exec.timer.display.label"); // "Tijd"
   display.textContent = formatTimeMMSS(totalSecondsInit);
 
-  const btnStart = document.createElement('button');
-  btnStart.className = 'btn btn-start';
-  btnStart.textContent = 'Start';
+  const btnStart = document.createElement("button");
+  btnStart.className = "btn btn-start";
+  setI18n(btnStart, "app.task.exec.timer.btn.start"); // "Start"
 
-  const btnPause = document.createElement('button');
-  btnPause.className = 'btn btn-pause';
-  btnPause.textContent = 'Pauze';
+  const btnPause = document.createElement("button");
+  btnPause.className = "btn btn-pause";
+  setI18n(btnPause, "app.task.exec.timer.btn.pause"); // "Pauze"
 
-  const btnReset = document.createElement('button');
-  btnReset.className = 'btn btn-reset';
-  btnReset.textContent = 'Reset';
+  const btnReset = document.createElement("button");
+  btnReset.className = "btn btn-reset";
+  setI18n(btnReset, "app.task.exec.timer.btn.reset"); // "Reset"
 
   let remaining = Math.max(1, Math.trunc(totalSecondsInit));
   let tickId = null;
@@ -71,8 +72,8 @@ function createTimerElement(totalSecondsInit = 60) {
   };
 
   const start = () => {
-    if (tickId) return; // al bezig
-    root.dispatchEvent(new CustomEvent('task:timer:start'));
+    if (tickId) return;
+    root.dispatchEvent(new CustomEvent("task:timer:start"));
     tickId = setInterval(() => {
       remaining = Math.max(0, remaining - 1);
       updateDisplay();
@@ -81,14 +82,12 @@ function createTimerElement(totalSecondsInit = 60) {
         tickId = null;
 
         // TODO: playTimerEndSound();
-        // Voorbeeld:
         // const audio = new Audio('media/timer_end.mp3'); audio.play().catch(()=>{});
 
         // TODO: enableCompleteButton();
-        // Bijvoorbeeld:
         // document.querySelector('#task-complete')?.removeAttribute('disabled');
 
-        root.dispatchEvent(new CustomEvent('task:timer:finish'));
+        root.dispatchEvent(new CustomEvent("task:timer:finish"));
       }
     }, 1000);
   };
@@ -97,80 +96,82 @@ function createTimerElement(totalSecondsInit = 60) {
     if (!tickId) return;
     clearInterval(tickId);
     tickId = null;
-    root.dispatchEvent(new CustomEvent('task:timer:pause'));
+    root.dispatchEvent(new CustomEvent("task:timer:pause"));
   };
 
   const reset = () => {
     pause();
     remaining = Math.max(1, Math.trunc(totalSecondsInit));
     updateDisplay();
-    root.dispatchEvent(new CustomEvent('task:timer:reset'));
+    root.dispatchEvent(new CustomEvent("task:timer:reset"));
   };
 
-  btnStart.addEventListener('click', start);
-  btnPause.addEventListener('click', pause);
-  btnReset.addEventListener('click', reset);
+  btnStart.addEventListener("click", start);
+  btnPause.addEventListener("click", pause);
+  btnReset.addEventListener("click", reset);
 
-  root.append(display, btnStart, btnPause, btnReset);
+  row.append(display, btnStart, btnPause, btnReset);
+  root.append(header, hint, row);
   return root;
 }
 
 /**
- * Bouwt een uitvoerings-element op basis van task.execution
- * @param {Object} task - jouw task object met task.execution = { type, ... }
- * @returns {HTMLElement} - invoegbaar element (tekst of timer-UI)
+ * Bouwt een uitvoerings-element op basis van task.execution (i18n-ready).
+ * - once  -> header + label
+ * - multiple -> header + label (met {count}) of voortgang (met {completed}/{total})
+ * - timer -> header + hint + display + knoppen
  */
 export function buildTaskExecutionElement(task) {
-  const wrapper = document.createElement('div');
-  wrapper.className = 'task-execution col';
+  const wrapper = document.createElement("section");
+  wrapper.className = "task-execution col";
 
   const exec = normalizeExecution(task?.execution);
 
-  // once
-  if (exec.type === 'once') {
-    const span = document.createElement('span');
-    span.className = 'exec-label';
-    span.textContent = 'Eenmalige uitvoering';
-    wrapper.appendChild(span);
+  // Algemene header
+  const header = document.createElement("h4");
+  setI18n(header, "app.task.exec.header"); // "Uitvoering"
+  wrapper.appendChild(header);
+
+  if (exec.type === "once") {
+    const text = document.createElement("p");
+    setI18n(text, "app.task.exec.once.label"); // "Eenmalige uitvoering"
+    wrapper.appendChild(text);
     return wrapper;
   }
 
-  // multiple
-  if (exec.type === 'multiple') {
-    const span = document.createElement('span');
-    span.className = 'exec-label';
-    // Optionele voortgangsweergave (placeholder; jouw code kan completedRuns updaten):
+  if (exec.type === "multiple") {
     const completed = Math.max(0, Math.trunc(task?.state?.completedRuns ?? 0));
     const total = exec.count;
-    const text = completed > 0 ? `Uitvoering ${completed} van ${total}` : `Voer deze taak ${total} keer uit`;
-    span.textContent = text;
-    wrapper.appendChild(span);
+
+    const text = document.createElement("p");
+    if (completed > 0) {
+      // "Uitvoering {completed} van {total}"
+      setI18n(text, "app.task.exec.multiple.progress", { completed, total });
+    } else {
+      // "Voer deze taak {count} keer uit"
+      setI18n(text, "app.task.exec.multiple.label", { count: total });
+    }
+    wrapper.appendChild(text);
     return wrapper;
   }
 
-  // timer
-  if (exec.type === 'timer') {
-    const title = document.createElement('span');
-    title.className = 'exec-label';
-    // Toon ook de broninput (m en s) in kleine noot, handig voor debug
-    title.textContent = 'Tijdgebonden uitvoering';
-
-    const timerEl = createTimerElement(exec.totalSeconds);
-
-    // Optional: luister op finish om meteen iets te doen vanuit de helper
-    timerEl.addEventListener('task:timer:finish', () => {
-      // TODO: enableCompleteButton();
-      // document.querySelector('#task-complete')?.removeAttribute('disabled');
+  if (exec.type === "timer") {
+    const timerEl = createTimerElement(exec.totalSeconds, {
+      minutes: exec.minutes ?? 0,
+      seconds: exec.seconds ?? 0,
     });
 
-    wrapper.append(title, timerEl);
+    // Optioneel: interop met jouw paneel
+    timerEl.addEventListener("task:timer:finish", () => {
+      // TODO: enableCompleteButton();
+    });
+
+    wrapper.appendChild(timerEl);
     return wrapper;
   }
 
-  // fallback
-  const span = document.createElement('span');
-  span.className = 'exec-label';
-  span.textContent = 'Onbekende uitvoeringsmodus';
-  wrapper.appendChild(span);
+  const fallback = document.createElement("p");
+  setI18n(fallback, "app.task.exec.unknown"); // "Onbekende uitvoeringsmodus"
+  wrapper.appendChild(fallback);
   return wrapper;
 }

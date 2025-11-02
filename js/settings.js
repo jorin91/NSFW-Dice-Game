@@ -7,6 +7,7 @@ import {
 } from "./enums.js";
 import { gameSaveState } from "./gamestate.js";
 import { getTasksModel } from "./tasks.js";
+import { setI18n } from "./lang_i18n";
 
 export function initGameSettings() {
   fillSettingsGeneral();
@@ -91,12 +92,14 @@ function fillSettingsGeneral(targetId = "settings_general") {
 
     const lab = document.createElement("label");
     lab.setAttribute("for", id);
-    lab.setAttribute("data-i18n-auto", baseI18nKey);
+    // lab.setAttribute("data-i18n-auto", baseI18nKey);
+    setI18n(lab, baseI18nKey);
 
     const span = document.createElement("span");
     span.className = "muted";
     // toon de korte beschrijving
-    span.setAttribute("data-i18n-auto", `${baseI18nKey}.descShort`);
+    // span.setAttribute("data-i18n-auto", `${baseI18nKey}.descShort`);
+    setI18n(span, `${baseI18nKey}.descShort`);
 
     row.appendChild(inputEl);
     row.appendChild(lab);
