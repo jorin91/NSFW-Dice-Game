@@ -79,18 +79,37 @@ function weightedRandomEntry(entries) {
   return list[list.length - 1];
 }
 
-function getRandomGameContext(gameWeights) {
-  return {
-    stage: pickFromWeights(gameWeights.stage),
-    intensity: pickFromWeights(gameWeights.intensity),
-    extremity: pickFromWeights(gameWeights.extremity),
-  };
+function pickFromWeights(arr) {
+  const valid = Array.isArray(arr)
+    ? arr.filter(x => Number(x?.weight) > 0 && (x?.value !== undefined || x?.key !== undefined))
+    : [];
+
+  if (valid.length === 0) return null;
+
+  const total = valid.reduce((s, x) => s + Number(x.weight), 0);
+  let roll = Math.random() * total;
+
+  for (const it of valid) {
+    roll -= Number(it.weight);
+    if (roll <= 0) {
+      // return een betekenisvolle payload; bij jou is .value "STAGE_ENUM.*"
+      return it.value ?? it.key ?? it;
+    }
+  }
+  const last = valid[valid.length - 1];
+  return last.value ?? last.key ?? last;
 }
 
-function pickFromWeights(weightArray) {
-  if (!Array.isArray(weightArray) || weightArray.length === 0) return null;
-  const chosen = weightedRandomEntry(weightArray);
-  return chosen ? chosen.value : null;
+function getRandomGameContext(gameWeights = {}) {
+  const pick = (arr) => (Array.isArray(arr) && arr.length > 0) ? pickFromWeights(arr) : null;
+
+  return {
+    stage:     pick(gameWeights.stage),
+    intensity: pick(gameWeights.intensity),
+    extremity: pick(gameWeights.extremity),
+    act_with:  pick(gameWeights.act_with),
+    act_on:    pick(gameWeights.act_on),
+  };
 }
 
 function arraysIntersect(a, b) {
