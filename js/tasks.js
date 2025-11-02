@@ -501,6 +501,7 @@ function createSecretTaskElement(task) {
   for (const part of task.participants) {
     if (part.secretInstructionKey) {
       const details = document.createElement("details");
+      details.className = "col small";
 
       const summary = document.createElement("summary");
       summary.setAttribute("data-i18n-auto", "app.task.secret.summary");
@@ -513,13 +514,13 @@ function createSecretTaskElement(task) {
       p.setAttribute("data-i18n-auto", part.secretInstructionKey);
       p.setAttribute("data-i18n-args", JSON.stringify(task.instruction_args));
 
-      details.append(summary, p);
+      details.append(summary, taskDetailsWrapper, p);
       secretWrapper.append(details);
     }
   }
 
   // Finish
-  wrapper.append(taskDetailsWrapper, secretHint, secretWrapper);
+  wrapper.append(secretHint, secretWrapper);
   return wrapper;
 }
 
