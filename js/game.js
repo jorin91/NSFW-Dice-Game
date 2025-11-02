@@ -457,6 +457,25 @@ function CheckForLoser() {
   }
 }
 
+export function getRoundResult() {
+  const players = window.GAME?.game?.players ?? [];
+  if (players.length === 0) return null; // geen spelers → niets doen
+
+  // Filter spelers die nog actief meedoen
+  const activePlayers = players.filter((p) => !p.safe);
+  if (activePlayers.length === 0) return null;
+
+  // Als er nog maar één niet-safe speler over is, is dat de verliezer
+  if (activePlayers.length === 1) {
+    const loser = activePlayers[0];
+    const winners = players.filter((p) => p !== loser);
+    return { loser, winners };
+  }
+
+  // Nog geen enkele duidelijke verliezer
+  return null;
+}
+
 function ResetPlayers(resetRound = false, resetGameCycle = false) {
   const players = window.GAME?.game?.players ?? [];
   const playerCount = players.length;

@@ -8,12 +8,13 @@
   "TASK.Undress.Self_Other.Public": "{loser} doet bij {winner1} zijn/haar {clothing} uit of verwijdert het.",
   "TASK.Undress.Self_Other.Secret.Loser": "Doe bij {winner1} zijn/haar {clothing} uit of verwijder het.",
 
+  "TASK.Dress.Self.Public": "{loser} trekt zijn/haar {clothing} aan of doet het om.",
+  "TASK.Dress.Self.Secret": "Trek je {clothing} aan of doe het om.",
 
+  "TASK.Dress.Other_Self.Public": "{winner1} trekt bij {loser} zijn/haar {clothing} aan of doet het om.",
+  "TASK.Dress.Other_Self.Secret.Winner1": "Trek bij {loser} zijn/haar {clothing} aan of doe het om.",
 
-  
-  "TASK.Dress.Self.Public": "{loser} trekt zijn/haar {clothing} aan of doet het weer om.",
-  "TASK.Dress.Self.Secret": "Trek je {clothing} aan of doe het weer om.",
+  "TASK.Dress.Self_Other.Public": "{loser} trekt bij {winner1} zijn/haar {clothing} aan of doet het om.",
+  "TASK.Dress.Self_Other.Secret.Loser": "Trek bij {winner1} zijn/haar {clothing} aan of doe het om."
 
-  "TASK.Dress.Other.Public": "{loser} trekt bij {winner1} zijn/haar {clothing} aan of doet het om.",
-  "TASK.Dress.Other.Secret.Loser": "Trek bij {winner1} zijn/haar {clothing} aan of doe het om."
 }

@@ -12,6 +12,7 @@ import { getClothesModel } from "./clothing.js";
 import { InitUpdate } from "./init.js";
 import { InitGame } from "./game.js";
 import { createDiceSet } from "./dices.js";
+import { STAGE_ENUM, INTENSITY_ENUM, EXTREMITY_ENUM, ACT_ON_ENUM, ACT_WITH_ENUM } from "./enums.js";
 
 export function InitNewGame() {
   UpdatePlayersUI(); // Fill players UI for new game
@@ -315,6 +316,8 @@ export function StartGame(targetId = "newgamebuttons", elementID = "StartGameBut
     window.GAME.game.diceSet = createDiceSet(window.GAME?.game?.settings?.dices ?? 5);
     window.GAME.game.players = window.GAME?.players;
 
+    setGameWeights(10, 1);
+
     // init
     InitGame();
 
@@ -323,4 +326,41 @@ export function StartGame(targetId = "newgamebuttons", elementID = "StartGameBut
   });
 
   root.append(resetButton);
+}
+
+// Nieuw: weights automatisch bepalen obv enum-volgorde & enabled settings
+function setGameWeights(start = 10, step = 1) {
+  if (!window.GAME?.game?.settings) return;
+
+  const enumMap = {
+    stage: STAGE_ENUM,
+    intensity: INTENSITY_ENUM,
+    extremity: EXTREMITY_ENUM,
+    act_with: ACT_WITH_ENUM,
+    act_on: ACT_ON_ENUM,
+  };
+
+  window.GAME.game.weights = window.GAME.game.weights || {
+    stage: [], intensity: [], extremity: [], act_with: [], act_on: [],
+  };
+
+  for (const [prop, enumObj] of Object.entries(enumMap)) {
+    const cfg = window.GAME.game.settings[prop] || {};
+    const out = [];
+    let w = start;
+
+    for (const enumKey of Object.keys(enumObj)) {
+      const enabled = !!cfg[enumKey]?.enabled;
+      if (!enabled) continue;
+
+      out.push({
+        key: enumKey,                  // bv. "MEDIUM"
+        value: enumObj[enumKey],       // bv. "INTENSITY_ENUM.MEDIUM"
+        weight: w
+      });
+      w = Math.max(0, w - step);
+    }
+
+    window.GAME.game.weights[prop] = out;
+  }
 }
