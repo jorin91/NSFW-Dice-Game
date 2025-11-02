@@ -41,6 +41,10 @@
   "app.game.gameControls.Header": "Besturing",
 
   "app.task.title": "Opdracht",
+  "app.task.detail.stage": "Fase: {taskStage}",
+  "app.task.detail.intensity": "Intensiteit: {taskIntensity}",
+  "app.task.detail.extremity": "Extremiteit: {taskExtremity}",
+  "app.task.detail.id": "ID: {taskID}",
 
   "app.task.secret.title": "Geheime Opdracht",
   "app.task.secret.loser": "Verliezer: <b>{loser}</b>",
