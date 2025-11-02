@@ -7,7 +7,7 @@ import {
 } from "./enums.js";
 import { gameSaveState } from "./gamestate.js";
 import { getTasksModel } from "./tasks.js";
-import { setI18n } from "./lang_i18n";
+import { setI18n } from "./lang_i18n.js";
 
 export function initGameSettings() {
   fillSettingsGeneral();

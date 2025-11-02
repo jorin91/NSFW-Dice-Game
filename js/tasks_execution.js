@@ -1,4 +1,4 @@
-import { setI18n } from "./lang_i18n";
+import { setI18n } from "./lang_i18n.js";
 
 /* Notatie: task.execution = { type: 'once' | 'multiple' | 'timer', ...opts } */
 function normalizeExecution(execution) {
