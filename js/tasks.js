@@ -801,7 +801,7 @@ function createSecretTaskElement(task) {
 
   // loser panel
   const loserWrap = document.createElement("div");
-  loserWrap.className = "col small";
+  loserWrap.className = "col";
   loserWrap.id = "loserContainer";
 
   const loserHeader = document.createElement("h4");
@@ -895,17 +895,22 @@ function createSecretTaskElement(task) {
     taskDetailsExWrapper.append(extremityEx);
   }
 
-  // secretInstruction
-  const secretTaskInstruction = document.createElement("p");
-  secretTaskInstruction.setAttribute(
-    "data-i18n",
-    "app.task.secret.taskInstruction"
-  );
-  secretTaskInstruction.setAttribute("data-i18n-target", "html");
+  // secretHint
+  const secretHintWrap = document.createElement("div");
+  secretHintWrap.className = "col";
+  secretHintWrap.id = "secretHintContainer";
+
+  const secretHintHeader = document.createElement("h4");
+  setI18n(secretHintHeader, "app.task.secret.hint.header");
+
+  const secretHintContent = document.createElement("p");
+  setI18n(secretHintContent, "app.task.secret.hint.content")
+
+  secretHintWrap.append(secretHintHeader, secretHintContent);
 
   // participating players
   const participatingWrap = document.createElement("div");
-  participatingWrap.className = "col small";
+  participatingWrap.className = "col";
   participatingWrap.id = "participatingContainer";
 
   const participatingHeader = document.createElement("h4");
@@ -969,7 +974,7 @@ function createSecretTaskElement(task) {
   wrapper.append(
     loserWrap,
     makeSeperator(),
-    secretTaskInstruction,
+    secretHintWrap,
     makeSeperator(),
     participatingWrap,
     makeSeperator(),

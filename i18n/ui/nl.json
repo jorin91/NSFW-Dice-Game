@@ -49,7 +49,8 @@
   "app.task.detail.explanation": "Uitleg {taskDetail}:<br>{taskDetailDesc}",
 
   "app.task.secret.title": "Geheime Opdracht",
-  "app.task.secret.taskInstruction": "{app.task.secret.title}<br>De hieronder genoemde spelers lezen om de beurt zijn/haar instructies maar delen dit met niemand en houden dit dus geheim!<br>De niet deelnemende spelers mogen de instructies wel bekijken om de uitvoer van de opdracht te controleren.<br>Vergeet niet om de instructies weer te sluiten!",
+  "app.task.secret.hint.header": "Geheime Opdracht Instructies",
+  "app.task.secret.hint.content": "De hieronder genoemde spelers lezen om de beurt zijn/haar instructies maar delen dit met niemand en houden dit dus geheim!<br>De niet deelnemende spelers mogen de instructies wel bekijken om de uitvoer van de opdracht te controleren.<br>Vergeet niet om de instructies weer te sluiten!",
   "app.task.secret.summary": "Instructies voor <b>{player}</b>",
 
   "app.task.global.loser.header": "Verliezer",
