@@ -63,6 +63,54 @@ export const TASKS_MODEL = {
 };
 
 // ——— helpers ———
+// Gewogen pick van [{ value, weight }, ...]
+function weightedRandomEntry(entries) {
+  const list = Array.isArray(entries)
+    ? entries.filter((e) => (e?.weight ?? 0) > 0)
+    : [];
+  if (list.length === 0) return null;
+  const total = list.reduce((s, e) => s + (e.weight || 0), 0);
+  let r = Math.random() * total;
+  for (const e of list) {
+    r -= e.weight || 0;
+    if (r <= 0) return e;
+  }
+  return list[list.length - 1];
+}
+
+function pickFromWeightsOrSettings(key, gameSettings, gameWeights) {
+  const enabled = Array.isArray(gameSettings[key]) ? gameSettings[key] : [];
+  if (enabled.length === 0) return null;
+
+  const weighted = (
+    Array.isArray(gameWeights[key]) ? gameWeights[key] : []
+  ).filter((e) => enabled.includes(e?.value) && (e?.weight ?? 0) > 0);
+
+  if (weighted.length > 0) {
+    const win = weightedRandomEntry(weighted);
+    return win ? win.value : null;
+  }
+  // fallback: uniforme keuze uit enabled
+  return enabled[Math.floor(Math.random() * enabled.length)];
+}
+
+// Kies één willekeurige context op basis van weights + settings
+function getRandomGameContext(gameSettings, gameWeights) {
+  return {
+    stage: pickFromWeightsOrSettings("stage", gameSettings, gameWeights),
+    intensity: pickFromWeightsOrSettings(
+      "intensity",
+      gameSettings,
+      gameWeights
+    ),
+    extremity: pickFromWeightsOrSettings(
+      "extremity",
+      gameSettings,
+      gameWeights
+    ),
+  };
+}
+
 function arraysIntersect(a, b) {
   if (!Array.isArray(a) || !Array.isArray(b)) return false;
   if (a.length === 0 || b.length === 0) return false;
@@ -80,15 +128,64 @@ function optionAllowed(taskVals, settingVals) {
   );
 }
 
-function matchesConditions(task, gameSettings) {
+function matchesConditions(task, gameSettings, chosenCtx) {
   const conds = task?.conditions || {};
   if (!gameSettings) return true;
 
-  // Loop dynamisch over alle keys in de conditions
+  // Helpers
+  const mustContainOrEmpty = (key, selectedVal) => {
+    const vals = conds[key];
+    if (!Array.isArray(vals) || vals.length === 0) return true; // leeg = altijd oké
+    return vals.includes(selectedVal);
+  };
+
+  const mustBeSubset = (key) => {
+    const req = conds[key];
+    if (!Array.isArray(req) || req.length === 0) return true;
+    const enabled = new Set(
+      Array.isArray(gameSettings[key]) ? gameSettings[key] : []
+    );
+    return req.every((v) => enabled.has(v));
+  };
+
+  const orOverlap = (key) => {
+    const vals = conds[key];
+    if (!Array.isArray(vals) || vals.length === 0) return true;
+    const enabled = Array.isArray(gameSettings[key]) ? gameSettings[key] : [];
+    return arraysIntersect(vals, enabled);
+  };
+
+  // 1) Specifieke eis: gekozen stage/intensity/extremity moeten in taak staan óf taak is leeg op die sleutel
+  if (chosenCtx?.stage && !mustContainOrEmpty("stage", chosenCtx.stage))
+    return false;
+  if (
+    chosenCtx?.intensity &&
+    !mustContainOrEmpty("intensity", chosenCtx.intensity)
+  )
+    return false;
+  if (
+    chosenCtx?.extremity &&
+    !mustContainOrEmpty("extremity", chosenCtx.extremity)
+  )
+    return false;
+
+  // 2) Specifieke eis: act_with / act_on moeten SUBSET zijn van settings
+  if (!mustBeSubset("act_with")) return false;
+  if (!mustBeSubset("act_on")) return false;
+
+  // 3) Overige keys blijven de oude logica (OR binnen de key)
   for (const [key, values] of Object.entries(conds)) {
-    if (!Array.isArray(values) || values.length === 0) continue; // geen beperking = automatisch goed
-    const settingValues = gameSettings[key];
-    if (!optionAllowed(values, settingValues)) return false;
+    if (
+      key === "stage" ||
+      key === "intensity" ||
+      key === "extremity" ||
+      key === "act_with" ||
+      key === "act_on"
+    ) {
+      continue; // al gedaan
+    }
+    if (!Array.isArray(values) || values.length === 0) continue;
+    if (!orOverlap(key)) return false;
   }
 
   return true;
@@ -253,6 +350,8 @@ export function generateTasks() {
   const gameWeights = window.GAME?.game?.weights ?? {};
   const { loser, winners } = getRoundResult();
 
+  const chosenCtx = getRandomGameContext(gameSettings, gameWeights);
+
   const pool = [];
 
   for (const [catKey, cat] of Object.entries(tasksModel)) {
@@ -273,7 +372,7 @@ export function generateTasks() {
       );
 
       // 1) conditions
-      if (!matchesConditions(task, gameSettings)) continue;
+      if (!matchesConditions(task, gameSettings, chosenCtx)) continue;
 
       // 2) participants -> candidates
       const partsWithCandidates = buildParticipantCandidates(
