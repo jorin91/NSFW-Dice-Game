@@ -1110,7 +1110,7 @@ function createTaskElement(task) {
     makeSeperator(),
     globalWrapper,
     makeSeperator(),
-    execElement
+    execElement,
   );
   return wrapper;
 }
