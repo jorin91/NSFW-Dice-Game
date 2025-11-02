@@ -10,7 +10,6 @@ import {
 } from "./settings.js";
 import { SEX_ENUM } from "./enums.js";
 import { CLOTHING_MODEL } from "./clothing.js";
-import { getTasksModel } from "./tasks.js";
 
 const LS_KEY_GAMESTATE = "NSFWDiceGame_GameState";
 
@@ -66,7 +65,7 @@ export const GAME_FLOW_MODEL = {
     score: 3,
     dices: 5,
   }, // later: maxRolls, pointsToSafe, enz.
-  tasks: getTasksModel(),
+  tasks: null,
   game: {
     // Settings game started with
     settings: {},

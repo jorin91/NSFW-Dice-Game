@@ -311,6 +311,9 @@ export function updateGameControls(targetId = "gameControlsRow") {
 
   root.append(rollButton, endTurnButton, stopButton);
 }
+function resetGame() {
+  
+}
 
 function updateGameStatus() {
   // elements

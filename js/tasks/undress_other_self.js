@@ -19,7 +19,7 @@ export const tasks_undress_other_self = [
       winner1: "Winner1",
     },
     conditions: {
-      stage: [],
+      stage: [STAGE_ENUM.INNOCENT],
       intensity: [],
       extremity: [],
       act_with: [],
@@ -43,7 +43,29 @@ export const tasks_undress_other_self = [
         secretInstructionKey: "TASK.Undress.Other_Self.Secret.Winner1",
       },
     ],
-    effects: [{ type: "clothing.remove", slot: "loser", item: "headwear" }],
+    effects: [
+      { type: "clothing.remove", slot: "loser", item: "headwear" },
+      {
+        type: "weight.category",
+        category: "undress_other_self",
+        op: "mult",
+        value: 0.95,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "PLAYFUL",
+        op: "mult",
+        value: 1.1,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "INNOCENT",
+        op: "mult",
+        value: 0.9,
+      },
+    ],
     flags: {
       checkPreferSex: false,
     },
@@ -58,7 +80,7 @@ export const tasks_undress_other_self = [
       winner1: "Winner1",
     },
     conditions: {
-      stage: [],
+      stage: [STAGE_ENUM.INNOCENT],
       intensity: [],
       extremity: [],
       act_with: [],
@@ -84,6 +106,26 @@ export const tasks_undress_other_self = [
     ],
     effects: [
       { type: "clothing.remove", slot: "loser", item: "accessories_glasses" },
+      {
+        type: "weight.category",
+        category: "undress_other_self",
+        op: "mult",
+        value: 0.95,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "PLAYFUL",
+        op: "mult",
+        value: 1.1,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "INNOCENT",
+        op: "mult",
+        value: 0.9,
+      },
     ],
     flags: {
       checkPreferSex: false,
@@ -99,7 +141,7 @@ export const tasks_undress_other_self = [
       winner1: "Winner1",
     },
     conditions: {
-      stage: [],
+      stage: [STAGE_ENUM.INNOCENT],
       intensity: [],
       extremity: [],
       act_with: [],
@@ -125,6 +167,26 @@ export const tasks_undress_other_self = [
     ],
     effects: [
       { type: "clothing.remove", slot: "loser", item: "accessories_neck" },
+      {
+        type: "weight.category",
+        category: "undress_other_self",
+        op: "mult",
+        value: 0.95,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "PLAYFUL",
+        op: "mult",
+        value: 1.1,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "INNOCENT",
+        op: "mult",
+        value: 0.9,
+      },
     ],
     flags: {
       checkPreferSex: false,
@@ -140,7 +202,7 @@ export const tasks_undress_other_self = [
       winner1: "Winner1",
     },
     conditions: {
-      stage: [],
+      stage: [STAGE_ENUM.INNOCENT],
       intensity: [],
       extremity: [],
       act_with: [],
@@ -166,6 +228,26 @@ export const tasks_undress_other_self = [
     ],
     effects: [
       { type: "clothing.remove", slot: "loser", item: "accessories_arm" },
+      {
+        type: "weight.category",
+        category: "undress_other_self",
+        op: "mult",
+        value: 0.95,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "PLAYFUL",
+        op: "mult",
+        value: 1.1,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "INNOCENT",
+        op: "mult",
+        value: 0.9,
+      },
     ],
     flags: {
       checkPreferSex: false,
@@ -181,7 +263,7 @@ export const tasks_undress_other_self = [
       winner1: "Winner1",
     },
     conditions: {
-      stage: [],
+      stage: [STAGE_ENUM.INNOCENT],
       intensity: [],
       extremity: [],
       act_with: [],
@@ -205,7 +287,29 @@ export const tasks_undress_other_self = [
         secretInstructionKey: "TASK.Undress.Other_Self.Secret.Winner1",
       },
     ],
-    effects: [{ type: "clothing.remove", slot: "loser", item: "jacket" }],
+    effects: [
+      { type: "clothing.remove", slot: "loser", item: "jacket" },
+      {
+        type: "weight.category",
+        category: "undress_other_self",
+        op: "mult",
+        value: 0.95,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "PLAYFUL",
+        op: "mult",
+        value: 1.1,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "INNOCENT",
+        op: "mult",
+        value: 0.9,
+      },
+    ],
     flags: {
       checkPreferSex: false,
     },
@@ -244,7 +348,29 @@ export const tasks_undress_other_self = [
         secretInstructionKey: "TASK.Undress.Other_Self.Secret.Winner1",
       },
     ],
-    effects: [{ type: "clothing.remove", slot: "loser", item: "sweater" }],
+    effects: [
+      { type: "clothing.remove", slot: "loser", item: "sweater" },
+      {
+        type: "weight.category",
+        category: "undress_other_self",
+        op: "mult",
+        value: 0.95,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "INTIMATE",
+        op: "mult",
+        value: 1.1,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "PLAYFUL",
+        op: "mult",
+        value: 0.9,
+      },
+    ],
     flags: {
       checkPreferSex: true,
     },
@@ -283,7 +409,29 @@ export const tasks_undress_other_self = [
         secretInstructionKey: "TASK.Undress.Other_Self.Secret.Winner1",
       },
     ],
-    effects: [{ type: "clothing.remove", slot: "loser", item: "shirt" }],
+    effects: [
+      { type: "clothing.remove", slot: "loser", item: "shirt" },
+      {
+        type: "weight.category",
+        category: "undress_other_self",
+        op: "mult",
+        value: 0.95,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "INTIMATE",
+        op: "mult",
+        value: 1.1,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "PLAYFUL",
+        op: "mult",
+        value: 0.9,
+      },
+    ],
     flags: {
       checkPreferSex: true,
     },
@@ -322,7 +470,29 @@ export const tasks_undress_other_self = [
         secretInstructionKey: "TASK.Undress.Other_Self.Secret.Winner1",
       },
     ],
-    effects: [{ type: "clothing.remove", slot: "loser", item: "undershirt" }],
+    effects: [
+      { type: "clothing.remove", slot: "loser", item: "undershirt" },
+      {
+        type: "weight.category",
+        category: "undress_other_self",
+        op: "mult",
+        value: 0.95,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "INTIMATE",
+        op: "mult",
+        value: 1.1,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "PLAYFUL",
+        op: "mult",
+        value: 0.9,
+      },
+    ],
     flags: {
       checkPreferSex: true,
     },
@@ -361,7 +531,29 @@ export const tasks_undress_other_self = [
         secretInstructionKey: "TASK.Undress.Other_Self.Secret.Winner1",
       },
     ],
-    effects: [{ type: "clothing.remove", slot: "loser", item: "bra" }],
+    effects: [
+      { type: "clothing.remove", slot: "loser", item: "bra" },
+      {
+        type: "weight.category",
+        category: "undress_other_self",
+        op: "mult",
+        value: 0.95,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "SENSUAL",
+        op: "mult",
+        value: 1.1,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "INTIMATE",
+        op: "mult",
+        value: 0.9,
+      },
+    ],
     flags: {
       checkPreferSex: true,
     },
@@ -400,7 +592,29 @@ export const tasks_undress_other_self = [
         secretInstructionKey: "TASK.Undress.Other_Self.Secret.Winner1",
       },
     ],
-    effects: [{ type: "clothing.remove", slot: "loser", item: "pants" }],
+    effects: [
+      { type: "clothing.remove", slot: "loser", item: "pants" },
+      {
+        type: "weight.category",
+        category: "undress_other_self",
+        op: "mult",
+        value: 0.95,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "INTIMATE",
+        op: "mult",
+        value: 1.1,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "PLAYFUL",
+        op: "mult",
+        value: 0.9,
+      },
+    ],
     flags: {
       checkPreferSex: true,
     },
@@ -439,7 +653,29 @@ export const tasks_undress_other_self = [
         secretInstructionKey: "TASK.Undress.Other_Self.Secret.Winner1",
       },
     ],
-    effects: [{ type: "clothing.remove", slot: "loser", item: "leggings" }],
+    effects: [
+      { type: "clothing.remove", slot: "loser", item: "leggings" },
+      {
+        type: "weight.category",
+        category: "undress_other_self",
+        op: "mult",
+        value: 0.95,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "INTIMATE",
+        op: "mult",
+        value: 1.1,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "PLAYFUL",
+        op: "mult",
+        value: 0.9,
+      },
+    ],
     flags: {
       checkPreferSex: true,
     },
@@ -478,7 +714,29 @@ export const tasks_undress_other_self = [
         secretInstructionKey: "TASK.Undress.Other_Self.Secret.Winner1",
       },
     ],
-    effects: [{ type: "clothing.remove", slot: "loser", item: "underwear" }],
+    effects: [
+      { type: "clothing.remove", slot: "loser", item: "underwear" },
+      {
+        type: "weight.category",
+        category: "undress_other_self",
+        op: "mult",
+        value: 0.95,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "SENSUAL",
+        op: "mult",
+        value: 1.1,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "INTIMATE",
+        op: "mult",
+        value: 0.9,
+      },
+    ],
     flags: {
       checkPreferSex: true,
     },
@@ -493,7 +751,7 @@ export const tasks_undress_other_self = [
       winner1: "Winner1",
     },
     conditions: {
-      stage: [],
+      stage: [STAGE_ENUM.INNOCENT],
       intensity: [],
       extremity: [],
       act_with: [],
@@ -517,7 +775,29 @@ export const tasks_undress_other_self = [
         secretInstructionKey: "TASK.Undress.Other_Self.Secret.Winner1",
       },
     ],
-    effects: [{ type: "clothing.remove", slot: "loser", item: "shoes" }],
+    effects: [
+      { type: "clothing.remove", slot: "loser", item: "shoes" },
+      {
+        type: "weight.category",
+        category: "undress_other_self",
+        op: "mult",
+        value: 0.95,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "PLAYFUL",
+        op: "mult",
+        value: 1.1,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "INNOCENT",
+        op: "mult",
+        value: 0.9,
+      },
+    ],
     flags: {
       checkPreferSex: false,
     },
@@ -556,7 +836,29 @@ export const tasks_undress_other_self = [
         secretInstructionKey: "TASK.Undress.Other_Self.Secret.Winner1",
       },
     ],
-    effects: [{ type: "clothing.remove", slot: "loser", item: "socks" }],
+    effects: [
+      { type: "clothing.remove", slot: "loser", item: "socks" },
+      {
+        type: "weight.category",
+        category: "undress_other_self",
+        op: "mult",
+        value: 0.95,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "INTIMATE",
+        op: "mult",
+        value: 1.1,
+      },
+      {
+        type: "weight.game",
+        bucket: "stage",
+        match: "PLAYFUL",
+        op: "mult",
+        value: 0.9,
+      },
+    ],
     flags: {
       checkPreferSex: false,
     },

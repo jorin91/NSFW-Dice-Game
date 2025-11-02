@@ -12,7 +12,14 @@ import { getClothesModel } from "./clothing.js";
 import { InitUpdate } from "./init.js";
 import { InitGame } from "./game.js";
 import { createDiceSet } from "./dices.js";
-import { STAGE_ENUM, INTENSITY_ENUM, EXTREMITY_ENUM, ACT_ON_ENUM, ACT_WITH_ENUM } from "./enums.js";
+import {
+  STAGE_ENUM,
+  INTENSITY_ENUM,
+  EXTREMITY_ENUM,
+  ACT_ON_ENUM,
+  ACT_WITH_ENUM,
+} from "./enums.js";
+import { getTasksModel } from "./tasks.js";
 
 export function InitNewGame() {
   UpdatePlayersUI(); // Fill players UI for new game
@@ -272,7 +279,10 @@ function removePlayerAt(index, targetId) {
   UpdatePlayersUI(targetId);
 }
 
-export function ResetGame(targetId = "newgamebuttons", elementID = "ResetGameButton") {
+export function ResetGame(
+  targetId = "newgamebuttons",
+  elementID = "ResetGameButton"
+) {
   const root = document.getElementById(targetId);
   if (!root) return;
 
@@ -293,7 +303,10 @@ export function ResetGame(targetId = "newgamebuttons", elementID = "ResetGameBut
   root.append(resetButton);
 }
 
-export function StartGame(targetId = "newgamebuttons", elementID = "StartGameButton") {
+export function StartGame(
+  targetId = "newgamebuttons",
+  elementID = "StartGameButton"
+) {
   const root = document.getElementById(targetId);
   if (!root) return;
 
@@ -307,16 +320,21 @@ export function StartGame(targetId = "newgamebuttons", elementID = "StartGameBut
   resetButton.setAttribute("data-i18n-auto", "button.startgame");
   resetButton.setAttribute("data-panel", "game");
   resetButton.addEventListener("click", () => {
+    // Create Tasks Pool
+    window.GAME.tasks = getTasksModel();
+
     // Copy settings to game instance
     window.GAME.game.settings = window.GAME?.settings;
 
     // Set initial values for new game
     window.GAME.game.round = 0;
     window.GAME.game.turnIndex = 0;
-    window.GAME.game.diceSet = createDiceSet(window.GAME?.game?.settings?.dices ?? 5);
+    window.GAME.game.diceSet = createDiceSet(
+      window.GAME?.game?.settings?.dices ?? 5
+    );
     window.GAME.game.players = window.GAME?.players;
 
-    setGameWeights(2.00, 1.50);
+    setGameWeights(2.0, 1.5);
 
     // init
     InitGame();
@@ -329,7 +347,7 @@ export function StartGame(targetId = "newgamebuttons", elementID = "StartGameBut
 }
 
 // Nieuw: weights automatisch bepalen obv enum-volgorde & enabled settings
-function setGameWeights(start = 2.00, step = 1.50) {
+function setGameWeights(start = 2.0, step = 1.5) {
   if (!window.GAME?.game?.settings) return;
 
   const enumMap = {
@@ -341,7 +359,11 @@ function setGameWeights(start = 2.00, step = 1.50) {
   };
 
   window.GAME.game.weights = window.GAME.game.weights || {
-    stage: [], intensity: [], extremity: [], act_with: [], act_on: [],
+    stage: [],
+    intensity: [],
+    extremity: [],
+    act_with: [],
+    act_on: [],
   };
 
   for (const [prop, enumObj] of Object.entries(enumMap)) {
@@ -354,11 +376,11 @@ function setGameWeights(start = 2.00, step = 1.50) {
       if (!enabled) continue;
 
       out.push({
-        key: enumKey,                  // bv. "MEDIUM"
-        value: enumObj[enumKey],       // bv. "INTENSITY_ENUM.MEDIUM"
-        weight: w
+        key: enumKey, // bv. "MEDIUM"
+        value: enumObj[enumKey], // bv. "INTENSITY_ENUM.MEDIUM"
+        weight: w,
       });
-      w = Math.max(0, w - step);
+      w = Math.max(0.01, w - step);
     }
 
     window.GAME.game.weights[prop] = out;

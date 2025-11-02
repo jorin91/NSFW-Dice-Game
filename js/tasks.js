@@ -28,31 +28,31 @@ export const TASKS_MODEL = {
 
   undress_other_self: {
     enabled: true,
-    weight: 8,
+    weight: 6,
     tasks: tasks_undress_other_self,
   },
 
   undress_self_other: {
     enabled: true,
-    weight: 8,
+    weight: 4,
     tasks: tasks_undress_self_other,
   },
 
   dress_self: {
     enabled: true,
-    weight: 6,
+    weight: 5,
     tasks: tasks_dress_self,
   },
 
   dress_other_self: {
     enabled: true,
-    weight: 4,
+    weight: 3,
     tasks: tasks_dress_other_self,
   },
 
   dress_self_other: {
     enabled: true,
-    weight: 4,
+    weight: 2,
     tasks: tasks_dress_self_other,
   },
 
@@ -81,7 +81,11 @@ function weightedRandomEntry(entries) {
 
 function pickFromWeights(arr) {
   const valid = Array.isArray(arr)
-    ? arr.filter(x => Number(x?.weight) > 0 && (x?.value !== undefined || x?.key !== undefined))
+    ? arr.filter(
+        (x) =>
+          Number(x?.weight) > 0 &&
+          (x?.value !== undefined || x?.key !== undefined)
+      )
     : [];
 
   if (valid.length === 0) return null;
@@ -101,14 +105,15 @@ function pickFromWeights(arr) {
 }
 
 function getRandomGameContext(gameWeights = {}) {
-  const pick = (arr) => (Array.isArray(arr) && arr.length > 0) ? pickFromWeights(arr) : null;
+  const pick = (arr) =>
+    Array.isArray(arr) && arr.length > 0 ? pickFromWeights(arr) : null;
 
   return {
-    stage:     pick(gameWeights.stage),
+    stage: pick(gameWeights.stage),
     intensity: pick(gameWeights.intensity),
     extremity: pick(gameWeights.extremity),
-    act_with:  pick(gameWeights.act_with),
-    act_on:    pick(gameWeights.act_on),
+    act_with: pick(gameWeights.act_with),
+    act_on: pick(gameWeights.act_on),
   };
 }
 
@@ -341,7 +346,7 @@ function needsPreferSex(task) {
 
 function fillInstructionArgsForParticipants(task) {
   for (const part of task.participants) {
-    const slot = part.slot  ?? "none";
+    const slot = part.slot ?? "none";
     task.instruction_args[slot] = part.player.name;
   }
 }
@@ -354,6 +359,197 @@ function shuffleInPlace(arr) {
   return arr;
 }
 
+// Helpers: clamp, operation, afronding
+function clampMin(v, min = 0) {
+  const n = Number(v);
+  return Number.isFinite(n) ? Math.max(min, n) : min;
+}
+
+function roundDecimals(value, decimals = 3) {
+  const f = Math.pow(10, decimals);
+  return Math.round((Number(value) || 0) * f) / f;
+}
+
+function clampRange(v, min = 1, max = 10) {
+  const n = Number(v);
+  if (!Number.isFinite(n)) return min;
+  return Math.min(max, Math.max(min, n));
+}
+
+function applyOp(current, op, value) {
+  const x = Number(current) || 0;
+  const v = Number(value) || 0;
+  switch (op) {
+    case "add":
+      return x + v;
+    case "sub":
+      return x - v;
+    case "mult":
+      return x * v;
+    default:
+      return x;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+//  applyGameWeightDelta(bucket, match, op, value, min, max, range, includeSelf, decimals)
+//  ----------------------------------------------------
+//  Wijzigt één of meerdere gewichten in window.GAME.game.weights[bucket],
+//  gebaseerd op een specifieke match of een bereik ten opzichte van die match.
+//
+//  • bucket       → de contextgroep (stage/intensity/extremity/act_with/act_on)
+//  • match        → enum-key of -value als pivot
+//  • op           → "add" | "sub" | "mult"
+//  • value        → numerieke operand
+//  • min/max      → clamps (standaard 1–10)
+//  • range        → null = enkel match, "higher" = boven pivot, "lower" = onder pivot
+//  • includeSelf  → bepaalt of de match zelf ook meedoet in de range
+//  • decimals     → aantal decimalen voor afronding (default 3)
+//
+//  Het gebruikt de volgorde van de bijbehorende enum uit enums.js
+//  (bijv. STAGE_ENUM) om te bepalen wat “hoger” of “lager” betekent.
+//  Ontbrekende enum-entries in game.weights worden automatisch genegeerd.
+//  Wordt aangeroepen door het effecttype "weight.game".
+// ─────────────────────────────────────────────────────────────────────────────
+function applyGameWeightDelta(
+  bucket,
+  match,
+  op,
+  value,
+  min = 1,
+  max = 10,
+  range = null,
+  includeSelf = false,
+  decimals = 3
+) {
+  const arr = window?.GAME?.game?.weights?.[bucket];
+  if (!Array.isArray(arr) || arr.length === 0) return;
+
+  const enumOrder = getEnumOrder(bucket);
+  if (enumOrder.keys.length === 0) return;
+
+  const pivotIdx = getEnumIndex(bucket, match);
+  if ((range === "higher" || range === "lower") && pivotIdx < 0) return;
+
+  // ➊ Bepaal de hoogste aanwezige enum-index in deze bucket
+  const presentIdxs = [];
+  for (const it of arr) {
+    const idx = enumOrder.indexByKey.has(it?.key)
+      ? enumOrder.indexByKey.get(it.key)
+      : enumOrder.indexByValue.has(it?.value)
+      ? enumOrder.indexByValue.get(it.value)
+      : -1;
+    if (idx >= 0) presentIdxs.push(idx);
+  }
+  const maxPresentIdx = presentIdxs.length ? Math.max(...presentIdxs) : -1;
+
+  for (const item of arr) {
+    const itemIdx = enumOrder.indexByKey.has(item?.key)
+      ? enumOrder.indexByKey.get(item.key)
+      : enumOrder.indexByValue.has(item?.value)
+      ? enumOrder.indexByValue.get(item.value)
+      : -1;
+    if (itemIdx < 0) continue;
+
+    let eligible = false;
+    if (range === "higher") {
+      eligible = includeSelf ? itemIdx >= pivotIdx : itemIdx > pivotIdx;
+    } else if (range === "lower") {
+      eligible = includeSelf ? itemIdx <= pivotIdx : itemIdx < pivotIdx;
+    } else {
+      eligible = item?.key === match || item?.value === match;
+    }
+    if (!eligible) continue;
+
+    // ➋ Bereken nieuw gewicht
+    const current = Number(item.weight) || 0;
+    let nextRaw = applyOp(current, op, value);
+
+    // ➌ Als dit de hoogste aanwezige enum is, blokkeer elke daling
+    //    (ongeacht op: add/sub/mult). Vergelijk op raw voor eerlijke check.
+    if (itemIdx === maxPresentIdx && nextRaw < current) {
+      nextRaw = current; // geen vermindering toestaan
+    }
+
+    const next = clampRange(roundDecimals(nextRaw, decimals), min, max);
+    item.weight = next;
+  }
+}
+
+
+// ─────────────────────────────────────────────────────────────────────────────
+//  applyCategoryWeightDelta(category, op, value, min, max, decimals)
+//  ----------------------------------------------------
+//  Past het gewicht van één categorie in window.GAME.tasks aan.
+//
+//  • category → string, categorie-sleutel (bijv. "undress_other_self")
+//  • op       → "add" | "sub" | "mult"
+//  • value    → numerieke operand voor de operatie
+//  • min/max  → clamps (standaard 1–10)
+//  • decimals → aantal decimalen om te behouden (default 3)
+//
+//  Wordt aangeroepen door het effecttype "weight.category".
+// ─────────────────────────────────────────────────────────────────────────────
+function applyCategoryWeightDelta(
+  category,
+  op,
+  value,
+  min = 1,
+  max = 10,
+  decimals = 3
+) {
+  const cat = window?.GAME?.tasks?.[category];
+  if (!cat) return;
+  const nextRaw = applyOp(cat.weight, op, value);
+  const next = clampRange(roundDecimals(nextRaw, decimals), min, max);
+  cat.weight = next;
+}
+
+// enum-volgorde ophalen (keys én values)
+function getEnumForBucket(bucket) {
+  // importeer je enums bovenin tasks.js:
+  // import { STAGE_ENUM, INTENSITY_ENUM, EXTREMITY_ENUM, ACT_WITH_ENUM, ACT_ON_ENUM } from "./enums.js";
+  switch (bucket) {
+    case "stage":
+      return STAGE_ENUM;
+    case "intensity":
+      return INTENSITY_ENUM;
+    case "extremity":
+      return EXTREMITY_ENUM;
+    case "act_with":
+      return ACT_WITH_ENUM;
+    case "act_on":
+      return ACT_ON_ENUM;
+    default:
+      return null;
+  }
+}
+
+function getEnumOrder(bucket) {
+  const E = getEnumForBucket(bucket);
+  if (!E)
+    return {
+      keys: [],
+      values: [],
+      indexByKey: new Map(),
+      indexByValue: new Map(),
+    };
+
+  // behoudt declaratie-volgorde
+  const keys = Object.keys(E); // ["INNOCENT","PLAYFUL",...]
+  const values = Object.values(E); // ["STAGE_ENUM.INNOCENT", "STAGE_ENUM.PLAYFUL", ...]
+  const indexByKey = new Map(keys.map((k, i) => [k, i]));
+  const indexByValue = new Map(values.map((v, i) => [v, i]));
+  return { keys, values, indexByKey, indexByValue };
+}
+
+function getEnumIndex(bucket, match) {
+  const { indexByKey, indexByValue } = getEnumOrder(bucket);
+  if (indexByKey.has(match)) return indexByKey.get(match);
+  if (indexByValue.has(match)) return indexByValue.get(match);
+  return -1;
+}
+
 // Main
 export function getTasksModel() {
   return deepCopy(TASKS_MODEL);
@@ -361,90 +557,89 @@ export function getTasksModel() {
 
 export function generateTasks() {
   const storedTask = window.GAME?.game?.currentTask ?? null;
-  if (storedTask) {
-    return storedTask;
-  }
+  if (storedTask) return storedTask;
 
-  const tasksModel = window.GAME?.tasks ?? {};
+  const tasksModel  = window.GAME?.tasks ?? {};
   const gameSettings = window.GAME?.game?.settings ?? {};
-  const gameWeights = window.GAME?.game?.weights ?? {};
+  const gameWeights  = window.GAME?.game?.weights ?? {};
   const { loser, winners } = getRoundResult();
 
-  const chosenCtx = getRandomGameContext(gameWeights);
+  // lokaal hulpfunctietje om de pool te bouwen voor een gegeven ctx
+  const buildPoolForCtx = (ctx) => {
+    const pool = [];
 
-  const pool = [];
+    for (const [catKey, cat] of Object.entries(tasksModel)) {
+      if (!cat?.enabled) continue;
+      if (!Array.isArray(cat.tasks) || cat.tasks.length === 0) continue;
 
-  for (const [catKey, cat] of Object.entries(tasksModel)) {
-    if (!cat?.enabled) continue;
-    if (!Array.isArray(cat.tasks) || cat.tasks.length === 0) continue;
+      const categoryWeight = Number(cat.weight) || 0;
 
-    const categoryWeight = Number(cat.weight) || 0;
+      for (const task of cat.tasks) {
+        if (task?.enabled === false) continue;
+        if (!(task?.participants?.length > 0)) continue;
 
-    for (const task of cat.tasks) {
-      if (task?.enabled === false) continue;
-      if (!(task?.participants?.length > 0)) continue;
+        const catWeightEffective = effectiveCategoryWeight(categoryWeight, task, gameWeights);
 
-      // Definitieve taak-weight: categorie × per-key-gemiddelden
-      const catWeightEffective = effectiveCategoryWeight(
-        categoryWeight,
-        task,
-        gameWeights
-      );
+        // 1) conditions
+        if (!matchesConditions(task, gameSettings, ctx)) continue;
 
-      // 1) conditions
-      if (!matchesConditions(task, gameSettings, chosenCtx)) continue;
+        // 2) participants -> candidates
+        const partsWithCandidates = buildParticipantCandidates(task.participants, loser, winners);
 
-      // 2) participants -> candidates
-      const partsWithCandidates = buildParticipantCandidates(
-        task.participants,
-        loser,
-        winners
-      );
+        // loser-slot moet exact de echte loser zijn
+        const loserPart = partsWithCandidates.find((p) => p.target === PLAYERTARGET_ENUM.loser);
+        if (!loserPart || loserPart.players.length !== 1 || loserPart.players[0].id !== loser.id) continue;
 
-      // Loser slot moet exact 1 mogelijke hebben (de echte loser), anders skip
-      const loserPart = partsWithCandidates.find(
-        (p) => p.target === PLAYERTARGET_ENUM.loser
-      );
-      if (
-        !loserPart ||
-        loserPart.players.length !== 1 ||
-        loserPart.players[0].id !== loser.id
-      )
-        continue;
+        // 3) greedy assignment
+        const assigned = assignParticipants(partsWithCandidates);
+        if (!assigned) continue;
 
-      // 3) greedy assignment
-      const assigned = assignParticipants(partsWithCandidates);
-      if (!assigned) continue;
+        // 4) preferSex (alleen als taak dit eist)
+        if (needsPreferSex(task) && !preferSexMatrixOk(assigned)) continue;
 
-      // 4) preferSex alleen afdwingen als de taak seksueel is
-      if (needsPreferSex(task) && !preferSexMatrixOk(assigned)) continue;
+        // 5) effects haalbaar?
+        if (!evaluateTaskEffects(task, assigned)) continue;
 
-      // 5) effects mogelijk?
-      if (!evaluateTaskEffects(task, assigned)) continue;
+        // 6) uitvoerbaar -> in pool
+        const taskCopy = structuredClone(task);
+        taskCopy.participants = assigned;
+        fillInstructionArgsForParticipants(taskCopy);
 
-      // 6) taak is uitvoerbaar → in pool
-      const taskCopy = structuredClone(task);
-      taskCopy.participants = assigned; // ingevulde spelers
-
-      // 7) vul instruction args in
-      fillInstructionArgsForParticipants(taskCopy);
-
-      pool.push({
-        task: taskCopy,
-        category: catKey,
-        weight: catWeightEffective, // per taak het cat-gewicht
-      });
+        pool.push({
+          task: taskCopy,
+          category: catKey,
+          weight: catWeightEffective,
+        });
+      }
     }
+    return pool;
+  };
+
+  const maxAttempts = 3;      // 1 + 2 retries
+  let attempts = 0;
+  let chosenCtx = null;
+  let pool = [];
+
+  // probeer met (nieuwe) chosenCtx
+  while (attempts < maxAttempts) {
+    chosenCtx = getRandomGameContext(gameWeights);
+    pool = buildPoolForCtx(chosenCtx);
+    if (pool.length > 0) break;
+    attempts++;
   }
 
-  // Kies nu 1 taak; wil je de hele pool bewaren, sla dan pool op in state
-  // shuffleInPlace(pool); 
-  const picked = weightedPick(pool);
-  console.log(picked);
+  // fallback: lege ctx (match alles)
+  if (pool.length === 0) {
+    chosenCtx = {}; // geen filters
+    pool = buildPoolForCtx(chosenCtx);
+  }
+
+  // pick (optioneel: shuffleInPlace(pool) als je ooit gaat slicen/croppen)
+  const pickedEntry = weightedPick(pool);
   return {
-    chosenCtx: chosenCtx,
-    picked: picked ? picked.task : null,
-    pool: pool,
+    chosenCtx,
+    picked: pickedEntry ? pickedEntry.task : null,
+    pool,
   };
 }
 
@@ -467,6 +662,11 @@ function evaluateTaskEffects(task, partsAssigned) {
           return false;
         break;
       }
+      // weight effects blokkeren nooit de uitvoerbaarheid
+      case "weight.category":
+      case "weight.game":
+        // altijd “pass”
+        break;
       default:
         return false;
     }
@@ -479,20 +679,99 @@ function executeTaskEffects(task, partsAssigned) {
   if (!task || !(task?.effects?.length > 0)) return;
 
   for (const effect of task.effects) {
-    const part = findParticipantBySlot(partsAssigned, effect.slot);
-    if (!part?.player?.clothing) continue;
-
-    const model = part.player.clothing;
     switch (effect.type) {
       case "clothing.remove": {
-        // assumptie: je hebt een mutator; zo niet, toggle hier direct:
-        const piece = model[effect.item];
+        const part = findParticipantBySlot(partsAssigned, effect.slot);
+        if (!part?.player?.clothing) continue;
+        const piece = part.player.clothing[effect.item];
         if (piece) piece.worn = false;
         break;
       }
       case "clothing.add": {
-        const piece = model[effect.item];
+        const part = findParticipantBySlot(partsAssigned, effect.slot);
+        if (!part?.player?.clothing) continue;
+        const piece = part.player.clothing[effect.item];
         if (piece) piece.worn = true;
+        break;
+      }
+      case "weight.category": {
+        // ─────────────────────────────────────────────────────────────────────────────
+        //  Effect type: weight.category
+        //  ----------------------------------------------------
+        //  Past het gewicht van een specifieke taken-categorie aan in window.GAME.tasks.
+        //  Gebruik om de kans op taken uit een categorie te verhogen of te verlagen.
+        //
+        //  Voorbeeld:
+        //    { type: "weight.category", category: "undress_other_self", op: "add", value: 0.5 }
+        //
+        //  Parameters:
+        //    category   → de sleutelnaam van de categorie (zoals in window.GAME.tasks).
+        //    op         → "add" | "sub" | "mult"  → bepaalt de bewerking.
+        //    value      → numerieke waarde voor de operatie.
+        //    min, max   → optioneel bereik (standaard 1.0–10.0) waar de uitkomst binnen blijft.
+        //    decimals   → aantal decimalen (default 3) voor afronding.
+        // ─────────────────────────────────────────────────────────────────────────────
+        const {
+          category,
+          op,
+          value,
+          min = 0.1,
+          max = 10,
+          decimals = 3,
+        } = effect || {};
+        if (category && op)
+          applyCategoryWeightDelta(category, op, value, min, max, decimals);
+        break;
+      }
+      case "weight.game": {
+        // ─────────────────────────────────────────────────────────────────────────────
+        //  Effect type: weight.game
+        //  ----------------------------------------------------
+        //  Past het gewicht aan van een context-bucket binnen window.GAME.game.weights.
+        //  Hiermee beïnvloed je bijvoorbeeld de kans op bepaalde stages of intensities.
+        //
+        //  Voorbeelden:
+        //    - Exacte match (alleen deze entry aanpassen):
+        //        { type:"weight.game", bucket:"stage", match:"STAGE_ENUM.PLAYFUL", op:"add", value:0.25 }
+        //
+        //    - Alles boven een pivot (op basis van enum-volgorde) verlagen:
+        //        { type:"weight.game", bucket:"stage", match:"PLAYFUL", range:"higher", op:"mult", value:0.8 }
+        //
+        //  Parameters:
+        //    bucket       → "stage" | "intensity" | "extremity" | "act_with" | "act_on"
+        //    match        → key of value van de enum (zoals "PLAYFUL" of "STAGE_ENUM.PLAYFUL")
+        //    op           → "add" | "sub" | "mult"
+        //    value        → numerieke waarde voor de operatie
+        //    range        → optioneel "higher" of "lower" om alles boven/onder de match te bewerken
+        //    includeSelf  → true/false (of de match zelf ook mee moet doen in de range)
+        //    min, max     → optioneel bereik (standaard 1.0–10.0)
+        //    decimals     → aantal decimalen (default 3) voor afronding
+        // ─────────────────────────────────────────────────────────────────────────────
+        const {
+          bucket,
+          match,
+          op,
+          value,
+          min = 0.1,
+          max = 10,
+          range = null,
+          includeSelf = false,
+          decimals = 3,
+        } = effect || {};
+        if (bucket && op) {
+          if (!match && !range) break; // exacte match vereist als geen range
+          applyGameWeightDelta(
+            bucket,
+            match,
+            op,
+            value,
+            min,
+            max,
+            range,
+            includeSelf,
+            decimals
+          );
+        }
         break;
       }
     }
@@ -524,7 +803,10 @@ function createSecretTaskElement(task) {
   partPlayersWrapper.className = "row";
 
   const partPlayersLabel = document.createElement("span");
-  partPlayersLabel.setAttribute("data-i18n-auto", "app.task.secret.partPlayers");
+  partPlayersLabel.setAttribute(
+    "data-i18n-auto",
+    "app.task.secret.partPlayers"
+  );
 
   partPlayersWrapper.append(partPlayersLabel);
 
@@ -555,12 +837,18 @@ function createSecretTaskElement(task) {
     }
 
     const partPlayerLabel = document.createElement("span");
-      partPlayerLabel.innerHTML = `<b>${part.player.name}</b>`;
-      partPlayersWrapper.append(partPlayerLabel)
+    partPlayerLabel.innerHTML = `<b>${part.player.name}</b>`;
+    partPlayersWrapper.append(partPlayerLabel);
   }
 
   // Finish
-  wrapper.append(secretHint, makeSeperator(), partPlayersWrapper, makeSeperator(), secretWrapper);
+  wrapper.append(
+    secretHint,
+    makeSeperator(),
+    partPlayersWrapper,
+    makeSeperator(),
+    secretWrapper
+  );
   return wrapper;
 }
 
