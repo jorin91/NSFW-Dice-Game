@@ -12,6 +12,7 @@ export function InitGame() {
   updateDiceSet();
   updateGameControls();
   updateGameStatus();
+  continueGame();
 }
 
 function layout(targetId = "GamePanel") {
@@ -359,6 +360,13 @@ function updateGameStatus() {
     } else {
       rollDicesButton.classList.remove("ghost");
     }
+  }
+}
+
+function continueGame() {
+  const storedTask = window.GAME?.game?.currentTask ?? null;
+  if (storedTask) {
+    buildTaskPanel();
   }
 }
 
