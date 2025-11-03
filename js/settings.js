@@ -256,7 +256,7 @@ function fillSettingsList({
 
   // Content Element
   if (contentKey) {
-    const content = document.createElement("h4");
+    const content = document.createElement("p");
     content.className = "muted";
     content.id = "SettingsContentContainer";
     setI18n(content, contentKey, null, "html");
