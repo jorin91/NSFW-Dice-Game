@@ -269,17 +269,17 @@ details > summary:hover {
   color: #fff;
 }
 .timer {
-  display: flex;
-  flex-direction: column;   /* alles onder elkaar */
-  align-items: center;      /* horizontaal centreren */
-  justify-content: center;  /* optioneel, ook verticaal centreren binnen eigen hoogte */
+  align-items: center; /* horizontaal centreren */
+  justify-content: center; /* optioneel, ook verticaal centreren binnen eigen hoogte */
   border: 1px solid var(--accent);
-  padding: 10px;            /* kleine marge rond de inhoud */
-  gap: 8px;                 /* ruimte tussen elementen */
+  padding: 10px; /* kleine marge rond de inhoud */
   border-radius: 16px;
+  width: fit-content;
+  margin: 0 auto;
+  background-color: var(--panel2);
 }
 .timer-display {
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   font-size: 40px;
   font-weight: 700;
   letter-spacing: 2px;

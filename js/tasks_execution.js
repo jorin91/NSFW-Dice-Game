@@ -12,8 +12,12 @@ function normalizeExecution(execution) {
   }
 
   if (type === "timer") {
-    const m = Number.isFinite(execution?.minutes) ? Math.trunc(execution.minutes) : 0;
-    const s = Number.isFinite(execution?.seconds) ? Math.trunc(execution.seconds) : 60;
+    const m = Number.isFinite(execution?.minutes)
+      ? Math.trunc(execution.minutes)
+      : 0;
+    const s = Number.isFinite(execution?.seconds)
+      ? Math.trunc(execution.seconds)
+      : 60;
     let total = Math.max(0, m * 60 + s);
     if (total === 0) total = 1; // voorkom 0s
     return { type: "timer", totalSeconds: total, minutes: m, seconds: s };
@@ -30,8 +34,10 @@ function formatTimeMMSS(totalSeconds) {
 }
 
 /* Timer-UI met i18n-keys op header/knoppen */
-function createTimerElement(totalSecondsInit = 60, src = { minutes: 0, seconds: 60 }) {
-
+function createTimerElement(
+  totalSecondsInit = 60,
+  src = { minutes: 0, seconds: 60 }
+) {
   // Element
   const root = document.createElement("div");
   root.className = "timer col";
@@ -51,7 +57,7 @@ function createTimerElement(totalSecondsInit = 60, src = { minutes: 0, seconds: 
   const display = document.createElement("span");
   display.className = "timer-display";
   // display-tekst is numeriek, maar we geven een i18n-label mee voor toegankelijkheid
-  setI18n(display, "app.task.exec.timer.display.label"); // "Tijd"
+  // setI18n(display, "app.task.exec.timer.display.label"); // "Tijd"
   display.textContent = formatTimeMMSS(totalSecondsInit);
 
   const btnStart = document.createElement("button");
@@ -113,7 +119,7 @@ function createTimerElement(totalSecondsInit = 60, src = { minutes: 0, seconds: 
   btnReset.addEventListener("click", reset);
 
   row.append(btnStart, btnPause, btnReset);
-  root.append(header, hint, row, display);
+  root.append(header, hint, display, row);
   return root;
 }
 

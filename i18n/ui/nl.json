@@ -121,7 +121,7 @@
   "app.task.exec.multiple.label": "Voer deze taak {count} keer uit",
   "app.task.exec.multiple.progress": "Uitvoering {completed} van {total}",
 
-  "app.task.exec.timer.header": "Tijdgebonden uitvoering",
+  "app.task.exec.timer.header": "Timer",
   "app.task.exec.timer.hint": "Ingesteld op {mm}m {ss}s",
   "app.task.exec.timer.display.label": "Tijd",
   "app.task.exec.timer.btn.start": "Start",
