@@ -268,3 +268,10 @@ details > summary:hover {
   background: var(--accent);
   color: #fff;
 }
+.timer {
+  border: 1px solid var(--accent);
+  align-content: center;
+}
+.timer.timer-display {
+  size: 32px;
+}

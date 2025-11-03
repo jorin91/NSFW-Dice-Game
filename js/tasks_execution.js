@@ -31,8 +31,10 @@ function formatTimeMMSS(totalSeconds) {
 
 /* Timer-UI met i18n-keys op header/knoppen */
 function createTimerElement(totalSecondsInit = 60, src = { minutes: 0, seconds: 60 }) {
+
+  // Element
   const root = document.createElement("div");
-  root.className = "task-timer col";
+  root.className = "timer col";
 
   const header = document.createElement("h4");
   setI18n(header, "app.task.exec.timer.header"); // "Tijdgebonden uitvoering"
@@ -110,8 +112,8 @@ function createTimerElement(totalSecondsInit = 60, src = { minutes: 0, seconds: 
   btnPause.addEventListener("click", pause);
   btnReset.addEventListener("click", reset);
 
-  row.append(display, btnStart, btnPause, btnReset);
-  root.append(header, hint, row);
+  row.append(btnStart, btnPause, btnReset);
+  root.append(header, hint, row, display);
   return root;
 }
 
