@@ -276,6 +276,7 @@ details > summary:hover {
   border: 1px solid var(--accent);
   padding: 10px;            /* kleine marge rond de inhoud */
   gap: 8px;                 /* ruimte tussen elementen */
+  border-radius: 16px;
 }
 .timer-display {
   font-family: 'Orbitron', sans-serif;
