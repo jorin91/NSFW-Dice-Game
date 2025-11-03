@@ -46,6 +46,7 @@ function createTimerElement(
   setI18n(header, "app.task.exec.timer.header"); // "Tijdgebonden uitvoering"
 
   const hint = document.createElement("p");
+  hint.className = "muted";
   setI18n(hint, "app.task.exec.timer.hint", {
     mm: Math.trunc(src.minutes ?? 0),
     ss: Math.trunc(src.seconds ?? 0),
