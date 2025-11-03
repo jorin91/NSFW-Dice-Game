@@ -269,9 +269,19 @@ details > summary:hover {
   color: #fff;
 }
 .timer {
+  display: flex;
+  flex-direction: column;   /* alles onder elkaar */
+  align-items: center;      /* horizontaal centreren */
+  justify-content: center;  /* optioneel, ook verticaal centreren binnen eigen hoogte */
   border: 1px solid var(--accent);
-  align-content: center;
+  padding: 10px;            /* kleine marge rond de inhoud */
+  gap: 8px;                 /* ruimte tussen elementen */
 }
-.timer.timer-display {
-  size: 32px;
+.timer-display {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--accent);
+  text-align: center;
 }
