@@ -249,7 +249,6 @@ function fillSettingsList({
   // Header Element
   if (headerKey) {
     const header = document.createElement("h4");
-    header.className = "hd";
     header.id = "SettingsHeaderContainer";
     setI18n(header, headerKey);
     root.append(header);
