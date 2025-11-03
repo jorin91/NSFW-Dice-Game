@@ -40,7 +40,7 @@ function createTimerElement(
 ) {
   // Element
   const root = document.createElement("div");
-  root.className = "timer col centerWrap centerContent";
+  root.className = "timer col leftWrap centerContent";
 
   const header = document.createElement("h4");
   setI18n(header, "app.task.exec.timer.header"); // "Tijdgebonden uitvoering"
