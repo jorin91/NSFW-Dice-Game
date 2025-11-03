@@ -5,6 +5,7 @@
   --text: #e8eaf0;
   --muted: #aab0bd;
   --accent: #5865f2;
+  --accent2: #ff8c42;
   --border: #2a2f3a;
   --radius: 14px;
   --max-app-width: 95%;
@@ -269,13 +270,9 @@ details > summary:hover {
   color: #fff;
 }
 .timer {
-  align-items: center; /* horizontaal centreren */
-  justify-content: center; /* optioneel, ook verticaal centreren binnen eigen hoogte */
   border: 1px solid var(--accent);
   padding: 10px; /* kleine marge rond de inhoud */
   border-radius: 16px;
-  width: fit-content;
-  margin: 0 auto;
   background-color: var(--panel2);
 }
 .timer-display {
@@ -283,6 +280,15 @@ details > summary:hover {
   font-size: 40px;
   font-weight: 700;
   letter-spacing: 2px;
-  color: var(--accent);
+  color: var(--accent2);
   text-align: center;
+}
+.centerWrap {
+  margin: 0 auto;
+}
+.centerContent {
+  margin: 0 auto;
+  justify-content: center; /* optioneel, ook verticaal centreren binnen eigen hoogte */
+  align-items: center; /* horizontaal centreren */
+  width: fit-content;
 }
