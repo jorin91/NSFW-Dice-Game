@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title data-i18n="ui.title"></title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <script type="module" src="js/init.js"></script>
+  </head>
+  <body>
+    <!-- Menu Container -->
+    <div class="container menu">
+      <section class="card">
+        <div class="hd" data-i18n-auto="ui.language"></div>
+        <div class="bd row">
+          <button data-lang="nl" class="btn lang-btn">Nederlands</button>
+          <button data-lang="en" class="btn lang-btn ghost">English</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- App Container -->
+    <div class="container app">
+      <!-- Main Menu Panel -->
+      <section class="panel card active" data-panel="mainmenu">
+        <div class="hd" data-i18n-auto="app.mainmenu.title"></div>
+        <div class="bd col">
+          <div>
+            <h2 data-i18n-auto="app.mainmenu.welcome.header"></h2>
+            <p class="muted" data-i18n-auto="app.mainmenu.welcome.content"></p>
+          </div>
+
+          <div>
+            <h3 data-i18n-auto="app.mainmenu.goal.header"></h3>
+            <p class="muted" data-i18n-auto="app.mainmenu.goal.content"></p>
+          </div>
+
+          <div>
+            <h3 data-i18n-auto="app.mainmenu.game.header"></h3>
+            <ul
+              class="muted list"
+              data-i18n="app.mainmenu.game.content"
+              data-i18n-target="html"
+            ></ul>
+          </div>
+
+          <div>
+            <h3 data-i18n-auto="app.mainmenu.score.header"></h3>
+            <ul
+              class="muted list"
+              data-i18n="app.mainmenu.score.content"
+              data-i18n-target="html"
+            ></ul>
+          </div>
+
+          <div>
+            <h3 data-i18n-auto="app.mainmenu.tasks.header"></h3>
+            <p class="muted" data-i18n-auto="app.mainmenu.tasks.content"></p>
+          </div>
+
+          <div>
+            <h3 data-i18n-auto="app.mainmenu.agree.header"></h3>
+            <p class="muted" data-i18n-auto="app.mainmenu.agree.content"></p>
+          </div>
+
+          <div>
+            <h3 data-i18n-auto="app.mainmenu.safety.header"></h3>
+            <p class="muted" data-i18n-auto="app.mainmenu.safety.content"></p>
+          </div>
+
+          <div class="sep"></div>
+
+          <div class="row">
+            <button
+              class="btn"
+              data-panel="settings"
+              data-i18n-auto="button.settings"
+            ></button>
+            <button
+              class="btn"
+              data-panel="newgame"
+              data-i18n-auto="button.startgame"
+            ></button>
+          </div>
+        </div>
+      </section>
+      <!-- Game Panel -->
+      <section class="panel card" data-panel="game">
+        <div class="hd" data-i18n-auto="app.game.title"></div>
+        <div class="bd col" id="GamePanel">
+          <div></div>
+        </div>
+      </section>
+      <!-- Task Panel -->
+      <section class="panel card" data-panel="task">
+        <div class="hd" data-i18n-auto="app.task.title"></div>
+        <div class="bd col">
+          <div id="task_content"></div>
+        </div>
+      </section>
+      <!-- Settings Panel -->
+      <section class="panel card" data-panel="settings">
+        <div class="hd" data-i18n-auto="app.settings.title"></div>
+        <div class="bd col">
+          
+          <div id="settings_general" class="col">
+            <h4 data-i18n-auto="app.settings.general.header"></h4>
+          </div>
+
+          <div id="settings_stage" class="col">
+          </div>
+
+          <div id="settings_intensity" class="col">
+          </div>
+
+          <div id="settings_extremity" class="col">
+          </div>
+
+          <div id="settings_act_with" class="col">
+          </div>
+
+          <div id="settings_act_on" class="col">
+          </div>
+
+          <div class="row">
+            <button
+              class="btn"
+              data-panel="mainmenu"
+              data-i18n-auto="button.mainmenu"
+            ></button>
+          </div>
+        </div>
+      </section>
+      <!-- New Game Panel -->
+      <section class="panel card" data-panel="newgame">
+        <div class="hd" data-i18n-auto="app.newgame.title"></div>
+        <div class="bd col">
+          <div>
+            <h2 data-i18n-auto="app.newgame.players.header"></h2>
+            <div class="row" id="newgame-players"></div>
+          </div>
+          <div>
+            <h2 data-i18n-auto="app.newgame.options.header"></h2>
+            <div class="row" id="newgamebuttons">
+              <button
+                class="btn"
+                data-panel="mainmenu"
+                data-i18n-auto="button.mainmenu"
+              ></button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- New Player Panel -->
+      <section class="panel card" data-panel="newplayer">
+        <div class="hd" data-i18n-auto="app.newplayer.title"></div>
+        <div class="bd col">
+          <div id="add-newplayer"></div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
