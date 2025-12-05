@@ -1,6 +1,9 @@
 :root {
  --bg_color: #14161a;
- --app_bg_color: #20242c;
+ --panel_bg_color: #20242c;
+ --panel_border_radius: 14px;
+ --panel_header_bg_color: #2a2f3a;
+ --panel_border: 1px solid #2a2f3a;
  --text: #e8eaf0;
 }
 * {
@@ -24,7 +27,14 @@ body {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  background: var(--app_bg_color);
-  border: 1px solid #2a2f3a;
-  border-radius: 14px;
+  background: var(--panel_bg_color);
+  border: var(--panel_border);
+  border-radius: var(--panel_border_radius);
+}
+.panel.header {
+  padding: 14px 16px;
+  border-bottom: var(--panel_border);
+  background: linear-gradient(180deg, var(--panel_header_bg_color), var(--panel_bg_color));
+  border-top-left-radius: var(--panel_border_radius);
+  border-top-right-radius: var(--radius);
 }
