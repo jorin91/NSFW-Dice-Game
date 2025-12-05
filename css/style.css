@@ -66,14 +66,16 @@ body {
   margin-bottom: 8px;
   color: var(--text);
 }
-.panel .body.row {
+.panel .body.row,
+.panel .body .row {
   display: flex;
   flex-direction: row;
   gap: 16px;
   flex-wrap: wrap;
   align-items: center;
 }
-.panel .body.col {
+.panel .body.col,
+.panel .body .col {
   display: flex;
   flex-direction: column;
   gap: 16px;
