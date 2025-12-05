@@ -80,6 +80,16 @@ body {
   flex-direction: column;
   gap: 16px;
 }
+.panel .body.sep,
+.panel .body .sep {
+  height: 1px;
+  margin: 8px 0;
+}
+.panel .body.list,
+.panel .body .list {
+  padding-left: 20px;
+  line-height: 1.6;
+}
 /* Button General Styles */
 .btn {
   background: var(--accent1);
