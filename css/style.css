@@ -31,7 +31,7 @@ body {
   border: var(--panel_border);
   border-radius: var(--panel_border_radius);
 }
-.panel.header {
+.panel .header {
   padding: 14px 16px;
   border-bottom: var(--panel_border);
   background: linear-gradient(
@@ -42,10 +42,10 @@ body {
   border-top-left-radius: var(--panel_border_radius);
   border-top-right-radius: var(--panel_border_radius);
 }
-.panel.body {
+.panel .body {
   padding: 16px;
 }
-.panel.row {
+.panel .body.row {
   display: flex;
   flex-direction: row;
   gap: 16px;
