@@ -27,6 +27,7 @@ body {
   flex-direction: column;
   gap: 12px;
 }
+/* Panel Styles */
 .panel {
   background: var(--panel_bg_color);
   border: var(--panel_border);
@@ -53,7 +54,8 @@ body {
   flex-wrap: wrap;
   align-items: center;
 }
-.panel .body .btn {
+/* Button General Styles */
+.btn {
   background: var(--accent1);
   color: var(--text);
   border: 1px solid var(--accent1);
@@ -71,4 +73,19 @@ body {
 }
 .btn:hover {
   opacity: 0.85;
+}
+/* Content Alignment */
+.centerWrap {
+  margin: 0 auto;
+}
+.leftWrap {
+  margin-right: auto;
+}
+.rightWrap {
+  margin-left: auto;
+}
+.centerContent {
+  justify-content: center; /* optioneel, ook verticaal centreren binnen eigen hoogte */
+  align-items: center; /* horizontaal centreren */
+  width: fit-content;
 }
