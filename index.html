@@ -14,19 +14,21 @@
   <body>
     <div class="app">
       <!-- Menu Container -->
-      <div class="panel">
-        <div class="header">
-          <h4 data-i18n-auto="ui.language"></h2>
-        </div>
-        <div class="body row">
-          <button data-lang="nl" class="btn lang-btn">Nederlands</button>
-          <button data-lang="en" class="btn lang-btn ghost">English</button>
-        </div>
-      </div>
+      <section class="panel active" data-panel="menu">
+        <section class="active" data-panel="menu-language">
+          <div class="header">
+            <h4 data-i18n-auto="ui.language"></h2>
+          </div>
+          <div class="body row">
+            <button data-lang="nl" class="btn lang-btn">Nederlands</button>
+            <button data-lang="en" class="btn lang-btn ghost">English</button>
+          </div>
+        </section>
+      </section>
 
       <!-- Main Container -->
-      <div class="panel">
-        <section class="active" data-panel="main">
+      <section class="panel active" data-panel="main">
+        <section class="active" data-panel="main-welcome">
           <div class="header">
             <h2 data-i18n-auto="ui.main.header"></h2>
           </div>
@@ -37,7 +39,7 @@
             </div>
           </div>
         </section>
-      </div>
+      </section>
     </div>
   </body>
 </html>
