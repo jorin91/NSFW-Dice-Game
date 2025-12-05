@@ -1,10 +1,10 @@
 :root {
- --bg_color: #14161a;
- --panel_bg_color: #20242c;
- --panel_header_bg_color: #2a2f3a;
- --panel_border: 1px solid #2a2f3a;
- --panel_border_radius: 14px;
- --text: #e8eaf0;
+  --bg_color: #14161a;
+  --panel_bg_color: #20242c;
+  --panel_header_bg_color: #2a2f3a;
+  --panel_border: 1px solid #2a2f3a;
+  --panel_border_radius: 14px;
+  --text: #e8eaf0;
 }
 * {
   box-sizing: border-box;
@@ -22,11 +22,11 @@ body {
   max-width: 95%;
   margin: 2px auto;
   padding: 16px;
-}
-.panel {
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+.panel {
   background: var(--panel_bg_color);
   border: var(--panel_border);
   border-radius: var(--panel_border_radius);
@@ -34,7 +34,11 @@ body {
 .panel.header {
   padding: 14px 16px;
   border-bottom: var(--panel_border);
-  background: linear-gradient(180deg, var(--panel_header_bg_color), var(--panel_bg_color));
+  background: linear-gradient(
+    180deg,
+    var(--panel_header_bg_color),
+    var(--panel_bg_color)
+  );
   border-top-left-radius: var(--panel_border_radius);
   border-top-right-radius: var(--panel_border_radius);
 }
