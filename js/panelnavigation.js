@@ -1,5 +1,3 @@
-// panelNavigation.js
-
 const PANEL_SELECTOR = "section[data-panel]";
 let _panelNavHandler = null;
 
@@ -108,9 +106,7 @@ export function initPanelNavigation() {
   }
 
   _panelNavHandler = (e) => {
-    const trigger = e.target.closest(
-      "[data-panel-show], [data-panel-hide]"
-    );
+    const trigger = e.target.closest("[data-panel-show], [data-panel-hide]");
     if (!trigger) return;
 
     const hideKeys = parseAttrKeys(trigger.getAttribute("data-panel-hide"));
