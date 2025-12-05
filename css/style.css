@@ -5,6 +5,7 @@
   --panel_border: 1px solid #2a2f3a;
   --panel_border_radius: 14px;
   --text: #e8eaf0;
+  --accent1: #5865f2;
 }
 * {
   box-sizing: border-box;
@@ -51,4 +52,23 @@ body {
   gap: 16px;
   flex-wrap: wrap;
   align-items: center;
+}
+.panel .body .btn {
+  background: var(--accent1);
+  color: var(--text);
+  border: 1px solid var(--accent1);
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.btn.ghost {
+  background: transparent;
+}
+.btn.in-element {
+  background: transparent;
+  border: none;
+  padding: 2px;
+}
+.btn:hover {
+  opacity: 0.85;
 }
