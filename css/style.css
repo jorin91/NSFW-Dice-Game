@@ -54,6 +54,14 @@ body {
 .panel .body {
   padding: 16px;
 }
+.panel .body h1,
+.panel .body h2,
+.panel .body h3,
+.panel .body h4,
+.panel .body h5,
+.panel .body h6 {
+  margin-bottom: 6px;
+}
 .panel .body.row {
   display: flex;
   flex-direction: row;
