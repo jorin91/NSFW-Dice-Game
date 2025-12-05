@@ -6,4 +6,4 @@ import { firebaseWriteTest } from "./firebase/firebase-test.js";
 gameInitFromStorage(); // GameState
 initI18n(); // Translation
 initPanelNavigation(); // Navigation
-firebaseWriteTest(); // Firebase Test
+await firebaseWriteTest(); // Firebase Test
