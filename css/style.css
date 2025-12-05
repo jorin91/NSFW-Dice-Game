@@ -39,6 +39,7 @@ body {
   background: var(--panel_bg_color);
   border: var(--panel_border);
   border-radius: var(--panel_border_radius);
+  display: none;
 }
 .panel .header {
   padding: 14px 16px;
@@ -60,7 +61,7 @@ body {
 .panel .body h4,
 .panel .body h5,
 .panel .body h6 {
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 .panel .body.row {
   display: flex;
@@ -140,6 +141,13 @@ body {
 /* Collomn Layouts */
 .col.small {
   gap: 4px;
+}
+/* Panel Navigation */
+.active {
+  display: block;
+}
+.inactive {
+  display: none;
 }
 /* Content Alignment */
 .centerWrap {
