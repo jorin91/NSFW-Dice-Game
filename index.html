@@ -5,19 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title data-i18n="ui.title"></title>
     <link rel="stylesheet" href="css/style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
     <script type="module" src="js/init.js"></script>
   </head>
   <body>
     <div class="app">
       <!-- Menu Container -->
-      <section class="panel">
-        <div class="header" data-i18n-auto="ui.language"></div>
+      <div class="panel">
+        <div class="header">
+          <h2 data-i18n-auto="ui.language"></h2>
+        </div>
         <div class="body row">
           <button data-lang="nl" class="btn lang-btn">Nederlands</button>
           <button data-lang="en" class="btn lang-btn ghost">English</button>
         </div>
-      </section>
+      </div>
+
+      <!-- Main Container -->
+      <div class="panel">
+        <section class="active" data-panel="main">
+          <div class="header">
+            <h2 data-i18n-auto="ui.main.header"></h2>
+          </div>
+          <div class="body col">
+            <div>
+              <h4 data-i18n-auto="ui.main.welcome.title"></h4>
+              <p class="muted" data-i18n-auto="ui.main.welcome.content"></p>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
   </body>
 </html>
