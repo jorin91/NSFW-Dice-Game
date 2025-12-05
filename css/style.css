@@ -78,7 +78,7 @@ body {
 .panel .body .col {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 32px;
 }
 .panel .body.sep,
 .panel .body .sep {
