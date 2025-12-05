@@ -5,7 +5,14 @@
   --panel_border: 1px solid #2a2f3a;
   --panel_border_radius: 14px;
   --text: #e8eaf0;
-  --accent1: #5865f2;
+  --muted: #aab0bd;
+  --accent1: #5865f2; /* Blurple (Discord stijl) */
+  --accent2: #c48a4a; /* gedempt warm oranje */
+  --accent3: #d7dae2; /* zacht koel wit / grijs */
+  --accent4: #b56363; /* gedempt rood, warme balans */
+  --accent5: #5da57a; /* gedempt groen, zacht en rustig */
+  --accent6: #c2b35f; /* gedempt geel/ochre, subtiel */
+  --accent7: #5aa7b3; /* turquoise-achtige koele tint */
 }
 * {
   box-sizing: border-box;
@@ -54,6 +61,11 @@ body {
   flex-wrap: wrap;
   align-items: center;
 }
+.panel .body.col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 /* Button General Styles */
 .btn {
   background: var(--accent1);
@@ -65,6 +77,7 @@ body {
 }
 .btn.ghost {
   background: transparent;
+  color: var(--muted);
 }
 .btn.in-element {
   background: transparent;
@@ -73,6 +86,52 @@ body {
 }
 .btn:hover {
   opacity: 0.85;
+}
+/* Row Layouts */
+.row.small {
+  gap: 4px;
+}
+.row.grid3 {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: center;
+  padding: 8px 12px;
+}
+.row.grid3 > :nth-child(3) {
+  justify-self: end; /* plaatst het element rechts */
+  width: auto; /* voorkomt uitrekken */
+}
+.row.grid3 > span,
+.row.grid3 > p {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+.row.grid3:has(input[type="checkbox"]) {
+  border: 1px solid var(--accent3);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.row.grid3:has(input[type="number"]) {
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.row.grid3:has(input[type="checkbox"]):hover,
+.row.grid3:has(input[type="number"]):hover {
+  opacity: 0.85;
+  background: var(--accent);
+}
+.row.grid3:has(input[type="number"]) input[type="number"] {
+  width: 50px; /* of 5ch / 6em, afhankelijk van look */
+  text-align: right; /* cijfers mooi rechts */
+}
+.row.grid3:has(input[type="checkbox"]:checked) {
+  border: 1px solid var(--accent);
+}
+/* Collomn Layouts */
+.col.small {
+  gap: 4px;
 }
 /* Content Alignment */
 .centerWrap {
