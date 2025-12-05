@@ -5,7 +5,7 @@
   --panel_border: 1px solid #2a2f3a;
   --panel_border_radius: 14px;
   --text: #e8eaf0;
-  --muted: #aab0bd;
+  --text_muted: #aab0bd;
   --accent1: #5865f2; /* Blurple (Discord stijl) */
   --accent2: #c48a4a; /* gedempt warm oranje */
   --accent3: #d7dae2; /* zacht koel wit / grijs */
@@ -51,9 +51,11 @@ body {
   );
   border-top-left-radius: var(--panel_border_radius);
   border-top-right-radius: var(--panel_border_radius);
+  color: var(--text);
 }
 .panel .body {
   padding: 16px;
+  color: var(--text_muted);
 }
 .panel .body h1,
 .panel .body h2,
@@ -62,6 +64,7 @@ body {
 .panel .body h5,
 .panel .body h6 {
   margin-bottom: 8px;
+  color: var(--text);
 }
 .panel .body.row {
   display: flex;
