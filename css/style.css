@@ -41,3 +41,10 @@ body {
 .panel.body {
   padding: 16px;
 }
+.panel.row {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
