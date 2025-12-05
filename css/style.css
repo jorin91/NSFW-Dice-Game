@@ -38,3 +38,6 @@ body {
   border-top-left-radius: var(--panel_border_radius);
   border-top-right-radius: var(--radius);
 }
+.panel.body {
+  padding: 16px;
+}
