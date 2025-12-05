@@ -1,9 +1,9 @@
 :root {
  --bg_color: #14161a;
  --panel_bg_color: #20242c;
- --panel_border_radius: 14px;
  --panel_header_bg_color: #2a2f3a;
  --panel_border: 1px solid #2a2f3a;
+ --panel_border_radius: 14px;
  --text: #e8eaf0;
 }
 * {
@@ -36,7 +36,7 @@ body {
   border-bottom: var(--panel_border);
   background: linear-gradient(180deg, var(--panel_header_bg_color), var(--panel_bg_color));
   border-top-left-radius: var(--panel_border_radius);
-  border-top-right-radius: var(--radius);
+  border-top-right-radius: var(--panel_border_radius);
 }
 .panel.body {
   padding: 16px;
