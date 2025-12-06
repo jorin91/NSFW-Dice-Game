@@ -132,7 +132,7 @@ function createPlayerProxy(base) {
     }
 
     // Zeker weten dat huidige staat in storage staat
-    storageSave(LS_KEY_PLAYER, _playerState);
+    storageSave(_playerState, LS_KEY_PLAYER);
 
     return _playerProxy;
 }
