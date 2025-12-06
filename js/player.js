@@ -9,6 +9,7 @@ const PLAYER_MODEL = {
     name: null,
     age: null,
     sex: null,
+    sexTarget: null,
 };
 
 // Interne state + proxy
