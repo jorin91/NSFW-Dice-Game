@@ -4,6 +4,9 @@
   "ui.panel-menu.language.header": "Taal",
 
   "ui.panel-player.overview.header": "Speler (Jij)",
+  "ui.panel-player.overview.nameProp": "Naam:",
+  "ui.panel-player.overview.ageProp": "Leeftijd:",
+  "ui.panel-player.overview.sexProp": "Geslacht:",
 
   "ui.panel-main.header": "NSFW Dobbelspel",
 
