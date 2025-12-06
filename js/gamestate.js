@@ -155,21 +155,16 @@ function makeGameStateProxy(target, pathSegments = []) {
     set(t, prop, value, receiver) {
       const result = Reflect.set(t, prop, value, receiver);
 
-      // Als we bezig zijn remote state toe te passen: niet terug syncen
-      if (_syncingFromRemote) {
-        return result;
-      }
-
       const fullPathSegments = [...pathSegments, prop];
       const relativePath = fullPathSegments.join("/");
 
-      // Firebase patch voor alleen deze property
-      pushFirebasePatch(relativePath, value);
+      // Alleen lokaal → naar Firebase + debug
+      if (!_syncingFromRemote) {
+        pushFirebasePatch(relativePath, value);
+        storageSave(deepCopy(_localState), LS_KEY_GAMESTATE);
+      }
 
-      // Voor debugging altijd huidige state wegschrijven
-      storageSave(deepCopy(_localState), LS_KEY_GAMESTATE);
-
-      // Events voor deze change
+      // Altijd events vuren (lokaal én remote)
       notifyGameStateListeners(relativePath);
 
       return result;
@@ -181,19 +176,14 @@ function makeGameStateProxy(target, pathSegments = []) {
 
       delete t[prop];
 
-      if (_syncingFromRemote) {
-        return true;
-      }
-
       const fullPathSegments = [...pathSegments, prop];
       const relativePath = fullPathSegments.join("/");
 
-      // In Firebase een pad verwijderen door null te zetten
-      pushFirebasePatch(relativePath, null);
+      if (!_syncingFromRemote) {
+        pushFirebasePatch(relativePath, null);
+        storageSave(deepCopy(_localState), LS_KEY_GAMESTATE);
+      }
 
-      storageSave(deepCopy(_localState), LS_KEY_GAMESTATE);
-
-      // Ook hier event vuren
       notifyGameStateListeners(relativePath);
 
       return true;
@@ -239,6 +229,9 @@ function gameApplyRemoteState(remoteState) {
   } finally {
     _syncingFromRemote = false;
   }
+
+  // één globale "state is veranderd" event
+  notifyGameStateListeners("");
 }
 
 // Dit vervangt je oude gameInitFromStorage:
