@@ -40,6 +40,7 @@ body {
   border: var(--panel_border);
   border-radius: var(--panel_border_radius);
   display: none;
+  gap: 16px;
 }
 .panel .header {
   padding: 14px 16px;
