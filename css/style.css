@@ -100,7 +100,7 @@ body {
   );
   border-bottom-left-radius: var(--panel_border_radius);
   border-bottom-right-radius: var(--panel_border_radius);
-  color: var(--text);
+  color: var(--text_muted);
 }
 /* Button General Styles */
 .btn {
@@ -193,5 +193,5 @@ body {
 }
 /* Text Colors */
 .error {
-  color: var(--accent4);
+  color: var(--accent4) !important;
 }
