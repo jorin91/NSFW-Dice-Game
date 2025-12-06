@@ -6,9 +6,9 @@ const LS_KEY_PLAYER = "NSFWDiceGame_Player";
 const PLAYER_MODEL = {
     version: 1.0,
     id: null,
-    name: "Player",
+    name: null,
     age: 0,
-    sex: "unspecified",
+    sex: null,
 };
 
 // Interne state + proxy
@@ -18,10 +18,52 @@ let _playerProxy = null;
 // Export-object dat altijd de actuele waarden weerspiegelt
 export const PLAYER = {};
 
+// Lijst met change-listeners
+const _playerChangeHandlers = [];
+
+/**
+ * Abonneer je op wijzigingen in de speler.
+ * handler krijgt (playerProxy, changeInfo)
+ *
+ * changeInfo:
+ *   { type: "set", prop, value }
+ *   { type: "delete", prop }
+ *
+ * Returns: functie om je weer uit te schrijven.
+ */
+export function onPlayerChange(handler) {
+    if (typeof handler !== "function") {
+        return () => {};
+    }
+    _playerChangeHandlers.push(handler);
+
+    // unsubscribe functie teruggeven
+    return () => {
+        const idx = _playerChangeHandlers.indexOf(handler);
+        if (idx !== -1) {
+            _playerChangeHandlers.splice(idx, 1);
+        }
+    };
+}
+
+// interne helper om alle listeners te triggeren
+function notifyPlayerChange(changeInfo) {
+    if (!_playerChangeHandlers.length) return;
+
+    const snapshot = _playerProxy; // altijd de actuele proxy
+    for (const fn of _playerChangeHandlers) {
+        try {
+            fn(snapshot, changeInfo);
+        } catch (e) {
+            console.error("[PLAYER] onPlayerChange handler error:", e);
+        }
+    }
+}
+
 // Maak een nieuwe default player, met uniek ID
 function createDefaultPlayer() {
     const base = deepCopy(PLAYER_MODEL);
-    base.id = generateRandomID(); // evt. prefix in jouw util afhandelen
+    base.id = generateRandomID("player_"); // of zonder prefix
     return base;
 }
 
@@ -31,6 +73,7 @@ function createDefaultPlayer() {
  * - naar localStorage
  * - naar window.PLAYER
  * - gesynchroniseerd naar export-object PLAYER
+ * - triggeren onPlayerChange callbacks
  */
 function createPlayerProxy(base) {
     _playerState = base;
@@ -54,6 +97,13 @@ function createPlayerProxy(base) {
                 window.PLAYER = _playerProxy;
             }
 
+            // listeners aanroepen
+            notifyPlayerChange({
+                type: "set",
+                prop,
+                value,
+            });
+
             return true;
         },
         deleteProperty(target, prop) {
@@ -66,6 +116,11 @@ function createPlayerProxy(base) {
                 if (typeof window !== "undefined") {
                     window.PLAYER = _playerProxy;
                 }
+
+                notifyPlayerChange({
+                    type: "delete",
+                    prop,
+                });
             }
             return true;
         }
@@ -84,8 +139,7 @@ function createPlayerProxy(base) {
 
 /**
  * Zorgt dat er een geldige player bestaat.
- * Wordt automatisch aangeroepen zodra deze module wordt geladen
- * of als getPlayer/PLAYER gebruikt wordt.
+ * Wordt 1x aangeroepen bij module load.
  */
 function ensurePlayerInitialized() {
     if (_playerProxy) return _playerProxy;
@@ -102,7 +156,7 @@ function ensurePlayerInitialized() {
 
         // Oude data kan nog geen id hebben → 1x genereren
         if (!base.id) {
-            base.id = generateRandomID();
+            base.id = generateRandomID("player_");
         }
     } else {
         // Versie mismatch of geen data → resetten
@@ -119,8 +173,7 @@ function ensurePlayerInitialized() {
 ensurePlayerInitialized();
 
 /**
- * Helper als je expliciet de proxy wilt hebben.
- * Niet verplicht om te gebruiken; PLAYER werkt ook gewoon.
+ * Optioneel: expliciet de proxy opvragen.
  */
 export function getPlayer() {
     return ensurePlayerInitialized();
