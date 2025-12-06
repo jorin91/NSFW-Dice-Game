@@ -65,8 +65,7 @@ export function setupPanelPlayer() {
   // Check for complete player profile
   if (!PLAYER.name || !PLAYER.age || !PLAYER.sex || !PLAYER.sexTarget) {
     const noDataEl = document.createElement("div");
-    noDataEl.style.color = "red";
-    noDataEl.className = "footer";
+    noDataEl.className = "footer error";
     noDataEl.id = "player-overview.player-no-data-warning";
 
     setI18n(noDataEl, "ui.panel-player.overview.missingPlayerData");
