@@ -1,4 +1,4 @@
-import { PLAYER, onPlayerChange } from "./player";
+import { PLAYER, onPlayerChange } from "./player.js";
 import { setI18n } from "./lang_i18n.js";
 
 const unsubscribe = onPlayerChange((player, change) => {
