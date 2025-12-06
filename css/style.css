@@ -191,3 +191,7 @@ body {
   align-items: center; /* horizontaal centreren */
   width: fit-content;
 }
+/* Text Colors */
+.error {
+  color: var(--accent4);
+}
