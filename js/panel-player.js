@@ -69,8 +69,8 @@ export function setupPanelPlayer() {
     noDataEl.className = "footer";
     noDataEl.id = "player-overview.player-no-data-warning";
 
-    noDataEl.textContent =
-      "Player data missing! Please set up your player profile before you can play.";
+    setI18n(noDataEl, "ui.panel-player.overview.missingPlayerData");
+
     rootPanel.appendChild(noDataEl);
   } else {
     const existingWarning = document.getElementById(
