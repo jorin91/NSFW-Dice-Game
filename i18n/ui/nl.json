@@ -9,6 +9,14 @@
   "ui.panel-player.overview.sexProp": "Geslacht: ",
   "ui.panel-player.overview.sexTargetProp": "Geslachtsvoorkeur: ",
   "ui.panel-player.overview.missingPlayerData": "Spelersgegevens niet beschikbaar of incompleet. Vul je gegevens aan voordat je kan spelen.",
+  "ui.panel-player.overview.editButton": "Bewerk Profiel",
+
+  "ui.panel-player.setup.header": "Speler Profiel Instellen",
+  "ui.panel-player.setup.nameProp": "Naam: ",
+  "ui.panel-player.setup.ageProp": "Leeftijd: ",
+  "ui.panel-player.setup.sexProp": "Geslacht: ",
+  "ui.panel-player.setup.sexTargetProp": "Geslachtsvoorkeur: ",
+  "ui.panel-player.setup.button.save": "Opslaan",
 
   "ui.panel-main.header": "NSFW Dobbelspel",
 
