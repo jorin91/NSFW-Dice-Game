@@ -35,7 +35,13 @@ export function setupPanelPlayer() {
   const sexProp = document.createElement("span");
   setI18n(sexProp, "ui.panel-player.overview.sexProp");
   const sexVal = document.createElement("span");
-  sexVal.textContent = (setI18n(sexVal, PLAYER.sex) ?? "Unknown");
+
+  if (PLAYER.sex) {
+    setI18n(sexVal, PLAYER.sex);
+  } else {
+    sexVal.textContent = "Unknown";
+  }
+  
   sexEl.append(sexProp, sexVal);
 
   // Geslachtsvoorkeur
@@ -43,7 +49,13 @@ export function setupPanelPlayer() {
   const sexTargetProp = document.createElement("span");
   setI18n(sexTargetProp, "ui.panel-player.overview.sexTargetProp");
   const sexTargetVal = document.createElement("span");
-  sexTargetVal.textContent = (setI18n(sexTargetVal, PLAYER.sexTarget) ?? "Unknown");
+
+  if (PLAYER.sexTarget) {
+    setI18n(sexTargetVal, PLAYER.sexTarget)
+  } else {
+    sexTargetVal.textContent = "Unknown";
+  }
+
   sexTargetEl.append(sexTargetProp, sexTargetVal);
 
   // Voeg alle velden toe aan de rij
