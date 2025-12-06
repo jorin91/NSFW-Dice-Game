@@ -8,7 +8,7 @@ const unsubscribe = onPlayerChange(() => {
 export function setupPanelPlayer() {
   const rootPlayer = document.getElementById("panel-player.overview");
   const rootPanel = document.getElementById("player-overview");
-  if (!rootPlayer) return;
+  if (!rootPlayer || !rootPanel) return;
 
   rootPlayer.innerHTML = "";
 
