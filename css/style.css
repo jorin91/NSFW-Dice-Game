@@ -39,7 +39,8 @@ body {
   background: var(--panel_bg_color);
   border: var(--panel_border);
   border-radius: var(--panel_border_radius);
-  display: none;
+  display: flex;
+  flex-direction: column;
   gap: 16px;
 }
 .panel .header {
@@ -179,11 +180,13 @@ body {
   gap: 4px;
 }
 /* Panel Navigation */
+/*
 .active {
   display: block;
 }
+  */
 .inactive {
-  display: none;
+  display: none !important;
 }
 /* Content Alignment */
 .centerWrap {
