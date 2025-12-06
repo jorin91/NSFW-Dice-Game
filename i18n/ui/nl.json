@@ -1,6 +1,9 @@
 {
   "ui.title": "NSFW Dobbelspel",
-  "ui.language": "Taal",
+
+  "ui.panel-menu.language.header": "Taal",
+
+  "ui.panel-player.overview.header": "Speler Overzicht",
 
   "ui.main.header": "NSFW Dobbelspel",
 
