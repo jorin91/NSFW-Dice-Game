@@ -308,7 +308,105 @@ export async function initI18n() {
   });
 }
 
-export function setI18n(el, key = null, argsObj = null, target = null, update = false, attr = null) {
+/**
+ * setI18n(el, key = null, argsObj = null, target = null, update = false, attr = null)
+ *
+ * Centrale helper om een element te "koppelen" aan jouw i18n-systeem.
+ * Je gebruikt deze functie als je vanuit JavaScript UI-elementen maakt,
+ * en daar direct de juiste data-i18n-attributen op wilt zetten.
+ *
+ * -----------------------------------------------------------
+ * PARAMS
+ * -----------------------------------------------------------
+ * el        : HTMLElement
+ *   Het element dat vertaald moet worden.
+ *
+ * key       : string | null
+ *   De i18n-key die gebruikt moet worden.
+ *
+ *   Gedrag:
+ *   - Als 'target' is meegegeven → wordt "data-i18n" gezet
+ *     en richt de vertaling zich op een specifieke output
+ *     (bijv. innerText, innerHTML, placeholder, title, etc.).
+ *
+ *   - Als er GEEN 'target' is → wordt "data-i18n-auto" gebruikt
+ *     en laat je de automatische detectie bepalen hoe de tekst
+ *     geplaatst wordt (op basis van tagtype en childnodes).
+ *
+ *   Voorbeelden:
+ *     setI18n(btn, "ui.save");                  → data-i18n-auto="ui.save"
+ *     setI18n(input, "ui.search", null, "placeholder");
+ *                                               → data-i18n="ui.search"
+ *                                                 data-i18n-target="placeholder"
+ *
+ * argsObj   : object | null
+ *   Optionele variabelen voor placeholders binnen de vertaalstring.
+ *   Wordt JSON-geencodeerd in data-i18n-args.
+ *
+ *   In JSON: { "name": "Jorin" }
+ *   In tekst: "Hallo {name}" → "Hallo Jorin"
+ *
+ *
+ * target    : string | null
+ *   Bepaalt HOE de vertaling moet worden toegepast.
+ *   Mogelijke waarden zijn o.a.:
+ *   - "text"  → el.textContent
+ *   - "html"  → el.innerHTML
+ *   - iedere andere attribuutnaam (bijv. "placeholder", "title")
+ *
+ *   Gedrag:
+ *   - Als target is gezet → gebruik data-i18n + data-i18n-target
+ *   - Als target niet is gezet → gebruik data-i18n-auto
+ *
+ *
+ * update    : boolean
+ *   Als true → direct applyI18nToElement(el) uitvoeren.
+ *   Dit is handig wanneer je een element maakt en direct wilt
+ *   vertalen zonder te wachten op een globale applyI18n() call.
+ *
+ *   Let op: als je meerdere attributen in stappen zet, kun je
+ *   update beter op false laten en handmatig aan het einde één
+ *   keer applyI18nToElement() doen.
+ *
+ *
+ * attr      : string | null
+ *   Hiermee kun je extra attribuut-vertalingen instellen.
+ *   Bijvoorbeeld: "placeholder:ui.search,aria-label:ui.close"
+ *
+ *   Dit vult data-i18n-attr.
+ *
+ *
+ * -----------------------------------------------------------
+ * RETURN
+ * -----------------------------------------------------------
+ * Retourneert hetzelfde element zodat chaining mogelijk is.
+ *
+ * -----------------------------------------------------------
+ * ALGEMEEN GEBRUIK
+ * -----------------------------------------------------------
+ * 1) Automatische tekst:
+ *      setI18n(btn, "ui.save");
+ *
+ * 2) Vertaling naar specifiek attribuut:
+ *      setI18n(input, "ui.search", null, "placeholder");
+ *
+ * 3) Met variabelen:
+ *      setI18n(span, "player.score", { score: 12 });
+ *
+ * 4) Direct updaten:
+ *      setI18n(btn, "ui.ok", null, null, true);
+ *
+ * 5) Meerdere attribuut-bindings:
+ *      setI18n(icon, null, null, null, false, "title:ui.info,aria-label:ui.info");
+ */
+export function setI18n(
+  el,
+  key = null,
+  argsObj = null,
+  target = null,
+  update = false,
+  attr = null
+) {
   if (target) {
     // Gerichte binding, bijvoorbeeld: data-i18n="text" of data-i18n="placeholder"
     el.setAttribute("data-i18n", key);
@@ -322,13 +420,11 @@ export function setI18n(el, key = null, argsObj = null, target = null, update = 
     el.setAttribute("data-i18n-args", JSON.stringify(argsObj));
   }
 
-  if (update)
-  {
+  if (update) {
     applyI18nToElement(el);
   }
 
-  if (attr)
-  {
+  if (attr) {
     el.setAttribute("data-i18n-attr", attr);
   }
 
