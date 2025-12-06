@@ -5,42 +5,48 @@ const LS_KEY_PLAYER = "NSFWDiceGame_Player";
 
 const PLAYER_MODEL = {
     version: 1.0,
-    id: generateRandomID(),
-    name: null,
+    id: null,
+    name: "Player",
     age: 0,
-    sex: null,
+    sex: "unspecified",
 };
 
 // Interne state + proxy
 let _playerState = null;
 let _playerProxy = null;
 
-// Export-object dat altijd de actuele waarden bevat
+// Export-object dat altijd de actuele waarden weerspiegelt
 export const PLAYER = {};
 
+// Maak een nieuwe default player, met uniek ID
+function createDefaultPlayer() {
+    const base = deepCopy(PLAYER_MODEL);
+    base.id = generateRandomID(); // evt. prefix in jouw util afhandelen
+    return base;
+}
+
 /**
- * Maakt (of hergebruikt) de proxy rond de interne player state.
- * Alle wijzigingen worden direct opgeslagen in:
- * - localStorage
- * - window.PLAYER
- * - het export-object PLAYER
+ * Maakt de Proxy rond de interne player state.
+ * Alle wijzigingen:
+ * - naar localStorage
+ * - naar window.PLAYER
+ * - gesynchroniseerd naar export-object PLAYER
  */
 function createPlayerProxy(base) {
     _playerState = base;
 
-    // Zorg dat het export-object direct de juiste waarden heeft
+    // Export-object syncen met de huidige state
     Object.keys(PLAYER).forEach((k) => delete PLAYER[k]);
     Object.assign(PLAYER, _playerState);
 
     _playerProxy = new Proxy(_playerState, {
         set(target, prop, value) {
-            // schrijf naar de echte state
             target[prop] = value;
 
-            // sync export-object
+            // export-object bijwerken
             PLAYER[prop] = value;
 
-            // localStorage bijwerken
+            // opslaan in storage
             storageSave(LS_KEY_PLAYER, target);
 
             // window.PLAYER bijwerken
@@ -65,58 +71,57 @@ function createPlayerProxy(base) {
         }
     });
 
-    // window.PLAYER initial zetten
+    // Initial window.PLAYER setten
     if (typeof window !== "undefined") {
         window.PLAYER = _playerProxy;
     }
 
-    // Zeker weten dat de initiële staat ook in storage staat
+    // Zeker weten dat huidige staat in storage staat
     storageSave(LS_KEY_PLAYER, _playerState);
 
     return _playerProxy;
 }
 
 /**
- * Initialiseert de PLAYER state.
- * - Probeert uit localStorage te laden
- * - Checkt de versie tegen PLAYER_MODEL.version
- * - Bij mismatch of geen data: maak een nieuwe vanuit PLAYER_MODEL
- * - Zet window.PLAYER en het export-object PLAYER
+ * Zorgt dat er een geldige player bestaat.
+ * Wordt automatisch aangeroepen zodra deze module wordt geladen
+ * of als getPlayer/PLAYER gebruikt wordt.
  */
-export function initPlayer() {
-    if (_playerProxy) {
-        // Al geïnitialiseerd, gewoon teruggeven
-        return _playerProxy;
-    }
+function ensurePlayerInitialized() {
+    if (_playerProxy) return _playerProxy;
 
     const loaded = storageLoad(LS_KEY_PLAYER, null);
-
     let base;
+
     if (
         loaded &&
         typeof loaded === "object" &&
         Number(loaded.version) === Number(PLAYER_MODEL.version)
     ) {
-        // Geldige bestaande speler
         base = loaded;
+
+        // Oude data kan nog geen id hebben → 1x genereren
+        if (!base.id) {
+            base.id = generateRandomID();
+        }
     } else {
-        // Versie mismatch of niets gevonden → resetten naar model
+        // Versie mismatch of geen data → resetten
         if (loaded) {
             storageClear(LS_KEY_PLAYER);
         }
-        base = deepCopy(PLAYER_MODEL);
+        base = createDefaultPlayer();
     }
 
     return createPlayerProxy(base);
 }
 
+// Automatisch initialiseren bij module load
+ensurePlayerInitialized();
+
 /**
- * Optioneel: helper om altijd de actuele proxy op te vragen.
- * (Handig als je niet met window.PLAYER wilt werken.)
+ * Helper als je expliciet de proxy wilt hebben.
+ * Niet verplicht om te gebruiken; PLAYER werkt ook gewoon.
  */
 export function getPlayer() {
-    if (!_playerProxy) {
-        initPlayer();
-    }
-    return _playerProxy;
+    return ensurePlayerInitialized();
 }
