@@ -11,7 +11,6 @@ export const SEXSELF_ENUM = Object.freeze({
 });
 
 // HELPERS
-
 /**
  * Check of de 'self' sex voldoet aan de 'target' voorkeur.
  * 
