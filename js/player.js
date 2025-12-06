@@ -7,7 +7,7 @@ const PLAYER_MODEL = {
     version: 1.0,
     id: null,
     name: null,
-    age: 0,
+    age: null,
     sex: null,
 };
 
