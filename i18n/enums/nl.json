@@ -1,0 +1,8 @@
+{
+    "SEXTARGET_ENUM.Male": "Man",
+    "SEXTARGET_ENUM.Female": "Vrouw",
+    "SEXTARGET_ENUM.Both": "Beide",
+
+    "SEXSELF_ENUM.Male": "Man",
+    "SEXSELF_ENUM.Female": "Vrouw"
+}
