@@ -1,5 +1,5 @@
 import { deepCopy } from "./utils.js";
-import { storageSave, storageLoad, storageClear } from "./storage.js";
+import { storageSave, storageLoad, storageClear } from "./localstorage.js";
 
 const LS_KEY_GAMESTATE = "NSFWDiceGame_GameState";
 
