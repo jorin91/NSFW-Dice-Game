@@ -8,6 +8,7 @@
   "ui.panel-player.overview.ageProp": "Leeftijd: ",
   "ui.panel-player.overview.sexProp": "Geslacht: ",
   "ui.panel-player.overview.sexTargetProp": "Geslachtsvoorkeur: ",
+  "ui.panel-player.overview.missingPlayerData": "Spelersgegevens niet beschikbaar of incompleet. Vul je gegevens aan voor dat je kan spelen.",
 
   "ui.panel-main.header": "NSFW Dobbelspel",
 
