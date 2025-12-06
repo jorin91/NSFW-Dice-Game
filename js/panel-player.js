@@ -20,7 +20,7 @@ export function setupPanelPlayer() {
   const nameVal = document.createElement("span");
   nameVal.textContent = PLAYER.name || "Unknown";
 
-  nameEl.appendChild(nameProp, nameVal);
+  nameEl.append(nameProp, nameVal);
 
   const ageEl = document.createElement("div");
   const ageProp = document.createElement("span");
@@ -28,15 +28,16 @@ export function setupPanelPlayer() {
   const ageVal = document.createElement("span");
   ageVal.textContent = PLAYER.age || "Unknown";
 
-  ageEl.appendChild(ageProp, ageVal);
+  ageEl.append(ageProp, ageVal);
 
   const sexEl = document.createElement("div");
   const sexProp = document.createElement("span");
   setI18n(sexProp, "ui.panel-player.overview.sexProp");
   const sexVal = document.createElement("span");
   sexVal.textContent = PLAYER.sex || "Unknown";
-  sexEl.appendChild(sexProp, sexVal);
 
-  el.appendChild(nameEl, ageEl, sexEl);
-  root.appendChild(el);
+  sexEl.append(sexProp, sexVal);
+
+  el.append(nameEl, ageEl, sexEl);
+  root.append(el);
 }
