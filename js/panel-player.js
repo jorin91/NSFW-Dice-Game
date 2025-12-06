@@ -59,8 +59,15 @@ export function setupPanelPlayer() {
 
   sexTargetEl.append(sexTargetProp, sexTargetVal);
 
+  // Edit button
+  const editBtn = document.createElement("button");
+  editBtn.className = "btn";
+  editBtn.setAttribute("data-panel-hide", "player-overview");
+  editBtn.setAttribute("data-panel-show", "player-setup");
+  setI18n(editBtn, "ui.panel-player.overview.editButton");
+
   // Voeg alle velden toe aan de rij
-  el.append(nameEl, ageEl, sexEl, sexTargetEl); // gebruik append i.p.v. appendChild
+  el.append(nameEl, ageEl, sexEl, sexTargetEl, editBtn); // gebruik append i.p.v. appendChild
 
   // Check for complete player profile
   if (!PLAYER.name || !PLAYER.age || !PLAYER.sex || !PLAYER.sexTarget) {
@@ -81,4 +88,13 @@ export function setupPanelPlayer() {
   }
 
   rootPlayer.appendChild(el);
+}
+
+export function setupPanelPlayerSetup() {
+  const rootSetup = document.getElementById("panel-player.setup");
+  const rootPanel = document.getElementById("player-overview");
+  if (!rootSetup || !rootPanel) return;
+
+  rootSetup.innerHTML = "";
+
 }
