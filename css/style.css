@@ -41,7 +41,6 @@ body {
   border-radius: var(--panel_border_radius);
   display: flex;
   flex-direction: column;
-  gap: 16px;
 }
 .panel .header {
   padding: 14px 16px;
