@@ -124,7 +124,7 @@ body {
 }
 .btn.ghost {
   background: transparent;
-  color: var(--muted);
+  color: var(--text_muted);
 }
 .btn.in-element {
   background: transparent;
