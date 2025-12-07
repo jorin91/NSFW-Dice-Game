@@ -1,7 +1,7 @@
 import { PLAYER, onPlayerChange } from "./player.js";
 import { setI18n } from "./lang_i18n.js";
 import { SEXSELF_ENUM, SEXTARGET_ENUM } from "./enums.js";
-import { makeInputField, makeSelectField } from "./utils.js";
+import { makeInputField, makeSelectField } from "./elementHelpers.js";
 
 const unsubscribe = onPlayerChange(() => {
   setupPanelPlayer();
