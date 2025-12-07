@@ -1,7 +1,7 @@
 {
   "ui.title": "NSFW Dobbelspel",
 
-  "ui.panel-menu.language.header": "Taal",
+  "ui.panel-menu-language.header": "Taal",
 
   "ui.panel-player-overview.header": "Speler (Jij)",
   "ui.panel-player-overview.nameProp": "Naam:",
