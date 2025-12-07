@@ -26,84 +26,78 @@
         </section>
       </section>
 
-      <!-- Player Container -->
-      <section class="panel active" data-panel="panel-player">
-        <section class="active" data-panel="player-overview" id="player-overview">
-          <div class="header">
-            <h4 data-i18n-auto="ui.panel-player.overview.header"></h2>
-          </div>
-          <div class="body row" id="panel-player.overview">
-            <!-- Filled dynamically -->
-          </div>
-        </section>
-        <section class="inactive" data-panel="player-setup" id="player-setup">
-          <div class="header">
-            <h4 data-i18n-auto="ui.panel-player.setup.header"></h2>
-          </div>
-          <div class="body col" id="panel-player.setup">
-            <!-- Filled dynamically -->
-          </div>
-        </section>
+      <!-- Player Overview -->
+      <section class="panel active" data-panel="panel-player-overview" id="panel-player-overview">
+        <div class="header">
+          <h4 data-i18n-auto="ui.panel-player-overview.header"></h2>
+        </div>
+        <div class="body row" id="panel-player-overview.body">
+          <!-- Filled dynamically -->
+        </div>
       </section>
 
-      <!-- Main Container -->
-      <section class="panel active" data-panel="panel-main">
+      <!-- Player Setup -->
+      <section class="panel inactive" data-panel="panel-player-setup" id="panel-player-setup">
         <div class="header">
-          <h2 data-i18n-auto="ui.panel-main.header"></h2>
+          <h4 data-i18n-auto="ui.panel-player-setup.header"></h2>
+        </div>
+        <div class="body col" id="panel-player-setup">
+          <!-- Filled dynamically -->
+        </div>
+      </section>
+
+      <!-- Main Menu -->
+      <section class="panel active" data-panel="panel-mainmenu">
+        <div class="header">
+          <h2 data-i18n-auto="ui.panel-mainmenu.header"></h2>
         </div>
         <div class="body col">
-          <!-- Main Menu -->
-          <section class="active col" data-panel="mainmenu">
-            <div>
-              <h4 data-i18n-auto="ui.mainmenu.welcome.title"></h4>
-              <p data-i18n-auto="ui.mainmenu.welcome.content"></p>
-            </div>
+          <div>
+            <h4 data-i18n-auto="ui.panel-mainmenu.welcome.title"></h4>
+            <p data-i18n-auto="ui.panel-mainmenu.welcome.content"></p>
+          </div>
 
-            <div>
-              <h4 data-i18n-auto="ui.mainmenu.goal.header"></h4>
-              <p data-i18n-auto="ui.mainmenu.goal.content"></p>
-            </div>
+          <div>
+            <h4 data-i18n-auto="ui.panel-mainmenu.goal.header"></h4>
+            <p data-i18n-auto="ui.panel-mainmenu.goal.content"></p>
+          </div>
 
-            <div>
-              <h4 data-i18n-auto="ui.mainmenu.game.header"></h4>
-              <ul
-                class="list"
-                data-i18n="ui.mainmenu.game.content"
-                data-i18n-target="html"
-              ></ul>
-            </div>
+          <div>
+            <h4 data-i18n-auto="ui.panel-mainmenu.game.header"></h4>
+            <ul
+              class="list"
+              data-i18n="ui.panel-mainmenu.game.content"
+              data-i18n-target="html"
+            ></ul>
+          </div>
 
-            <div>
-              <h4 data-i18n-auto="ui.mainmenu.score.header"></h4>
-              <ul
-                class="list"
-                data-i18n="ui.mainmenu.score.content"
-                data-i18n-target="html"
-              ></ul>
-            </div>
+          <div>
+            <h4 data-i18n-auto="ui.panel-mainmenu.score.header"></h4>
+            <ul
+              class="list"
+              data-i18n="ui.panel-mainmenu.score.content"
+              data-i18n-target="html"
+            ></ul>
+          </div>
 
-            <div>
-              <h4 data-i18n-auto="ui.mainmenu.tasks.header"></h4>
-              <p data-i18n-auto="ui.mainmenu.tasks.content"></p>
-            </div>
+          <div>
+            <h4 data-i18n-auto="ui.panel-mainmenu.tasks.header"></h4>
+            <p data-i18n-auto="ui.panel-mainmenu.tasks.content"></p>
+          </div>
 
-            <div>
-              <h4 data-i18n-auto="ui.mainmenu.agree.header"></h4>
-              <p data-i18n-auto="ui.mainmenu.agree.content"></p>
-            </div>
+          <div>
+            <h4 data-i18n-auto="ui.panel-mainmenu.agree.header"></h4>
+            <p data-i18n-auto="ui.panel-mainmenu.agree.content"></p>
+          </div>
 
-            <div>
-              <h4 data-i18n-auto="ui.mainmenu.safety.header"></h4>
-              <p data-i18n-auto="ui.mainmenu.safety.content"></p>
-            </div>
-          </section>
+          <div>
+            <h4 data-i18n-auto="ui.panel-mainmenu.safety.header"></h4>
+            <p data-i18n-auto="ui.panel-mainmenu.safety.content"></p>
+          </div>
         </div>
         <div class="footer col">
-          <!-- Main Menu Buttons -->
-          <section class="active row equal" data-panel="mainmenu-buttons">
-            <button class="btn" data-i18n-auto="ui.mainmenu.button.createGame"></button>
-            <button class="btn" data-i18n-auto="ui.mainmenu.button.joinGame"></button>
-          </section>
+          <button class="btn" data-i18n-auto="ui.panel-mainmenu.button.createGame"></button>
+          <button class="btn" data-i18n-auto="ui.panel-mainmenu.button.joinGame"></button>
         </div>
       </section>
     </div>
