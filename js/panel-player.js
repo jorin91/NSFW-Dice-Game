@@ -9,8 +9,8 @@ const unsubscribe = onPlayerChange(() => {
 });
 
 export function setupPanelPlayer() {
-  const rootPlayer = document.getElementById("panel-player.overview");
-  const rootPanel = document.getElementById("player-overview");
+  const rootPlayer = document.getElementById("panel-player-overview.body");
+  const rootPanel = document.getElementById("panel-player-overview");
   if (!rootPlayer || !rootPanel) return;
 
   rootPlayer.innerHTML = "";
@@ -21,7 +21,7 @@ export function setupPanelPlayer() {
   const nameEl = document.createElement("div");
   nameEl.className = "row small";
   const nameProp = document.createElement("span");
-  setI18n(nameProp, "ui.panel-player.overview.nameProp");
+  setI18n(nameProp, "ui.panel-player-overview.nameProp");
   const nameVal = document.createElement("span");
   nameVal.textContent = PLAYER.name ?? "Unknown";
   nameEl.append(nameProp, nameVal); // append kan meerdere nodes
@@ -30,7 +30,7 @@ export function setupPanelPlayer() {
   const ageEl = document.createElement("div");
   ageEl.className = "row small";
   const ageProp = document.createElement("span");
-  setI18n(ageProp, "ui.panel-player.overview.ageProp");
+  setI18n(ageProp, "ui.panel-player-overview.ageProp");
   const ageVal = document.createElement("span");
   ageVal.textContent = PLAYER.age ?? "Unknown";
   ageEl.append(ageProp, ageVal);
@@ -39,7 +39,7 @@ export function setupPanelPlayer() {
   const sexEl = document.createElement("div");
   sexEl.className = "row small";
   const sexProp = document.createElement("span");
-  setI18n(sexProp, "ui.panel-player.overview.sexProp");
+  setI18n(sexProp, "ui.panel-player-overview.sexProp");
   const sexVal = document.createElement("span");
 
   if (PLAYER.sex) {
@@ -54,7 +54,7 @@ export function setupPanelPlayer() {
   const sexTargetEl = document.createElement("div");
   sexTargetEl.className = "row small";
   const sexTargetProp = document.createElement("span");
-  setI18n(sexTargetProp, "ui.panel-player.overview.sexTargetProp");
+  setI18n(sexTargetProp, "ui.panel-player-overview.sexTargetProp");
   const sexTargetVal = document.createElement("span");
 
   if (PLAYER.sexTarget) {
@@ -68,16 +68,16 @@ export function setupPanelPlayer() {
   // Edit button
   const editBtn = document.createElement("button");
   editBtn.className = "btn";
-  editBtn.setAttribute("data-panel-hide", "player-overview");
-  editBtn.setAttribute("data-panel-show", "player-setup");
-  setI18n(editBtn, "ui.panel-player.overview.editButton");
+  editBtn.setAttribute("data-panel-hide", "panel-player-overview");
+  editBtn.setAttribute("data-panel-show", "panel-player-setup");
+  setI18n(editBtn, "ui.panel-player-overview.editButton");
 
   // Voeg alle velden toe aan de rij
   rootPlayer.append(nameEl, ageEl, sexEl, sexTargetEl, editBtn); // gebruik append i.p.v. appendChild
 
   // Check for complete player profile
   const existingWarning = document.getElementById(
-    "player-overview.player-no-data-warning"
+    "panel-player-overview.player-no-data-warning"
   );
 
   if (
@@ -90,9 +90,9 @@ export function setupPanelPlayer() {
     if (!existingWarning) {
       const noDataEl = document.createElement("div");
       noDataEl.className = "footer error";
-      noDataEl.id = "player-overview.player-no-data-warning";
+      noDataEl.id = "panel-player-overview.player-no-data-warning";
 
-      setI18n(noDataEl, "ui.panel-player.overview.missingPlayerData");
+      setI18n(noDataEl, "ui.panel-player-overview.missingPlayerData");
 
       rootPanel.appendChild(noDataEl);
     }
@@ -104,8 +104,8 @@ export function setupPanelPlayer() {
 }
 
 export function setupPanelPlayerSetup() {
-  const rootSetup = document.getElementById("panel-player.setup");
-  const rootPanel = document.getElementById("player-overview");
+  const rootSetup = document.getElementById("panel-player-setup");
+  const rootPanel = document.getElementById("panel-player-overview");
   if (!rootSetup || !rootPanel) return;
 
   rootSetup.innerHTML = "";
@@ -118,8 +118,8 @@ export function setupPanelPlayerSetup() {
       defaultValue: PLAYER.name || "",
     },
     {
-      label: "ui.panel-player.setup.nameProp",
-      // eventueel: placeholder: "ui.panel-player.setup.namePlaceholder"
+      label: "ui.panel-player-setup.nameProp",
+      // eventueel: placeholder: "ui.panel-player-setup.namePlaceholder"
     }
   );
 
@@ -132,7 +132,7 @@ export function setupPanelPlayerSetup() {
       attrs: { min: 0 },
     },
     {
-      label: "ui.panel-player.setup.ageProp",
+      label: "ui.panel-player-setup.ageProp",
     }
   );
 
@@ -145,7 +145,7 @@ export function setupPanelPlayerSetup() {
       emptyLabelText: "Unknown",
     },
     {
-      label: "ui.panel-player.setup.sexProp",
+      label: "ui.panel-player-setup.sexProp",
       optionFromValue: true, // enums zijn al i18n-keys
     }
   );
@@ -162,7 +162,7 @@ export function setupPanelPlayerSetup() {
       emptyLabelText: "Unknown",
     },
     {
-      label: "ui.panel-player.setup.sexTargetProp",
+      label: "ui.panel-player-setup.sexTargetProp",
       optionFromValue: true,
     }
   );
@@ -173,9 +173,9 @@ export function setupPanelPlayerSetup() {
   // Save button
   const saveBtn = document.createElement("button");
   saveBtn.className = "btn";
-  saveBtn.setAttribute("data-panel-show", "player-overview");
-  saveBtn.setAttribute("data-panel-hide", "player-setup");
-  setI18n(saveBtn, "ui.panel-player.setup.button.save");
+  saveBtn.setAttribute("data-panel-show", "panel-player-overview");
+  saveBtn.setAttribute("data-panel-hide", "panel-player-setup");
+  setI18n(saveBtn, "ui.panel-player-setup.button.save");
 
   saveBtn.addEventListener("click", () => {
     const nameVal = nameInput.value.trim();
