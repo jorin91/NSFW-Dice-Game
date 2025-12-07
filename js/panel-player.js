@@ -73,18 +73,27 @@ export function setupPanelPlayer() {
   el.append(nameEl, ageEl, sexEl, sexTargetEl, editBtn); // gebruik append i.p.v. appendChild
 
   // Check for complete player profile
-  if (!PLAYER.name || !PLAYER.age || PLAYER.age <= 0 || !PLAYER.sex || !PLAYER.sexTarget) {
-    const noDataEl = document.createElement("div");
-    noDataEl.className = "footer error";
-    noDataEl.id = "player-overview.player-no-data-warning";
+  const existingWarning = document.getElementById(
+    "player-overview.player-no-data-warning"
+  );
 
-    setI18n(noDataEl, "ui.panel-player.overview.missingPlayerData");
+  if (
+    !PLAYER.name ||
+    !PLAYER.age ||
+    PLAYER.age <= 0 ||
+    !PLAYER.sex ||
+    !PLAYER.sexTarget
+  ) {
+    if (!existingWarning) {
+      const noDataEl = document.createElement("div");
+      noDataEl.className = "footer error";
+      noDataEl.id = "player-overview.player-no-data-warning";
 
-    rootPanel.appendChild(noDataEl);
+      setI18n(noDataEl, "ui.panel-player.overview.missingPlayerData");
+
+      rootPanel.appendChild(noDataEl);
+    }
   } else {
-    const existingWarning = document.getElementById(
-      "player-overview.player-no-data-warning"
-    );
     if (existingWarning) {
       existingWarning.remove();
     }
@@ -101,10 +110,7 @@ export function setupPanelPlayerSetup() {
   rootSetup.innerHTML = "";
 
   // Naam
-  const {
-    wrap: nameWrap,
-    input: nameInput,
-  } = makeInputField(
+  const { wrap: nameWrap, input: nameInput } = makeInputField(
     "player_name",
     "text",
     {
@@ -117,10 +123,7 @@ export function setupPanelPlayerSetup() {
   );
 
   // Leeftijd
-  const {
-    wrap: ageWrap,
-    input: ageInput,
-  } = makeInputField(
+  const { wrap: ageWrap, input: ageInput } = makeInputField(
     "player_age",
     "number",
     {
@@ -133,10 +136,7 @@ export function setupPanelPlayerSetup() {
   );
 
   // Geslacht (self)
-  const {
-    wrap: sexWrap,
-    select: sexSelect,
-  } = makeSelectField(
+  const { wrap: sexWrap, select: sexSelect } = makeSelectField(
     "player_sex",
     {
       entries: Object.entries(SEXSELF_ENUM),
@@ -153,10 +153,7 @@ export function setupPanelPlayerSetup() {
   }
 
   // Geslachtsvoorkeur (target)
-  const {
-    wrap: sexTargetWrap,
-    select: sexTargetSelect,
-  } = makeSelectField(
+  const { wrap: sexTargetWrap, select: sexTargetSelect } = makeSelectField(
     "player_sexTarget",
     {
       entries: Object.entries(SEXTARGET_ENUM),
@@ -192,11 +189,5 @@ export function setupPanelPlayerSetup() {
   });
 
   // Velden + button toevoegen
-  rootSetup.append(
-    nameWrap,
-    ageWrap,
-    sexWrap,
-    sexTargetWrap,
-    saveBtn
-  );
+  rootSetup.append(nameWrap, ageWrap, sexWrap, sexTargetWrap, saveBtn);
 }
