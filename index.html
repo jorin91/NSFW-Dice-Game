@@ -15,10 +15,10 @@
     <div class="app">
       <!-- Menu Language Container -->
       <section class="panel active" data-panel="panel-menu-language">
-        <div class="header col">
+        <div class="header col" id="panel-menu-language.header">
           <h4 data-i18n-auto="ui.panel-menu-language.header"></h2>
         </div>
-        <div class="body col">
+        <div class="body col" id="panel-menu-language.body">
           <div class="row equal">
             <button data-lang="nl" class="btn lang-btn">Nederlands</button>
             <button data-lang="en" class="btn lang-btn ghost">English</button>
@@ -28,13 +28,13 @@
 
       <!-- Player Overview -->
       <section class="panel active" data-panel="panel-player-overview" id="panel-player-overview">
-        <div class="header col">
+        <div class="header col" id="panel-player-overview.header">
           <h4 data-i18n-auto="ui.panel-player-overview.header"></h2>
         </div>
         <div class="body col" id="panel-player-overview.body">
           <!-- Filled dynamically -->
         </div>
-        <div class="footer col">
+        <div class="footer col" id="panel-player-overview.footer">
           <div class="row equal">
             <button class="btn" id="panel-player-overview.button.edit" data-i18n-auto="ui.panel-player-overview.button.edit" data-panel-hide="panel-player-overview" data-panel-show="panel-player-setup"></button>
           </div>
@@ -43,13 +43,13 @@
 
       <!-- Player Setup -->
       <section class="panel inactive" data-panel="panel-player-setup" id="panel-player-setup">
-        <div class="header col">
+        <div class="header col" id="panel-player-setup.header">
           <h4 data-i18n-auto="ui.panel-player-setup.header"></h2>
         </div>
         <div class="body col" id="panel-player-setup.body">
           <!-- Filled dynamically -->
         </div>
-        <div class="footer col">
+        <div class="footer col" id="panel-player-setup.footer">
           <div class="row equal">
             <button class="btn" id="panel-player-setup.button.save" data-i18n-auto="ui.panel-player-setup.button.save" data-panel-hide="panel-player-setup" data-panel-show="panel-player-overview"></button>
           </div>
@@ -58,10 +58,10 @@
 
       <!-- Main Menu -->
       <section class="panel active" data-panel="panel-mainmenu">
-        <div class="header col">
+        <div class="header col" id="panel-mainmenu.header">
           <h2 data-i18n-auto="ui.panel-mainmenu.header"></h2>
         </div>
-        <div class="body col">
+        <div class="body col" id="panel-mainmenu.body">
           <div>
             <h4 data-i18n-auto="ui.panel-mainmenu.welcome.title"></h4>
             <p data-i18n-auto="ui.panel-mainmenu.welcome.content"></p>
@@ -105,21 +105,41 @@
             <p data-i18n-auto="ui.panel-mainmenu.safety.content"></p>
           </div>
         </div>
-        <div class="footer col">
+        <div class="footer col" id="panel-mainmenu.footer">
           <div class="row equal">
-            <button class="btn" data-i18n-auto="ui.panel-mainmenu.button.createGame"></button>
-            <button class="btn" data-i18n-auto="ui.panel-mainmenu.button.joinGame"></button>
+            <button class="btn" data-i18n-auto="ui.panel-mainmenu.button.createGame" data-panel-hide="panel-mainmenu" data-panel-show="panel-newgame"></button>
+            <button class="btn" data-i18n-auto="ui.panel-mainmenu.button.joinGame" data-panel-hide="panel-mainmenu" data-panel-show="panel-joingame"></button>
           </div>
         </div>
       </section>
 
       <!-- New Game -->
       <section class="panel inactive" data-panel="panel-newgame" id="panel-newgame">
-        <div class="header col">
+        <div class="header col" id="panel-newgame.header">
           <h4 data-i18n-auto="ui.panel-newgame.header"></h2>
         </div>
         <div class="body col" id="panel-newgame.body">
           <!-- Filled dynamically -->
+        </div>
+        <div class="footer col" id="panel-newgame.footer">
+          <div class="row equal">
+            <button class="btn" id="panel-newgame.button.return" data-i18n-auto="ui.panel-newgame.button.return" data-panel-hide="panel-newgame" data-panel-show="panel-mainmenu"></button>
+          </div> 
+        </div>
+      </section>
+
+      <!-- Join Game -->
+      <section class="panel inactive" data-panel="panel-joingame" id="panel-joingame">
+        <div class="header col" id="panel-joingame.header">
+          <h4 data-i18n-auto="ui.panel-joingame.header"></h2>
+        </div>
+        <div class="body col" id="panel-joingame.body">
+          <!-- Filled dynamically -->
+        </div>
+        <div class="footer col" id="panel-joingame.footer">
+          <div class="row equal">
+            <button class="btn" id="panel-joingame.button.return" data-i18n-auto="ui.panel-joingame.button.return" data-panel-hide="panel-joingame" data-panel-show="panel-mainmenu"></button>
+          </div> 
         </div>
       </section>
     </div>

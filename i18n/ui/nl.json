@@ -35,5 +35,11 @@
   "ui.panel-mainmenu.safety.header": "Waarschuwing en Veiligheid",
   "ui.panel-mainmenu.safety.content": "Dit spel heeft een expliciet volwassen karakter en richt zich op seksuele spanning en interactie tussen spelers. Deelname houdt in dat iedere speler bewust verantwoordelijkheid neemt voor zijn of haar eigen veiligheid, gezondheid en welzijn, evenals dat van anderen. Denk vooraf na over beschermingsmiddelen en gezondheidsmaatregelen (zoals het gebruik van condooms, de pil of andere vormen van anticonceptie) en zorg dat hierover open en eerlijk wordt gecommuniceerd. Accepteer dat lichamelijke reacties, zoals een orgasme als gevolg van seksuele interactie, onderdeel kunnen zijn van het spel en dat dit persoonlijke en emotionele gevolgen kan hebben. Ga altijd met respect, zorg en wederzijdse instemming met elkaar om.",
   "ui.panel-mainmenu.button.createGame": "Nieuw Spel",
-  "ui.panel-mainmenu.button.joinGame": "Deelnemen aan Spel"
+  "ui.panel-mainmenu.button.joinGame": "Deelnemen aan Spel",
+
+  "ui.panel-joingame.header": "Deelnemen aan Spel",
+  "ui.panel-joingame.button.return": "Terug naar Hoofdmenu",
+
+  "ui.panel.newgame.header": "Nieuw Spel Aanmaken",
+  "ui.panel-newgame.button.return": "Terug naar Hoofdmenu"
 }
