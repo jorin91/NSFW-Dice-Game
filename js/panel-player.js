@@ -101,44 +101,102 @@ export function setupPanelPlayerSetup() {
   rootSetup.innerHTML = "";
 
   // Naam
-  const { wrapName, inputName } = makeInputField("name", "text", {
-    labelI18n: "ui.panel-player.setup.nameProp",
-    defaultValue: PLAYER.name || ""
-  });
+  const {
+    wrap: nameWrap,
+    input: nameInput,
+  } = makeInputField(
+    "player_name",
+    "text",
+    {
+      defaultValue: PLAYER.name || "",
+    },
+    {
+      label: "ui.panel-player.setup.nameProp",
+      // eventueel: placeholder: "ui.panel-player.setup.namePlaceholder"
+    }
+  );
 
   // Leeftijd
-  const { wrapAge, inputAge } = makeInputField("age", "number", {
-    labelI18n: "ui.panel-player.setup.ageProp",
-    defaultValue: PLAYER.age || 0,
-    attrs: { min: 0 }
-  });
+  const {
+    wrap: ageWrap,
+    input: ageInput,
+  } = makeInputField(
+    "player_age",
+    "number",
+    {
+      defaultValue: PLAYER.age || "",
+      attrs: { min: 0 },
+    },
+    {
+      label: "ui.panel-player.setup.ageProp",
+    }
+  );
 
-  // Geslacht
-  const { wrapSex, selectSex } = makeSelectField("sex", {
-    labelI18n: "ui.panel-player.setup.sexProp",
-    entries: Object.entries(SEXSELF_ENUM)
-  });
+  // Geslacht (self)
+  const {
+    wrap: sexWrap,
+    select: sexSelect,
+  } = makeSelectField(
+    "player_sex",
+    {
+      entries: Object.entries(SEXSELF_ENUM),
+      includeEmptyOption: true,
+      emptyLabelText: "Unknown",
+    },
+    {
+      label: "ui.panel-player.setup.sexProp",
+      optionFromValue: true, // enums zijn al i18n-keys
+    }
+  );
+  if (PLAYER.sex) {
+    sexSelect.value = PLAYER.sex;
+  }
 
-  // Geslachtsvoorkeur
-  const {wrapSexTarget, selectSexTarget} = makeSelectField("sexTarget", {
-    labelI18n: "ui.panel-player.setup.sexTargetProp",
-    entries: Object.entries(SEXTARGET_ENUM)
-  });
+  // Geslachtsvoorkeur (target)
+  const {
+    wrap: sexTargetWrap,
+    select: sexTargetSelect,
+  } = makeSelectField(
+    "player_sexTarget",
+    {
+      entries: Object.entries(SEXTARGET_ENUM),
+      includeEmptyOption: true,
+      emptyLabelText: "Unknown",
+    },
+    {
+      label: "ui.panel-player.setup.sexTargetProp",
+      optionFromValue: true,
+    }
+  );
+  if (PLAYER.sexTarget) {
+    sexTargetSelect.value = PLAYER.sexTarget;
+  }
 
   // Save button
   const saveBtn = document.createElement("button");
   saveBtn.className = "btn";
   saveBtn.setAttribute("data-panel-show", "player-overview");
   saveBtn.setAttribute("data-panel-hide", "player-setup");
-  saveBtn.addEventListener("click", () => {
-    // Waarden opslaan in PLAYER
-    const nameVal = inputName.value.trim();
-    const ageVal = parseInt(inputAge.value, 10);
-    const sexVal = selectSex.value;
-    const sexTargetVal = selectSexTarget.value;
-  });
   setI18n(saveBtn, "ui.panel-player.setup.button.save");
 
-  // Voeg alle velden toe aan de rij
-  rootSetup.append(wrapName, wrapAge, wrapSex, wrapSexTarget, saveBtn); // gebruik append i.p.v. appendChild
+  saveBtn.addEventListener("click", () => {
+    const nameVal = nameInput.value.trim();
+    const ageVal = parseInt(ageInput.value, 10);
+    const sexVal = sexSelect.value;
+    const sexTargetVal = sexTargetSelect.value;
+
+    PLAYER.name = nameVal || null;
+    PLAYER.age = Number.isFinite(ageVal) && ageVal > 0 ? ageVal : null;
+    PLAYER.sex = sexVal || null;
+    PLAYER.sexTarget = sexTargetVal || null;
+  });
+
+  // Velden + button toevoegen
+  rootSetup.append(
+    nameWrap,
+    ageWrap,
+    sexWrap,
+    sexTargetWrap,
+    saveBtn
+  );
 }
