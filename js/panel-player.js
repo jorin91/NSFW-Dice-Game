@@ -106,9 +106,8 @@ export function setupPanelPlayer() {
 }
 
 export function setupPanelPlayerSetup() {
-  const rootSetup = document.getElementById("panel-player-setup");
-  const rootPanel = document.getElementById("panel-player-overview");
-  if (!rootSetup || !rootPanel) return;
+  const rootSetup = document.getElementById("panel-player-setup.body");
+  if (!rootSetup) return;
 
   rootSetup.innerHTML = "";
 
