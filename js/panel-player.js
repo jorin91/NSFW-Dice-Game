@@ -66,15 +66,8 @@ export function setupPanelPlayer() {
 
   sexTargetEl.append(sexTargetProp, sexTargetVal);
 
-  // Edit button
-  const editBtn = document.createElement("button");
-  editBtn.className = "btn";
-  editBtn.setAttribute("data-panel-hide", "panel-player-overview");
-  editBtn.setAttribute("data-panel-show", "panel-player-setup");
-  setI18n(editBtn, "ui.panel-player-overview.editButton");
-
   // Voeg alle velden toe aan de rij
-  el.append(nameEl, ageEl, sexEl, sexTargetEl, editBtn); // gebruik append i.p.v. appendChild
+  el.append(nameEl, ageEl, sexEl, sexTargetEl);
   rootPlayer.appendChild(el);
 
   // Check for complete player profile
@@ -107,7 +100,8 @@ export function setupPanelPlayer() {
 
 export function setupPanelPlayerSetup() {
   const rootSetup = document.getElementById("panel-player-setup.body");
-  if (!rootSetup) return;
+  const saveBtn = document.getElementById("panel-player-setup.button.save");
+  if (!rootSetup || !saveBtn) return;
 
   rootSetup.innerHTML = "";
 
@@ -172,12 +166,6 @@ export function setupPanelPlayerSetup() {
   }
 
   // Save button
-  const saveBtn = document.createElement("button");
-  saveBtn.className = "btn";
-  saveBtn.setAttribute("data-panel-show", "panel-player-overview");
-  saveBtn.setAttribute("data-panel-hide", "panel-player-setup");
-  setI18n(saveBtn, "ui.panel-player-setup.button.save");
-
   saveBtn.addEventListener("click", () => {
     const nameVal = nameInput.value.trim();
     const ageVal = parseInt(ageInput.value, 10);
@@ -191,5 +179,5 @@ export function setupPanelPlayerSetup() {
   });
 
   // Velden + button toevoegen
-  rootSetup.append(nameWrap, ageWrap, sexWrap, sexTargetWrap, saveBtn);
+  rootSetup.append(nameWrap, ageWrap, sexWrap, sexTargetWrap);
 }

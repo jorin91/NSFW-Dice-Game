@@ -34,6 +34,11 @@
         <div class="body col" id="panel-player-overview.body">
           <!-- Filled dynamically -->
         </div>
+        <div class="footer col">
+          <div class="row equal">
+            <button class="btn" data-i18n-auto="ui.panel-player-overview.editButton" data-panel-hide="panel-player-overview" data-panel-show="panel-player-setup"></button>
+          </div>
+        </div>
       </section>
 
       <!-- Player Setup -->
@@ -43,6 +48,11 @@
         </div>
         <div class="body col" id="panel-player-setup.body">
           <!-- Filled dynamically -->
+        </div>
+        <div class="footer col">
+          <div class="row equal">
+            <button class="btn" id="panel-player-setup.button.save" data-i18n-auto="ui.panel-player-setup.button.save" data-panel-hide="panel-player-setup" data-panel-show="panel-player-overview"></button>
+          </div>
         </div>
       </section>
 
@@ -100,6 +110,16 @@
             <button class="btn" data-i18n-auto="ui.panel-mainmenu.button.createGame"></button>
             <button class="btn" data-i18n-auto="ui.panel-mainmenu.button.joinGame"></button>
           </div>
+        </div>
+      </section>
+
+      <!-- New Game -->
+      <section class="panel inactive" data-panel="panel-newgame" id="panel-newgame">
+        <div class="header col">
+          <h4 data-i18n-auto="ui.panel-newgame.header"></h2>
+        </div>
+        <div class="body col" id="panel-newgame.body">
+          <!-- Filled dynamically -->
         </div>
       </section>
     </div>
