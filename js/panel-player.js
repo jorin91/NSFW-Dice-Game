@@ -5,6 +5,7 @@ import { makeInputField, makeSelectField } from "./utils.js";
 
 const unsubscribe = onPlayerChange(() => {
   setupPanelPlayer();
+  setupPanelPlayerSetup();
 });
 
 export function setupPanelPlayer() {
