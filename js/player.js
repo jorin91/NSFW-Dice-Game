@@ -4,11 +4,11 @@ import { deepCopy, generateRandomID } from "./utils.js";
 const LS_KEY_PLAYER = "NSFWDiceGame_Player";
 
 const PLAYER_MODEL = {
-    version: 1.0,
-    id: null,
-    name: null,
-    age: 0,
-    sex: null,
+  version: 1.0,
+  id: null,
+  name: null,
+  age: 0,
+  sex: null,
 };
 
 // Interne state + proxy
@@ -32,39 +32,39 @@ const _playerChangeHandlers = [];
  * Returns: functie om je weer uit te schrijven.
  */
 export function onPlayerChange(handler) {
-    if (typeof handler !== "function") {
-        return () => {};
-    }
-    _playerChangeHandlers.push(handler);
+  if (typeof handler !== "function") {
+    return () => {};
+  }
+  _playerChangeHandlers.push(handler);
 
-    // unsubscribe functie teruggeven
-    return () => {
-        const idx = _playerChangeHandlers.indexOf(handler);
-        if (idx !== -1) {
-            _playerChangeHandlers.splice(idx, 1);
-        }
-    };
+  // unsubscribe functie teruggeven
+  return () => {
+    const idx = _playerChangeHandlers.indexOf(handler);
+    if (idx !== -1) {
+      _playerChangeHandlers.splice(idx, 1);
+    }
+  };
 }
 
 // interne helper om alle listeners te triggeren
 function notifyPlayerChange(changeInfo) {
-    if (!_playerChangeHandlers.length) return;
+  if (!_playerChangeHandlers.length) return;
 
-    const snapshot = _playerProxy; // altijd de actuele proxy
-    for (const fn of _playerChangeHandlers) {
-        try {
-            fn(snapshot, changeInfo);
-        } catch (e) {
-            console.error("[PLAYER] onPlayerChange handler error:", e);
-        }
+  const snapshot = _playerProxy; // altijd de actuele proxy
+  for (const fn of _playerChangeHandlers) {
+    try {
+      fn(snapshot, changeInfo);
+    } catch (e) {
+      console.error("[PLAYER] onPlayerChange handler error:", e);
     }
+  }
 }
 
 // Maak een nieuwe default player, met uniek ID
 function createDefaultPlayer() {
-    const base = deepCopy(PLAYER_MODEL);
-    base.id = generateRandomID("player_"); // of zonder prefix
-    return base;
+  const base = deepCopy(PLAYER_MODEL);
+  base.id = generateRandomID("player_"); // of zonder prefix
+  return base;
 }
 
 /**
@@ -75,58 +75,58 @@ function createDefaultPlayer() {
  * - triggeren onPlayerChange callbacks
  */
 function createPlayerProxy(base) {
-    _playerState = base;
+  _playerState = base;
 
-    _playerProxy = new Proxy(_playerState, {
-        set(target, prop, value) {
-            target[prop] = value;
+  _playerProxy = new Proxy(_playerState, {
+    set(target, prop, value) {
+      target[prop] = value;
 
-            // opslaan in storage
-            storageSave(target,LS_KEY_PLAYER);
+      // opslaan in storage
+      storageSave(target, LS_KEY_PLAYER);
 
-            // window.PLAYER bijwerken
-            if (typeof window !== "undefined") {
-                window.PLAYER = _playerProxy;
-            }
-
-            // listeners aanroepen
-            notifyPlayerChange({
-                type: "set",
-                prop,
-                value,
-            });
-
-            return true;
-        },
-        deleteProperty(target, prop) {
-            if (prop in target) {
-                delete target[prop];
-
-                storageSave(target,LS_KEY_PLAYER);
-
-                if (typeof window !== "undefined") {
-                    window.PLAYER = _playerProxy;
-                }
-
-                notifyPlayerChange({
-                    type: "delete",
-                    prop,
-                });
-            }
-            return true;
-        }
-    });
-
-    // export-binding + window-binding naar de proxy zelf
-    PLAYER = _playerProxy;
-    if (typeof window !== "undefined") {
+      // window.PLAYER bijwerken
+      if (typeof window !== "undefined") {
         window.PLAYER = _playerProxy;
-    }
+      }
 
-    // huidige staat in storage
-    storageSave(target,LS_KEY_PLAYER);
+      // listeners aanroepen
+      notifyPlayerChange({
+        type: "set",
+        prop,
+        value,
+      });
 
-    return _playerProxy;
+      return true;
+    },
+    deleteProperty(target, prop) {
+      if (prop in target) {
+        delete target[prop];
+
+        storageSave(target, LS_KEY_PLAYER);
+
+        if (typeof window !== "undefined") {
+          window.PLAYER = _playerProxy;
+        }
+
+        notifyPlayerChange({
+          type: "delete",
+          prop,
+        });
+      }
+      return true;
+    },
+  });
+
+  // export-binding + window-binding naar de proxy zelf
+  PLAYER = _playerProxy;
+  if (typeof window !== "undefined") {
+    window.PLAYER = _playerProxy;
+  }
+
+  // huidige staat in storage
+  storageSave(_playerState, LS_KEY_PLAYER);
+
+  return _playerProxy;
 }
 
 /**
@@ -134,31 +134,31 @@ function createPlayerProxy(base) {
  * Wordt 1x aangeroepen bij module load.
  */
 function ensurePlayerInitialized() {
-    if (_playerProxy) return _playerProxy;
+  if (_playerProxy) return _playerProxy;
 
-    const loaded = storageLoad(LS_KEY_PLAYER, null);
-    let base;
+  const loaded = storageLoad(LS_KEY_PLAYER, null);
+  let base;
 
-    if (
-        loaded &&
-        typeof loaded === "object" &&
-        Number(loaded.version) === Number(PLAYER_MODEL.version)
-    ) {
-        base = loaded;
+  if (
+    loaded &&
+    typeof loaded === "object" &&
+    Number(loaded.version) === Number(PLAYER_MODEL.version)
+  ) {
+    base = loaded;
 
-        // Oude data kan nog geen id hebben → 1x genereren
-        if (!base.id) {
-            base.id = generateRandomID("player_");
-        }
-    } else {
-        // Versie mismatch of geen data → resetten
-        if (loaded) {
-            storageClear(LS_KEY_PLAYER);
-        }
-        base = createDefaultPlayer();
+    // Oude data kan nog geen id hebben → 1x genereren
+    if (!base.id) {
+      base.id = generateRandomID("player_");
     }
+  } else {
+    // Versie mismatch of geen data → resetten
+    if (loaded) {
+      storageClear(LS_KEY_PLAYER);
+    }
+    base = createDefaultPlayer();
+  }
 
-    return createPlayerProxy(base);
+  return createPlayerProxy(base);
 }
 
 // Automatisch initialiseren bij module load
@@ -168,5 +168,5 @@ ensurePlayerInitialized();
  * Optioneel: expliciet de proxy opvragen.
  */
 export function getPlayer() {
-    return ensurePlayerInitialized();
+  return ensurePlayerInitialized();
 }
