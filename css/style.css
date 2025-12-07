@@ -75,7 +75,10 @@ body {
   gap: 32px;
   flex-wrap: wrap;
   align-items: center;
+}
+.panel .row > * {
   flex: 1 1 0;
+  min-width: 0;
 }
 .panel .col {
   display: flex;
