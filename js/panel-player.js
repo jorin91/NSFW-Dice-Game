@@ -140,5 +140,5 @@ export function setupPanelPlayerSetup() {
   setI18n(saveBtn, "ui.panel-player.setup.button.save");
 
   // Voeg alle velden toe aan de rij
-  el.append(nameEl, ageEl, sexEl, sexTargetEl, saveBtn); // gebruik append i.p.v. appendChild
+  rootSetup.append(nameEl, ageEl, sexEl, sexTargetEl, saveBtn); // gebruik append i.p.v. appendChild
 }
