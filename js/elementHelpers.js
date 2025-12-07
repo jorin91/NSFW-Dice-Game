@@ -29,7 +29,7 @@ export function makeInputField(
   i18nOpts = {}
 ) {
   const {
-    wrapClass = "col small",
+    wrapClass = "row small",
     inputClass = "",
     defaultValue = "",
     placeholderText,
@@ -122,7 +122,7 @@ export function makeSelectField(
   i18nOpts = {}
 ) {
   const {
-    wrapClass = "col small",
+    wrapClass = "row small",
     selectClass = "",
     entries = [],
     attrs = {},
