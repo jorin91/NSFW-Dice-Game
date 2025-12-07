@@ -101,26 +101,26 @@ export function setupPanelPlayerSetup() {
   rootSetup.innerHTML = "";
 
   // Naam
-  const nameEl = makeInputField("name", "text", {
+  const { wrapName, inputName } = makeInputField("name", "text", {
     labelI18n: "ui.panel-player.setup.nameProp",
     defaultValue: PLAYER.name || ""
   });
 
   // Leeftijd
-  const ageEl = makeInputField("age", "number", {
+  const { wrapAge, inputAge } = makeInputField("age", "number", {
     labelI18n: "ui.panel-player.setup.ageProp",
     defaultValue: PLAYER.age || 0,
     attrs: { min: 0 }
   });
 
   // Geslacht
-  const sexEl = makeSelectField("sex", {
+  const { wrapSex, selectSex } = makeSelectField("sex", {
     labelI18n: "ui.panel-player.setup.sexProp",
     entries: Object.entries(SEXSELF_ENUM)
   });
 
   // Geslachtsvoorkeur
-  const sexTargetEl = makeSelectField("sexTarget", {
+  const {wrapSexTarget, selectSexTarget} = makeSelectField("sexTarget", {
     labelI18n: "ui.panel-player.setup.sexTargetProp",
     entries: Object.entries(SEXTARGET_ENUM)
   });
@@ -132,13 +132,13 @@ export function setupPanelPlayerSetup() {
   saveBtn.setAttribute("data-panel-hide", "player-setup");
   saveBtn.addEventListener("click", () => {
     // Waarden opslaan in PLAYER
-    const nameVal = nameEl.input.value.trim();
-    const ageVal = parseInt(ageEl.input.value, 10);
-    const sexVal = sexEl.select.value;
-    const sexTargetVal = sexTargetEl.select.value;
+    const nameVal = inputName.value.trim();
+    const ageVal = parseInt(inputAge.value, 10);
+    const sexVal = selectSex.value;
+    const sexTargetVal = selectSexTarget.value;
   });
   setI18n(saveBtn, "ui.panel-player.setup.button.save");
 
   // Voeg alle velden toe aan de rij
-  rootSetup.append(nameEl, ageEl, sexEl, sexTargetEl, saveBtn); // gebruik append i.p.v. appendChild
+  rootSetup.append(wrapName, wrapAge, wrapSex, wrapSexTarget, saveBtn); // gebruik append i.p.v. appendChild
 }
