@@ -7,17 +7,16 @@ const PLAYER_MODEL = {
     version: 1.0,
     id: null,
     name: null,
-    age: null,
+    age: 0,
     sex: null,
-    sexTarget: null,
 };
 
 // Interne state + proxy
 let _playerState = null;
 let _playerProxy = null;
 
-// Export-object dat altijd de actuele waarden weerspiegelt
-export const PLAYER = {};
+// Dit is nu een live binding naar de proxy zelf
+export let PLAYER = null;
 
 // Lijst met change-listeners
 const _playerChangeHandlers = [];
@@ -73,22 +72,14 @@ function createDefaultPlayer() {
  * Alle wijzigingen:
  * - naar localStorage
  * - naar window.PLAYER
- * - gesynchroniseerd naar export-object PLAYER
  * - triggeren onPlayerChange callbacks
  */
 function createPlayerProxy(base) {
     _playerState = base;
 
-    // Export-object syncen met de huidige state
-    Object.keys(PLAYER).forEach((k) => delete PLAYER[k]);
-    Object.assign(PLAYER, _playerState);
-
     _playerProxy = new Proxy(_playerState, {
         set(target, prop, value) {
             target[prop] = value;
-
-            // export-object bijwerken
-            PLAYER[prop] = value;
 
             // opslaan in storage
             storageSave(LS_KEY_PLAYER, target);
@@ -110,7 +101,6 @@ function createPlayerProxy(base) {
         deleteProperty(target, prop) {
             if (prop in target) {
                 delete target[prop];
-                delete PLAYER[prop];
 
                 storageSave(LS_KEY_PLAYER, target);
 
@@ -127,13 +117,14 @@ function createPlayerProxy(base) {
         }
     });
 
-    // Initial window.PLAYER setten
+    // export-binding + window-binding naar de proxy zelf
+    PLAYER = _playerProxy;
     if (typeof window !== "undefined") {
         window.PLAYER = _playerProxy;
     }
 
-    // Zeker weten dat huidige staat in storage staat
-    storageSave(_playerState, LS_KEY_PLAYER);
+    // huidige staat in storage
+    storageSave(LS_KEY_PLAYER, _playerState);
 
     return _playerProxy;
 }
