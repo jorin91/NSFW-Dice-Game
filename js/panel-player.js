@@ -15,7 +15,8 @@ export function setupPanelPlayer() {
 
   rootPlayer.innerHTML = "";
 
-  rootPlayer.className = "body row equal";
+  const el = document.createElement("div");
+  el.className = "row equal";
 
   // Naam
   const nameEl = document.createElement("div");
@@ -73,7 +74,8 @@ export function setupPanelPlayer() {
   setI18n(editBtn, "ui.panel-player-overview.editButton");
 
   // Voeg alle velden toe aan de rij
-  rootPlayer.append(nameEl, ageEl, sexEl, sexTargetEl, editBtn); // gebruik append i.p.v. appendChild
+  el.append(nameEl, ageEl, sexEl, sexTargetEl, editBtn); // gebruik append i.p.v. appendChild
+  rootPlayer.appendChild(el);
 
   // Check for complete player profile
   const existingWarning = document.getElementById(
