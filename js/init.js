@@ -1,7 +1,7 @@
 import { initI18n } from "./lang_i18n.js";
 import { initPanelNavigation } from "./panelnavigation.js";
 import { firebaseWriteTest } from "./firebase/firebase-test.js";
-import { setupPanelPlayer } from "./panel-player.js";
+import { setupPanelPlayer, setupPanelPlayerSetup } from "./panel-player.js";
 
 export async function init() {
   // Initialization functions
@@ -12,6 +12,7 @@ export async function init() {
 
 export async function initUpdate() {
   setupPanelPlayer(); // Setup Player Panel
+  setupPanelPlayerSetup(); // Setup Player Setup Panel
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
