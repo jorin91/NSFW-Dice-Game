@@ -20,7 +20,7 @@ export function setupPanelPlayer() {
 
   // Naam
   const nameEl = document.createElement("div");
-  nameEl.className = "row";
+  nameEl.className = "row small";
   const nameProp = document.createElement("span");
   setI18n(nameProp, "ui.panel-player.overview.nameProp");
   const nameVal = document.createElement("span");
@@ -29,7 +29,7 @@ export function setupPanelPlayer() {
 
   // Leeftijd
   const ageEl = document.createElement("div");
-  ageEl.className = "row";
+  ageEl.className = "row small";
   const ageProp = document.createElement("span");
   setI18n(ageProp, "ui.panel-player.overview.ageProp");
   const ageVal = document.createElement("span");
@@ -38,7 +38,7 @@ export function setupPanelPlayer() {
 
   // Geslacht
   const sexEl = document.createElement("div");
-  sexEl.className = "row";
+  sexEl.className = "row small";
   const sexProp = document.createElement("span");
   setI18n(sexProp, "ui.panel-player.overview.sexProp");
   const sexVal = document.createElement("span");
@@ -53,7 +53,7 @@ export function setupPanelPlayer() {
 
   // Geslachtsvoorkeur
   const sexTargetEl = document.createElement("div");
-  sexTargetEl.className = "row";
+  sexTargetEl.className = "row small";
   const sexTargetProp = document.createElement("span");
   setI18n(sexTargetProp, "ui.panel-player.overview.sexTargetProp");
   const sexTargetVal = document.createElement("span");
