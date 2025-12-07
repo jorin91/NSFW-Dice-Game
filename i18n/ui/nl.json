@@ -40,6 +40,6 @@
   "ui.panel-joingame.header": "Deelnemen aan Spel",
   "ui.panel-joingame.button.return": "Terug naar Hoofdmenu",
 
-  "ui.panel.newgame.header": "Nieuw Spel Aanmaken",
+  "ui.panel-newgame.header": "Nieuw Spel Aanmaken",
   "ui.panel-newgame.button.return": "Terug naar Hoofdmenu"
 }
