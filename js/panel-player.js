@@ -15,7 +15,7 @@ export function setupPanelPlayer() {
 
   rootPlayer.innerHTML = "";
 
-  rootPlayer.className = "row equal";
+  rootPlayer.className = "body row equal";
 
   // Naam
   const nameEl = document.createElement("div");
