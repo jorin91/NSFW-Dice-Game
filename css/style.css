@@ -69,27 +69,23 @@ body {
   margin-bottom: 8px;
   color: var(--text);
 }
-.panel .body.row,
-.panel .body .row {
+.panel .row {
   display: flex;
   flex-direction: row;
-  gap: 16px;
+  gap: 32px;
   flex-wrap: wrap;
   align-items: center;
 }
-.panel .body.col,
-.panel .body .col {
+.panel .col {
   display: flex;
   flex-direction: column;
   gap: 32px;
 }
-.panel .body.sep,
-.panel .body .sep {
+.panel .sep {
   height: 1px;
   margin: 8px 0;
 }
-.panel .body.list,
-.panel .body .list {
+.panel .list {
   padding-left: 20px;
   line-height: 1.6;
 }
@@ -136,7 +132,7 @@ body {
 }
 /* Row Layouts */
 .row.small {
-  gap: 4px;
+  gap: 8px !important;
 }
 .row.grid3 {
   display: grid;
@@ -178,7 +174,7 @@ body {
 }
 /* Collomn Layouts */
 .col.small {
-  gap: 4px;
+  gap: 8px !important;
 }
 /* Panel Navigation */
 /*
