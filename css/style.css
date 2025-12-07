@@ -44,7 +44,7 @@ body {
   overflow: hidden;
 }
 .panel .header {
-  padding: 14px 16px;
+  padding: 16px;
   border-bottom: var(--panel_border);
   background: linear-gradient(
     180deg,
@@ -94,16 +94,10 @@ body {
   line-height: 1.6;
 }
 .panel .footer {
-  padding: 14px 16px;
   border-top: var(--panel_border);
-  background: linear-gradient(
-    180deg,
-    var(--panel_bg_color),
-    var(--panel_header_bg_color)
-  );
-  border-bottom-left-radius: var(--panel_border_radius);
-  border-bottom-right-radius: var(--panel_border_radius);
+  padding: 16px;
   color: var(--text_muted);
+  background: var(--panel_bg_color);
 }
 .panel input,
 .panel select {
