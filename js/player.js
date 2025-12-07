@@ -82,7 +82,7 @@ function createPlayerProxy(base) {
             target[prop] = value;
 
             // opslaan in storage
-            storageSave(LS_KEY_PLAYER, target);
+            storageSave(target,LS_KEY_PLAYER);
 
             // window.PLAYER bijwerken
             if (typeof window !== "undefined") {
@@ -102,7 +102,7 @@ function createPlayerProxy(base) {
             if (prop in target) {
                 delete target[prop];
 
-                storageSave(LS_KEY_PLAYER, target);
+                storageSave(target,LS_KEY_PLAYER);
 
                 if (typeof window !== "undefined") {
                     window.PLAYER = _playerProxy;
@@ -124,7 +124,7 @@ function createPlayerProxy(base) {
     }
 
     // huidige staat in storage
-    storageSave(LS_KEY_PLAYER, _playerState);
+    storageSave(target,LS_KEY_PLAYER);
 
     return _playerProxy;
 }
