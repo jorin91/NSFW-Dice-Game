@@ -185,18 +185,18 @@ body {
 }
 /* Content Alignment */
 .centerWrap {
-  margin: 0 auto;
+  margin: 0 auto !important;
 }
 .leftWrap {
-  margin-right: auto;
+  margin-right: auto !important;
 }
 .rightWrap {
-  margin-left: auto;
+  margin-left: auto !important;
 }
 .centerContent {
-  justify-content: center; /* optioneel, ook verticaal centreren binnen eigen hoogte */
-  align-items: center; /* horizontaal centreren */
-  width: fit-content;
+  justify-content: center !important; /* optioneel, ook verticaal centreren binnen eigen hoogte */
+  align-items: center !important; /* horizontaal centreren */
+  width: fit-content !important;
 }
 /* Text Colors */
 .error {
