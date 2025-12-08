@@ -77,34 +77,23 @@ body {
   align-items: center;
 }
 .panel .row.equal > * {
-  flex: 1 1 0;
-  min-width: 0;
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
 }
 /* Settings-variant */
 .panel .row.setting {
-  /* we willen vaste kolommen, dus niet wrappen */
-  flex-wrap: nowrap;
+  display: grid;
+  grid-template-columns: minmax(0, 20%) minmax(0, 20%) minmax(0, 60%);
+  column-gap: 32px;
+  row-gap: 8px;
   align-items: flex-start;
 }
 /* Alles gewoon links uitlijnen voor de zekerheid */
 .panel .row.setting > * {
   text-align: left;
-}
-/* Label */
-.panel .row.setting > label {
-  flex: 0 0 20%;
-  max-width: 20%;
-}
-/* Input/select (setting value) */
-.panel .row.setting > input,
-.panel .row.setting > select {
-  flex: 0 0 20%;
-  max-width: 20%;
-}
-/* Description (span) */
-.panel .row.setting > span {
-  flex: 0 0 60%;
-  max-width: 60%;
+  min-width: 0;
+  margin-right: auto;
+  overflow-wrap: break-word;
 }
 .panel .col {
   display: flex;
