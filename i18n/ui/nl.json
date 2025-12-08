@@ -44,7 +44,7 @@
   "ui.panel-newgame.button.return": "Terug naar Hoofdmenu",
   "ui.panel-newgame.button.create": "Spel Aanmaken",
 
-  "ui.panel-game.header": "NSFW Dobbelspel | Game ID: {gameID}",
+  "ui.panel-game.header": "NSFW Dobbelspel | Game ID: {gameID} | Game Code: {gameCode}",
 
   "ui.settings.rolls": "Aantal worpen per beurt",
   "ui.settings.rolls.desc": "Het aantal worpen dat elke speler per beurt mag doen om zijn of haar score te bepalen.",
