@@ -32,7 +32,7 @@ function buildSettingsElement() {
 
 function createSettingElement(key, setting) {
   const container = document.createElement("div");
-  container.className = "col";
+  container.className = "col small";
   container.id = `setting-${key}`;
 
   if (setting.i18nTitle) {
