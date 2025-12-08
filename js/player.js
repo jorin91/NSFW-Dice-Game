@@ -4,11 +4,18 @@ import { deepCopy, generateRandomID } from "./utils.js";
 const LS_KEY_PLAYER = "NSFWDiceGame_Player";
 
 const PLAYER_MODEL = {
-  version: 1.0,
-  id: null,
-  name: null,
-  age: 0,
-  sex: null,
+  version: 1.0, // versie van het player-model
+  id: null, // unieke speler ID
+  name: null, // naam/bijnaam van de speler
+  age: 0, // leeftijd van de speler
+  sex: null, // geslacht van de speler
+  game: {
+    score: 0, // aantal gewonnen rondes in huidige game
+    points: 0, // gegooide punten in huidige beurt
+    safe: false, // speler is veilig in huidige game
+    consent: false, // speler stemt in met deelname
+    clothing: {}, // kledingstukken van de speler
+  }
 };
 
 // Interne state + proxy
@@ -63,7 +70,7 @@ function notifyPlayerChange(changeInfo) {
 // Maak een nieuwe default player, met uniek ID
 function createDefaultPlayer() {
   const base = deepCopy(PLAYER_MODEL);
-  base.id = generateRandomID("player_"); // of zonder prefix
+  base.id = generateRandomID();
   return base;
 }
 
@@ -71,7 +78,6 @@ function createDefaultPlayer() {
  * Maakt de Proxy rond de interne player state.
  * Alle wijzigingen:
  * - naar localStorage
- * - naar window.PLAYER
  * - triggeren onPlayerChange callbacks
  */
 function createPlayerProxy(base) {
@@ -83,11 +89,6 @@ function createPlayerProxy(base) {
 
       // opslaan in storage
       storageSave(target, LS_KEY_PLAYER);
-
-      // window.PLAYER bijwerken
-      if (typeof window !== "undefined") {
-        window.PLAYER = _playerProxy;
-      }
 
       // listeners aanroepen
       notifyPlayerChange({
@@ -104,10 +105,6 @@ function createPlayerProxy(base) {
 
         storageSave(target, LS_KEY_PLAYER);
 
-        if (typeof window !== "undefined") {
-          window.PLAYER = _playerProxy;
-        }
-
         notifyPlayerChange({
           type: "delete",
           prop,
@@ -117,11 +114,8 @@ function createPlayerProxy(base) {
     },
   });
 
-  // export-binding + window-binding naar de proxy zelf
+  // export-binding naar de proxy zelf
   PLAYER = _playerProxy;
-  if (typeof window !== "undefined") {
-    window.PLAYER = _playerProxy;
-  }
 
   // huidige staat in storage
   storageSave(_playerState, LS_KEY_PLAYER);
@@ -148,7 +142,7 @@ function ensurePlayerInitialized() {
 
     // Oude data kan nog geen id hebben → 1x genereren
     if (!base.id) {
-      base.id = generateRandomID("player_");
+      base.id = generateRandomID();
     }
   } else {
     // Versie mismatch of geen data → resetten
