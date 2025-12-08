@@ -107,8 +107,8 @@ body {
   background: var(--accent1);
 }
 .panel .row.setting:has(input[type="number"]) input[type="number"] {
-  width: 150px;
-  text-align: right;
+  width: 75px;
+  text-align: left;
 }
 .panel .row.setting:has(input[type="checkbox"]:checked) {
   border: 1px solid var(--accent1);
