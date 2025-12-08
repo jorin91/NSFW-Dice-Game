@@ -2,14 +2,14 @@
 import { deepCopy } from "./utils.js";
 import { storageSave, storageLoad, storageClear } from "./localstorage.js";
 import { dbUpdate, subscribeValue } from "./firebase/firebase-db.js";
+import { randomNumberString } from "./utils.js";
 
 const LS_KEY_GAMESTATE = "NSFWDiceGame_GameState";
 
 // Basis vorm van je gamestate – alles wat hier in staat, heb je altijd.
 const GAMESTATE_MODEL = {
   version: 1.0,
-  gameID: null,
-  gamePassword: null,
+  gameID: randomNumberString(6),
   settings: {},
 };
 
