@@ -80,6 +80,32 @@ body {
   flex: 1 1 0;
   min-width: 0;
 }
+/* Settings-variant */
+.panel .row.setting {
+  /* we willen vaste kolommen, dus niet wrappen */
+  flex-wrap: nowrap;
+  align-items: flex-start;
+}
+/* Alles gewoon links uitlijnen voor de zekerheid */
+.panel .row.setting > * {
+  text-align: left;
+}
+/* Label */
+.panel .row.setting > label {
+  flex: 0 0 20%;
+  max-width: 20%;
+}
+/* Input/select (setting value) */
+.panel .row.setting > input,
+.panel .row.setting > select {
+  flex: 0 0 20%;
+  max-width: 20%;
+}
+/* Description (span) */
+.panel .row.setting > span {
+  flex: 0 0 60%;
+  max-width: 60%;
+}
 .panel .col {
   display: flex;
   flex-direction: column;
