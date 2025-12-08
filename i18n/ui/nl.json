@@ -61,6 +61,7 @@
 
   "ui.firebase.joinGame.noGameIDCode": "Geen game-ID of game-code opgegeven.",
   "ui.firebase.joinGame.notFound": "Deze game bestaat niet.",
+  "ui.firebase.joinGame.wrongCode": "De opgegeven game-code is onjuist.",
   "ui.firebase.joinGame.success": "Je bent succesvol aangesloten bij de game.",
   "ui.firebase.joinGame.error": "Er is een fout opgetreden bij het joinen van de game."
 }
