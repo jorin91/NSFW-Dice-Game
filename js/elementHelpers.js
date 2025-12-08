@@ -19,15 +19,13 @@ import { setI18n } from "./lang_i18n.js";
  *   label?: string          - i18n-key voor het label
  *   placeholder?: string    - i18n-key voor placeholder
  *   defaultValue?: string   - i18n-key voor default value (value attribuut)
+ *   labelArgs?: object         - args voor label ("Hallo {name}")
+ *   placeholderArgs?: object   - args voor placeholder
+ *   defaultValueArgs?: object  - args voor value
  *
  * @returns {{ wrap: HTMLLabelElement, labelSpan: HTMLSpanElement, input: HTMLInputElement }}
  */
-export function makeInputField(
-  name,
-  type,
-  elemOpts = {},
-  i18nOpts = {}
-) {
+export function makeInputField(name, type, elemOpts = {}, i18nOpts = {}) {
   const {
     wrapClass = "row equal",
     inputClass = "",
@@ -41,6 +39,9 @@ export function makeInputField(
     label: labelKey,
     placeholder: placeholderKey,
     defaultValue: defaultValueKey,
+    labelArgs,
+    placeholderArgs,
+    defaultValueArgs,
   } = i18nOpts;
 
   const wrap = document.createElement("label");
@@ -50,7 +51,7 @@ export function makeInputField(
 
   // Label via i18n of fallback tekst
   if (labelKey) {
-    setI18n(labelSpan, labelKey);
+    setI18n(labelSpan, labelKey, labelArgs);
   } else if (labelText) {
     labelSpan.textContent = labelText;
   } else {
@@ -69,12 +70,12 @@ export function makeInputField(
 
   // Default value via i18n op het "value" attribuut
   if (defaultValueKey) {
-    setI18n(input, defaultValueKey, null, "attr", false, "value");
+    setI18n(input, defaultValueKey, defaultValueArgs || null, "value");
   }
 
   // Placeholder: eerst i18n, anders plain tekst
   if (placeholderKey) {
-    setI18n(input, placeholderKey, null, "attr", false, "placeholder");
+    setI18n(input, placeholderKey, placeholderArgs || null, "placeholder");
   } else if (placeholderText) {
     input.placeholder = placeholderText;
   }
@@ -116,11 +117,7 @@ export function makeInputField(
  *
  * @returns {{ wrap: HTMLLabelElement, labelSpan: HTMLSpanElement, select: HTMLSelectElement }}
  */
-export function makeSelectField(
-  name,
-  elemOpts = {},
-  i18nOpts = {}
-) {
+export function makeSelectField(name, elemOpts = {}, i18nOpts = {}) {
   const {
     wrapClass = "row equal",
     selectClass = "",
