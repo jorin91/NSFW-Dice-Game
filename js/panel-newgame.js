@@ -2,6 +2,9 @@
 import { setI18n } from "./lang_i18n.js";
 import { makeInputField, makeSelectField } from "./elementHelpers.js";
 import { getSettingsModel } from "./settings.js";
+import { GAMESTATE } from "./gamestate.js";
+
+let createClickHandler = null;
 
 export function setupPanelNewGame() {
   buildSettingsElement();
@@ -9,7 +12,8 @@ export function setupPanelNewGame() {
 
 function buildSettingsElement() {
   const body = document.getElementById("panel-newgame.body");
-  if (!body) return;
+  const createButton = document.getElementById("panel-newgame.button.create");
+  if (!body || !createButton) return;
 
   const settings = getSettingsModel();
 
@@ -28,6 +32,13 @@ function buildSettingsElement() {
     const settingElement = createSettingElement(key, setting);
     settingsPanel.appendChild(settingElement);
   }
+
+  if (createClickHandler) {
+    createButton.removeEventListener("click", createClickHandler);
+  }
+
+  createClickHandler = handleCreateClick.bind(null, settings);
+  createButton.addEventListener("click", createClickHandler);
 }
 
 function createSettingElement(key, setting) {
@@ -88,7 +99,7 @@ function createSettingElement(key, setting) {
 
       input.addEventListener("change", () => {
         let val = parseInt(input.value, 10);
-        subSetting = val;
+        setting[subKey] = val;
       });
 
       subSettingContainer.appendChild(input);
@@ -98,4 +109,8 @@ function createSettingElement(key, setting) {
   }
 
   return container;
+}
+
+function handleCreateClick(settings, e) {
+  GAMESTATE.settings = settings;
 }
