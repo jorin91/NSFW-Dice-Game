@@ -12,6 +12,21 @@ import {
 import { setI18n } from "./lang_i18n.js";
 
 export const SETTINGS_MODEL = {
+  rolls: {
+    i18nTitle: "ui.settings.rolls",
+    i18nDesc: "ui.settings.rolls.desc",
+    value: 3,
+  },
+  score: {
+    i18nTitle: "ui.settings.score",
+    i18nDesc: "ui.settings.score.desc",
+    value: 3,
+  },
+  dices: {
+    i18nTitle: "ui.settings.dices",
+    i18nDesc: "ui.settings.dices.desc",
+    value: 5,
+  },
   gamephase: buildSettingsCollection(GAMEPHASE_ENUM, true, "GAMEPHASE_ENUM"),
   gamecategory: buildSettingsCollection(
     GAMECATEGORY_ENUM,
