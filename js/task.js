@@ -1,4 +1,4 @@
-// task.js
+// js/task.js
 import { deepCopy } from "./utils.js";
 import {
   SEXTARGET_ENUM,
@@ -10,9 +10,9 @@ import {
   TASKPLAYERTARGET_ENUM,
 } from "./enums.js";
 
-export const TASK_MODEL_PROMISE = buildSettingsCollectionAsync(GAMECATEGORY_ENUM, true, 10);
+// Lazy init in plaats van direct bij import
+let _TASK_MODEL_PROMISE = null;
 
-// Diepe kopie van de huidige state van TASK_MODEL
 export async function getTaskModel() {
   try {
     if (!_TASK_MODEL_PROMISE) {
@@ -55,11 +55,6 @@ async function loadTasksForKey(key) {
 
 /**
  * Bouwt een settings-collectie op basis van een enum-object.
- * Elke key krijgt:
- * - value: de enum value
- * - enabled: standaard aan/uit
- * - weight: standaard gewicht
- * - tasks: array met taken die geladen worden uit de corresponderende tasks/<KEY>.js bestanden
  */
 async function buildSettingsCollectionAsync(
   enumObj,
