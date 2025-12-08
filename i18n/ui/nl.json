@@ -59,7 +59,7 @@
   "ui.firebase.createGame.success": "De game is succesvol aangemaakt.",
   "ui.firebase.createGame.error": "Er is een fout opgetreden bij het aanmaken van de game.",
 
-  "ui.firebase.joinGame.noGameID": "Geen game-ID opgegeven.",
+  "ui.firebase.joinGame.noGameIDCode": "Geen game-ID of game-code opgegeven.",
   "ui.firebase.joinGame.notFound": "Deze game bestaat niet.",
   "ui.firebase.joinGame.success": "Je bent succesvol aangesloten bij de game.",
   "ui.firebase.joinGame.error": "Er is een fout opgetreden bij het joinen van de game."
