@@ -39,7 +39,7 @@
 
   "ui.panel-joingame.header": "Deelnemen aan Spel",
   "ui.panel-joingame.button.return": "Terug naar Hoofdmenu",
-  "ui.panel-joingame.body.button.gameID": "Spel {gameID}",
+  "ui.panel-joingame.body.button.gameID": "Spel ID: {gameID}",
 
   "ui.panel-newgame.header": "Nieuw Spel Aanmaken",
   "ui.panel-newgame.button.return": "Terug naar Hoofdmenu",
