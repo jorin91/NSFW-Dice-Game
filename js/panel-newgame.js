@@ -5,6 +5,7 @@ import { getSettingsModel } from "./settings.js";
 import { GAMESTATE } from "./gamestate.js";
 import { randomNumberString } from "./utils.js";
 import { createGame } from "./firebase/firebase-game.js";
+import { PLAYER } from "./player.js";
 
 let createClickHandler = null;
 
@@ -116,5 +117,6 @@ function createSettingElement(key, setting) {
 function handleCreateClick(settings, e) {
   GAMESTATE.gameID = randomNumberString(6);
   GAMESTATE.settings = settings;
+  GAMESTATE.players.push(PLAYER);
   createGame();
 }
