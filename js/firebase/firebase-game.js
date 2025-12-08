@@ -1,139 +1,68 @@
 // js/firebase/firebase-game.js
-import { dbGet } from "./firebase-db.js";
-import { GAMESTATE, GAMESTATE_MODEL, gameBindToFirebase } from "../gamestate.js";
+import { GAMESTATE, gameBindToFirebase } from "../gamestate.js";
+import { firebaseDB, ref, set, get } from "./firebase-init.js";
+import { randomNumberString } from "../utils.js";
 
-// Helper: numerieke code genereren (bijv. 6 of 8 cijfers)
-function generateGameCode(length = 6) {
-  let code = "";
-  for (let i = 0; i < length; i++) {
-    code += Math.floor(Math.random() * 10);
-  }
-  return code;
-}
-
-// Helper: playerId genereren (mag alles zijn, hoeft niet mooi)
-function generatePlayerId() {
-  return "p_" + Math.random().toString(36).slice(2, 10);
-}
-
-// Helper: code normaliseren (spaties weg, naar string)
-export function normalizeGameCode(input) {
-  return String(input || "").trim();
+/**
+ * Check of een game bestaat in Firebase.
+ */
+async function gameExists(gameID) {
+  const gameRef = ref(firebaseDB, `games/${gameID}`);
+  const snapshot = await get(gameRef);
+  return snapshot.exists();
 }
 
 /**
- * Checkt of een game met deze code bestaat.
- * Retourneert:
- *  - null als de game niet bestaat
- *  - het object onder /games/{code} als hij wel bestaat
+ * Nieuwe game aanmaken.
+ * Returned: { success: boolean, message: translationKey }
  */
-export async function findGameByCode(gameCode) {
-  const code = normalizeGameCode(gameCode);
-  if (!code) return null;
+export async function createGame() {
+  let gameID = GAMESTATE.gameID;
 
-  const game = await dbGet(["games", code]);
-  return game || null;
+  if (!gameID) {
+    return { success: false, message: "ui.firebase.createGame.noGameID" };
+  }
+
+  try {
+    // Check of ID al bestaat → zo ja, nieuwe genereren
+    while (await gameExists(gameID)) {
+      // Je kunt dit eventueel loggen via UI (via returned message)
+      GAMESTATE.gameID = randomNumberString(6);
+      gameID = GAMESTATE.gameID;
+    }
+
+    // Opslaan naar Firebase
+    const gameRef = ref(firebaseDB, `games/${gameID}`);
+    await set(gameRef, GAMESTATE);
+
+    // Lokale binding
+    gameBindToFirebase(gameID);
+
+    return { success: true, message: "ui.firebase.createGame.success" };
+  } catch (err) {
+    console.error("createGame error:", err);
+    return { success: false, message: "ui.firebase.createGame.error" };
+  }
 }
 
 /**
- * Host: nieuwe game aanmaken en direct verbinden.
- *
- * - maakt een nieuwe gameCode (6 of 8 cijfers)
- * - maakt een playerId voor de host
- * - bindt GAMESTATE aan Firebase op /games/{code}
- * - zet basis velden in GAMESTATE
- * - voegt host toe aan GAMESTATE.players
- *
- * Retourneert: { gameCode, playerId }
+ * Join een bestaande game.
+ * Returned: { success: boolean, message: translationKey }
  */
-export async function createAndBindGame({
-  gameName,
-  hostName,
-  codeLength = 6,
-} = {}) {
-  const code = generateGameCode(codeLength);
-  const playerId = generatePlayerId();
-  const now = Date.now();
-
-  // Eerst binden aan Firebase, zodat vanaf nu alle GAMESTATE-wijzigingen syncen
-  gameBindToFirebase(code);
-
-  // Basis game-inhoud in GAMESTATE zetten
-  // Alles wat je hier zet, gaat automatisch naar Firebase via de Proxy
-  GAMESTATE.version = GAMESTATE_MODEL.version;
-  GAMESTATE.gameCode = code;
-  GAMESTATE.createdAt = now;
-  GAMESTATE.gameName = gameName || "Nieuwe game";
-  GAMESTATE.hostPlayerId = playerId;
-
-  // Info over "mijzelf"
-  GAMESTATE.me = {
-    id: playerId,
-    name: hostName || "Host",
-    joinedAt: now,
-  };
-
-  // Spelers-structuur
-  GAMESTATE.players ??= {};
-  GAMESTATE.players[playerId] = {
-    id: playerId,
-    name: hostName || "Host",
-    joinedAt: now,
-    isHost: true,
-  };
-
-  return { gameCode: code, playerId };
-}
-
-/**
- * Joinen bij een bestaande game.
- *
- * - controleert of /games/{code} bestaat
- * - maakt een playerId
- * - bindt GAMESTATE aan Firebase op /games/{code}
- * - voegt deze speler toe aan GAMESTATE.players
- *
- * Retourneert: { gameCode, playerId, game } (game = huidige state uit Firebase)
- */
-export async function joinAndBindGame({
-  gameCode,
-  playerName,
-} = {}) {
-  const code = normalizeGameCode(gameCode);
-  if (!code) {
-    throw new Error("Geen geldige game code opgegeven.");
+export async function joinGame(gameID) {
+  if (!gameID) {
+    return { success: false, message: "ui.firebase.joinGame.noGameID" };
   }
 
-  // Bestaat de game?
-  const existingGame = await findGameByCode(code);
-  if (!existingGame) {
-    throw new Error("Deze game bestaat niet (ongeldige code).");
+  try {
+    if (!(await gameExists(gameID))) {
+      return { success: false, message: "ui.firebase.joinGame.notFound" };
+    }
+
+    gameBindToFirebase(gameID);
+    return { success: true, message: "ui.firebase.joinGame.success" };
+  } catch (err) {
+    console.error("joinGame error:", err);
+    return { success: false, message: "ui.firebase.joinGame.error" };
   }
-
-  const playerId = generatePlayerId();
-  const now = Date.now();
-
-  // Binden aan Firebase
-  gameBindToFirebase(code);
-
-  // GAMESTATE vullen op basis van bestaande game + eigen info
-  // De remote state wordt via gameBindToFirebase binnengehaald.
-  // Hier voegen we onszelf toe.
-  GAMESTATE.gameCode = code;
-
-  GAMESTATE.me = {
-    id: playerId,
-    name: playerName || "Speler",
-    joinedAt: now,
-  };
-
-  GAMESTATE.players ??= {};
-  GAMESTATE.players[playerId] = {
-    id: playerId,
-    name: playerName || "Speler",
-    joinedAt: now,
-    isHost: false,
-  };
-
-  return { gameCode: code, playerId, game: existingGame };
 }
