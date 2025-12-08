@@ -12,7 +12,9 @@ import { setupPanelGame } from "./panel-game.js";
 let createClickHandler = null;
 
 export function setupPanelNewGame() {
-  const createButton = document.getElementById("panel-mainmenu.button.createGame");
+  const createButton = document.getElementById(
+    "panel-mainmenu.button.createGame"
+  );
   if (createButton) {
     createButton.addEventListener("click", (e) => {
       buildSettingsElement();
@@ -133,6 +135,12 @@ async function handleCreateClick(settings, e) {
     return;
   }
 
+  const footer = document.getElementById("panel-newgame.footer");
+  const status = footer.getElementById("panel-newgame.footer.status");
+  if (status) {
+    warning.remove();
+  }
+
   PLAYER.game.consent = true;
 
   GAMESTATE.gameID = randomNumberString(8);
@@ -140,6 +148,18 @@ async function handleCreateClick(settings, e) {
   GAMESTATE.settings = settings;
   GAMESTATE.tasks = await getTaskModel();
   GAMESTATE.players = [PLAYER];
-  await createGame();
+  const result = await createGame();
+
+  if (result.message) {
+    const message = document.createElement("div");
+    message.id = "panel-newgame.footer.status";
+    setI18n(message, result.message);
+    footer.appendChild(message);
+  }
+
+  if (!result.success) {
+    return;
+  }
+
   setupPanelGame();
 }
