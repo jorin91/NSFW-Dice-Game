@@ -1,4 +1,4 @@
-// ENUMS
+// enums.js
 export const SEXTARGET_ENUM = Object.freeze({
   Male: "SEXTARGET_ENUM.Male",
   Female: "SEXTARGET_ENUM.Female",
@@ -28,7 +28,7 @@ export const GAMECATEGORY_ENUM = Object.freeze({
   DRESS: "GAMECATEGORY_ENUM.DRESS",
   UNDRESS: "GAMECATEGORY_ENUM.UNDRESS",
   CHALLENGE: "GAMECATEGORY_ENUM.CHALLENGE",
-  MOVEMENT: "GAMECATEGORY_ENUM.MOVEMENT"
+  MOVEMENT: "GAMECATEGORY_ENUM.MOVEMENT",
 });
 
 export const SEXACT_ENUM = Object.freeze({
@@ -36,7 +36,7 @@ export const SEXACT_ENUM = Object.freeze({
   VAGINAL: "SEXACT_ENUM.VAGINAL",
   ANAL: "SEXACT_ENUM.ANAL",
   MANUAL: "SEXACT_ENUM.MANUAL",
-  TOY: "SEXACT_ENUM.TOY"
+  TOY: "SEXACT_ENUM.TOY",
 });
 
 export const BODYZONE_ENUM = Object.freeze({
@@ -44,14 +44,25 @@ export const BODYZONE_ENUM = Object.freeze({
   NECK: "BODYZONE_ENUM.NECK",
   BELLY: "BODYZONE_ENUM.BELLY",
   BUTT: "BODYZONE_ENUM.BUTT",
-  PUBIC: "BODYZONE_ENUM.PUBIC",     // schaamstreek (incl. lies + mons)
+  PUBIC: "BODYZONE_ENUM.PUBIC", // schaamstreek (incl. lies + mons)
   BREASTS: "BODYZONE_ENUM.BREASTS",
   PENIS: "BODYZONE_ENUM.PENIS",
   VAGINA: "BODYZONE_ENUM.VAGINA",
   ANUS: "BODYZONE_ENUM.ANUS",
-  MOUTH: "BODYZONE_ENUM.MOUTH"
+  MOUTH: "BODYZONE_ENUM.MOUTH",
 });
 
+export const TASKPLAYERTARGET_ENUM = Object.freeze({
+  loser: 0,
+  winner: 1,
+  other: 2,
+});
+
+export const TASKCOMPLETETYPE_ENUM = Object.freeze({
+  once: 0,
+  count: 1,
+  time: 2,
+});
 
 // HELPERS
 /**
