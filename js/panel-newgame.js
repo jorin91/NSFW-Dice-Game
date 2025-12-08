@@ -47,7 +47,7 @@ function createSettingElement(key, setting) {
     container.appendChild(desc);
   }
 
-  // Create checkboxes for each sub-setting
+  // Create input for each sub-setting
 
   for (const subKey of Object.keys(setting)) {
     if (subKey === "i18nTitle" || subKey === "i18nDesc") continue;
@@ -56,28 +56,44 @@ function createSettingElement(key, setting) {
     const subSettingContainer = document.createElement("div");
     subSettingContainer.className = "row setting";
 
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.checked = subSetting.enabled;
-    checkbox.addEventListener("change", () => {
-      subSetting.enabled = checkbox.checked;
-    });
+    if (subSetting && typeof subSetting === "object") {
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.checked = subSetting.enabled;
+      checkbox.addEventListener("change", () => {
+        subSetting.enabled = checkbox.checked;
+      });
 
-    // row listener to turn row into a clickable area for the checkbox
-    subSettingContainer.addEventListener("click", (e) => {
-      if (e.target !== checkbox) {
-        checkbox.checked = !checkbox.checked;
-        checkbox.dispatchEvent(new Event("change"));
-      }
-    });
+      // row listener to turn row into a clickable area for the checkbox
+      subSettingContainer.addEventListener("click", (e) => {
+        if (e.target !== checkbox) {
+          checkbox.checked = !checkbox.checked;
+          checkbox.dispatchEvent(new Event("change"));
+        }
+      });
 
-    const label = document.createElement("label");
-    setI18n(label, subSetting.value);
+      const label = document.createElement("label");
+      setI18n(label, subSetting.value);
 
-    const description = document.createElement("span");
-    setI18n(description, `${subSetting.value}.desc`);
+      const description = document.createElement("span");
+      setI18n(description, `${subSetting.value}.desc`);
 
-    subSettingContainer.append(checkbox, label, description);
+      subSettingContainer.append(checkbox, label, description);
+    } else if (typeof subSetting === "number") {
+      const input = document.createElement("input");
+      input.type = "number";
+      input.min = "1";
+      input.step = "1";
+      input.value = subSetting;
+
+      input.addEventListener("change", () => {
+        let val = parseInt(input.value, 10);
+        subSetting = val;
+      });
+
+      const label = document.createElement("label");
+      setI18n(label, setting.i18nTitle);
+    }
 
     container.appendChild(subSettingContainer);
   }
