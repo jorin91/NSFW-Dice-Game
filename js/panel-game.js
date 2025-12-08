@@ -10,7 +10,7 @@ export function setupPanelGame() {
     setI18n(
       title,
       "ui.panel-game.header",
-      { gameID: GAMESTATE.gameID },
+      { gameID: GAMESTATE.gameID, gameCode: GAMESTATE.gameCode },
       "text",
       true
     );
