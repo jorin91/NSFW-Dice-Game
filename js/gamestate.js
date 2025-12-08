@@ -12,7 +12,7 @@ const GAMESTATE_MODEL = {
   gameID: null, // unieke game ID (6-cijferig)
   settings: null, // game-instellingen
   players: [], // spelerslijst
-  tasks: await getTaskModel(), // takenlijst
+  tasks: null, // takenlijst
   game: {
     currentRound: 0, // huidige ronde
     currentPlayerTurnIndex: 0, // index van speler die nu aan de beurt is
