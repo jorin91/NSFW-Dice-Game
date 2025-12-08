@@ -2,14 +2,23 @@
 import { deepCopy } from "./utils.js";
 import { storageSave, storageLoad, storageClear } from "./localstorage.js";
 import { dbUpdate, subscribeValue } from "./firebase/firebase-db.js";
+import { getTaskModel } from "./task.js";
 
 const LS_KEY_GAMESTATE = "NSFWDiceGame_GameState";
 
 // Basis vorm van je gamestate – alles wat hier in staat, heb je altijd.
 const GAMESTATE_MODEL = {
-  version: 1.0,
-  gameID: null,
-  settings: {},
+  version: 1.0, // versie van het game-state model
+  gameID: null, // unieke game ID (6-cijferig)
+  settings: null, // game-instellingen
+  players: [], // spelerslijst
+  tasks: await getTaskModel(), // takenlijst
+  game: {
+    currentRound: 0, // huidige ronde
+    currentPlayerTurnIndex: 0, // index van speler die nu aan de beurt is
+    currentPlayerTurnRoll: 0, // huidige worp van de speler die aan de beurt is
+    currentTask: null, // huidige taak
+  }
 };
 
 // Huidige game-code waarmee we aan Firebase gekoppeld zijn
@@ -193,9 +202,6 @@ function makeGameStateProxy(target, pathSegments = []) {
 
 // Init Proxy één keer bij load
 _GAMESTATE_PROXY = makeGameStateProxy(_localState, []);
-
-// Voor backwards compatibility: ook op window hangen
-window.GAMESTATE = _GAMESTATE_PROXY;
 
 // Exporteer de proxy zodat je hem direct kunt gebruiken
 export const GAMESTATE = _GAMESTATE_PROXY;
