@@ -115,6 +115,17 @@ function createSettingElement(key, setting) {
 }
 
 function handleCreateClick(settings, e) {
+  // Check for complete player profile
+  if (
+    !PLAYER.name ||
+    !PLAYER.age ||
+    PLAYER.age <= 0 ||
+    !PLAYER.sex ||
+    !PLAYER.sexTarget
+  ) {
+    return;
+  }
+
   GAMESTATE.gameID = randomNumberString(6);
   GAMESTATE.settings = settings;
   GAMESTATE.players = [PLAYER];
