@@ -13,6 +13,13 @@
   --accent5: #5da57a; /* gedempt groen, zacht en rustig */
   --accent6: #c2b35f; /* gedempt geel/ochre, subtiel */
   --accent7: #5aa7b3; /* turquoise-achtige koele tint */
+  --accent1-dark: #3f4ac2; /* donkere blurple */
+  --accent2-dark: #926538; /* donker warm oranje */
+  --accent3-dark: #a7a9b3; /* donker koel grijs */
+  --accent4-dark: #884a4a; /* donker gedempt rood */
+  --accent5-dark: #447b5b; /* donkergroen zacht */
+  --accent6-dark: #948843; /* donker ochre */
+  --accent7-dark: #437f8a; /* donker turquoise */
 }
 * {
   box-sizing: border-box;
@@ -89,7 +96,7 @@ body {
 }
 .panel .row.setting > :not(:first-child):last-child {
   justify-self: start !important;
-  width: auto !important; 
+  width: auto !important;
 }
 .panel .row.setting:has(input[type="checkbox"]) {
   border: 1px solid var(--accent3);
@@ -161,9 +168,13 @@ body {
   border-radius: 10px;
   cursor: pointer;
 }
+.btn.game {
+  background: var(--accent1-dark) !important;
+  border: 1px solid var(--accent1-dark) !important;
+}
 .btn.ghost {
-  background: transparent;
-  color: var(--text_muted);
+  background: transparent !important;
+  color: var(--text_muted) !important;
 }
 .btn.in-element {
   background: transparent;
