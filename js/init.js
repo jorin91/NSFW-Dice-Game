@@ -8,7 +8,7 @@ export async function init() {
   // Initialization functions
   initI18n(); // Translation
   initPanelNavigation(); // Navigation
-  await firebaseWriteTest(); // Firebase Test
+  // await firebaseWriteTest(); // Firebase Test
 }
 
 export async function initUpdate() {
