@@ -8,6 +8,7 @@ const LS_KEY_GAMESTATE = "NSFWDiceGame_GameState";
 // Basis vorm van je gamestate – alles wat hier in staat, heb je altijd.
 const GAMESTATE_MODEL = {
   version: 1.0, // versie van het game-state model
+  createdAt: null, // timestamp van aanmaak
   gameID: null, // unieke game ID (6-cijferig)
   settings: null, // game-instellingen
   players: null, // spelerslijst
