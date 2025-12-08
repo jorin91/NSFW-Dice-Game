@@ -3,16 +3,12 @@ import { setI18n } from "./lang_i18n.js";
 import { makeInputField, makeSelectField } from "./elementHelpers.js";
 import { getSettingsModel } from "./settings.js";
 import { GAMESTATE } from "./gamestate.js";
+import { randomNumberString } from "./utils.js";
 
 let createClickHandler = null;
 
 export function setupPanelNewGame() {
-  const newGameButton = document.getElementById("panel-mainmenu.button.createGame");
-  if (newGameButton) {
-    newGameButton.addEventListener("click", (e) => {
-      buildSettingsElement();
-    });
-  }
+  buildSettingsElement();
 }
 
 function buildSettingsElement() {
@@ -117,5 +113,6 @@ function createSettingElement(key, setting) {
 }
 
 function handleCreateClick(settings, e) {
+    GAMESTATE.gameID = randomNumberString(6);
   GAMESTATE.settings = settings;
 }
