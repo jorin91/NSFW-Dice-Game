@@ -91,8 +91,7 @@ function createSettingElement(key, setting) {
         subSetting = val;
       });
 
-      const label = document.createElement("label");
-      setI18n(label, setting.i18nTitle);
+      subSettingContainer.appendChild(input);
     }
 
     container.appendChild(subSettingContainer);
