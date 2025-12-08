@@ -2,7 +2,6 @@
 import { deepCopy } from "./utils.js";
 import { storageSave, storageLoad, storageClear } from "./localstorage.js";
 import { dbUpdate, subscribeValue } from "./firebase/firebase-db.js";
-import { getTaskModel } from "./task.js";
 
 const LS_KEY_GAMESTATE = "NSFWDiceGame_GameState";
 
@@ -13,7 +12,7 @@ const GAMESTATE_MODEL = {
   gameID: null, // unieke game ID (6-cijferig)
   settings: null, // game-instellingen
   players: null, // spelerslijst
-  tasks: await getTaskModel(), // takenlijst
+  tasks: null, // takenlijst
   game: {
     currentRound: 0, // huidige ronde
     currentPlayerTurnIndex: 0, // index van speler die nu aan de beurt is
