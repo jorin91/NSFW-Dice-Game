@@ -17,7 +17,7 @@ function buildSettingsElement() {
   if (!settingsPanel) {
     settingsPanel = document.createElement("div");
     settingsPanel.id = "panel-newgame.body.settings";
-    settingsPanel.className = "col small";
+    settingsPanel.className = "col";
     body.appendChild(settingsPanel);
   } else {
     settingsPanel.innerHTML = "";
