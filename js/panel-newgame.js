@@ -7,7 +7,7 @@ import { GAMESTATE } from "./gamestate.js";
 let createClickHandler = null;
 
 export function setupPanelNewGame() {
-  const newGameButton = document.getElementById("panel-newgame.button.create");
+  const newGameButton = document.getElementById("panel-mainmenu.button.createGame");
   if (newGameButton) {
     newGameButton.addEventListener("click", (e) => {
       buildSettingsElement();
