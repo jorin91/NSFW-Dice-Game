@@ -9,7 +9,7 @@ const LS_KEY_GAMESTATE = "NSFWDiceGame_GameState";
 const GAMESTATE_MODEL = {
   version: 1.0, // versie van het game-state model
   createdAt: null, // timestamp van aanmaak
-  gameID: null, // unieke game ID (6-cijferig)
+  gameID: null, // unieke game ID (8-cijferig)
   gameCode: null, // code voor multiplayer Firebase game
   settings: null, // game-instellingen
   players: null, // spelerslijst
