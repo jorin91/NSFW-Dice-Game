@@ -109,14 +109,14 @@ body {
   text-align: left;
 }
 .panel .row.setting label {
-  width: 200px;
+  width: 175px;
   overflow-wrap: anywhere;
   text-align: left;
 }
 .panel .row.setting span {
   width: 600px;
   overflow-wrap: anywhere;
-  text-align: right;
+  text-align: left;
 }
 .panel .row.setting:has(input[type="checkbox"]:checked) {
   border: 1px solid var(--accent1);
