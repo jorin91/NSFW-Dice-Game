@@ -136,7 +136,7 @@ async function handleCreateClick(settings, e) {
   }
 
   const footer = document.getElementById("panel-newgame.footer");
-  const status = footer.getElementById("panel-newgame.footer.status");
+  const status = document.getElementById("panel-newgame.footer.status");
   if (status) {
     status.remove();
   }
@@ -150,7 +150,7 @@ async function handleCreateClick(settings, e) {
   GAMESTATE.players = [PLAYER];
   const result = await createGame();
 
-  if (result.message) {
+  if (result.message && footer) {
     const message = document.createElement("div");
     message.id = "panel-newgame.footer.status";
     setI18n(message, result.message);
