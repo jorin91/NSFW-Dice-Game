@@ -49,5 +49,15 @@
   "ui.settings.score": "Punten om te winnen",
   "ui.settings.score.desc": "Het aantal punten dat een speler moet behalen om vrijgesteld te worden van verdere opdrachten.",
   "ui.settings.dices": "Aantal dobbelstenen",
-  "ui.settings.dices.desc": "Het aantal dobbelstenen dat wordt gebruikt om de score te bepalen."
+  "ui.settings.dices.desc": "Het aantal dobbelstenen dat wordt gebruikt om de score te bepalen.",
+
+  "ui.firebase.createGame.noGameID": "Er is geen game-ID ingesteld.",
+  "ui.firebase.createGame.idExistsRetry": "Game-ID bestaat al, nieuw ID wordt gegenereerd...",
+  "ui.firebase.createGame.success": "De game is succesvol aangemaakt.",
+  "ui.firebase.createGame.error": "Er is een fout opgetreden bij het aanmaken van de game.",
+
+  "ui.firebase.joinGame.noGameID": "Geen game-ID opgegeven.",
+  "ui.firebase.joinGame.notFound": "Deze game bestaat niet.",
+  "ui.firebase.joinGame.success": "Je bent succesvol aangesloten bij de game.",
+  "ui.firebase.joinGame.error": "Er is een fout opgetreden bij het joinen van de game."
 }
