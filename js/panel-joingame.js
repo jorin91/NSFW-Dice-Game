@@ -70,5 +70,6 @@ function gameButtonClick(e) {
     {},
     { label: "ui.panel-joingame.body.code.label", labelArgs: { gameID } }
   );
+  inputField.wrap.className = "row";
   bodyCode.appendChild(inputField.wrap);
 }
