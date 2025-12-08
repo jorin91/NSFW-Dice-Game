@@ -87,15 +87,9 @@ body {
   align-items: center;
   padding: 8px 12px;
 }
-.panel .row.setting > span,
-.panel .row.setting > p {
-  min-width: 0;
-  overflow-wrap: anywhere;
-  text-align: right;
-}
-.panel .row.setting > :nth-child(3) {
-  justify-self: end; /* plaatst het element rechts */
-  width: auto; /* voorkomt uitrekken */
+.panel .row.setting > :not(:first-child):last-child {
+  justify-self: end !important;
+  width: auto !important; 
 }
 .panel .row.setting:has(input[type="checkbox"]) {
   border: 1px solid var(--accent3);
@@ -106,9 +100,23 @@ body {
   opacity: 0.85;
   background: var(--accent1);
 }
-.panel .row.setting:has(input[type="number"]) input[type="number"] {
+.panel .row.setting input[type="number"] {
   width: 75px;
   text-align: left;
+}
+.panel .row.setting input[type="checkbox"] {
+  width: 50px;
+  text-align: left;
+}
+.panel .row.setting label {
+  width: 200px;
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+.panel .row.setting span {
+  width: 600px;
+  overflow-wrap: anywhere;
+  text-align: right;
 }
 .panel .row.setting:has(input[type="checkbox"]:checked) {
   border: 1px solid var(--accent1);
