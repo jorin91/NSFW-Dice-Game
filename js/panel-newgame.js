@@ -6,7 +6,6 @@ import { GAMESTATE } from "./gamestate.js";
 import { randomNumberString } from "./utils.js";
 import { createGame } from "./firebase/firebase-game.js";
 import { PLAYER } from "./player.js";
-import { getTaskModel } from "./task.js";
 
 let createClickHandler = null;
 
@@ -136,9 +135,6 @@ async function handleCreateClick(settings, e) {
 
   GAMESTATE.gameID = randomNumberString(6);
   GAMESTATE.settings = settings;
-  console.log("[NewGame] vóór getTaskModel");
-  GAMESTATE.tasks = await getTaskModel();
-  console.log("[NewGame] na getTaskModel");
   GAMESTATE.players = [PLAYER];
   await createGame();
 }
