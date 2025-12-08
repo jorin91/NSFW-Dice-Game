@@ -117,6 +117,6 @@ function createSettingElement(key, setting) {
 function handleCreateClick(settings, e) {
   GAMESTATE.gameID = randomNumberString(6);
   GAMESTATE.settings = settings;
-  GAMESTATE.players.push(PLAYER);
+  GAMESTATE.players = [PLAYER];
   createGame();
 }
