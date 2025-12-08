@@ -135,8 +135,8 @@ async function handleCreateClick(settings, e) {
 
   PLAYER.game.consent = true;
 
-  GAMESTATE.gameID = randomNumberString(6);
-  GAMESTATE.gameCode = randomString(4);
+  GAMESTATE.gameID = randomNumberString(8);
+  GAMESTATE.gameCode = randomNumberString(4);
   GAMESTATE.settings = settings;
   GAMESTATE.tasks = await getTaskModel();
   GAMESTATE.players = [PLAYER];
