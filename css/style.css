@@ -13,13 +13,13 @@
   --accent5: #5da57a; /* gedempt groen, zacht en rustig */
   --accent6: #c2b35f; /* gedempt geel/ochre, subtiel */
   --accent7: #5aa7b3; /* turquoise-achtige koele tint */
-  --accent1-dark: #3f4ac2; /* donkere blurple */
-  --accent2-dark: #926538; /* donker warm oranje */
-  --accent3-dark: #a7a9b3; /* donker koel grijs */
-  --accent4-dark: #884a4a; /* donker gedempt rood */
-  --accent5-dark: #447b5b; /* donkergroen zacht */
-  --accent6-dark: #948843; /* donker ochre */
-  --accent7-dark: #437f8a; /* donker turquoise */
+  --accent1-dark: #2c3479; /* veel donkerder blurple */
+  --accent2-dark: #624223; /* diep warm oranje/bruin */
+  --accent3-dark: #6e6f77; /* donker koel grijs */
+  --accent4-dark: #5c3a3a; /* diep gedempt rood */
+  --accent5-dark: #2f523d; /* donker mosgroen */
+  --accent6-dark: #6a602f; /* donker ochre / earth tone */
+  --accent7-dark: #2f5961; /* donker turquoise */
 }
 * {
   box-sizing: border-box;
