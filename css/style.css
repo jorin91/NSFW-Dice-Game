@@ -108,15 +108,19 @@ body {
   width: 50px;
   text-align: left;
 }
+/* setting name */
 .panel .row.setting label {
   width: 175px;
   overflow-wrap: anywhere;
   text-align: left;
+  color: var(--text);
 }
+/* setting description */
 .panel .row.setting span {
   width: 600px;
   overflow-wrap: anywhere;
   text-align: left;
+  color: var(--text_muted);
 }
 .panel .row.setting:has(input[type="checkbox"]:checked) {
   border: 1px solid var(--accent1);
