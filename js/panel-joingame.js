@@ -11,20 +11,32 @@ export function setupPanelJoinGame() {
   }
 }
 
-async function buildGameListElement() {
+async function buildGameListElement(perRow = 5) {
   const body = document.getElementById("panel-joingame.body");
   if (!body) return;
 
   body.innerHTML = "";
 
   const gameIDList = await listGames();
+
+  let rowEl = null;
+  let count = 0;
+
   for (const gameID of gameIDList) {
+    // Nieuwe row starten wanneer nodig
+    if (count % perRow === 0) {
+      rowEl = document.createElement("div");
+      rowEl.className = "row centerWrap centerContent";
+      body.appendChild(rowEl);
+    }
+
     const btn = document.createElement("button");
     btn.className = "btn";
     btn.setAttribute("data-game-id", gameID);
     setI18n(btn, "ui.panel-joingame.body.button.gameID", { gameID: gameID }, "text");
     btn.addEventListener("click", gameButtonClick);
-    body.appendChild(btn);
+    rowEl.appendChild(btn);
+    count++;
   }
 }
 
