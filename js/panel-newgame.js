@@ -120,7 +120,7 @@ function createSettingElement(key, setting) {
   return container;
 }
 
-function handleCreateClick(settings, e) {
+async function handleCreateClick(settings, e) {
   // Check for complete player profile
   if (
     !PLAYER.name ||
@@ -136,7 +136,7 @@ function handleCreateClick(settings, e) {
 
   GAMESTATE.gameID = randomNumberString(6);
   GAMESTATE.settings = settings;
-  GAMESTATE.tasks = getTaskModel();
+  GAMESTATE.tasks = await getTaskModel();
   GAMESTATE.players = [PLAYER];
-  createGame();
+  await createGame();
 }
