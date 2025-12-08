@@ -11,7 +11,7 @@ export function setupPanelJoinGame() {
   }
 }
 
-async function buildGameListElement(perRow = 5) {
+async function buildGameListElement(perRow = 6) {
   const body = document.getElementById("panel-joingame.body");
   if (!body) return;
 
