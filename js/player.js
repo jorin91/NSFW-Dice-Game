@@ -14,7 +14,7 @@ const PLAYER_MODEL = {
     points: 0, // gegooide punten in huidige beurt
     safe: false, // speler is veilig in huidige game
     consent: false, // speler stemt in met deelname
-    clothing: {}, // kledingstukken van de speler
+    clothing: null, // kledingstukken van de speler
   }
 };
 
