@@ -138,7 +138,7 @@ async function handleCreateClick(settings, e) {
   const footer = document.getElementById("panel-newgame.footer");
   const status = footer.getElementById("panel-newgame.footer.status");
   if (status) {
-    warning.remove();
+    status.remove();
   }
 
   PLAYER.game.consent = true;
