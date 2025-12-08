@@ -18,4 +18,16 @@ async function buildGameListElement() {
   body.innerHTML = "";
 
   const gameIDList = await listGames();
+  for (const gameID of gameIDList) {
+    const btn = document.createElement("button");
+    btn.className = "btn";
+    btn.setAttribute("data-game-id", gameID);
+    setI18n(btn, "ui.panel-joingame.body.button.gameID", { gameID: gameID }, "text");
+    btn.addEventListener("click", gameButtonClick);
+    body.appendChild(btn);
+  }
+}
+
+function gameButtonClick(e) {
+  const gameID = e.currentTarget.getAttribute("data-game-id");
 }
