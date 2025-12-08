@@ -23,6 +23,7 @@ const GAMESTATE_MODEL = {
 };
 
 // Huidige game-code waarmee we aan Firebase gekoppeld zijn
+let _currentGameID = null;
 let _currentGameCode = null;
 
 // Dit is de "echte" state waar de Proxy overheen komt
@@ -138,7 +139,7 @@ function pushFirebasePatch(relativePath, value) {
   };
 
   // Schrijf onder /games/{gameCode}/{relativePath}
-  dbUpdate(["games", _currentGameCode], updateMap).catch((err) => {
+  dbUpdate(["games", _currentGameID, _currentGameCode], updateMap).catch((err) => {
     console.error("[GameState] Failed to sync to Firebase:", err);
   });
 }
@@ -244,16 +245,17 @@ function gameApplyRemoteState(remoteState) {
 // Dit vervangt je oude gameInitFromStorage:
 // Je haalt niet meer uit localStorage, maar koppelt aan Firebase.
 // remoteState komt binnen via subscribeValue.
-export function gameBindToFirebase(gameCode) {
+export function gameBindToFirebase(gameID, gameCode) {
   // Eventuele oude subscription stoppen
   if (_stopFirebaseSub) {
     _stopFirebaseSub();
     _stopFirebaseSub = null;
   }
 
+  _currentGameID = gameID || null;
   _currentGameCode = gameCode || null;
 
-  if (!_currentGameCode) {
+  if (!_currentGameID || !_currentGameCode) {
     // Geen gameCode → alleen resetten naar model en debug saven
     gameApplyRemoteState(null);
     return;
@@ -261,7 +263,7 @@ export function gameBindToFirebase(gameCode) {
 
   // Abonneren op /games/{gameCode} in Firebase
   _stopFirebaseSub = subscribeValue(
-    ["games", _currentGameCode],
+    ["games", _currentGameID, _currentGameCode],
     (remoteState) => {
       // remoteState is de volledige game-doc op /games/{gameCode}
       if (!remoteState) {
