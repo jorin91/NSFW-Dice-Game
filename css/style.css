@@ -88,7 +88,7 @@ body {
   padding: 8px 12px;
 }
 .panel .row.setting > :not(:first-child):last-child {
-  justify-self: end !important;
+  justify-self: start !important;
   width: auto !important; 
 }
 .panel .row.setting:has(input[type="checkbox"]) {
