@@ -10,9 +10,7 @@ const GAMESTATE_MODEL = {
   version: 1.0,
   gameID: null,
   gamePassword: null,
-  settings: {
-
-  },
+  settings: {},
 };
 
 // Huidige game-code waarmee we aan Firebase gekoppeld zijn
