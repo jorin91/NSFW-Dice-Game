@@ -6,9 +6,16 @@ import { randomNumberString } from "../utils.js";
 /**
  * Check of een game bestaat in Firebase.
  */
-async function gameExists(gameID, gameCode) {
-  const gameRef = ref(firebaseDB, `games/${gameID}/${gameCode}`);
+async function gameExists(gameID) {
+  const gameRef = ref(firebaseDB, `games/${gameID}`);
   const snapshot = await get(gameRef);
+  return snapshot.exists();
+}
+
+// Bestaat deze gameCode binnen dit gameID?
+async function gameCodeMatches(gameID, gameCode) {
+  const codeRef = ref(firebaseDB, `games/${gameID}/${gameCode}`);
+  const snapshot = await get(codeRef);
   return snapshot.exists();
 }
 
@@ -56,8 +63,12 @@ export async function joinGame(gameID, gameCode) {
   }
 
   try {
-    if (!(await gameExists(gameID, gameCode))) {
-      return { success: false, message: "ui.firebase.joinGame.notFound" };
+    if (!(await gameExists(gameID))) {
+      return { success: false, message: "ui.firebase.joinGame.notFoundID" };
+    }
+
+    if (!(await gameCodeMatches(gameID, gameCode))) {
+      return { success: false, message: "ui.firebase.joinGame.wrongCode" };
     }
 
     gameBindToFirebase(gameID, gameCode);
@@ -65,5 +76,23 @@ export async function joinGame(gameID, gameCode) {
   } catch (err) {
     console.error("joinGame error:", err);
     return { success: false, message: "ui.firebase.joinGame.error" };
+  }
+}
+
+// Alle games ophalen als lijst van alleen gameIDs
+export async function listGames() {
+  try {
+    const gamesRef = ref(firebaseDB, "games");
+    const snapshot = await get(gamesRef);
+
+    if (!snapshot.exists()) return [];
+
+    const data = snapshot.val() || {};
+    // data = { [gameID]: { [gameCode]: { ...state } } }
+
+    return Object.keys(data); // alleen ID’s teruggeven
+  } catch (err) {
+    console.error("listGames error:", err);
+    return [];
   }
 }
