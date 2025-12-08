@@ -11,7 +11,7 @@ import { getTaskModel } from "./task.js";
 let createClickHandler = null;
 
 export function setupPanelNewGame() {
-  const createButton = document.getElementById("panel-newgame.button.create");
+  const createButton = document.getElementById("panel-mainmenu.button.createGame");
   if (createButton) {
     createButton.addEventListener("click", (e) => {
       buildSettingsElement();
