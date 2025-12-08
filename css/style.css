@@ -83,22 +83,21 @@ body {
 /* override: settings-rij gebruikt grid met 3 kolommen */
 .panel .row.setting {
   display: grid;
-  grid-template-columns: auto auto minmax(0, 1fr); /* input, label, beschrijving */
+  grid-template-columns: auto auto 1fr;
   align-items: center;
   padding: 8px 12px;
-  column-gap: 32px;
-  row-gap: 8px;
 }
 .panel .row.setting > span,
 .panel .row.setting > p {
   min-width: 0;
   overflow-wrap: anywhere;
-  text-align: left;
+  text-align: right;
 }
 .panel .row.setting > :nth-child(3) {
-  justify-self: start;
+  justify-self: end; /* plaatst het element rechts */
+  width: auto; /* voorkomt uitrekken */
 }
-.panel .row.setting:has(input[type="checkbox"]){
+.panel .row.setting:has(input[type="checkbox"]) {
   border: 1px solid var(--accent3);
   border-radius: 10px;
   cursor: pointer;
@@ -118,7 +117,7 @@ body {
   text-align: right;
 }
 .panel .row.setting:has(input[type="checkbox"]:checked) {
-  border-color: var(--accent1);
+  border: 1px solid var(--accent1);
 }
 .panel .col {
   display: flex;
@@ -172,44 +171,7 @@ body {
 .row.small {
   gap: 8px !important;
 }
-.row.grid3 {
-  display: grid;
-  grid-template-columns: auto auto 1fr;
-  align-items: center;
-  padding: 8px 12px;
-}
-.row.grid3 > :nth-child(3) {
-  justify-self: end; /* plaatst het element rechts */
-  width: auto; /* voorkomt uitrekken */
-}
-.row.grid3 > span,
-.row.grid3 > p {
-  min-width: 0;
-  overflow-wrap: anywhere;
-  text-align: right;
-}
-.row.grid3:has(input[type="checkbox"]) {
-  border: 1px solid var(--accent3);
-  border-radius: 10px;
-  cursor: pointer;
-}
-.row.grid3:has(input[type="number"]) {
-  border: 1px solid var(--accent);
-  border-radius: 10px;
-  cursor: pointer;
-}
-.row.grid3:has(input[type="checkbox"]):hover,
-.row.grid3:has(input[type="number"]):hover {
-  opacity: 0.85;
-  background: var(--accent);
-}
-.row.grid3:has(input[type="number"]) input[type="number"] {
-  width: 50px; /* of 5ch / 6em, afhankelijk van look */
-  text-align: right; /* cijfers mooi rechts */
-}
-.row.grid3:has(input[type="checkbox"]:checked) {
-  border: 1px solid var(--accent);
-}
+
 /* Collomn Layouts */
 .col.small {
   gap: 8px !important;
