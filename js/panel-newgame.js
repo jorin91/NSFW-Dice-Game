@@ -63,6 +63,14 @@ function createSettingElement(key, setting) {
       subSetting.enabled = checkbox.checked;
     });
 
+    // row listener to turn row into a clickable area for the checkbox
+    subSettingContainer.addEventListener("click", (e) => {
+      if (e.target !== checkbox) {
+        checkbox.checked = !checkbox.checked;
+        checkbox.dispatchEvent(new Event("change"));
+      }
+    });
+
     const label = document.createElement("label");
     setI18n(label, subSetting.value);
 
