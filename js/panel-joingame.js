@@ -32,7 +32,7 @@ async function buildGameListElement(perRow = 6) {
     }
 
     const btn = document.createElement("button");
-    btn.className = "btn";
+    btn.className = "btn game";
     btn.setAttribute("data-game-id", gameID);
     setI18n(
       btn,
@@ -73,3 +73,5 @@ function gameButtonClick(e) {
   inputField.wrap.className = "row";
   bodyCode.appendChild(inputField.wrap);
 }
+
+function codeConfirmClick(e) {}
