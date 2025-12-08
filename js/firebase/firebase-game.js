@@ -6,8 +6,8 @@ import { randomNumberString } from "../utils.js";
 /**
  * Check of een game bestaat in Firebase.
  */
-async function gameExists(gameID) {
-  const gameRef = ref(firebaseDB, `games/${gameID}`);
+async function gameExists(gameID, gameCode) {
+  const gameRef = ref(firebaseDB, `games/${gameID}/${gameCode}`);
   const snapshot = await get(gameRef);
   return snapshot.exists();
 }
@@ -18,6 +18,7 @@ async function gameExists(gameID) {
  */
 export async function createGame() {
   let gameID = GAMESTATE.gameID;
+  let gameCode = GAMESTATE.gameCode;
 
   if (!gameID) {
     return { success: false, message: "ui.firebase.createGame.noGameID" };
@@ -32,11 +33,11 @@ export async function createGame() {
     }
 
     // Opslaan naar Firebase
-    const gameRef = ref(firebaseDB, `games/${gameID}`);
+    const gameRef = ref(firebaseDB, `games/${gameID}/${gameCode}`);
     await set(gameRef, GAMESTATE);
 
     // Lokale binding
-    gameBindToFirebase(gameID);
+    gameBindToFirebase(gameID, gameCode);
 
     return { success: true, message: "ui.firebase.createGame.success" };
   } catch (err) {
@@ -49,17 +50,17 @@ export async function createGame() {
  * Join een bestaande game.
  * Returned: { success: boolean, message: translationKey }
  */
-export async function joinGame(gameID) {
-  if (!gameID) {
-    return { success: false, message: "ui.firebase.joinGame.noGameID" };
+export async function joinGame(gameID, gameCode) {
+  if (!gameID || !gameCode) {
+    return { success: false, message: "ui.firebase.joinGame.noGameIDCode" };
   }
 
   try {
-    if (!(await gameExists(gameID))) {
+    if (!(await gameExists(gameID, gameCode))) {
       return { success: false, message: "ui.firebase.joinGame.notFound" };
     }
 
-    gameBindToFirebase(gameID);
+    gameBindToFirebase(gameID, gameCode);
     return { success: true, message: "ui.firebase.joinGame.success" };
   } catch (err) {
     console.error("joinGame error:", err);
