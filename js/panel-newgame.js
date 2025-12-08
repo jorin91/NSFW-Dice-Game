@@ -1,9 +1,10 @@
-// panel-newgame.js
+// js/panel-newgame.js
 import { setI18n } from "./lang_i18n.js";
 import { makeInputField, makeSelectField } from "./elementHelpers.js";
 import { getSettingsModel } from "./settings.js";
 import { GAMESTATE } from "./gamestate.js";
 import { randomNumberString } from "./utils.js";
+import { createGame } from "./firebase/firebase-game.js";
 
 let createClickHandler = null;
 
@@ -113,6 +114,7 @@ function createSettingElement(key, setting) {
 }
 
 function handleCreateClick(settings, e) {
-    GAMESTATE.gameID = randomNumberString(6);
+  GAMESTATE.gameID = randomNumberString(6);
   GAMESTATE.settings = settings;
+  createGame();
 }
