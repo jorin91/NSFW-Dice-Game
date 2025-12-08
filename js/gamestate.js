@@ -11,7 +11,7 @@ const GAMESTATE_MODEL = {
   version: 1.0, // versie van het game-state model
   gameID: null, // unieke game ID (6-cijferig)
   settings: null, // game-instellingen
-  players: [], // spelerslijst
+  players: null, // spelerslijst
   tasks: null, // takenlijst
   game: {
     currentRound: 0, // huidige ronde
