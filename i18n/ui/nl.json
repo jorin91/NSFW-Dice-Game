@@ -41,5 +41,12 @@
   "ui.panel-joingame.button.return": "Terug naar Hoofdmenu",
 
   "ui.panel-newgame.header": "Nieuw Spel Aanmaken",
-  "ui.panel-newgame.button.return": "Terug naar Hoofdmenu"
+  "ui.panel-newgame.button.return": "Terug naar Hoofdmenu",
+
+  "ui.settings.rolls": "Aantal worpen per beurt",
+  "ui.settings.rolls.desc": "Het aantal worpen dat elke speler per beurt mag doen om zijn of haar score te bepalen.",
+  "ui.settings.score": "Punten om te winnen",
+  "ui.settings.score.desc": "Het aantal punten dat een speler moet behalen om vrijgesteld te worden van verdere opdrachten.",
+  "ui.settings.dices": "Aantal dobbelstenen",
+  "ui.settings.dices.desc": "Het aantal dobbelstenen dat wordt gebruikt om de score te bepalen."
 }
