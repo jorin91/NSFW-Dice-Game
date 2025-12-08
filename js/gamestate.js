@@ -1,8 +1,7 @@
-// gamestate.js
+// js/gamestate.js
 import { deepCopy } from "./utils.js";
 import { storageSave, storageLoad, storageClear } from "./localstorage.js";
 import { dbUpdate, subscribeValue } from "./firebase/firebase-db.js";
-import { randomNumberString } from "./utils.js";
 
 const LS_KEY_GAMESTATE = "NSFWDiceGame_GameState";
 
