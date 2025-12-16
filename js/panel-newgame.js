@@ -103,7 +103,10 @@ function createSettingElement(key, setting, taskKeys) {
 
     if (subSetting && typeof subSetting === "object") {
       // Check for taskKeys. If setting is not used in any task, skip it, no need to show it.
-      if (taskKeys.size === 0 || !taskKeys.has(subKey)) continue;
+      if (taskKeys.size === 0 || !taskKeys.has(subKey)) {
+        console.log (`taskKey count: ${taskKeys.size}, skipping setting ${subKey}, array of taskKeys:`, Array.from(taskKeys));
+        continue;
+      }
 
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
@@ -126,7 +129,6 @@ function createSettingElement(key, setting, taskKeys) {
       const description = document.createElement("span");
       setI18n(description, `${subSetting.value}.desc`);
 
-      hasSettings = true;
       subSettingContainer.append(checkbox, label, description);
     } else if (typeof subSetting === "number") {
       const input = document.createElement("input");
@@ -140,11 +142,11 @@ function createSettingElement(key, setting, taskKeys) {
         setting[subKey] = val;
       });
 
-      hasSettings = true;
       subSettingContainer.appendChild(input);
     }
 
     container.appendChild(subSettingContainer);
+    hasSettings = true;
   }
 
   if (!hasSettings) return null;
