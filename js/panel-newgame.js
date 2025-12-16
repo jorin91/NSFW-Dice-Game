@@ -47,10 +47,9 @@ async function buildSettingsElement() {
 
     console.log("Processing task category:", categoryKey, category);
 
-    // taskKeys.add(categoryKey);
-
     // Lets get all sub-keys as well
-    if (!category.tasks || !Array.isArray(category.tasks)) continue;
+    if (!category.tasks || !Array.isArray(category.tasks) || category.tasks.length === 0) continue;
+    taskKeys.add(categoryKey);
     const categoryTasks = category.tasks;
     for (const task of categoryTasks) {
       console.log(" Processing task:", task.id, task);
@@ -61,7 +60,7 @@ async function buildSettingsElement() {
         const condition = conditions[conditionKey];
 
         console.log("  Processing condition:", conditionKey, condition);
-        if (!Array.isArray(condition)) continue;
+        if (!Array.isArray(condition) || condition.length === 0) continue;
 
         for (const key of condition) {
           console.log("   Adding task key:", key);
