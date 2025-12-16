@@ -28,6 +28,7 @@ function buildSettingsElement() {
   if (!body || !createButton) return;
 
   const settings = getSettingsModel();
+  const tasks = getTaskModel();
 
   let settingsPanel = document.getElementById("panel-newgame.body.settings");
   if (!settingsPanel) {
@@ -37,6 +38,16 @@ function buildSettingsElement() {
     body.appendChild(settingsPanel);
   } else {
     settingsPanel.innerHTML = "";
+  }
+
+  // Load all settings related task keys to check if setting is used at all
+  const taskKeys = new Set();
+  for (const categoryKey of Object.keys(tasks)) {
+    taskKeys.add(categoryKey);
+
+    // Lets get all sub-keys as well
+    const categoryTasks = tasks[categoryKey];
+
   }
 
   for (const key of Object.keys(settings)) {
