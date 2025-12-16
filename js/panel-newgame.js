@@ -49,7 +49,7 @@ async function buildSettingsElement() {
 
     // Lets get all sub-keys as well
     if (!category.tasks || !Array.isArray(category.tasks) || category.tasks.length === 0) continue;
-    taskKeys.add(categoryKey);
+    taskKeys.add(categoryKey); // At this point we know the category is used and has tasks, add it as well.
     const categoryTasks = category.tasks;
     for (const task of categoryTasks) {
       console.log(" Processing task:", task.id, task);
