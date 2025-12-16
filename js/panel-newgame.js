@@ -22,13 +22,13 @@ export function setupPanelNewGame() {
   }
 }
 
-function buildSettingsElement() {
+async function buildSettingsElement() {
   const body = document.getElementById("panel-newgame.body");
   const createButton = document.getElementById("panel-newgame.button.create");
   if (!body || !createButton) return;
 
   const settings = getSettingsModel();
-  const tasks = getTaskModel();
+  const tasks = await getTaskModel();
 
   let settingsPanel = document.getElementById("panel-newgame.body.settings");
   if (!settingsPanel) {
