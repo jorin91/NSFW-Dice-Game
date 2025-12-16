@@ -47,13 +47,22 @@ function buildSettingsElement() {
 
     // Lets get all sub-keys as well
     const categoryTasks = tasks[categoryKey];
-
+    for (const task of categoryTasks) {
+      const conditions = task.conditions;
+      for (const condition of conditions) {
+        if (Array.isArray(condition) && condition.length > 0) {
+          for (const key of condition) {
+            taskKeys.add(key);
+          }
+        }
+      }
+    }
   }
 
   for (const key of Object.keys(settings)) {
     const setting = settings[key];
-    const settingElement = createSettingElement(key, setting);
-    settingsPanel.appendChild(settingElement);
+    const settingElement = createSettingElement(key, setting, taskKeys);
+    if (settingElement) settingsPanel.appendChild(settingElement);
   }
 
   if (createClickHandler) {
@@ -64,7 +73,7 @@ function buildSettingsElement() {
   createButton.addEventListener("click", createClickHandler);
 }
 
-function createSettingElement(key, setting) {
+function createSettingElement(key, setting, taskKeys) {
   const container = document.createElement("div");
   container.className = "col small";
   container.id = `setting-${key}`;
@@ -81,8 +90,10 @@ function createSettingElement(key, setting) {
     container.appendChild(desc);
   }
 
-  // Create input for each sub-setting
+  // Propertie to check if we added settings
+  let hasSettings = false;
 
+  // Create input for each sub-setting
   for (const subKey of Object.keys(setting)) {
     if (subKey === "i18nTitle" || subKey === "i18nDesc") continue;
     const subSetting = setting[subKey];
@@ -91,6 +102,9 @@ function createSettingElement(key, setting) {
     subSettingContainer.className = "row setting";
 
     if (subSetting && typeof subSetting === "object") {
+      // Check for taskKeys. If setting is not used in any task, skip it, no need to show it.
+      if (taskKeys.size === 0 || !taskKeys.has(subKey)) continue;
+
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
       checkbox.checked = subSetting.enabled;
@@ -112,6 +126,7 @@ function createSettingElement(key, setting) {
       const description = document.createElement("span");
       setI18n(description, `${subSetting.value}.desc`);
 
+      hasSettings = true;
       subSettingContainer.append(checkbox, label, description);
     } else if (typeof subSetting === "number") {
       const input = document.createElement("input");
@@ -125,12 +140,14 @@ function createSettingElement(key, setting) {
         setting[subKey] = val;
       });
 
+      hasSettings = true;
       subSettingContainer.appendChild(input);
     }
 
     container.appendChild(subSettingContainer);
   }
 
+  if (!hasSettings) return null;
   return container;
 }
 
