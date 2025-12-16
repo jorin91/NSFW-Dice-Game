@@ -32,7 +32,7 @@ export async function getTaskModel() {
     for (const [key, value] of Object.entries(GAMECATEGORY_ENUM)) {
       empty[key] = {
         value,
-        enabled: true,
+        // enabled: true,
         weight: 10,
         tasks: [],
       };
