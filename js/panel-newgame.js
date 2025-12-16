@@ -46,7 +46,7 @@ async function buildSettingsElement() {
     const category = tasks[categoryKey];
 
     console.log("Processing task category:", categoryKey, category);
-    
+
     // taskKeys.add(categoryKey);
 
     // Lets get all sub-keys as well
@@ -55,16 +55,17 @@ async function buildSettingsElement() {
     for (const task of categoryTasks) {
       console.log(" Processing task:", task.id, task);
 
-      if (!task.conditions || !Array.isArray(task.conditions)) continue;
+      if (!task.conditions) continue;
       const conditions = task.conditions;
-      for (const condition of conditions) {
-        console.log("  Processing condition array:", condition);
-        if (Array.isArray(condition) && condition.length > 0) {
+      for (const conditionKey of Object.keys(conditions)) {
+        const condition = conditions[conditionKey];
 
-          for (const key of condition) {
-            console.log("   Adding task key:", key);
-            taskKeys.add(key);
-          }
+        console.log("  Processing condition:", conditionKey, condition);
+        if (!Array.isArray(condition)) continue;
+
+        for (const key of condition) {
+          console.log("   Adding task key:", key);
+          taskKeys.add(key);
         }
       }
     }
@@ -115,7 +116,10 @@ function createSettingElement(key, setting, taskKeys) {
     if (subSetting && typeof subSetting === "object") {
       // Check for taskKeys. If setting is not used in any task, skip it, no need to show it.
       if (taskKeys.size === 0 || !taskKeys.has(subKey)) {
-        console.log (`taskKey count: ${taskKeys.size}, skipping setting ${subKey}, array of taskKeys:`, Array.from(taskKeys));
+        console.log(
+          `taskKey count: ${taskKeys.size}, skipping setting ${subKey}, array of taskKeys:`,
+          Array.from(taskKeys)
+        );
         continue;
       }
 
