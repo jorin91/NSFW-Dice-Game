@@ -117,7 +117,7 @@ function createSettingElement(key, setting, taskKeys) {
       if (taskKeys.size === 0 || !taskKeys.has(subSetting.value)) {
         console.log(
           `taskKey count: ${taskKeys.size}, skipping setting ${subKey}, array of taskKeys:`,
-          Array.from(taskKeys)
+          Array.from(taskKeys), subSetting
         );
         continue;
       }
