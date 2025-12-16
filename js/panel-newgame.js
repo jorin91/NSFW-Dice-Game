@@ -53,7 +53,7 @@ async function buildSettingsElement() {
     if (!category.tasks || !Array.isArray(category.tasks)) continue;
     const categoryTasks = category.tasks;
     for (const task of categoryTasks) {
-      console.log(" Processing task:", task.id), task;
+      console.log(" Processing task:", task.id, task);
 
       if (!task.conditions || !Array.isArray(task.conditions)) continue;
       const conditions = task.conditions;
