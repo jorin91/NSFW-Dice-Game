@@ -29,25 +29,31 @@ export const TASKS = [
     },
     participants: [
       {
+        id: 0, // Unique identifier for this participant slot within the task. Used to reference this participant in effects, flags ands interaction preferences.
         slot: TASKPLAYERTARGET_ENUM.loser, // Which type of player goes into this slot. There is always only one loser. This slot gets filled first.
         player: null, // Stored player object assigned to this slot. Once assigned, this player cannot be assigned to other slots in this task and will be removed from their eligiblePlayers lists. In this case the loser will be assigned here.
         egliblePlayers: [], // Players that can be chosen for this slot. Will be filled before task assignment to randomly pick from. To determine eligibility, the player's sex is checked against the slot's required sex, the player's prefered sex is checked against the other slot's required sex and the sex of the assigned player, also other conditions can be applied here later.
         sex: SEXTARGET_ENUM.Female, // Sex required for this participant. In this case only females can be assigned to this slot.
         instructionLocalizationKey: "task.BaseTask1.participant.loser", // Localization key for task instruction this participant gets
+        interactionTargets: [1, 2] // Array of ids of other participants that this participant will interact with during the task. Used to determine interaction preferences. In this case this participant will interact with both the winner and the other.
       },
       {
+        id: 1, // Unique identifier for this participant slot within the task. Used to reference this participant in effects, flags ands interaction preferences.
         slot: TASKPLAYERTARGET_ENUM.winner, // Which type of player goes into this slot. There is always only one winner, the first player to finish the round. This slot gets filled second. If the first winner does not fullfill conditions, the second winning player will be assigned here, and so on.
         player: null, // Stored player object assigned to this slot. Once assigned, this player cannot be assigned to other slots in this task and will be removed from their eligiblePlayers lists. In this case only one winner, ordered by who finished first, will be assigned here.
         egliblePlayers: [], // Players that can be chosen for this slot. Will be filled before task assignment to randomly pick from. To determine eligibility, the player's sex is checked against the slot's required sex, the player's prefered sex is checked against the other slot's required sex and the sex of the assigned player, also other conditions can be applied here later.
         sex: SEXTARGET_ENUM.Male, // Sex required for this participant. In this case only males can be assigned to this slot.
         instructionLocalizationKey: "task.BaseTask1.participant.winner", // Localization key for task instruction this participant gets
+        interactionTargets: [0] // Array of ids of other participants that this participant will interact with during the task. Used to determine interaction preferences. In this case this participant will only interact with the loser.
       },
       {
+        id: 2, // Unique identifier for this participant slot within the task. Used to reference this participant in effects, flags ands interaction preferences.
         slot: TASKPLAYERTARGET_ENUM.other, // Which type of player goes into this slot. There can be multiple others, technically they are all winners but not assigned to the winner slot. This slot gets filled last. If there are multiple other slots, they get filled based on the lowest amount of eligible players first to increase chances of successful assignment.
         player: null, // Stored player object assigned to this slot. Once assigned, this player cannot be assigned to other slots in this task and will be removed from their eligiblePlayers lists. In this case one winning player that did not fulfill the winner slot conditions will be assigned here.
         egliblePlayers: [], // Players that can be chosen for this slot. Will be filled before task assignment to randomly pick from. To determine eligibility, the player's sex is checked against the slot's required sex, the player's prefered sex is checked against the other slot's required sex and the sex of the assigned player, also other conditions can be applied here later.
         sex: SEXTARGET_ENUM.Both, // Sex required for this participant. In this case both males and females can be assigned to this slot.
         instructionLocalizationKey: "task.BaseTask1.participant.other", // Localization key for task instruction this participant gets
+        interactionTargets: [0, 1] // Array of ids of other participants that this participant will interact with during the task. Used to determine interaction preferences. In this case this participant will interact with both the loser and the winner.
       },
     ],
     effects: [
