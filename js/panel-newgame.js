@@ -44,26 +44,17 @@ async function buildSettingsElement() {
   const taskKeys = new Set();
   for (const categoryKey of Object.keys(tasks)) {
     const category = tasks[categoryKey];
-
-    console.log("Processing task category:", categoryKey, category);
-
     // Lets get all sub-keys as well
     if (!category.tasks || !Array.isArray(category.tasks) || category.tasks.length === 0) continue;
     taskKeys.add(category.value); // At this point we know the category is used and has tasks, add it as well.
     const categoryTasks = category.tasks;
     for (const task of categoryTasks) {
-      console.log(" Processing task:", task.id, task);
-
       if (!task.conditions) continue;
       const conditions = task.conditions;
       for (const conditionKey of Object.keys(conditions)) {
         const condition = conditions[conditionKey];
-
-        console.log("  Processing condition:", conditionKey, condition);
         if (!Array.isArray(condition) || condition.length === 0) continue;
-
         for (const key of condition) {
-          console.log("   Adding task key:", key);
           taskKeys.add(key);
         }
       }
@@ -115,10 +106,6 @@ function createSettingElement(key, setting, taskKeys) {
     if (subSetting && typeof subSetting === "object") {
       // Check for taskKeys. If setting is not used in any task, skip it, no need to show it.
       if (taskKeys.size === 0 || !taskKeys.has(subSetting.value)) {
-        console.log(
-          `taskKey count: ${taskKeys.size}, skipping setting ${subKey}, array of taskKeys:`,
-          Array.from(taskKeys), subSetting
-        );
         continue;
       }
 
