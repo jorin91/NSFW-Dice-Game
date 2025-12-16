@@ -43,15 +43,20 @@ function buildSettingsElement() {
   // Load all settings related task keys to check if setting is used at all
   const taskKeys = new Set();
   for (const categoryKey of Object.keys(tasks)) {
+    console.log("Processing task category:", categoryKey);
     taskKeys.add(categoryKey);
 
     // Lets get all sub-keys as well
     const categoryTasks = tasks[categoryKey];
     for (const task of categoryTasks) {
+      console.log(" Processing task:", task.id);
       const conditions = task.conditions;
       for (const condition of conditions) {
+        console.log("  Processing condition array:", condition);
         if (Array.isArray(condition) && condition.length > 0) {
+
           for (const key of condition) {
+            console.log("   Adding task key:", key);
             taskKeys.add(key);
           }
         }
