@@ -22,10 +22,10 @@ export const TASKS = [
     id: "Base.ExampleTask.1", // Unique identifier for the task. Format: {GAMECATEGORY_ENUM.KEYWORD}.{description}.{number}
     weight: 10, // Weight for random selection among eligible tasks. Higher weight means higher chance of being selected. Goes down 1.0 everytime the task is assigned to avoid repetition and goes up 0.1 every round it is not assigned, to a maximum of the starting weight.
     conditions: {
-      gamephase: [], // Empty array means no restrictions, if filled, these options must all be enabled in game settings for the task to be eligible.
-      gamecategory: [], // Empty array means no restrictions, if filled, these options must all be enabled in game settings for the task to be eligible.
-      sexact: [], // Empty array means no restrictions, if filled, these options must all be enabled in game settings for the task to be eligible.
-      bodyzone: [], // Empty array means no restrictions, if filled, these options must all be enabled in game settings for the task to be eligible.
+      gamephase: [GAMEPHASE_ENUM.DISCOVERY], // Empty array means no restrictions, if filled, these options must all be enabled in game settings for the task to be eligible.
+      gamecategory: [GAMECATEGORY_ENUM.CHALLENGE], // Empty array means no restrictions, if filled, these options must all be enabled in game settings for the task to be eligible.
+      sexact: [SEXACT_ENUM.MANUAL], // Empty array means no restrictions, if filled, these options must all be enabled in game settings for the task to be eligible.
+      bodyzone: [BODYZONE_ENUM.BODY], // Empty array means no restrictions, if filled, these options must all be enabled in game settings for the task to be eligible.
     },
     participants: [
       {
