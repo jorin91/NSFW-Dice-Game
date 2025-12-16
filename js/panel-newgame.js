@@ -114,7 +114,7 @@ function createSettingElement(key, setting, taskKeys) {
 
     if (subSetting && typeof subSetting === "object") {
       // Check for taskKeys. If setting is not used in any task, skip it, no need to show it.
-      if (taskKeys.size === 0 || !taskKeys.has(subKey)) {
+      if (taskKeys.size === 0 || !taskKeys.has(subSetting.value)) {
         console.log(
           `taskKey count: ${taskKeys.size}, skipping setting ${subKey}, array of taskKeys:`,
           Array.from(taskKeys)
