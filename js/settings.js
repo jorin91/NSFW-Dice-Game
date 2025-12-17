@@ -27,6 +27,21 @@ export const SETTINGS_MODEL = {
     i18nDesc: "ui.settings.dices.desc",
     value: 5,
   },
+  playersCanReroll: {
+    i18nTitle: "ui.settings.playersCanReroll",
+    i18nDesc: "ui.settings.playersCanReroll.desc",
+    value: true,
+  },
+  playerRerolls: {
+    i18nTitle: "ui.settings.playerRerolls",
+    i18nDesc: "ui.settings.playerRerolls.desc",
+    value: 5,
+  },
+  loserCount: {
+    i18nTitle: "ui.settings.loserCount",
+    i18nDesc: "ui.settings.loserCount.desc",
+    value: 1,
+  },
   gamephase: buildSettingsCollection(GAMEPHASE_ENUM, true, "GAMEPHASE_ENUM"),
   gamecategory: buildSettingsCollection(
     GAMECATEGORY_ENUM,
