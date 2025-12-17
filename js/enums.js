@@ -21,14 +21,122 @@ export const GAMEPHASE_ENUM = Object.freeze({
   SEX_INTENSE: "GAMEPHASE_ENUM.SEX_INTENSE",
 });
 
+/**
+ * GAMECATEGORY_ENUM
+ *
+ * Deze enum definieert de categorieën (tags) die bepalen
+ * wat voor soort opdracht wordt uitgevoerd en in welke context.
+ *
+ * Belangrijk ontwerpprincipe:
+ * - Categorieën beschrijven de VORM (core) en de CONTEXT (lading) van een opdracht
+ * - Ze beschrijven NIET de intensiteit (dat doet GAMEPHASE)
+ * - Ze beschrijven NIET de concrete seksuele handeling (dat doen SEXACT/BODYZONE)
+ *
+ * Meerdere categorieën mogen gecombineerd worden.
+ * De uiteindelijke invulling ontstaat uit:
+ *   core + context + gamephase + task-inhoud
+ */
+
 export const GAMECATEGORY_ENUM = Object.freeze({
+  /* ==========================================================
+   * CORE CATEGORIEËN
+   * ----------------------------------------------------------
+   * Bepalen de vorm of mechaniek van de opdracht.
+   * Ze zeggen WAT voor soort actie centraal staat.
+   * ========================================================== */
+
+  /**
+   * POSE
+   * Poseren of presenteren zonder beweging.
+   * De speler neemt een houding aan en blijft daarin.
+   * Geen lopen, draaien of uitvoeren van acties.
+   */
   POSE: "GAMECATEGORY_ENUM.POSE",
+
+  /**
+   * EXPOSE
+   * Tonen of zichtbaar maken.
+   * Geen aanraking, alleen kijken.
+   * Altijd vanuit: "ik laat zien", niet "ik kijk".
+   */
   EXPOSE: "GAMECATEGORY_ENUM.EXPOSE",
+
+  /**
+   * TOUCH
+   * Fysiek contact en aanraking.
+   * Elke opdracht waarbij aanraken centraal staat.
+   */
   TOUCH: "GAMECATEGORY_ENUM.TOUCH",
+
+  /**
+   * DRESS
+   * Aankleden.
+   * Het aantrekken of aanpassen van kleding,
+   * door jezelf of door een andere speler.
+   */
   DRESS: "GAMECATEGORY_ENUM.DRESS",
+
+  /**
+   * UNDRESS
+   * Uitkleden.
+   * Het verwijderen van kleding,
+   * gedeeltelijk of volledig.
+   */
   UNDRESS: "GAMECATEGORY_ENUM.UNDRESS",
+
+  /**
+   * CHALLENGE
+   * Doelgerichte opdrachten.
+   * De speler moet iets proberen te behalen,
+   * volhouden, durven of vergelijken.
+   */
   CHALLENGE: "GAMECATEGORY_ENUM.CHALLENGE",
+
+  /**
+   * MOVEMENT
+   * Beweging als hoofddoel.
+   * De opdracht draait om bewegen, positioneren of verplaatsen,
+   * niet om een ander doel waarbij beweging slechts nodig is.
+   */
   MOVEMENT: "GAMECATEGORY_ENUM.MOVEMENT",
+
+  /* ==========================================================
+   * CONTEXT CATEGORIEËN
+   * ----------------------------------------------------------
+   * Bepalen de lading, sfeer en intentie van de opdracht.
+   * Ze zeggen HOE de opdracht aanvoelt.
+   * ========================================================== */
+
+  /**
+   * SOCIAL
+   * Laagdrempelig, veilig en niet-intiem.
+   * Geschikt voor ontspanning, humor en sociale interactie.
+   */
+  SOCIAL: "GAMECATEGORY_ENUM.SOCIAL",
+
+  /**
+   * PLAYFUL
+   * Ondeugend, plagerig en speels.
+   * Spanning ontstaat uit humor en speels gedrag,
+   * niet uit intimiteit of seks.
+   */
+  PLAYFUL: "GAMECATEGORY_ENUM.PLAYFUL",
+
+  /**
+   * INTIMATE
+   * Intiem en dichtbij, meestal (bijna) naakt.
+   * Spanning ontstaat uit nabijheid en kwetsbaarheid.
+   * Expliciet GEEN seks of seksuele handelingen.
+   */
+  INTIMATE: "GAMECATEGORY_ENUM.INTIMATE",
+
+  /**
+   * EROTIC
+   * Gericht op seks.
+   * Altijd seksuele focus, spanning of verleiding.
+   * Niet per se seks zelf, maar wel met seks als doel.
+   */
+  EROTIC: "GAMECATEGORY_ENUM.EROTIC",
 });
 
 export const SEXACT_ENUM = Object.freeze({
