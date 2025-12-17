@@ -12,7 +12,9 @@ const PLAYER_MODEL = {
   game: {
     score: 0, // aantal gewonnen rondes in huidige game
     points: 0, // gegooide punten in huidige beurt
-    safe: false, // speler is veilig in huidige game
+    rerolls: 0, // aantal resterende rerolls van speler. word gebruikt om iets opnieuw te doen zoals een andere opdracht, mogelijk andere opties.
+    safe: false, // speler is veilig in huidige game -> gewonnen
+    playerResultType: null, // Word ingevuld volgens de TASKPLAYERTARGET_ENUM met spelresultaat van de speler in de huidige ronde (zoals loser, winner, other)
     consent: false, // speler stemt in met deelname
     clothing: null, // kledingstukken van de speler
   }
