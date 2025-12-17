@@ -45,7 +45,12 @@ async function buildSettingsElement() {
   for (const categoryKey of Object.keys(tasks)) {
     const category = tasks[categoryKey];
     // Lets get all sub-keys as well
-    if (!category.tasks || !Array.isArray(category.tasks) || category.tasks.length === 0) continue;
+    if (
+      !category.tasks ||
+      !Array.isArray(category.tasks) ||
+      category.tasks.length === 0
+    )
+      continue;
     taskKeys.add(category.value); // At this point we know the category is used and has tasks, add it as well.
     const categoryTasks = category.tasks;
     for (const task of categoryTasks) {
@@ -103,8 +108,36 @@ function createSettingElement(key, setting, taskKeys) {
     const subSettingContainer = document.createElement("div");
     subSettingContainer.className = "row setting";
 
-    if (subSetting && typeof subSetting === "object") {
-      // Check for taskKeys. If setting is not used in any task, skip it, no need to show it.
+    // === BOOLEAN ===
+    if (typeof subSetting === "boolean") {
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.checked = subSetting;
+
+      checkbox.addEventListener("change", () => {
+        setting[subKey] = checkbox.checked;
+      });
+
+      // hele row klikbaar
+      subSettingContainer.addEventListener("click", (e) => {
+        if (e.target !== checkbox) {
+          checkbox.checked = !checkbox.checked;
+          checkbox.dispatchEvent(new Event("change"));
+        }
+      });
+
+      const label = document.createElement("label");
+      setI18n(label, `${setting.i18nTitle}.${subKey}`);
+
+      const description = document.createElement("span");
+      setI18n(description, `${setting.i18nTitle}.${subKey}.desc`);
+
+      subSettingContainer.append(checkbox, label, description);
+    }
+
+    // === ENUM / OBJECT ===
+    else if (subSetting && typeof subSetting === "object") {
+      // Check for taskKeys. If setting is not used in any task, skip it.
       if (taskKeys.size === 0 || !taskKeys.has(subSetting.value)) {
         continue;
       }
@@ -112,11 +145,11 @@ function createSettingElement(key, setting, taskKeys) {
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
       checkbox.checked = subSetting.enabled;
+
       checkbox.addEventListener("change", () => {
         subSetting.enabled = checkbox.checked;
       });
 
-      // row listener to turn row into a clickable area for the checkbox
       subSettingContainer.addEventListener("click", (e) => {
         if (e.target !== checkbox) {
           checkbox.checked = !checkbox.checked;
@@ -131,7 +164,10 @@ function createSettingElement(key, setting, taskKeys) {
       setI18n(description, `${subSetting.value}.desc`);
 
       subSettingContainer.append(checkbox, label, description);
-    } else if (typeof subSetting === "number") {
+    }
+
+    // === NUMBER ===
+    else if (typeof subSetting === "number") {
       const input = document.createElement("input");
       input.type = "number";
       input.min = "1";
@@ -139,8 +175,7 @@ function createSettingElement(key, setting, taskKeys) {
       input.value = subSetting;
 
       input.addEventListener("change", () => {
-        let val = parseInt(input.value, 10);
-        setting[subKey] = val;
+        setting[subKey] = parseInt(input.value, 10);
       });
 
       subSettingContainer.appendChild(input);
