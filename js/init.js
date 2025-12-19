@@ -19,6 +19,7 @@ export async function initFunctions() {
 
 export async function initPanels() {
   // Initialize or update all panels in order
+  // Visible panels
   await setupPanelMenuLanguage(); // Setup Language Menu Panel
   setupPanelPlayerOverview(); // Setup Player Panel
   setupPanelPlayerSetup(); // Setup Player Setup Panel
