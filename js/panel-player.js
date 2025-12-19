@@ -80,6 +80,9 @@ export function setupPanelPlayerOverview(id = "player-overview") {
   // Build footer
   panel.footer.innerHTML = "";
 
+  const buttonRow = document.createElement("div");
+  buttonRow.className = "row";
+
   const editBtn = document.createElement("button");
   editBtn.className = "btn";
   editBtn.id = `${panel.panelID}.button.edit`;
@@ -87,7 +90,8 @@ export function setupPanelPlayerOverview(id = "player-overview") {
   editBtn.setAttribute("data-panel-close", panel.panelID);
   setI18n(editBtn, "ui.panel-player-overview.button.edit");
 
-  panel.footer.appendChild(editBtn);
+  buttonRow.appendChild(editBtn);
+  panel.footer.appendChild(buttonRow);
 
   // Check for complete player profile
   const warningID = `${panel.panelID}.player-no-data-warning`;
