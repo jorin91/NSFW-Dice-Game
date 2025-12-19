@@ -9,8 +9,8 @@ import {
 } from "./elementHelpers.js";
 
 const unsubscribe = onPlayerChange(() => {
-  setupPanelPlayerOverview();
-  setupPanelPlayerSetup();
+  // setupPanelPlayerOverview();
+  // setupPanelPlayerSetup();
 });
 
 export function setupPanelPlayerOverview(id = "player-overview") {
