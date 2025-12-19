@@ -15,8 +15,6 @@ import { PLAYER } from "./player.js";
 import { getTaskModel } from "./task.js";
 import { setupPanelGame } from "./panel-game.js";
 
-let createClickHandler = null;
-
 // First step of new game: Player setup
 export function setupPanelNewGame_Player(id = "new-game-player") {
   let panel = getPanel(id);
@@ -173,7 +171,7 @@ export function setupPanelNewGame_Player(id = "new-game-player") {
       }
     } else if (!missing) {
       // Enable next button
-      nextButton.setAttribute("data-panel-show", "");
+      nextButton.setAttribute("data-panel-show", "panel-new-game-settings");
       nextButton.setAttribute("data-panel-hide", `${panel.panelID}`);
       nextButton.classList.remove("ghost");
 
@@ -184,36 +182,33 @@ export function setupPanelNewGame_Player(id = "new-game-player") {
   }
 }
 
-export function setupPanelNewGame() {
-  const createButton = document.getElementById(
-    "panel-mainmenu.button.createGame"
-  );
-  if (createButton) {
-    createButton.addEventListener("click", (e) => {
-      buildSettingsElement();
-    });
-  }
-}
+export async function setupPanelNewGame_Settings(id = "new-game-settings") {
+  let panel = getPanel(id);
+  if (!panel) panel = makePanel(id, false);
 
-async function buildSettingsElement() {
-  const body = document.getElementById("panel-newgame.body");
-  const createButton = document.getElementById("panel-newgame.button.create");
-  if (!body || !createButton) return;
+  // Build header
+  panel.header.innerHTML = "";
 
-  const settings = getSettingsModel();
+  const h2Header = document.createElement("h2");
+  setI18n(h2Header, "ui.panel-new-game-settings.header");
+  panel.header.appendChild(h2Header);
+
+  // Build body
+  panel.body.innerHTML = "";
+
+const settings = getSettingsModel();
   const tasks = await getTaskModel();
 
-  let settingsPanel = document.getElementById("panel-newgame.body.settings");
-  if (!settingsPanel) {
-    settingsPanel = document.createElement("div");
-    settingsPanel.id = "panel-newgame.body.settings";
-    settingsPanel.className = "col";
-    body.appendChild(settingsPanel);
-  } else {
-    settingsPanel.innerHTML = "";
-  }
+  // Build footer
+  panel.footer.innerHTML = "";
 
-  // Load all settings related task keys to check if setting is used at all
+  // Settings container
+  const settingsContainer = document.createElement("div");
+  settingsContainer.id = `${panel.footer.panelID}.settingsContainer`;
+  settingsContainer.className = "col";
+  panel.body.appendChild(settingsContainer);
+
+  // Get settings used in tasks, to only show relevant settings
   const taskKeys = new Set();
   for (const categoryKey of Object.keys(tasks)) {
     const category = tasks[categoryKey];
@@ -239,18 +234,43 @@ async function buildSettingsElement() {
     }
   }
 
+  // Create setting elements
   for (const key of Object.keys(settings)) {
     const setting = settings[key];
     const settingElement = createSettingElement(key, setting, taskKeys);
-    if (settingElement) settingsPanel.appendChild(settingElement);
+    if (settingElement) settingsContainer.appendChild(settingElement);
   }
 
-  if (createClickHandler) {
-    createButton.removeEventListener("click", createClickHandler);
-  }
+  // Buttons
+  const buttonRow = document.createElement("div");
+  buttonRow.className = "row";
 
-  createClickHandler = handleCreateClick.bind(null, settings);
-  createButton.addEventListener("click", createClickHandler);
+  const mainMenuButton = document.createElement("button");
+  mainMenuButton.id = `${panel.panelID}.button.main-menu`;
+  mainMenuButton.className = "btn";
+  mainMenuButton.setAttribute("data-panel-show", "panel-main-menu");
+  mainMenuButton.setAttribute("data-panel-hide", "*");
+  setI18n(mainMenuButton, "ui.panel-new-game.button.main-menu");
+
+  const backButton = document.createElement("button");
+  backButton.id = `${panel.panelID}.button.back`;
+  backButton.className = "btn";
+  backButton.setAttribute("data-panel-show", "panel-new-game-player");
+  backButton.setAttribute("data-panel-hide", `${panel.panelID}`);
+  setI18n(backButton, "ui.panel-new-game.button.back");
+
+  const nextButton = document.createElement("button");
+  nextButton.id = `${panel.panelID}.button.create`;
+  nextButton.className = "btn";
+  nextButton.setAttribute("data-panel-show", "");
+  nextButton.setAttribute("data-panel-hide", `${panel.panelID}`);
+  setI18n(nextButton, "ui.panel-new-game.button.create");
+
+  const createClickHandler = handleClickCreateGame.bind(null, settings);
+  nextButton.addEventListener("click", createClickHandler);
+
+  buttonRow.append(mainMenuButton, backButton, nextButton);
+  panel.footer.appendChild(buttonRow);
 }
 
 function createSettingElement(key, setting, taskKeys) {
@@ -362,7 +382,7 @@ function createSettingElement(key, setting, taskKeys) {
   return container;
 }
 
-async function handleCreateClick(settings, e) {
+async function handleClickCreateGame(settings, e) {
   // Check for complete player profile
   if (
     !PLAYER.name ||
