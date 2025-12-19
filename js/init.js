@@ -22,6 +22,9 @@ export async function initPanels() {
   await setupPanelMenuLanguage(); // Setup Language Menu Panel
   setupPanelPlayerOverview(); // Setup Player Panel
   setupPanelPlayerSetup(); // Setup Player Setup Panel
+  setupPanelMainMenu(); // Setup Main Menu Panel
+
+  // Hidden panels
   setupPanelNewGame(); // Setup New Game Panel
   setupPanelJoinGame(); // Setup Join Game Panel
 }
