@@ -1,4 +1,4 @@
 {
   "files": ["clothes", "enums", "tasks", "ui"],
-  "languages": ["nl"]
+  "languages": [{"code": "nl", "name": "Nederlands"}]
 }
