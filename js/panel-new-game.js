@@ -1,6 +1,11 @@
 // js/panel-newgame.js
-import { setI18n } from "./lang_i18n.js";
-import { makeInputField, makeSelectField } from "./elementHelpers.js";
+import { setI18n, getSupportedLanguages } from "./lang_i18n.js";
+import {
+  makeInputField,
+  makeSelectField,
+  makePanel,
+  getPanel,
+} from "./elementHelpers.js";
 import { getSettingsModel } from "./settings.js";
 import { GAMESTATE } from "./gamestate.js";
 import { randomNumberString } from "./utils.js";
@@ -10,6 +15,170 @@ import { getTaskModel } from "./task.js";
 import { setupPanelGame } from "./panel-game.js";
 
 let createClickHandler = null;
+
+// First step of new game: Player setup
+export function setupPanelNewGame_Player(id = "new-game-player") {
+  let panel = getPanel(id);
+  if (!panel) panel = makePanel(id, false);
+
+  // Build header
+  panel.header.innerHTML = "";
+
+  const h2Header = document.createElement("h2");
+  setI18n(h2Header, "ui.panel-new-game-player.header");
+  panel.header.appendChild(h2Header);
+
+  // Build body
+  panel.body.innerHTML = "";
+
+  // Naam
+  const { wrap: nameWrap, input: nameInput } = makeInputField(
+    "player_name",
+    "text",
+    {
+      defaultValue: PLAYER.name || "",
+    },
+    {
+      label: "ui.panel-new-game-player.nameProp",
+      // eventueel: placeholder: "ui.panel-player-setup.namePlaceholder"
+    }
+  );
+
+  nameInput.addEventListener("input", () => {
+    const nameVal = nameInput.value.trim();
+    PLAYER.name = nameVal || null;
+    updatePlayerDataWarning();
+  });
+
+  // Leeftijd
+  const { wrap: ageWrap, input: ageInput } = makeInputField(
+    "player_age",
+    "number",
+    {
+      defaultValue: PLAYER.age || "",
+      attrs: { min: 0 },
+    },
+    {
+      label: "ui.panel-new-game-player.ageProp",
+    }
+  );
+
+  ageInput.addEventListener("input", () => {
+    const ageVal = parseInt(ageInput.value, 10);
+    PLAYER.age = Number.isFinite(ageVal) && ageVal > 0 ? ageVal : null;
+    updatePlayerDataWarning();
+  });
+
+  // Geslacht (self)
+  const { wrap: sexWrap, select: sexSelect } = makeSelectField(
+    "player_sex",
+    {
+      entries: Object.entries(SEXSELF_ENUM),
+      includeEmptyOption: true,
+      emptyLabelText: "Unknown",
+    },
+    {
+      label: "ui.panel-new-game-player.sexProp",
+      optionFromValue: true, // enums zijn al i18n-keys
+    }
+  );
+  if (PLAYER.sex) {
+    sexSelect.value = PLAYER.sex;
+  }
+
+  sexSelect.addEventListener("change", () => {
+    const sexVal = sexSelect.value;
+    PLAYER.sex = sexVal || null;
+    updatePlayerDataWarning();
+  });
+
+  // Geslachtsvoorkeur (target)
+  const { wrap: sexTargetWrap, select: sexTargetSelect } = makeSelectField(
+    "player_sexTarget",
+    {
+      entries: Object.entries(SEXTARGET_ENUM),
+      includeEmptyOption: true,
+      emptyLabelText: "Unknown",
+    },
+    {
+      label: "ui.panel-new-game-player.sexTargetProp",
+      optionFromValue: true,
+    }
+  );
+  if (PLAYER.sexTarget) {
+    sexTargetSelect.value = PLAYER.sexTarget;
+  }
+
+  sexTargetSelect.addEventListener("change", () => {
+    const sexTargetVal = sexTargetSelect.value;
+    PLAYER.sexTarget = sexTargetVal || null;
+    updatePlayerDataWarning();
+  });
+
+  // Add fields to body
+  panel.body.append(nameWrap, ageWrap, sexWrap, sexTargetWrap);
+
+  // Build footer
+  panel.footer.innerHTML = "";
+
+  // Buttons
+  const buttonRow = document.createElement("div");
+  buttonRow.className = "row";
+
+  const mainMenuButton = document.createElement("button");
+  mainMenuButton.id = `${panel.panelID}.button.main-menu`;
+  mainMenuButton.className = "btn";
+  mainMenuButton.setAttribute("data-panel-show", "panel-main-menu");
+  mainMenuButton.setAttribute("data-panel-hide", "*");
+  setI18n(mainMenuButton, "ui.panel-new-game.button.main-menu");
+
+  const nextButton = document.createElement("button");
+  nextButton.id = `${panel.panelID}.button.next`;
+  nextButton.className = "btn";
+  nextButton.setAttribute("data-panel-show", "");
+  nextButton.setAttribute("data-panel-hide", "");
+  setI18n(nextButton, "ui.panel-new-game.button.next");
+
+  buttonRow.append(mainMenuButton, nextButton);
+  panel.footer.appendChild(buttonRow);
+
+  // Local function for incomplete player data warning
+  const warningID = `${panel.panelID}.player-no-data-warning`;
+
+  function updatePlayerDataWarning() {
+    // zoek binnen footer, niet globaal
+    let warning = panel.footer.querySelector(`#${warningID}`);
+
+    const missing =
+      !PLAYER.name ||
+      !PLAYER.age ||
+      PLAYER.age <= 0 ||
+      !PLAYER.sex ||
+      !PLAYER.sexTarget;
+
+    if (missing) {
+      // Disable next button
+      nextButton.setAttribute("data-panel-show", "");
+      nextButton.setAttribute("data-panel-hide", "");
+
+      if (!warning) {
+        warning = document.createElement("span");
+        warning.className = "footer error";
+        warning.id = warningID;
+        setI18n(warning, "ui.panel-new-game-player.missingPlayerData");
+        panel.footer.appendChild(warning);
+      }
+    } else if (!missing) {
+      // Enable next button
+      nextButton.setAttribute("data-panel-show", "");
+      nextButton.setAttribute("data-panel-hide", `${panel.panelID}`);
+
+      if (warning) {
+        warning.remove();
+      }
+    }
+  }
+}
 
 export function setupPanelNewGame() {
   const createButton = document.getElementById(
