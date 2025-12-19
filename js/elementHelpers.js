@@ -220,3 +220,57 @@ export function makeSeperator() {
   el.className = "sep";
   return el;
 }
+
+export function makePanel(id, active = false) {
+  if (!id) throw new Error("Panel requires an id");
+
+  const app = document.getElementById("app");
+  if (!app) throw new Error("App container (#app.app) not found");
+
+  const base = `panel-${id}`;
+
+  const section = document.createElement("section");
+  section.className = "panel" + (active ? " active" : " inactive");
+  section.id = `${base}.section`;
+  section.setAttribute("data-panel", `${base}`);
+
+  const header = document.createElement("div");
+  header.className = "header col";
+  header.id = `${base}.header`;
+  section.appendChild(header);
+
+  const body = document.createElement("div");
+  body.className = "body col";
+  body.id = `${base}.body`;
+  section.appendChild(body);
+
+  const footer = document.createElement("div");
+  footer.className = "footer col";
+  footer.id = `${base}.footer`;
+  section.appendChild(footer);
+
+  app.appendChild(section);
+  
+  return {panelID: base, section, header, body, footer};
+}
+
+export function getPanel(id) {
+  if (!id) throw new Error("getPanel requires an id");
+
+  const base = `panel-${id}`;
+
+  const section = document.getElementById(`${base}.section`);
+  if (!section) return null;
+
+  const header = section.querySelector(`#${base}.header`);
+  const body   = section.querySelector(`#${base}.body`);
+  const footer = section.querySelector(`#${base}.footer`);
+
+  return {
+    panelID: base,
+    section,
+    header,
+    body,
+    footer,
+  };
+}
