@@ -1,19 +1,25 @@
 import { initI18n } from "./lang_i18n.js";
 import { initPanelNavigation } from "./panelnavigation.js";
 import { firebaseWriteTest } from "./firebase/firebase-test.js";
-import { setupPanelPlayerOverview, setupPanelPlayerSetup } from "./panel-player.js";
+import {
+  setupPanelPlayerOverview,
+  setupPanelPlayerSetup,
+} from "./panel-player.js";
 import { setupPanelNewGame } from "./panel-newgame.js";
 import { set } from "./firebase/firebase-init.js";
 import { setupPanelJoinGame } from "./panel-joingame.js";
+import { setupPanelMenuLanguage } from "./panel-menu-language.js";
 
-export async function init() {
+export async function initFunctions() {
   // Initialization functions
   initI18n(); // Translation
   initPanelNavigation(); // Navigation
   // await firebaseWriteTest(); // Firebase Test
 }
 
-export async function initUpdate() {
+export async function initPanels() {
+  // Initialize or update all panels in order
+  await setupPanelMenuLanguage(); // Setup Language Menu Panel
   setupPanelPlayerOverview(); // Setup Player Panel
   setupPanelPlayerSetup(); // Setup Player Setup Panel
   setupPanelNewGame(); // Setup New Game Panel
@@ -21,6 +27,6 @@ export async function initUpdate() {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  await init();
-  await initUpdate();
+  await initFunctions();
+  await initPanels();
 });
