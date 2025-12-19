@@ -28,8 +28,8 @@ export async function setupPanelMenuLanguage(id = "menu-language") {
     buttonRow.appendChild(langBtn);
   });
 
-    panel.body.appendChild(buttonRow);
-    
+  panel.body.appendChild(buttonRow);
+
   // Build footer
   panel.footer.innerHTML = "";
 }
