@@ -24,7 +24,16 @@ async function loadManifest() {
   // languages is optioneel
   return {
     files: man.files,
-    languages: Array.isArray(man.languages) ? man.languages : []
+    languages: Array.isArray(man.languages)
+      ? man.languages
+          .filter(
+            (x) => x && typeof x === "object" && typeof x.code === "string"
+          )
+          .map((x) => ({
+            code: String(x.code).toLowerCase().trim(),
+            name: typeof x.name === "string" ? x.name : String(x.code),
+          }))
+      : [],
   };
 }
 
@@ -51,7 +60,7 @@ async function loadDict(lang) {
     );
 
     // 3) merge (latere files overschrijven eerdere keys)
-    return Object.assign({}, ...(parts.filter(Boolean)));
+    return Object.assign({}, ...parts.filter(Boolean));
   })();
 
   cache.set(cacheKey, p);
@@ -105,13 +114,14 @@ function updateLangButtons(activeLang) {
 async function resolveLanguage(requestedLang) {
   const manifest = await loadManifest();
   const allowed = manifest?.languages || [];
+  const allowedCodes = allowed.map((l) => l.code);
 
   // normalize
   let lang = (requestedLang || "").toLowerCase().trim();
 
   // 1) als er een whitelist is: altijd beperken tot manifest
-  if (allowed.length) {
-    if (!allowed.includes(lang)) lang = allowed[0];
+  if (allowedCodes.length) {
+    if (!allowedCodes.includes(lang)) lang = allowedCodes[0];
   } else {
     // geen whitelist: oude gedrag (maar nog steeds netjes)
     if (!lang) lang = "en";
@@ -123,13 +133,13 @@ async function resolveLanguage(requestedLang) {
 
   // 3) fallback: eerste taal uit manifest die echt iets laadt
   for (const cand of allowed) {
-    const dd = await loadDict(cand);
-    if (dd && Object.keys(dd).length) return { lang: cand, dict: dd };
+    const dd = await loadDict(cand.code);
+    if (dd && Object.keys(dd).length) return { lang: cand.code, dict: dd };
   }
 
   // 4) als whitelist bestaat maar alles is leeg: pak alsnog allowed[0] (niet "en")
   if (allowed.length) {
-    const first = allowed[0];
+    const first = allowed[0].code;
     const fd = await loadDict(first);
     return { lang: first, dict: fd || {} };
   }
