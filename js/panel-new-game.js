@@ -162,6 +162,7 @@ export function setupPanelNewGame_Player(id = "new-game-player") {
       // Disable next button
       nextButton.setAttribute("data-panel-show", "");
       nextButton.setAttribute("data-panel-hide", "");
+      nextButton.classList.add("ghost");
 
       if (!warning) {
         warning = document.createElement("span");
@@ -174,6 +175,7 @@ export function setupPanelNewGame_Player(id = "new-game-player") {
       // Enable next button
       nextButton.setAttribute("data-panel-show", "");
       nextButton.setAttribute("data-panel-hide", `${panel.panelID}`);
+      nextButton.classList.remove("ghost");
 
       if (warning) {
         warning.remove();
