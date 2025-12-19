@@ -6,6 +6,7 @@ import {
   makePanel,
   getPanel,
 } from "./elementHelpers.js";
+import { SEXSELF_ENUM, SEXTARGET_ENUM } from "./enums.js";
 import { getSettingsModel } from "./settings.js";
 import { GAMESTATE } from "./gamestate.js";
 import { randomNumberString } from "./utils.js";
