@@ -18,9 +18,14 @@ async function loadManifest() {
   const man = await fetchJson(I18N_MANIFEST_PATH);
   if (!man) return null;
 
-  // verwacht: { "files": ["clothes","enums","tasks","ui"] }
-  if (!man || !Array.isArray(man.files)) return null;
-  return man;
+  // files is vereist om manifest bruikbaar te maken
+  if (!Array.isArray(man.files)) return null;
+
+  // languages is optioneel
+  return {
+    files: man.files,
+    languages: Array.isArray(man.languages) ? man.languages : []
+  };
 }
 
 async function loadDict(lang) {
@@ -97,16 +102,57 @@ function updateLangButtons(activeLang) {
   });
 }
 
+async function resolveLanguage(requestedLang) {
+  const manifest = await loadManifest();
+  const allowed = manifest?.languages || [];
+
+  // normalize
+  let lang = (requestedLang || "").toLowerCase().trim();
+
+  // 1) als er een whitelist is: altijd beperken tot manifest
+  if (allowed.length) {
+    if (!allowed.includes(lang)) lang = allowed[0];
+  } else {
+    // geen whitelist: oude gedrag (maar nog steeds netjes)
+    if (!lang) lang = "en";
+  }
+
+  // 2) probeer gekozen taal te laden
+  let d = await loadDict(lang);
+  if (d && Object.keys(d).length) return { lang, dict: d };
+
+  // 3) fallback: eerste taal uit manifest die echt iets laadt
+  for (const cand of allowed) {
+    const dd = await loadDict(cand);
+    if (dd && Object.keys(dd).length) return { lang: cand, dict: dd };
+  }
+
+  // 4) als whitelist bestaat maar alles is leeg: pak alsnog allowed[0] (niet "en")
+  if (allowed.length) {
+    const first = allowed[0];
+    const fd = await loadDict(first);
+    return { lang: first, dict: fd || {} };
+  }
+
+  // 5) laatste fallback als er geen whitelist is
+  const en = await loadDict("en");
+  return { lang: "en", dict: en || {} };
+}
+
 export async function setLang(lang) {
-  currentLang = lang;
-  localStorage.setItem(LANG_KEY, lang);
-  document.documentElement.lang = lang;
-  dict = await loadDict(lang);
-  applyI18n(document); // update zichtbare nodes
-  updateLangButtons(lang);
+  const resolved = await resolveLanguage(lang);
+
+  currentLang = resolved.lang;
+  localStorage.setItem(LANG_KEY, currentLang);
+  document.documentElement.lang = currentLang;
+
+  dict = resolved.dict || {};
+  applyI18n(document);
+  updateLangButtons(currentLang);
+
   listeners.forEach((fn) => {
     try {
-      fn(lang);
+      fn(currentLang);
     } catch (e) {
       console.error(e);
     }
@@ -439,4 +485,9 @@ export function setI18n(
   }
 
   return el;
+}
+
+export async function getSupportedLanguages() {
+  const manifest = await loadManifest();
+  return manifest?.languages?.length ? manifest.languages : [];
 }
