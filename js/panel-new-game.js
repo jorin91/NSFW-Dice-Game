@@ -1,5 +1,5 @@
 // js/panel-newgame.js
-import { setI18n, getSupportedLanguages } from "./lang_i18n.js";
+import { setI18n } from "./lang_i18n.js";
 import {
   makeInputField,
   makeSelectField,
@@ -145,6 +145,7 @@ export function setupPanelNewGame_Player(id = "new-game-player") {
 
   // Local function for incomplete player data warning
   const warningID = `${panel.panelID}.player-no-data-warning`;
+  updatePlayerDataWarning(); // initial call
 
   function updatePlayerDataWarning() {
     // zoek binnen footer, niet globaal
