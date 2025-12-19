@@ -9,6 +9,7 @@ import { setupPanelNewGame } from "./panel-newgame.js";
 import { set } from "./firebase/firebase-init.js";
 import { setupPanelJoinGame } from "./panel-joingame.js";
 import { setupPanelMenuLanguage } from "./panel-menu-language.js";
+import { setupPanelMainMenu } from "./panel-main-menu.js";
 
 export async function initFunctions() {
   // Initialization functions
