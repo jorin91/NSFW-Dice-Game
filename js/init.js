@@ -5,7 +5,7 @@ import {
   setupPanelPlayerOverview,
   setupPanelPlayerSetup,
 } from "./panel-player.js";
-import { setupPanelNewGame } from "./panel-newgame.js";
+import { setupPanelNewGame } from "./panel-new-game.js";
 import { set } from "./firebase/firebase-init.js";
 import { setupPanelJoinGame } from "./panel-joingame.js";
 import { setupPanelMenuLanguage } from "./panel-menu-language.js";
@@ -22,8 +22,8 @@ export async function initPanels() {
   // Initialize or update all panels in order
   // Visible panels
   await setupPanelMenuLanguage(); // Setup Language Menu Panel
-  setupPanelPlayerOverview(); // Setup Player Panel
-  setupPanelPlayerSetup(); // Setup Player Setup Panel
+  // setupPanelPlayerOverview(); // Setup Player Panel
+  // setupPanelPlayerSetup(); // Setup Player Setup Panel
   setupPanelMainMenu(); // Setup Main Menu Panel
 
   // Hidden panels
