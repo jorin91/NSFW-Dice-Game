@@ -144,7 +144,7 @@ export function setupPanelNewGame_Player(id = "new-game-player") {
   panel.footer.appendChild(buttonRow);
 
   // Local function for incomplete player data warning
-  const warningID = `${panel.panelID}.player-no-data-warning`;
+  const warningID = `${panel.panelID}_player-no-data-warning`;
   updatePlayerDataWarning(); // initial call
 
   function updatePlayerDataWarning() {
