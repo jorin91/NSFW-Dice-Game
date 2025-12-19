@@ -1,11 +1,7 @@
 import { initI18n } from "./lang_i18n.js";
 import { initPanelNavigation } from "./panelnavigation.js";
 import { firebaseWriteTest } from "./firebase/firebase-test.js";
-import {
-  setupPanelPlayerOverview,
-  setupPanelPlayerSetup,
-} from "./panel-player.js";
-import { setupPanelNewGame_Player } from "./panel-new-game.js";
+import { setupPanelNewGame_Player, setupPanelNewGame_Settings } from "./panel-new-game.js";
 import { set } from "./firebase/firebase-init.js";
 import { setupPanelJoinGame } from "./panel-joingame.js";
 import { setupPanelMenuLanguage } from "./panel-menu-language.js";
@@ -22,12 +18,11 @@ export async function initPanels() {
   // Initialize or update all panels in order
   // Visible panels
   await setupPanelMenuLanguage(); // Setup Language Menu Panel
-  // setupPanelPlayerOverview(); // Setup Player Panel
-  // setupPanelPlayerSetup(); // Setup Player Setup Panel
   setupPanelMainMenu(); // Setup Main Menu Panel
 
   // Hidden panels
   setupPanelNewGame_Player(); // Setup New Game - Player Panel
+  await setupPanelNewGame_Settings(); // Setup New Game - Settings Panel
   setupPanelJoinGame(); // Setup Join Game Panel
 }
 
