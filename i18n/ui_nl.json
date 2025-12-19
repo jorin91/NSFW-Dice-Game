@@ -28,6 +28,7 @@
 
   "ui.panel-new-game.button.main-menu": "Terug naar Hoofdmenu",
   "ui.panel-new-game.button.next": "Volgende",
+  "ui.panel-new-game.button.create": "Spel Aanmaken",
 
   "ui.panel-new-game-player.header": "Nieuw Spel - Speler Profiel Instellen",
   "ui.panel-new-game-player.nameProp": "Naam:",
@@ -35,6 +36,8 @@
   "ui.panel-new-game-player.sexProp": "Geslacht:",
   "ui.panel-new-game-player.sexTargetProp": "Geslachtsvoorkeur:",
   "ui.panel-new-game-player.missingPlayerData": "Vul alle spelersgegevens in om verder te gaan.",
+
+  "ui.panel-new-game-settings.header": "Nieuw Spel - Spel Instellingen",
 
   "ui.panel-game.header": "NSFW Dobbelspel | Game ID: {gameID} | Game Code: {gameCode}",
   "ui.panel-game.header.loading": "NSFW Dobbelspel | Laden...",
