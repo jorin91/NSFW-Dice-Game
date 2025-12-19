@@ -44,7 +44,7 @@ export function setupPanelMainMenu(id = "main-menu") {
     setI18n(gameTitle, "ui.panel-main-menu.game.title");
 
     const gameContent = document.createElement("p");
-    setI18n(gameContent, "ui.panel-main-menu.game.content");
+    setI18n(gameContent, "ui.panel-main-menu.game.content", null, "html");
 
     game.append(gameTitle, gameContent);
 
@@ -55,7 +55,7 @@ export function setupPanelMainMenu(id = "main-menu") {
     setI18n(scoreTitle, "ui.panel-main-menu.score.title");
 
     const scoreContent = document.createElement("p");
-    setI18n(scoreContent, "ui.panel-main-menu.score.content");
+    setI18n(scoreContent, "ui.panel-main-menu.score.content", null, "html");
 
     score.append(scoreTitle, scoreContent);
 
