@@ -107,7 +107,7 @@ export function setupPanelMainMenu(id = "main-menu") {
     btnCreateGame.className = "btn";
     btnCreateGame.id = `${panel.panelID}.button.createGame`;
     btnCreateGame.setAttribute("data-panel-hide", "*");
-    btnCreateGame.setAttribute("data-panel-show", "panel-new-game, panel-player-overview");
+    btnCreateGame.setAttribute("data-panel-show", "panel-new-game-player");
     setI18n(btnCreateGame, "ui.panel-main-menu.button.createGame");
     btnRow.appendChild(btnCreateGame);
 
