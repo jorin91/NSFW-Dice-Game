@@ -1,3 +1,4 @@
 {
-  "files": ["clothes", "enums", "tasks", "ui"]
+  "files": ["clothes", "enums", "tasks", "ui"],
+  "languages": ["nl"]
 }
