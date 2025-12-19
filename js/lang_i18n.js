@@ -4,39 +4,49 @@ let currentLang = "en";
 let dict = {};
 const cache = new Map();
 const listeners = new Set();
-export const I18N_MODULES = ["clothes", "enums", "tasks", "ui"];
+export const I18N_FILES_FALLBACK = ["clothes", "enums", "tasks", "ui"];
+const I18N_MANIFEST_PATH = "i18n/manifest.json";
 
-// Helper: veilig JSON laden uit submap; 404 wordt stilletjes overgeslagen
-async function fetchModuleDict(lang, mod) {
-  const path = mod ? `i18n/${mod}/${lang}.json` : `i18n/${lang}.json`;
+async function fetchJson(path) {
   const r = await fetch(path, { cache: "no-store" });
-  if (r.status === 404) return {}; // module ontbreekt: negeren
+  if (r.status === 404) return null; // ontbreekt: stil skippen
   if (!r.ok) throw new Error(`Failed to load ${path}`);
   return r.json();
 }
 
+async function loadManifest() {
+  const man = await fetchJson(I18N_MANIFEST_PATH);
+  if (!man) return null;
+
+  // verwacht: { "files": ["clothes","enums","tasks","ui"] }
+  if (!man || !Array.isArray(man.files)) return null;
+  return man;
+}
+
 async function loadDict(lang) {
-  // Cache key hangt af van taal én de gekozen modules
-  const cacheKey = `${lang}::${(I18N_MODULES || []).join("|")}`;
+  // 1) manifest proberen (automatisch uitbreidbaar)
+  const manifest = await loadManifest();
+  const files = manifest?.files?.length ? manifest.files : I18N_FILES_FALLBACK;
+
+  // Cache key hangt af van taal én files-lijst
+  const cacheKey = `${lang}::${files.join("|")}`;
   if (cache.has(cacheKey)) return cache.get(cacheKey);
 
   const p = (async () => {
-    // Als er geen modules gedefinieerd zijn, val terug op root i18n/{lang}.json
-    const modules =
-      Array.isArray(I18N_MODULES) && I18N_MODULES.length ? I18N_MODULES : [""];
+    // 2) laad alle i18n/<name>_<lang>.json bestanden
+    const paths = files.map((name) => `i18n/${name}_${lang}.json`);
+
     const parts = await Promise.all(
-      modules.map((m) =>
-        fetchModuleDict(lang, m).catch((e) => {
-          console.warn(
-            `[i18n] overslaan wegens laadfout: ${m}/${lang}.json`,
-            e
-          );
-          return {};
+      paths.map((path) =>
+        fetchJson(path).catch((e) => {
+          console.warn(`[i18n] overslaan wegens laadfout: ${path}`, e);
+          return null;
         })
       )
     );
-    // Platte merge: latere modules overschrijven eerdere keys
-    return Object.assign({}, ...parts);
+
+    // 3) merge (latere files overschrijven eerdere keys)
+    return Object.assign({}, ...(parts.filter(Boolean)));
   })();
 
   cache.set(cacheKey, p);
