@@ -195,6 +195,18 @@ function canSetTextDirect(el) {
   return onlyText;
 }
 
+function bindLangButtons(root = document) {
+  root.querySelectorAll?.(".lang-btn").forEach((btn) => {
+    if (btn.dataset.langBound === "1") return; // al gebonden
+
+    btn.dataset.langBound = "1";
+    btn.addEventListener("click", () => {
+      const lang = btn.dataset.lang || btn.getAttribute("data-lang");
+      if (lang) setLang(lang);
+    });
+  });
+}
+
 // Kern: pas i18n toe op 1 element
 export function applyI18nToElement(el) {
   const key = el.getAttribute?.("data-i18n");
@@ -349,6 +361,8 @@ export async function initI18n() {
       m.addedNodes.forEach((node) => {
         if (node.nodeType === 1) {
           const el = node;
+
+          // i18n apply
           if (
             el.matches?.(
               "[data-i18n], [data-i18n-attr], [data-i18n-auto], [data-i18n-auto-placeholder], [data-i18n-auto-alt], [data-i18n-auto-title]"
@@ -359,19 +373,18 @@ export async function initI18n() {
           el.querySelectorAll?.(
             "[data-i18n], [data-i18n-attr], [data-i18n-auto], [data-i18n-auto-placeholder], [data-i18n-auto-alt], [data-i18n-auto-title]"
           ).forEach(applyI18nToElement);
+
+          // lang buttons bind (nieuw)
+          if (el.matches?.(".lang-btn")) bindLangButtons(el);
+          bindLangButtons(el); // bind ook eventuele descendants
         }
       });
     }
   });
   mo.observe(document.body, { childList: true, subtree: true });
 
-  // optionele topbar language buttons
-  document.querySelectorAll(".lang-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const lang = btn.getAttribute("data-lang");
-      if (lang) setLang(lang);
-    });
-  });
+  // bind bestaande (als ze er al zijn)
+  bindLangButtons(document);
 }
 
 /**
