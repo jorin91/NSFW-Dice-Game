@@ -192,6 +192,9 @@ export function setupPanelPlayerSetup(id = "player-setup") {
   panel.footer.innerHTML = "";
 
   // Save button
+  const buttonRow = document.createElement("div");
+  buttonRow.className = "row";
+
   const saveBtn = document.createElement("button");
   saveBtn.className = "btn";
   saveBtn.id = `${panel.panelID}.button.save`;
@@ -211,5 +214,6 @@ export function setupPanelPlayerSetup(id = "player-setup") {
     PLAYER.sexTarget = sexTargetVal || null;
   });
 
-  panel.footer.appendChild(saveBtn);
+  buttonRow.appendChild(saveBtn);
+  panel.footer.appendChild(buttonRow);
 }
