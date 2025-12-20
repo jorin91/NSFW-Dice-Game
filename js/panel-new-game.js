@@ -312,6 +312,7 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   );
   gameNameInput.input.addEventListener("change", () => {
     settings.gameName = gameNameInput.input.value;
+    updateIncompleteSettingsWarning();
   });
   gameNameContainer.append(gameNameHeader, gameNameInput.wrap);
 
@@ -333,6 +334,7 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   rollsInput.input.addEventListener("change", () => {
     const val = parseInt(rollsInput.input.value, 10);
     settings.rolls = Number.isFinite(val) && val > 0 ? val : 3;
+    updateIncompleteSettingsWarning();
   });
   rollsContainer.append(rollsHeader, rollsInput.wrap);
 
@@ -354,6 +356,7 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   pointsInput.input.addEventListener("change", () => {
     const val = parseInt(pointsInput.input.value, 10);
     settings.score = Number.isFinite(val) && val > 0 ? val : 3;
+    updateIncompleteSettingsWarning();
   });
   pointsContainer.append(pointsHeader, pointsInput.wrap);
 
@@ -375,6 +378,7 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   dicesInput.input.addEventListener("change", () => {
     const val = parseInt(dicesInput.input.value, 10);
     settings.dices = Number.isFinite(val) && val > 0 ? val : 5;
+    updateIncompleteSettingsWarning();
   });
   dicesContainer.append(dicesHeader, dicesInput.wrap);
 
@@ -394,11 +398,9 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   );
   canRerollInput.input.addEventListener("change", () => {
     settings.playersCanReroll = canRerollInput.input.checked;
+    updateIncompleteSettingsWarning();
   });
-  canRerollContainer.append(
-    canRerollHeader,
-    canRerollInput.wrap
-  );
+  canRerollContainer.append(canRerollHeader, canRerollInput.wrap);
 
   // Amount of Rerolls
   const playerRerollsContainer = container();
@@ -418,6 +420,7 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   playerRerollsInput.input.addEventListener("change", () => {
     const val = parseInt(playerRerollsInput.input.value, 10);
     settings.playerRerolls = Number.isFinite(val) && val >= 0 ? val : 3;
+    updateIncompleteSettingsWarning();
   });
   playerRerollsContainer.append(playerRerollsHeader, playerRerollsInput.wrap);
 
@@ -439,11 +442,9 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   loserCountInput.input.addEventListener("change", () => {
     const val = parseInt(loserCountInput.input.value, 10);
     settings.loserCount = Number.isFinite(val) && val > 0 ? val : 1;
+    updateIncompleteSettingsWarning();
   });
-  loserCountContainer.append(
-    loserCountHeader,
-    loserCountInput.wrap
-  );
+  loserCountContainer.append(loserCountHeader, loserCountInput.wrap);
 
   // Append simple settings so far
   panel.body.append(
@@ -517,7 +518,7 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   nextButton.id = `${panel.panelID}.button.create`;
   nextButton.className = "btn";
   nextButton.setAttribute("data-panel-show", "");
-  nextButton.setAttribute("data-panel-hide", `${panel.panelID}`);
+  nextButton.setAttribute("data-panel-hide", "");
   setI18n(nextButton, "ui.panel-new-game.button.create");
 
   const createClickHandler = handleClickCreateGame.bind(null, settings);
@@ -525,6 +526,49 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
 
   buttonRow.append(mainMenuButton, backButton, nextButton);
   panel.footer.appendChild(buttonRow);
+
+  // Local function to check complete settings
+  const warningID = `${panel.panelID}_incomplete-settings-warning`;
+  updateIncompleteSettingsWarning(); // initial call
+
+  function updateIncompleteSettingsWarning() {
+    // zoek binnen footer, niet globaal
+    let warning = panel.footer.querySelector(`#${warningID}`);
+    const missing =
+      !settings.gameName ||
+      !settings.gameCode ||
+      !settings.gameID ||
+      !settings.rolls ||
+      settings.rolls < 1 ||
+      !settings.score ||
+      settings.score < 1 ||
+      !settings.dices ||
+      settings.dices < 1 ||
+      !settings.loserCount ||
+      settings.loserCount < 1;
+
+    if (missing) {
+      // Disable next button
+      nextButton.setAttribute("data-panel-show", "");
+      nextButton.setAttribute("data-panel-hide", "");
+      nextButton.classList.add("ghost");
+      if (!warning) {
+        warning = document.createElement("span");
+        warning.className = "footer error";
+        warning.id = warningID;
+        setI18n(warning, "ui.panel-new-game-settings.incompleteSettings");
+        panel.footer.appendChild(warning);
+      }
+    } else if (!missing) {
+      // Enable next button
+      nextButton.setAttribute("data-panel-show", "");
+      nextButton.setAttribute("data-panel-hide", `${panel.panelID}`);
+      nextButton.classList.remove("ghost");
+      if (warning) {
+        warning.remove();
+      }
+    }
+  }
 }
 
 function createSettingElement(key, setting, taskKeys) {
