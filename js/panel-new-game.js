@@ -373,7 +373,6 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   });
   canRerollContainer.append(
     canRerollHeader,
-    canRerollDesc,
     canRerollInput.wrap
   );
 
@@ -402,8 +401,6 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   const loserCountContainer = container();
   const loserCountHeader = document.createElement("h4");
   setI18n(loserCountHeader, "ui.settings.loserCount");
-  const loserCountDesc = document.createElement("p");
-  setI18n(loserCountDesc, "ui.settings.loserCount.desc");
   const loserCountInput = makeInputField(
     "settings_loserCount",
     "number",
@@ -421,7 +418,6 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   });
   loserCountContainer.append(
     loserCountHeader,
-    loserCountDesc,
     loserCountInput.wrap
   );
 
