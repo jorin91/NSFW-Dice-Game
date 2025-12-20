@@ -50,6 +50,7 @@
   "ui.panel-game-task.subheader": "Game ID: {gameID} | Game Code: {gameCode}",
   "ui.panel-game-play.header": "NSFW Dobbelspel - Spelen",
 
+  "ui.settings": "Spel Instellingen",
   "ui.settings.rolls": "Aantal worpen per beurt",
   "ui.settings.rolls.desc": "Het aantal worpen dat elke speler per beurt mag doen om zijn of haar score te bepalen.",
   "ui.settings.score": "Punten om te winnen",
@@ -65,6 +66,8 @@
   "ui.settings.gameName": "Spel Naam",
   "ui.settings.gameName.desc": "De naam van het spel die wordt weergegeven in de lijst met beschikbare spellen.",
   "ui.settings.gameName.placeholder": "Spel #{ID}",
+  "ui.settings.gameCode": "Spel Code",
+  "ui.settings.gameID": "Spel ID",
 
   "ui.firebase.createGame.noGameID": "Er is geen game-ID ingesteld.",
   "ui.firebase.createGame.idExistsRetry": "Game-ID bestaat al, nieuw ID wordt gegenereerd...",
