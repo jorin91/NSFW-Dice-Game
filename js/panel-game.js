@@ -122,6 +122,7 @@ export async function setupPanelPlayerConsent(
 
   // Build body
   panel.body.innerHTML = "";
+  panel.body.className = "col small";
 
   // Settings Header
   const settingsHeader = document.createElement("h4");
@@ -137,9 +138,9 @@ export async function setupPanelPlayerConsent(
   }
 
   // Loop trough settings and build elements
-  const settingsContainer = document.createElement("div");
-  settingsContainer.className = "col small";
-  panel.body.appendChild(settingsContainer);
+  // const settingsContainer = document.createElement("div");
+  // settingsContainer.className = "col small";
+  // panel.body.appendChild(settingsContainer);
 
   for (const settingKey of Object.keys(game.settings)) {
     const setting = game.settings[settingKey];
@@ -149,7 +150,7 @@ export async function setupPanelPlayerConsent(
       setI18n(label, `{ui.settings.${settingKey}}: {value}`, {
         value: String(setting),
       });
-      settingsContainer.appendChild(label);
+      panel.body.appendChild(label);
     } else if (setting && typeof setting === "object") {
       let stringValue = `{${setting.i18nTitle}}: `;
       const propArr = [];
@@ -162,7 +163,7 @@ export async function setupPanelPlayerConsent(
 
       const label = document.createElement("label");
       setI18n(label, stringValue);
-      settingsContainer.appendChild(label);
+      panel.body.appendChild(label);
     }
   }
 
