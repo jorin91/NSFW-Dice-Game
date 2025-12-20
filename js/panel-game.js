@@ -4,7 +4,11 @@ import { makePanel, getPanel } from "./elementHelpers.js";
 import { GAMESTATE } from "./gamestate.js";
 import { PLAYER } from "./player.js";
 import { getTaskModel } from "./task.js";
-import { createGameFB, joinGameFB } from "./firebase/firebase-game.js";
+import {
+  createGameFB,
+  joinGameFB,
+  listGames,
+} from "./firebase/firebase-game.js";
 
 // Panels
 export function setupPanelGameTask(id = "game-task") {
@@ -90,7 +94,8 @@ export async function createGame(settings) {
 }
 
 export async function joinGame(gameCode, gameID) {
-  if (PLAYER.game.consent !== true) {
+  if (!PLAYER.game.consent) {
+    await setupPanelPlayerConsent(gameID, gameCode);
   } else {
     const result = await joinGameFB(gameID, gameCode);
     console.log("joinGame result:", result);
@@ -98,7 +103,11 @@ export async function joinGame(gameCode, gameID) {
   }
 }
 
-export function setupPanelPlayerConsent(id = "player-consent") {
+export async function setupPanelPlayerConsent(
+  gameID,
+  gameCode
+) {
+  id = "player-consent"
   let panel = getPanel(id);
   if (!panel) panel = makePanel(id, true);
 
@@ -111,6 +120,27 @@ export function setupPanelPlayerConsent(id = "player-consent") {
 
   // Build body
   panel.body.innerHTML = "";
+
+  if (!gameID || !gameCode) return;
+
+  const game = await listGames(gameID, gameCode);
+  if (!game.success) {
+    console.log("Failed to setup player consent panel", game);
+    return;
+  }
+
+  // Loop trough settings and build elements
+  for (const key of Object.keys(game.settings)) {
+    const setting = game.settings[key];
+
+    if (setting && typeof setting != "object") {
+      const label = document.createElement("label");
+      setI18n(label, `{ui.settings.${key}}: {value}`, { value: String(setting) });
+      panel.body.appendChild(label);
+    } else if (setting && typeof setting === "object" && setting.enabled) {
+
+    }
+  }
 
   // Build footer
   panel.footer.innerHTML = "";
