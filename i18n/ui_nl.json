@@ -27,6 +27,7 @@
   "ui.panel-joingame.body.code.label": "Voer de code in voor spel {gameID}:",
 
   "ui.panel-new-game.button.main-menu": "Terug naar Hoofdmenu",
+  "ui.panel-new-game.button.back": "Terug",
   "ui.panel-new-game.button.next": "Volgende",
   "ui.panel-new-game.button.create": "Spel Aanmaken",
 
