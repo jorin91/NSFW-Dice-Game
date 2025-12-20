@@ -312,7 +312,6 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
     updateIncompleteSettingsWarning();
   });
   gameNameContainer.append(gameNameHeader, gameNameInput.wrap);
-  settings.gameName = gameNameInput.input.value; // Set the translated default value as default
 
   // Rolls
   const rollsContainer = container();
@@ -529,6 +528,15 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   // updateIncompleteSettingsWarning(); // initial call
 
   function updateIncompleteSettingsWarning() {
+    // Update settings to ensure we have latest values
+    settings.gameName = gameNameInput.input.value;
+    settings.rolls = parseInt(rollsInput.input.value, 10);
+    settings.score = parseInt(pointsInput.input.value, 10);
+    settings.dices = parseInt(dicesInput.input.value, 10);
+    settings.playersCanReroll = canRerollInput.input.checked;
+    settings.playerRerolls = parseInt(playerRerollsInput.input.value, 10);
+    settings.loserCount = parseInt(loserCountInput.input.value, 10);
+
     // zoek binnen footer, niet globaal
     let warning = panel.footer.querySelector(`#${warningID}`);
     const missing =
