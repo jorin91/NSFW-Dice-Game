@@ -95,7 +95,7 @@ export async function createGame(settings) {
 
 export async function joinGame(gameCode, gameID) {
   if (!PLAYER.game.consent) {
-    await setupPanelPlayerConsent(gameID, gameCode);
+    await setupPanelPlayerConsent(gameID, gameCode, true);
   } else {
     const result = await joinGameFB(gameID, gameCode);
     console.log("joinGame result:", result);
@@ -105,11 +105,14 @@ export async function joinGame(gameCode, gameID) {
 
 export async function setupPanelPlayerConsent(
   gameID,
-  gameCode
-) {
+  gameCode,
+  active = false,
   id = "player-consent"
+) {
   let panel = getPanel(id);
-  if (!panel) panel = makePanel(id, true);
+  if (panel) panel.section.remove();
+
+  panel = makePanel(id, active);
 
   // Build header
   panel.header.innerHTML = "";
@@ -135,10 +138,11 @@ export async function setupPanelPlayerConsent(
 
     if (setting && typeof setting != "object") {
       const label = document.createElement("label");
-      setI18n(label, `{ui.settings.${key}}: {value}`, { value: String(setting) });
+      setI18n(label, `{ui.settings.${key}}: {value}`, {
+        value: String(setting),
+      });
       panel.body.appendChild(label);
     } else if (setting && typeof setting === "object" && setting.enabled) {
-
     }
   }
 
