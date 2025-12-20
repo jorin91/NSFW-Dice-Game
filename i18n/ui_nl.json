@@ -59,6 +59,9 @@
   "ui.settings.playerRerolls.desc": "Bepaalt met hoeveel rerolls elke speler het spel begint.",
   "ui.settings.loserCount": "Aantal verliezers",
   "ui.settings.loserCount.desc": "Bepaalt hoeveel spelers per spelmoment als verliezer worden beschouwd. Dit aantal wordt nagestreefd, maar het spel zorgt er altijd voor dat er minimaal één winnaar overblijft.",
+  "ui.settings.gameName": "Spel Naam",
+  "ui.settings.gameName.desc": "De naam van het spel die wordt weergegeven in de lijst met beschikbare spellen.",
+  "ui.settings.gameName.placeholder": "Spel #{ID}",
 
   "ui.firebase.createGame.noGameID": "Er is geen game-ID ingesteld.",
   "ui.firebase.createGame.idExistsRetry": "Game-ID bestaat al, nieuw ID wordt gegenereerd...",
