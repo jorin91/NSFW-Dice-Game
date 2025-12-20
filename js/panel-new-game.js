@@ -564,6 +564,7 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
       }
     }
 
+    console.log(settings);
     return !missing;
   }
 }
