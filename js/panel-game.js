@@ -123,6 +123,11 @@ export async function setupPanelPlayerConsent(
   // Build body
   panel.body.innerHTML = "";
 
+  // Settings Header
+  const settingsHeader = document.createElement("h4");
+  setI18n(settingsHeader, "ui.settings");
+  panel.body.appendChild(settingsHeader);
+
   if (!gameID || !gameCode) return;
 
   const game = await listGames(gameID, gameCode);
@@ -132,16 +137,32 @@ export async function setupPanelPlayerConsent(
   }
 
   // Loop trough settings and build elements
-  for (const key of Object.keys(game.settings)) {
-    const setting = game.settings[key];
+  const settingsContainer = document.createElement("div");
+  settingsContainer.className = "col small";
+  panel.body.appendChild(settingsContainer);
+
+  for (const settingKey of Object.keys(game.settings)) {
+    const setting = game.settings[settingKey];
 
     if (setting && typeof setting != "object") {
       const label = document.createElement("label");
-      setI18n(label, `{ui.settings.${key}}: {value}`, {
+      setI18n(label, `{ui.settings.${settingKey}}: {value}`, {
         value: String(setting),
       });
-      panel.body.appendChild(label);
-    } else if (setting && typeof setting === "object" && setting.enabled) {
+      settingsContainer.appendChild(label);
+    } else if (setting && typeof setting === "object") {
+      let stringValue = `{${setting.i18nTitle}}: `;
+      const propArr = [];
+      for (const propKey of Object.keys(setting)) {
+        const prop = setting[propKey];
+        if (prop && prop.enabled) propArr.push(`{${prop.value}}`);
+      }
+      const propString = propArr.join(", ");
+      stringValue += propString;
+
+      const label = document.createElement("label");
+      setI18n(label, stringValue);
+      settingsContainer.appendChild(label);
     }
   }
 
