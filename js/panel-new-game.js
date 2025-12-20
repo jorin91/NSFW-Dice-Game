@@ -295,95 +295,108 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   const rollsContainer = container();
   const rollsHeader = document.createElement("h4");
   setI18n(rollsHeader, "ui.settings.rolls");
-  const rollsDesc = document.createElement("p");
-  setI18n(rollsDesc, "ui.settings.rolls.desc");
   const rollsInput = makeInputField(
-    "settings_rolls", 
-    "number", 
+    "settings_rolls",
+    "number",
     {
       defaultValue: settings.rolls,
       attrs: { min: 1, max: 10, step: 1 },
-    }, 
+    },
     {
-      label: "ui.settings.rolls",
-    });
+      label: "ui.settings.rolls.desc",
+    }
+  );
   rollsInput.input.addEventListener("change", () => {
     const val = parseInt(rollsInput.input.value, 10);
     settings.rolls = Number.isFinite(val) && val > 0 ? val : 3;
   });
-  rollsContainer.append(rollsHeader, rollsDesc, rollsInput.wrap);
+  rollsContainer.append(rollsHeader, rollsInput.wrap);
 
   // score to win
   const pointsContainer = container();
   const pointsHeader = document.createElement("h4");
   setI18n(pointsHeader, "ui.settings.score");
-  const pointsDesc = document.createElement("p");
-  setI18n(pointsDesc, "ui.settings.score.desc");
-  const pointsInput = document.createElement("input");
-  pointsInput.type = "number";
-  pointsInput.min = "1";
-  pointsInput.max = "100";
-  pointsInput.step = "1";
-  pointsInput.value = settings.score;
-  pointsInput.addEventListener("change", () => {
-    const val = parseInt(pointsInput.value, 10);
+  const pointsInput = makeInputField(
+    "settings_score",
+    "number",
+    {
+      defaultValue: settings.score,
+      attrs: { min: 1, max: 100, step: 1 },
+    },
+    {
+      label: "ui.settings.score.desc",
+    }
+  );
+  pointsInput.input.addEventListener("change", () => {
+    const val = parseInt(pointsInput.input.value, 10);
     settings.score = Number.isFinite(val) && val > 0 ? val : 3;
   });
-  pointsContainer.append(pointsHeader, pointsDesc, pointsInput);
+  pointsContainer.append(pointsHeader, pointsInput.wrap);
 
   // Amount Dices
   const dicesContainer = container();
   const dicesHeader = document.createElement("h4");
   setI18n(dicesHeader, "ui.settings.dices");
-  const dicesDesc = document.createElement("p");
-  setI18n(dicesDesc, "ui.settings.dices.desc");
-  const dicesInput = document.createElement("input");
-  dicesInput.type = "number";
-  dicesInput.min = "1";
-  dicesInput.max = "10";
-  dicesInput.step = "1";
-  dicesInput.value = settings.dices;
-  dicesInput.addEventListener("change", () => {
-    const val = parseInt(dicesInput.value, 10);
+  const dicesInput = makeInputField(
+    "settings_dices",
+    "number",
+    {
+      defaultValue: settings.dices,
+      attrs: { min: 1, max: 10, step: 1 },
+    },
+    {
+      label: "ui.settings.dices.desc",
+    }
+  );
+  dicesInput.input.addEventListener("change", () => {
+    const val = parseInt(dicesInput.input.value, 10);
     settings.dices = Number.isFinite(val) && val > 0 ? val : 5;
   });
-  dicesContainer.append(dicesHeader, dicesDesc, dicesInput);
+  dicesContainer.append(dicesHeader, dicesInput.wrap);
 
   // Players Can Reroll
   const canRerollContainer = container();
   const canRerollHeader = document.createElement("h4");
   setI18n(canRerollHeader, "ui.settings.playersCanReroll");
-  const canRerollDesc = document.createElement("p");
-  setI18n(canRerollDesc, "ui.settings.playersCanReroll.desc");
-  const canRerollInput = document.createElement("input");
-  canRerollInput.type = "checkbox";
-  canRerollInput.checked = settings.playersCanReroll;
-  canRerollInput.addEventListener("change", () => {
-    settings.playersCanReroll = canRerollInput.checked;
+  const canRerollInput = makeInputField(
+    "settings_playersCanReroll",
+    "checkbox",
+    {
+      defaultValue: settings.playersCanReroll,
+    },
+    {
+      label: "ui.settings.playersCanReroll.desc",
+    }
+  );
+  canRerollInput.input.addEventListener("change", () => {
+    settings.playersCanReroll = canRerollInput.input.checked;
   });
-  canRerollContainer.append(canRerollHeader, canRerollDesc, canRerollInput);
+  canRerollContainer.append(
+    canRerollHeader,
+    canRerollDesc,
+    canRerollInput.wrap
+  );
 
   // Amount of Rerolls
   const playerRerollsContainer = container();
   const playerRerollsHeader = document.createElement("h4");
   setI18n(playerRerollsHeader, "ui.settings.playerRerolls");
-  const playerRerollsDesc = document.createElement("p");
-  setI18n(playerRerollsDesc, "ui.settings.playerRerolls.desc");
-  const playerRerollsInput = document.createElement("input");
-  playerRerollsInput.type = "number";
-  playerRerollsInput.min = "0";
-  playerRerollsInput.max = "100";
-  playerRerollsInput.step = "1";
-  playerRerollsInput.value = settings.playerRerolls;
-  playerRerollsInput.addEventListener("change", () => {
-    const val = parseInt(playerRerollsInput.value, 10);
+  const playerRerollsInput = makeInputField(
+    "settings_playerRerolls",
+    "number",
+    {
+      defaultValue: settings.playerRerolls,
+      attrs: { min: 0, max: 100, step: 1 },
+    },
+    {
+      label: "ui.settings.playerRerolls.desc",
+    }
+  );
+  playerRerollsInput.input.addEventListener("change", () => {
+    const val = parseInt(playerRerollsInput.input.value, 10);
     settings.playerRerolls = Number.isFinite(val) && val >= 0 ? val : 3;
   });
-  playerRerollsContainer.append(
-    playerRerollsHeader,
-    playerRerollsDesc,
-    playerRerollsInput
-  );
+  playerRerollsContainer.append(playerRerollsHeader, playerRerollsInput.wrap);
 
   // Amount of losing players
   const loserCountContainer = container();
@@ -391,20 +404,36 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   setI18n(loserCountHeader, "ui.settings.loserCount");
   const loserCountDesc = document.createElement("p");
   setI18n(loserCountDesc, "ui.settings.loserCount.desc");
-  const loserCountInput = document.createElement("input");
-  loserCountInput.type = "number";
-  loserCountInput.min = "1";
-  loserCountInput.max = "100";
-  loserCountInput.step = "1";
-  loserCountInput.value = settings.loserCount;
-  loserCountInput.addEventListener("change", () => {
-    const val = parseInt(loserCountInput.value, 10);
+  const loserCountInput = makeInputField(
+    "settings_loserCount",
+    "number",
+    {
+      defaultValue: settings.loserCount,
+      attrs: { min: 1, max: 100, step: 1 },
+    },
+    {
+      label: "ui.settings.loserCount.desc",
+    }
+  );
+  loserCountInput.input.addEventListener("change", () => {
+    const val = parseInt(loserCountInput.input.value, 10);
     settings.loserCount = Number.isFinite(val) && val > 0 ? val : 1;
   });
-  loserCountContainer.append(loserCountHeader, loserCountDesc, loserCountInput);
+  loserCountContainer.append(
+    loserCountHeader,
+    loserCountDesc,
+    loserCountInput.wrap
+  );
 
   // Append simple settings so far
-  panel.body.append(rollsContainer, pointsContainer, dicesContainer, canRerollContainer, playerRerollsContainer, loserCountContainer);
+  panel.body.append(
+    rollsContainer,
+    pointsContainer,
+    dicesContainer,
+    canRerollContainer,
+    playerRerollsContainer,
+    loserCountContainer
+  );
 
   // Task related settings
   // Get settings used in tasks, to only show relevant settings
@@ -459,7 +488,7 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   const backButton = document.createElement("button");
   backButton.id = `${panel.panelID}.button.back`;
   backButton.className = "btn";
-  backButton.setAttribute("data-panel-show", "panel-new-game-player");
+  backButton.setAttribute("data-panel-show", "panel-new-game-clothes");
   backButton.setAttribute("data-panel-hide", `${panel.panelID}`);
   setI18n(backButton, "ui.panel-new-game.button.back");
 
