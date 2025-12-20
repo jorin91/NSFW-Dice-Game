@@ -202,7 +202,7 @@ export function setupPanelNewGame_Clothes(id = "new-game-clothes") {
 
   for (const clothingKey of Object.keys(defClothes)) {
     const clothingItem = defClothes[clothingKey];
-    
+
     // Element
     const container = document.createElement("div");
     container.className = "row setting";
@@ -284,12 +284,125 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   const settings = getSettingsModel();
   const tasks = await getTaskModel();
 
-  // Settings container
-  const settingsContainer = document.createElement("div");
-  settingsContainer.id = `${panel.footer.panelID}.settingsContainer`;
-  settingsContainer.className = "col";
-  panel.body.appendChild(settingsContainer);
+  // Helpers
+  function container() {
+    const div = document.createElement("div");
+    div.className = "col small";
+    return div;
+  }
 
+  // Rolls
+  const rollsContainer = container();
+  const rollsHeader = document.createElement("h4");
+  setI18n(rollsHeader, "ui.settings.rolls");
+  const rollsDesc = document.createElement("p");
+  setI18n(rollsDesc, "ui.settings.rolls.desc");
+  const rollsInput = document.createElement("input");
+  rollsInput.type = "number";
+  rollsInput.min = "1";
+  rollsInput.max = "10";
+  rollsInput.step = "1";
+  rollsInput.value = settings.rolls;
+  rollsInput.addEventListener("change", () => {
+    const val = parseInt(rollsInput.value, 10);
+    settings.rolls = Number.isFinite(val) && val > 0 ? val : 3;
+  });
+  rollsContainer.append(rollsHeader, rollsDesc, rollsInput);
+
+  // score to win
+  const pointsContainer = container();
+  const pointsHeader = document.createElement("h4");
+  setI18n(pointsHeader, "ui.settings.score");
+  const pointsDesc = document.createElement("p");
+  setI18n(pointsDesc, "ui.settings.score.desc");
+  const pointsInput = document.createElement("input");
+  pointsInput.type = "number";
+  pointsInput.min = "1";
+  pointsInput.max = "100";
+  pointsInput.step = "1";
+  pointsInput.value = settings.score;
+  pointsInput.addEventListener("change", () => {
+    const val = parseInt(pointsInput.value, 10);
+    settings.score = Number.isFinite(val) && val > 0 ? val : 3;
+  });
+  pointsContainer.append(pointsHeader, pointsDesc, pointsInput);
+
+  // Amount Dices
+  const dicesContainer = container();
+  const dicesHeader = document.createElement("h4");
+  setI18n(dicesHeader, "ui.settings.dices");
+  const dicesDesc = document.createElement("p");
+  setI18n(dicesDesc, "ui.settings.dices.desc");
+  const dicesInput = document.createElement("input");
+  dicesInput.type = "number";
+  dicesInput.min = "1";
+  dicesInput.max = "10";
+  dicesInput.step = "1";
+  dicesInput.value = settings.dices;
+  dicesInput.addEventListener("change", () => {
+    const val = parseInt(dicesInput.value, 10);
+    settings.dices = Number.isFinite(val) && val > 0 ? val : 5;
+  });
+  dicesContainer.append(dicesHeader, dicesDesc, dicesInput);
+
+  // Players Can Reroll
+  const canRerollContainer = container();
+  const canRerollHeader = document.createElement("h4");
+  setI18n(canRerollHeader, "ui.settings.playersCanReroll");
+  const canRerollDesc = document.createElement("p");
+  setI18n(canRerollDesc, "ui.settings.playersCanReroll.desc");
+  const canRerollInput = document.createElement("input");
+  canRerollInput.type = "checkbox";
+  canRerollInput.checked = settings.playersCanReroll;
+  canRerollInput.addEventListener("change", () => {
+    settings.playersCanReroll = canRerollInput.checked;
+  });
+  canRerollContainer.append(canRerollHeader, canRerollDesc, canRerollInput);
+
+  // Amount of Rerolls
+  const playerRerollsContainer = container();
+  const playerRerollsHeader = document.createElement("h4");
+  setI18n(playerRerollsHeader, "ui.settings.playerRerolls");
+  const playerRerollsDesc = document.createElement("p");
+  setI18n(playerRerollsDesc, "ui.settings.playerRerolls.desc");
+  const playerRerollsInput = document.createElement("input");
+  playerRerollsInput.type = "number";
+  playerRerollsInput.min = "0";
+  playerRerollsInput.max = "100";
+  playerRerollsInput.step = "1";
+  playerRerollsInput.value = settings.playerRerolls;
+  playerRerollsInput.addEventListener("change", () => {
+    const val = parseInt(playerRerollsInput.value, 10);
+    settings.playerRerolls = Number.isFinite(val) && val >= 0 ? val : 3;
+  });
+  playerRerollsContainer.append(
+    playerRerollsHeader,
+    playerRerollsDesc,
+    playerRerollsInput
+  );
+
+  // Amount of losing players
+  const loserCountContainer = container();
+  const loserCountHeader = document.createElement("h4");
+  setI18n(loserCountHeader, "ui.settings.loserCount");
+  const loserCountDesc = document.createElement("p");
+  setI18n(loserCountDesc, "ui.settings.loserCount.desc");
+  const loserCountInput = document.createElement("input");
+  loserCountInput.type = "number";
+  loserCountInput.min = "1";
+  loserCountInput.max = "100";
+  loserCountInput.step = "1";
+  loserCountInput.value = settings.loserCount;
+  loserCountInput.addEventListener("change", () => {
+    const val = parseInt(loserCountInput.value, 10);
+    settings.loserCount = Number.isFinite(val) && val > 0 ? val : 1;
+  });
+  loserCountContainer.append(loserCountHeader, loserCountDesc, loserCountInput);
+
+  // Append simple settings so far
+  panel.body.append(rollsContainer, pointsContainer, dicesContainer, canRerollContainer, playerRerollsContainer, loserCountContainer);
+
+  // Task related settings
   // Get settings used in tasks, to only show relevant settings
   const taskKeys = new Set();
   for (const categoryKey of Object.keys(tasks)) {
@@ -319,8 +432,10 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   // Create setting elements
   for (const key of Object.keys(settings)) {
     const setting = settings[key];
-    const settingElement = createSettingElement(key, setting, taskKeys);
-    if (settingElement) settingsContainer.appendChild(settingElement);
+    if (typeof setting === "object") {
+      const settingElement = createSettingElement(key, setting, taskKeys);
+      if (settingElement) panel.body.appendChild(settingElement);
+    }
   }
 
   // Build footer
@@ -386,35 +501,8 @@ function createSettingElement(key, setting, taskKeys) {
     const subSettingContainer = document.createElement("div");
     subSettingContainer.className = "row setting";
 
-    // === BOOLEAN ===
-    if (typeof subSetting === "boolean") {
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.checked = subSetting;
-
-      checkbox.addEventListener("change", () => {
-        setting[subKey] = checkbox.checked;
-      });
-
-      // hele row klikbaar
-      subSettingContainer.addEventListener("click", (e) => {
-        if (e.target !== checkbox) {
-          checkbox.checked = !checkbox.checked;
-          checkbox.dispatchEvent(new Event("change"));
-        }
-      });
-
-      const label = document.createElement("label");
-      setI18n(label, `${setting.i18nTitle}.${subKey}`);
-
-      const description = document.createElement("span");
-      setI18n(description, `${setting.i18nTitle}.${subKey}.desc`);
-
-      subSettingContainer.append(checkbox, label, description);
-    }
-
     // === ENUM / OBJECT ===
-    else if (subSetting && typeof subSetting === "object") {
+    if (subSetting && typeof subSetting === "object") {
       // Check for taskKeys. If setting is not used in any task, skip it.
       if (taskKeys.size === 0 || !taskKeys.has(subSetting.value)) {
         continue;
@@ -442,21 +530,6 @@ function createSettingElement(key, setting, taskKeys) {
       setI18n(description, `${subSetting.value}.desc`);
 
       subSettingContainer.append(checkbox, label, description);
-    }
-
-    // === NUMBER ===
-    else if (typeof subSetting === "number") {
-      const input = document.createElement("input");
-      input.type = "number";
-      input.min = "1";
-      input.step = "1";
-      input.value = subSetting;
-
-      input.addEventListener("change", () => {
-        setting[subKey] = parseInt(input.value, 10);
-      });
-
-      subSettingContainer.appendChild(input);
     }
 
     container.appendChild(subSettingContainer);
