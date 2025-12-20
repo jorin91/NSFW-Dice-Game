@@ -12,6 +12,9 @@ import {
 import { setI18n } from "./lang_i18n.js";
 
 export const SETTINGS_MODEL = {
+  gameName: null,
+  gameID: null,
+  gameCode: null,
   rolls: 3,
   score: 3,
   dices: 5,
