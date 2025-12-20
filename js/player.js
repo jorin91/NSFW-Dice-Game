@@ -177,6 +177,7 @@ function ensurePlayerInitialized() {
     Number(loaded.version) === Number(PLAYER_MODEL.version)
   ) {
     base = loaded;
+    base.game.consent = false; // Always to false on load
 
     // Oude data kan nog geen id hebben → 1x genereren
     if (!base.id) {
