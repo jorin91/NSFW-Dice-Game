@@ -42,8 +42,13 @@
 
   "ui.panel-new-game-settings.header": "Nieuw Spel - Spel Instellingen",
 
-  "ui.panel-game.header": "NSFW Dobbelspel | Game ID: {gameID} | Game Code: {gameCode}",
-  "ui.panel-game.header.loading": "NSFW Dobbelspel | Laden...",
+  "ui.game.gameCode": "Spel Code: {gameCode}",
+  "ui.game.gameID": "Spel ID: {gameID}",
+  "ui.game.loading": "Laden...",
+
+  "ui.panel-game-task.header": "NSFW Dobbelspel - Opdracht",
+  "ui.panel-game-task.subheader": "Game ID: {gameID} | Game Code: {gameCode}",
+  
 
   "ui.settings.rolls": "Aantal worpen per beurt",
   "ui.settings.rolls.desc": "Het aantal worpen dat elke speler per beurt mag doen om zijn of haar score te bepalen.",
@@ -52,8 +57,6 @@
   "ui.settings.dices": "Aantal dobbelstenen",
   "ui.settings.dices.desc": "Het aantal dobbelstenen dat wordt gebruikt om de score te bepalen.",
   "ui.settings.playersCanReroll": "Spelers mogen een reroll gebruiken",
-  "ui.settings.playersCanReroll.value": "Gebruik rerolls",
-  "ui.settings.playersCanReroll.value.desc": "Gebruik een schaars hulpmiddel om het lot een duwtje te geven.",
   "ui.settings.playersCanReroll.desc": "Als deze optie is ingeschakeld, kunnen spelers een reroll inzetten om een uitkomst opnieuw te laten bepalen, zoals een opdracht of spelmoment.",
   "ui.settings.playerRerolls": "Aantal rerolls",
   "ui.settings.playerRerolls.desc": "Bepaalt met hoeveel rerolls elke speler het spel begint.",
