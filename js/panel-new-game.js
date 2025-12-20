@@ -517,8 +517,9 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   nextButton.className = "btn";
   setI18n(nextButton, "ui.panel-new-game.button.create");
 
-  const createClickHandler = handleClickCreateGame.bind(null, settings);
-  nextButton.addEventListener("click", createClickHandler);
+  nextButton.addEventListener("click", async (e) => {
+    if (updateIncompleteSettingsWarning()) await ClickCreateGame(settings);
+  });
 
   buttonRow.append(mainMenuButton, backButton, nextButton);
   panel.footer.appendChild(buttonRow);
@@ -562,6 +563,8 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
         warning.remove();
       }
     }
+
+    return !missing;
   }
 }
 
@@ -633,7 +636,7 @@ function createSettingElement(key, setting, taskKeys) {
   return container;
 }
 
-async function handleClickCreateGame(settings, e) {
+async function ClickCreateGame(settings) {
   // Since this player creates the game, they automatically give consent
   // PLAYER.game.consent = true;
 
