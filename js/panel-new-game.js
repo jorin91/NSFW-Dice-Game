@@ -198,11 +198,11 @@ export function setupPanelNewGame_Clothes(id = "new-game-clothes") {
   panel.body.innerHTML = "";
 
   const defClothes = getClothesModel();
+  PLAYER.game.clothing = defClothes;
 
   for (const clothingKey of Object.keys(defClothes)) {
     const clothingItem = defClothes[clothingKey];
-    PLAYER.game.clothing[clothingKey] = clothingItem;
-
+    
     // Element
     const container = document.createElement("div");
     container.className = "row setting";
@@ -228,8 +228,8 @@ export function setupPanelNewGame_Clothes(id = "new-game-clothes") {
     });
 
     checkbox.addEventListener("change", () => {
-      clothingItem.enabled = checkbox.checked;
-      PLAYER.game.clothing[clothingKey] = clothingItem;
+      // clothingItem.enabled = checkbox.checked;
+      PLAYER.game.clothing[clothingKey].enabled = checkbox.checked;
     });
 
     panel.body.appendChild(container);
