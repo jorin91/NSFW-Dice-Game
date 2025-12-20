@@ -23,7 +23,7 @@ async function gameCodeMatches(gameID, gameCode) {
  * Nieuwe game aanmaken.
  * Returned: { success: boolean, message: translationKey }
  */
-export async function createGame() {
+export async function createGameFB() {
   let gameID = GAMESTATE.gameID;
   let gameCode = GAMESTATE.gameCode;
 
@@ -57,7 +57,7 @@ export async function createGame() {
  * Join een bestaande game.
  * Returned: { success: boolean, message: translationKey }
  */
-export async function joinGame(gameID, gameCode) {
+export async function joinGameFB(gameID, gameCode) {
   if (!gameID || !gameCode) {
     return { success: false, message: "ui.firebase.joinGame.noGameIDCode" };
   }
