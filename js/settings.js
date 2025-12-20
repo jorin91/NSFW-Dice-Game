@@ -17,7 +17,7 @@ export const SETTINGS_MODEL = {
   dices: 5,
   playersCanReroll: true,
   playerRerolls: 3,
-  loserCount: 1,
+  loserCount: 2,
   gamephase: buildSettingsCollection(GAMEPHASE_ENUM, true, "GAMEPHASE_ENUM"),
   gamecategory: buildSettingsCollection(
     GAMECATEGORY_ENUM,
