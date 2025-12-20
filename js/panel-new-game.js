@@ -283,12 +283,37 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   const settings = getSettingsModel();
   const tasks = await getTaskModel();
 
+  // Default settings values
+  settings.gameID = randomNumberString(8);
+  settings.gameCode = randomNumberString(4);
+
   // Helpers
   function container() {
     const div = document.createElement("div");
     div.className = "col small";
     return div;
   }
+
+  // Game Name
+  const gameNameContainer = container();
+  const gameNameHeader = document.createElement("h4");
+  setI18n(gameNameHeader, "ui.settings.gameName");
+  const gameNameInput = makeInputField(
+    "settings_gameName",
+    "text",
+    {
+      defaultValue: settings.gameName,
+    },
+    {
+      label: "ui.settings.gameName.desc",
+      defaultValue: "ui.settings.gameName.placeholder",
+      defaultValueArgs: { ID: settings.gameID },
+    }
+  );
+  gameNameInput.input.addEventListener("change", () => {
+    settings.gameName = gameNameInput.input.value;
+  });
+  gameNameContainer.append(gameNameHeader, gameNameInput.wrap);
 
   // Rolls
   const rollsContainer = container();
@@ -571,19 +596,13 @@ function createSettingElement(key, setting, taskKeys) {
 async function handleClickCreateGame(settings, e) {
   PLAYER.game.consent = true;
 
+  // Needs to be moved to game creation, ID and Code also stored in settings now
   GAMESTATE.gameID = randomNumberString(8);
   GAMESTATE.gameCode = randomNumberString(4);
   GAMESTATE.settings = settings;
   GAMESTATE.tasks = await getTaskModel();
   GAMESTATE.players = [PLAYER];
   const result = await createGame();
-
-  if (result.message && footer) {
-    const message = document.createElement("div");
-    message.id = "panel-newgame.footer.status";
-    setI18n(message, result.message);
-    footer.appendChild(message);
-  }
 
   if (!result.success) {
     return;
