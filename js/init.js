@@ -6,7 +6,7 @@ import { set } from "./firebase/firebase-init.js";
 import { setupPanelJoinGame } from "./panel-joingame.js";
 import { setupPanelMenuLanguage } from "./panel-menu-language.js";
 import { setupPanelMainMenu } from "./panel-main-menu.js";
-import { setupPanelGameTask, setupPanelGamePlay } from "./panel-game.js";
+import { setupPanelGameTask, setupPanelGamePlay, setupPanelPlayerConsent } from "./panel-game.js";
 
 export async function initFunctions() {
   // Initialization functions
@@ -28,6 +28,7 @@ export async function initPanels() {
   setupPanelJoinGame(); // Setup Join Game Panel
   setupPanelGameTask(); // Setup Game Task Panel
   setupPanelGamePlay(); // Setup Game Play Panel
+  setupPanelPlayerConsent(); // Setup Player Consent Panel
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
