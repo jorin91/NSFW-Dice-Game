@@ -201,6 +201,7 @@ export function setupPanelNewGame_Clothes(id = "new-game-clothes") {
 
   for (const clothingKey of Object.keys(defClothes)) {
     const clothingItem = defClothes[clothingKey];
+    PLAYER.game.clothing[clothingKey] = clothingItem;
 
     // Element
     const container = document.createElement("div");
@@ -228,7 +229,7 @@ export function setupPanelNewGame_Clothes(id = "new-game-clothes") {
 
     checkbox.addEventListener("change", () => {
       clothingItem.enabled = checkbox.checked;
-      PLAYER.game.clothing = defClothes;
+      PLAYER.game.clothing[clothingKey] = clothingItem;
     });
 
     panel.body.appendChild(container);
