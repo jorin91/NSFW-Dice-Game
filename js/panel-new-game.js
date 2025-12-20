@@ -297,13 +297,16 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   const gameNameContainer = container();
   const gameNameHeader = document.createElement("h4");
   setI18n(gameNameHeader, "ui.settings.gameName");
-  const gameNameInput = makeInputField("settings_gameName", "text", {}, {
-    label: "ui.settings.gameName.desc",
-    placeholder: "ui.settings.gameName.placeholder",
-    placeholderArgs: { ID: settings.gameID },
-    defaultValue: "ui.settings.gameName.placeholder",
-    defaultValueArgs: { ID: settings.gameID },
-  });
+  const gameNameInput = makeInputField(
+    "settings_gameName",
+    "text",
+    { placeholderText: `Game #${settings.gameID}` },
+    {
+      label: "ui.settings.gameName.desc",
+      defaultValue: "ui.settings.gameName.placeholder",
+      defaultValueArgs: { ID: settings.gameID },
+    }
+  );
   gameNameInput.input.addEventListener("change", () => {
     settings.gameName = gameNameInput.input.value;
     updateIncompleteSettingsWarning();
