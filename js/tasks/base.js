@@ -29,9 +29,9 @@ export const TASKS = [
     },
     // Participant slots define how manuy players are involved and what their roles are.
     // If a slot cannont be filled due to lack of eligible players, we will source players from other slots. For loser and winner slots we will source a player defined as other.
-    // Winner (first player to finish) will never be assigned to loser slots.
-    // Losers (players left that didnt finish) will never be assigned to winner slots.
-    // Others (who finished, didnt necessarily win but havent lost either) will be used to fill remaining slots.
+    // Winner (first player to finish) will never be assigned to 'loser' slots.
+    // Losers (players left that didnt finish) will never be assigned to 'winner' slots.
+    // Others (who finished, didnt necessarily win but havent lost either) will be used to fill remaining 'winner' or 'other' slots.
     // Winner and Loser typed players/slot have a big impact on the role of the player within the task. Other typed players/slots are more generic and less impactful.
     // Loser slots are filled first, then winner slots, then other slots. If not all slots can be filled, the task will not be assigned.
     // If there are multiple slots of the same player type, we fill the slots in order of lowest amount of eligible players first to increase chances of successful assignment.
