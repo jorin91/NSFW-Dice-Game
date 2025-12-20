@@ -38,6 +38,8 @@
   "ui.panel-new-game-player.sexTargetProp": "Geslachtsvoorkeur:",
   "ui.panel-new-game-player.missingPlayerData": "Vul alle spelersgegevens in om verder te gaan.",
 
+  "ui.panel-new-game-clothes.header": "Nieuw Spel - Kleding Instellingen",
+
   "ui.panel-new-game-settings.header": "Nieuw Spel - Spel Instellingen",
 
   "ui.panel-game.header": "NSFW Dobbelspel | Game ID: {gameID} | Game Code: {gameCode}",
