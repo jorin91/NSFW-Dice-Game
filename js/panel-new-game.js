@@ -635,7 +635,7 @@ function createSettingElement(key, setting, taskKeys) {
 
 async function handleClickCreateGame(settings, e) {
   // Since this player creates the game, they automatically give consent
-  PLAYER.game.consent = true;
+  // PLAYER.game.consent = true;
 
   if (await createGame(settings)) {
     // Lets join game
