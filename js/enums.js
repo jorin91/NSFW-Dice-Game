@@ -169,120 +169,122 @@ export const GAMEPHASE_ENUM = Object.freeze({
 /**
  * GAMECATEGORY_ENUM
  *
- * Deze enum definieert de categorieën (tags) die bepalen
- * wat voor soort opdracht wordt uitgevoerd en in welke context.
+ * Deze enum definieert de categorieën die bepalen
+ * wat voor soort opdracht wordt uitgevoerd.
  *
- * Belangrijk ontwerpprincipe:
- * - Categorieën beschrijven de VORM (core) en de CONTEXT (lading) van een opdracht
+ * Ontwerpprincipes:
+ * - Elke taak heeft in principe één primaire categorie
+ * - Categorieën beschrijven WAT het kernmechaniek van de opdracht is
  * - Ze beschrijven NIET de intensiteit (dat doet GAMEPHASE)
- * - Ze beschrijven NIET de concrete seksuele handeling (dat doen SEXACT/BODYZONE)
+ * - Ze beschrijven NIET de concrete seksuele handeling (dat doen SEXACT en BODYZONE)
  *
- * Meerdere categorieën mogen gecombineerd worden.
- * De uiteindelijke invulling ontstaat uit:
- *   core + context + gamephase + task-inhoud
+ * Uitzondering:
+ * - CHALLENGE en ROLEPLAY zijn overkoepelende categorieën
+ *   en kunnen meerdere andere elementen bevatten binnen één opdracht.
+ *
+ * De uiteindelijke invulling van een opdracht ontstaat uit:
+ *   category + gamephase + task-inhoud (+ optioneel sexact/bodyzone)
  */
 
 export const GAMECATEGORY_ENUM = Object.freeze({
   /* ==========================================================
-   * CORE CATEGORIEËN
-   * ----------------------------------------------------------
-   * Bepalen de vorm of mechaniek van de opdracht.
-   * Ze zeggen WAT voor soort actie centraal staat.
+   * PRESENTATIE & ZICHTBAARHEID
    * ========================================================== */
 
   /**
    * POSE
-   * Poseren of presenteren zonder beweging.
-   * De speler neemt een houding aan en blijft daarin.
-   * Geen lopen, draaien of uitvoeren van acties.
+   * De speler neemt een houding aan of presenteert zichzelf.
+   * Het doel is het aannemen en vasthouden van een positie.
+   * Geen actieve handelingen of beweging.
    */
   POSE: "GAMECATEGORY_ENUM.POSE",
 
   /**
    * EXPOSE
-   * Tonen of zichtbaar maken.
-   * Geen aanraking, alleen kijken.
-   * Altijd vanuit: "ik laat zien", niet "ik kijk".
+   * De speler laat tijdelijk iets zien.
+   * De focus ligt op zichtbaar maken, niet op aanraken.
+   * Dit kan door houding, kleding verplaatsen of positionering.
    */
   EXPOSE: "GAMECATEGORY_ENUM.EXPOSE",
 
-  /**
-   * TOUCH
-   * Fysiek contact en aanraking.
-   * Elke opdracht waarbij aanraken centraal staat.
-   */
-  TOUCH: "GAMECATEGORY_ENUM.TOUCH",
+  /* ==========================================================
+   * KLEDING
+   * ========================================================== */
 
   /**
    * DRESS
-   * Aankleden.
-   * Het aantrekken of aanpassen van kleding,
-   * door jezelf of door een andere speler.
+   * Het aantrekken, aanpassen of herstellen van kleding.
+   * Door de speler zelf of door een andere speler.
    */
   DRESS: "GAMECATEGORY_ENUM.DRESS",
 
   /**
    * UNDRESS
-   * Uitkleden.
-   * Het verwijderen van kleding,
-   * gedeeltelijk of volledig.
+   * Het verwijderen van kleding.
+   * Gedeeltelijk of volledig, bij jezelf of bij een ander.
    */
   UNDRESS: "GAMECATEGORY_ENUM.UNDRESS",
 
-  /**
-   * CHALLENGE
-   * Doelgerichte opdrachten.
-   * De speler moet iets proberen te behalen,
-   * volhouden, durven of vergelijken.
-   */
-  CHALLENGE: "GAMECATEGORY_ENUM.CHALLENGE",
+  /* ==========================================================
+   * BEWEGING & ACTIE
+   * ========================================================== */
 
   /**
    * MOVEMENT
-   * Beweging als hoofddoel.
-   * De opdracht draait om bewegen, positioneren of verplaatsen,
-   * niet om een ander doel waarbij beweging slechts nodig is.
+   * Beweging is het hoofddoel van de opdracht.
+   * Denk aan lopen, draaien, verplaatsen of uitvoeren van een actie.
+   * Beweging is hier geen middel, maar het doel.
    */
   MOVEMENT: "GAMECATEGORY_ENUM.MOVEMENT",
 
   /* ==========================================================
-   * CONTEXT CATEGORIEËN
-   * ----------------------------------------------------------
-   * Bepalen de lading, sfeer en intentie van de opdracht.
-   * Ze zeggen HOE de opdracht aanvoelt.
+   * AANRAKING
    * ========================================================== */
 
   /**
-   * SOCIAL
-   * Laagdrempelig, veilig en niet-intiem.
-   * Geschikt voor ontspanning, humor en sociale interactie.
+   * SELF_TOUCH
+   * De opdracht draait om aanraking van het eigen lichaam.
+   * Aanraken is het doel van de taak.
+   * De aard en grenzen worden bepaald door de gamefase.
    */
-  SOCIAL: "GAMECATEGORY_ENUM.SOCIAL",
+  SELF_TOUCH: "GAMECATEGORY_ENUM.SELF_TOUCH",
 
   /**
-   * PLAYFUL
-   * Ondeugend, plagerig en speels.
-   * Spanning ontstaat uit humor en speels gedrag,
-   * niet uit intimiteit of seks.
+   * OTHER_TOUCH
+   * De opdracht draait om aanraking van het lichaam van een andere speler.
+   * Aanraken is het centrale doel van de taak.
+   * De aard en grenzen worden bepaald door de gamefase.
    */
-  PLAYFUL: "GAMECATEGORY_ENUM.PLAYFUL",
+  OTHER_TOUCH: "GAMECATEGORY_ENUM.OTHER_TOUCH",
+
+  /* ==========================================================
+   * OVERKOEPELENDE MECHANIEKEN
+   * ========================================================== */
 
   /**
-   * INTIMATE
-   * Intiem en dichtbij, meestal (bijna) naakt.
-   * Spanning ontstaat uit nabijheid en kwetsbaarheid.
-   * Expliciet GEEN seks of seksuele handelingen.
+   * CHALLENGE
+   * De opdracht draait om proberen, durven, vergelijken of presteren.
+   * Intensiteit wordt opgevoerd via competitie of een doel.
+   *
+   * Deze categorie is NIET beperkt tot andere categorieën:
+   * een challenge kan elementen bevatten van aanraking, beweging,
+   * expose, seks of meerdere acties binnen één opdracht.
    */
-  INTIMATE: "GAMECATEGORY_ENUM.INTIMATE",
+  CHALLENGE: "GAMECATEGORY_ENUM.CHALLENGE",
 
   /**
-   * EROTIC
-   * Gericht op seks.
-   * Altijd seksuele focus, spanning of verleiding.
-   * Niet per se seks zelf, maar wel met seks als doel.
+   * ROLEPLAY
+   * De speler neemt een rol aan waarin controle, macht of autonomie
+   * (tijdelijk) wordt verlegd.
+   *
+   * ROLEPLAY is een kader, geen handeling.
+   * Opdrachten binnen deze categorie kunnen meerdere elementen bevatten,
+   * waaronder aanraking, beweging, expose of seks,
+   * afhankelijk van de gamefase en taakinhoud.
    */
-  EROTIC: "GAMECATEGORY_ENUM.EROTIC",
+  ROLEPLAY: "GAMECATEGORY_ENUM.ROLEPLAY",
 });
+
 
 /**
  * SEXACT_ENUM
