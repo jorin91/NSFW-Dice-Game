@@ -14,6 +14,7 @@ import { createGame } from "./firebase/firebase-game.js";
 import { PLAYER } from "./player.js";
 import { getTaskModel } from "./task.js";
 import { getClothesModel } from "./clothing.js";
+import { createGame, joinGame } from "./panel-game.js";
 
 // First step of new game: Player setup
 export function setupPanelNewGame_Player(id = "new-game-player") {
@@ -160,7 +161,7 @@ export function setupPanelNewGame_Player(id = "new-game-player") {
       // Disable next button
       nextButton.setAttribute("data-panel-show", "");
       nextButton.setAttribute("data-panel-hide", "");
-      nextButton.classList.add("ghost");
+      nextButton.disabled = true;
 
       if (!warning) {
         warning = document.createElement("span");
@@ -173,7 +174,7 @@ export function setupPanelNewGame_Player(id = "new-game-player") {
       // Enable next button
       nextButton.setAttribute("data-panel-show", "panel-new-game-clothes");
       nextButton.setAttribute("data-panel-hide", `${panel.panelID}`);
-      nextButton.classList.remove("ghost");
+      nextButton.disabled = false;
 
       if (warning) {
         warning.remove();
@@ -517,8 +518,6 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   const nextButton = document.createElement("button");
   nextButton.id = `${panel.panelID}.button.create`;
   nextButton.className = "btn";
-  nextButton.setAttribute("data-panel-show", "");
-  nextButton.setAttribute("data-panel-hide", "");
   setI18n(nextButton, "ui.panel-new-game.button.create");
 
   const createClickHandler = handleClickCreateGame.bind(null, settings);
@@ -549,9 +548,8 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
 
     if (missing) {
       // Disable next button
-      nextButton.setAttribute("data-panel-show", "");
-      nextButton.setAttribute("data-panel-hide", "");
-      nextButton.classList.add("ghost");
+      nextButton.disabled = true;
+
       if (!warning) {
         warning = document.createElement("span");
         warning.className = "footer error";
@@ -561,9 +559,8 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
       }
     } else if (!missing) {
       // Enable next button
-      nextButton.setAttribute("data-panel-show", "");
-      nextButton.setAttribute("data-panel-hide", `${panel.panelID}`);
-      nextButton.classList.remove("ghost");
+      nextButton.disabled = false;
+
       if (warning) {
         warning.remove();
       }
@@ -639,19 +636,11 @@ function createSettingElement(key, setting, taskKeys) {
 }
 
 async function handleClickCreateGame(settings, e) {
+  // Since this player creates the game, they automatically give consent
   PLAYER.game.consent = true;
 
-  // Needs to be moved to game creation, ID and Code also stored in settings now
-  GAMESTATE.gameID = randomNumberString(8);
-  GAMESTATE.gameCode = randomNumberString(4);
-  GAMESTATE.settings = settings;
-  GAMESTATE.tasks = await getTaskModel();
-  GAMESTATE.players = [PLAYER];
-  const result = await createGame();
-
-  if (!result.success) {
-    return;
+  if (await createGame(settings)) {
+    // Lets join game
+    await joinGame(settings.gameCode, settings.gameID);
   }
-
-  setupPanelGame();
 }
