@@ -38,6 +38,7 @@
   "ui.panel-new-game-player.missingPlayerData": "Vul alle spelersgegevens in om verder te gaan.",
   "ui.panel-new-game-clothes.header": "Nieuw Spel - Kleding Instellingen",
   "ui.panel-new-game-settings.header": "Nieuw Spel - Spel Instellingen",
+  "ui.panel-new-game-settings.incompleteSettings": "Vul alle spelinstellingen in om verder te gaan.",
 
   "ui.game.gameCode": "Spel Code: {gameCode}",
   "ui.game.gameID": "Spel ID: {gameID}",
