@@ -30,16 +30,13 @@
   "ui.panel-new-game.button.back": "Terug",
   "ui.panel-new-game.button.next": "Volgende",
   "ui.panel-new-game.button.create": "Spel Aanmaken",
-
   "ui.panel-new-game-player.header": "Nieuw Spel - Speler Profiel Instellen",
   "ui.panel-new-game-player.nameProp": "Naam:",
   "ui.panel-new-game-player.ageProp": "Leeftijd:",
   "ui.panel-new-game-player.sexProp": "Geslacht:",
   "ui.panel-new-game-player.sexTargetProp": "Geslachtsvoorkeur:",
   "ui.panel-new-game-player.missingPlayerData": "Vul alle spelersgegevens in om verder te gaan.",
-
   "ui.panel-new-game-clothes.header": "Nieuw Spel - Kleding Instellingen",
-
   "ui.panel-new-game-settings.header": "Nieuw Spel - Spel Instellingen",
 
   "ui.game.gameCode": "Spel Code: {gameCode}",
@@ -48,7 +45,7 @@
 
   "ui.panel-game-task.header": "NSFW Dobbelspel - Opdracht",
   "ui.panel-game-task.subheader": "Game ID: {gameID} | Game Code: {gameCode}",
-  
+  "ui.panel-game-play.header": "NSFW Dobbelspel - Spelen",
 
   "ui.settings.rolls": "Aantal worpen per beurt",
   "ui.settings.rolls.desc": "Het aantal worpen dat elke speler per beurt mag doen om zijn of haar score te bepalen.",
