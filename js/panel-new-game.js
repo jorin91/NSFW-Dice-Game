@@ -305,8 +305,8 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
     },
     {
       label: "ui.settings.gameName.desc",
-      defaultValue: "ui.settings.gameName.placeholder",
-      defaultValueArgs: { ID: settings.gameID },
+      placeholder: "ui.settings.gameName.placeholder",
+      placeholderArgs: { ID: settings.gameID },
     }
   );
   gameNameInput.input.addEventListener("change", () => {
