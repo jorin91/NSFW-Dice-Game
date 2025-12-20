@@ -13,7 +13,6 @@ import { randomNumberString } from "./utils.js";
 import { createGame } from "./firebase/firebase-game.js";
 import { PLAYER } from "./player.js";
 import { getTaskModel } from "./task.js";
-import { setupPanelGame } from "./panel-game.js";
 import { getClothesModel } from "./clothing.js";
 
 // First step of new game: Player setup
