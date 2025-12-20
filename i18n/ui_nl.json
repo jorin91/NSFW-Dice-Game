@@ -40,7 +40,9 @@
   "ui.panel-new-game-settings.header": "Nieuw Spel - Spel Instellingen",
   "ui.panel-new-game-settings.incompleteSettings": "Vul alle spelinstellingen in om verder te gaan.",
 
-  "ui.panel-player-consent.header": "Speler Instemming",
+  "ui.panel-player-consent.header": "Speler Instemming Verreist",
+  "ui.panel-player-consent.content": "Door op 'Akkoord' te klikken, stem je ermee in om volledig en onvoorwaardelijk akkoord te gaan met alle ingestelde spelregels, categorieën en opdrachten. Dit betekent dat je elke opdracht die het spel toewijst verplicht uitvoert zoals bedoeld. Opdrachten mogen niet worden geweigerd, overgeslagen, aangepast of opnieuw gekozen, tenzij het spel dit expliciet toestaat. Door nu in te stemmen bevestig je dat je dit begrijpt en accepteert.",
+  "ui.panel-player-consent.button.agree": "Ik stem in en doe mee",
 
   "ui.game.gameCode": "Spel Code: {gameCode}",
   "ui.game.gameID": "Spel ID: {gameID}",
@@ -68,8 +70,6 @@
   "ui.settings.gameName.placeholder": "Spel #{ID}",
   "ui.settings.gameCode": "Spel Code",
   "ui.settings.gameID": "Spel ID",
-  "ui.settings.consent": "Instemming vereist",
-  "ui.settings.consent.desc": "Door in te stemmen ga je volledig en onvoorwaardelijk akkoord met alle ingestelde spelregels, categorieën en opdrachten. Dit betekent dat je elke opdracht die het spel toewijst verplicht uitvoert zoals bedoeld. Opdrachten mogen niet worden geweigerd, overgeslagen, aangepast of opnieuw gekozen, tenzij het spel dit expliciet toestaat. Door nu in te stemmen bevestig je dat je dit begrijpt en accepteert.",
 
   "ui.firebase.createGame.noGameID": "Er is geen game-ID ingesteld.",
   "ui.firebase.createGame.idExistsRetry": "Game-ID bestaat al, nieuw ID wordt gegenereerd...",
