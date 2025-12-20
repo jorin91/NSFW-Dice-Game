@@ -7,7 +7,7 @@ export const CLOTHING_MODEL = {
     name: "clothes.underwear_top.name",
     desc: "clothes.underwear_top.desc",
     worn: true,
-    enabled: false,
+    enabled: true,
     rules: {
       notworn: [
         "underwear_onepiece",
@@ -30,7 +30,7 @@ export const CLOTHING_MODEL = {
     name: "clothes.underwear_bottom.name",
     desc: "clothes.underwear_bottom.desc",
     worn: true,
-    enabled: false,
+    enabled: true,
     rules: {
       notworn: [
         "underwear_onepiece",
@@ -219,7 +219,7 @@ export const CLOTHING_MODEL = {
     name: "clothes.socks.name",
     desc: "clothes.socks.desc",
     worn: true,
-    enabled: false,
+    enabled: true,
     rules: {
       notworn: ["footwear"],
       worn: []
@@ -231,7 +231,7 @@ export const CLOTHING_MODEL = {
     name: "clothes.clothing_normal_top.name",
     desc: "clothes.clothing_normal_top.desc",
     worn: true,
-    enabled: false,
+    enabled: true,
     rules: {
       notworn: [
         "clothing_normal_onepiece",
@@ -248,7 +248,7 @@ export const CLOTHING_MODEL = {
     name: "clothes.clothing_normal_bottom.name",
     desc: "clothes.clothing_normal_bottom.desc",
     worn: true,
-    enabled: false,
+    enabled: true,
     rules: {
       notworn: [
         "clothing_normal_onepiece",
@@ -287,7 +287,7 @@ export const CLOTHING_MODEL = {
     name: "clothes.footwear.name",
     desc: "clothes.footwear.desc",
     worn: true,
-    enabled: false,
+    enabled: true,
     rules: {
       notworn: [],
       worn: []
