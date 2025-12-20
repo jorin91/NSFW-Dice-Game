@@ -297,14 +297,18 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   setI18n(rollsHeader, "ui.settings.rolls");
   const rollsDesc = document.createElement("p");
   setI18n(rollsDesc, "ui.settings.rolls.desc");
-  const rollsInput = document.createElement("input");
-  rollsInput.type = "number";
-  rollsInput.min = "1";
-  rollsInput.max = "10";
-  rollsInput.step = "1";
-  rollsInput.value = settings.rolls;
-  rollsInput.addEventListener("change", () => {
-    const val = parseInt(rollsInput.value, 10);
+  const rollsInput = makeInputField(
+    "settings_rolls", 
+    "number", 
+    {
+      defaultValue: settings.rolls,
+      attrs: { min: 1, max: 10, step: 1 },
+    }, 
+    {
+      label: "ui.settings.rolls",
+    });
+  rollsInput.input.addEventListener("change", () => {
+    const val = parseInt(rollsInput.input.value, 10);
     settings.rolls = Number.isFinite(val) && val > 0 ? val : 3;
   });
   rollsContainer.append(rollsHeader, rollsDesc, rollsInput);
@@ -541,23 +545,6 @@ function createSettingElement(key, setting, taskKeys) {
 }
 
 async function handleClickCreateGame(settings, e) {
-  // Check for complete player profile
-  if (
-    !PLAYER.name ||
-    !PLAYER.age ||
-    PLAYER.age <= 0 ||
-    !PLAYER.sex ||
-    !PLAYER.sexTarget
-  ) {
-    return;
-  }
-
-  const footer = document.getElementById("panel-newgame.footer");
-  const status = document.getElementById("panel-newgame.footer.status");
-  if (status) {
-    status.remove();
-  }
-
   PLAYER.game.consent = true;
 
   GAMESTATE.gameID = randomNumberString(8);
