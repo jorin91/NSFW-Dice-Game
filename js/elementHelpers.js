@@ -65,7 +65,11 @@ export function makeInputField(name, type, elemOpts = {}, i18nOpts = {}) {
 
   // Non-i18n default value (directe value)
   if (defaultValue !== undefined && defaultValue !== null) {
-    input.value = defaultValue;
+    if (type === "checkbox") {
+      input.checked = Boolean(defaultValue);
+    } else {
+      input.value = defaultValue;
+    }
   }
 
   // Default value via i18n op het "value" attribuut
@@ -250,8 +254,8 @@ export function makePanel(id, active = false) {
   section.appendChild(footer);
 
   app.appendChild(section);
-  
-  return {panelID: base, section, header, body, footer};
+
+  return { panelID: base, section, header, body, footer };
 }
 
 export function getPanel(id) {
@@ -263,7 +267,7 @@ export function getPanel(id) {
   if (!section) return null;
 
   const header = section.querySelector(`#${base}.header`);
-  const body   = section.querySelector(`#${base}.body`);
+  const body = section.querySelector(`#${base}.body`);
   const footer = section.querySelector(`#${base}.footer`);
 
   return {
