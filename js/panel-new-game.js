@@ -182,6 +182,53 @@ export function setupPanelNewGame_Player(id = "new-game-player") {
   }
 }
 
+export function setupPanelNewGame_Clothes(id = "new-game-clothes") {
+  let panel = getPanel(id);
+  if (!panel) panel = makePanel(id, false);
+
+  // Build header
+  panel.header.innerHTML = "";
+
+  const h2Header = document.createElement("h2");
+  setI18n(h2Header, "ui.panel-new-game-clothes.header");
+  panel.header.appendChild(h2Header);
+
+  // Build body
+  panel.body.innerHTML = "";
+
+
+  // Build footer
+  panel.footer.innerHTML = "";
+
+  // Buttons
+  const buttonRow = document.createElement("div");
+  buttonRow.className = "row";
+
+  const mainMenuButton = document.createElement("button");
+  mainMenuButton.id = `${panel.panelID}.button.main-menu`;
+  mainMenuButton.className = "btn";
+  mainMenuButton.setAttribute("data-panel-show", "panel-main-menu");
+  mainMenuButton.setAttribute("data-panel-hide", "*");
+  setI18n(mainMenuButton, "ui.panel-new-game.button.main-menu");
+
+  const backButton = document.createElement("button");
+  backButton.id = `${panel.panelID}.button.back`;
+  backButton.className = "btn";
+  backButton.setAttribute("data-panel-show", "panel-new-game-player");
+  backButton.setAttribute("data-panel-hide", `${panel.panelID}`);
+  setI18n(backButton, "ui.panel-new-game.button.back");
+
+  const nextButton = document.createElement("button");
+  nextButton.id = `${panel.panelID}.button.next`;
+  nextButton.className = "btn";
+  nextButton.setAttribute("data-panel-show", "panel-new-game-settings");
+  nextButton.setAttribute("data-panel-hide", "panel-new-game-clothes");
+  setI18n(nextButton, "ui.panel-new-game.button.next");
+
+  buttonRow.append(mainMenuButton, backButton, nextButton);
+  panel.footer.appendChild(buttonRow);
+}
+
 export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   let panel = getPanel(id);
   if (!panel) panel = makePanel(id, false);
