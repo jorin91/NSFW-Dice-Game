@@ -525,7 +525,7 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
 
   // Local function to check complete settings
   const warningID = `${panel.panelID}_incomplete-settings-warning`;
-  // updateIncompleteSettingsWarning(); // initial call
+  updateIncompleteSettingsWarning(); // initial call
 
   function updateIncompleteSettingsWarning() {
     // Update settings to ensure we have latest values
