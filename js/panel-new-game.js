@@ -447,6 +447,7 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
 
   // Append simple settings so far
   panel.body.append(
+    gameNameContainer,
     rollsContainer,
     pointsContainer,
     dicesContainer,
