@@ -122,7 +122,7 @@ export async function setupPanelPlayerConsent(
 
   // Build body
   panel.body.innerHTML = "";
-  panel.body.className = "col small";
+  panel.body.className = "body col small";
 
   // Settings Header
   const settingsHeader = document.createElement("h4");
