@@ -9,6 +9,7 @@ import {
   joinGameFB,
   listGames,
 } from "./firebase/firebase-game.js";
+import { switchPanel } from "./panelnavigation.js";
 
 // Panels
 export function setupPanelGameTask(id = "game-task") {
@@ -95,7 +96,8 @@ export async function createGame(settings) {
 
 export async function joinGame(gameCode, gameID) {
   if (!PLAYER.game.consent) {
-    await setupPanelPlayerConsent(gameID, gameCode, true);
+    await setupPanelPlayerConsent(gameID, gameCode);
+    switchPanel("*", "panel-player-consent");
   } else {
     const result = await joinGameFB(gameID, gameCode);
     console.log("joinGame result:", result);
@@ -106,13 +108,10 @@ export async function joinGame(gameCode, gameID) {
 export async function setupPanelPlayerConsent(
   gameID,
   gameCode,
-  active = false,
   id = "player-consent"
 ) {
   let panel = getPanel(id);
-  if (panel) panel.section.remove();
-
-  panel = makePanel(id, active);
+  if (!panel) panel = makePanel(id, false);
 
   // Build header
   panel.header.innerHTML = "";
