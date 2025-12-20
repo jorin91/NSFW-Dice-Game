@@ -35,10 +35,8 @@ const _playerChangeHandlers = [];
  * handler krijgt (playerProxy, changeInfo)
  *
  * changeInfo:
- *   { type: "set", prop, value }
- *   { type: "delete", prop }
- *
- * Returns: functie om je weer uit te schrijven.
+ *   { type: "set", path, value }
+ *   { type: "delete", path }
  */
 export function onPlayerChange(handler) {
   if (typeof handler !== "function") {
@@ -85,42 +83,80 @@ function createDefaultPlayer() {
 function createPlayerProxy(base) {
   _playerState = base;
 
-  _playerProxy = new Proxy(_playerState, {
-    set(target, prop, value) {
-      target[prop] = value;
+  // Cache voorkomt eindeloos nieuwe proxies voor dezelfde objecten
+  const proxyCache = new WeakMap();
 
-      // opslaan in storage
-      storageSave(target, LS_KEY_PLAYER);
+  function notifyAndSave(relativePath, value, type) {
+    // Bewaar altijd de volledige state (zelfde gedrag als je intentie)
+    storageSave(deepCopy(_playerState), LS_KEY_PLAYER);
 
-      // listeners aanroepen
-      notifyPlayerChange({
-        type: "set",
-        prop,
-        value,
-      });
+    // Fire event (met pad, zoals je gamestate)
+    notifyPlayerChange({
+      type,                 // "set" | "delete"
+      path: relativePath,   // bijv. "game/rerolls"
+      value,                // nieuwe value (bij set)
+    });
+  }
 
-      return true;
-    },
-    deleteProperty(target, prop) {
-      if (prop in target) {
-        delete target[prop];
+  function makePlayerProxy(target, pathSegments = []) {
+    if (!target || typeof target !== "object") return target;
 
-        storageSave(target, LS_KEY_PLAYER);
+    // hergebruik bestaande proxy als we deze al hebben
+    const cached = proxyCache.get(target);
+    if (cached) return cached;
 
-        notifyPlayerChange({
-          type: "delete",
-          prop,
-        });
-      }
-      return true;
-    },
-  });
+    const p = new Proxy(target, {
+      get(t, prop, receiver) {
+        // interne props (optioneel, maar handig voor debug)
+        if (prop === "__isProxy") return true;
+        if (prop === "__path") return pathSegments;
+
+        const value = Reflect.get(t, prop, receiver);
+
+        // child-objecten ook wrappen, zodat diepe sets ook door de proxy gaan
+        if (value && typeof value === "object") {
+          const childPath = [...pathSegments, String(prop)];
+          return makePlayerProxy(value, childPath);
+        }
+
+        return value;
+      },
+
+      set(t, prop, value, receiver) {
+        const result = Reflect.set(t, prop, value, receiver);
+
+        const fullPathSegments = [...pathSegments, String(prop)];
+        const relativePath = fullPathSegments.join("/");
+
+        notifyAndSave(relativePath, value, "set");
+        return result;
+      },
+
+      deleteProperty(t, prop) {
+        const existed = Object.prototype.hasOwnProperty.call(t, prop);
+        if (!existed) return true;
+
+        delete t[prop];
+
+        const fullPathSegments = [...pathSegments, String(prop)];
+        const relativePath = fullPathSegments.join("/");
+
+        notifyAndSave(relativePath, undefined, "delete");
+        return true;
+      },
+    });
+
+    proxyCache.set(target, p);
+    return p;
+  }
+
+  _playerProxy = makePlayerProxy(_playerState, []);
 
   // export-binding naar de proxy zelf
   PLAYER = _playerProxy;
 
-  // huidige staat in storage
-  storageSave(_playerState, LS_KEY_PLAYER);
+  // initial save
+  storageSave(deepCopy(_playerState), LS_KEY_PLAYER);
 
   return _playerProxy;
 }
