@@ -122,12 +122,15 @@ export async function setupPanelPlayerConsent(
 
   // Build body
   panel.body.innerHTML = "";
-  panel.body.className = "body col small";
+
+  const settingsContainer = document.createElement("div");
+  settingsContainer.className = "col small";
+  panel.body.appendChild(settingsContainer);
 
   // Settings Header
   const settingsHeader = document.createElement("h4");
   setI18n(settingsHeader, "ui.settings");
-  panel.body.appendChild(settingsHeader);
+  settingsContainer.appendChild(settingsHeader);
 
   if (!gameID || !gameCode) return;
 
@@ -146,7 +149,7 @@ export async function setupPanelPlayerConsent(
       setI18n(label, `{ui.settings.${settingKey}}: {value}`, {
         value: String(setting),
       });
-      panel.body.appendChild(label);
+      settingsContainer.appendChild(label);
     } else if (setting && typeof setting === "object") {
       let stringValue = `{${setting.i18nTitle}}: `;
       const propArr = [];
@@ -159,19 +162,18 @@ export async function setupPanelPlayerConsent(
 
       const label = document.createElement("label");
       setI18n(label, stringValue);
-      panel.body.appendChild(label);
+      settingsContainer.appendChild(label);
     }
   }
 
   // Consent Text
-  const consentHeader = document.createElement("h4");
-  setI18n(consentHeader, "ui.settings.consent");
-  panel.body.appendChild(consentHeader);
-
-  const consentDesc = document.createElement("p");
-  setI18n(consentDesc, "ui.settings.consent.desc");
-  panel.body.appendChild(consentDesc);
+  const consentText = document.createElement("h4");
+  setI18n(consentText, "ui.panel-player-consent.content");
+  panel.body.appendChild(consentText);
 
   // Build footer
   panel.footer.innerHTML = "";
+  const agreeButton = document.createElement("button");
+  agreeButton.className = "btn";
+  setI18n(agreeButton, "ui.panel-player-consent.button.agree");
 }
