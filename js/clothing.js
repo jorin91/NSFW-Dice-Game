@@ -451,8 +451,6 @@ export const CLOTHING_MODEL = {
   }
 };
 
-
-
 // Helper: is dit kledingstuk überhaupt actief in dit spel / voor deze speler?
 function isEnabled(model, k) {
   const p = model[k];
