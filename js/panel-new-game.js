@@ -171,7 +171,7 @@ export function setupPanelNewGame_Player(id = "new-game-player") {
       }
     } else if (!missing) {
       // Enable next button
-      nextButton.setAttribute("data-panel-show", "panel-new-game-settings");
+      nextButton.setAttribute("data-panel-show", "panel-new-game-clothes");
       nextButton.setAttribute("data-panel-hide", `${panel.panelID}`);
       nextButton.classList.remove("ghost");
 
