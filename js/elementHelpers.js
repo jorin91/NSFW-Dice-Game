@@ -266,9 +266,9 @@ export function getPanel(id) {
   const section = document.getElementById(`${base}.section`);
   if (!section) return null;
 
-  const header = section.querySelector(`#${base}.header`);
-  const body = section.querySelector(`#${base}.body`);
-  const footer = section.querySelector(`#${base}.footer`);
+  const header = document.getElementById(`${base}.header`);
+  const body = document.getElementById(`${base}.body`);
+  const footer = document.getElementById(`${base}.footer`);
 
   return {
     panelID: base,
