@@ -138,10 +138,6 @@ export async function setupPanelPlayerConsent(
   }
 
   // Loop trough settings and build elements
-  // const settingsContainer = document.createElement("div");
-  // settingsContainer.className = "col small";
-  // panel.body.appendChild(settingsContainer);
-
   for (const settingKey of Object.keys(game.settings)) {
     const setting = game.settings[settingKey];
 
@@ -166,6 +162,15 @@ export async function setupPanelPlayerConsent(
       panel.body.appendChild(label);
     }
   }
+
+  // Consent Text
+  const consentHeader = document.createElement("h4");
+  setI18n(consentHeader, "ui.settings.consent");
+  panel.body.appendChild(consentHeader);
+
+  const consentDesc = document.createElement("p");
+  setI18n(consentDesc, "ui.settings.consent.desc");
+  panel.body.appendChild(consentDesc);
 
   // Build footer
   panel.footer.innerHTML = "";
