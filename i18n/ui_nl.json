@@ -40,6 +40,8 @@
   "ui.panel-new-game-settings.header": "Nieuw Spel - Spel Instellingen",
   "ui.panel-new-game-settings.incompleteSettings": "Vul alle spelinstellingen in om verder te gaan.",
 
+  "ui.panel-player-consent.header": "Speler Instemming",
+
   "ui.game.gameCode": "Spel Code: {gameCode}",
   "ui.game.gameID": "Spel ID: {gameID}",
   "ui.game.loading": "Laden...",
