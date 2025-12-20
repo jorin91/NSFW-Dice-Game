@@ -485,7 +485,7 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   // Create setting elements
   for (const key of Object.keys(settings)) {
     const setting = settings[key];
-    if (typeof setting === "object") {
+    if (setting && typeof setting === "object") {
       const settingElement = createSettingElement(key, setting, taskKeys);
       if (settingElement) panel.body.appendChild(settingElement);
     }
