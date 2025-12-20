@@ -8,9 +8,7 @@ import {
 } from "./elementHelpers.js";
 import { SEXSELF_ENUM, SEXTARGET_ENUM } from "./enums.js";
 import { getSettingsModel } from "./settings.js";
-import { GAMESTATE } from "./gamestate.js";
 import { randomNumberString } from "./utils.js";
-import { createGame } from "./firebase/firebase-game.js";
 import { PLAYER } from "./player.js";
 import { getTaskModel } from "./task.js";
 import { getClothesModel } from "./clothing.js";
