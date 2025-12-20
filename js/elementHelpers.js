@@ -28,8 +28,8 @@ import { setI18n } from "./lang_i18n.js";
 export function makeInputField(name, type, elemOpts = {}, i18nOpts = {}) {
   const {
     wrapClass = "row equal",
-    inputClass = "",
-    defaultValue = "",
+    inputClass,
+    defaultValue,
     placeholderText,
     labelText,
     attrs = {},
