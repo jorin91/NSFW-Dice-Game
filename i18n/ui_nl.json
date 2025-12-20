@@ -68,6 +68,8 @@
   "ui.settings.gameName.placeholder": "Spel #{ID}",
   "ui.settings.gameCode": "Spel Code",
   "ui.settings.gameID": "Spel ID",
+  "ui.settings.consent": "Instemming vereist",
+  "ui.settings.consent.desc": "Door in te stemmen ga je volledig en onvoorwaardelijk akkoord met alle ingestelde spelregels, categorieën en opdrachten. Dit betekent dat je elke opdracht die het spel toewijst verplicht uitvoert zoals bedoeld. Opdrachten mogen niet worden geweigerd, overgeslagen, aangepast of opnieuw gekozen, tenzij het spel dit expliciet toestaat. Door nu in te stemmen bevestig je dat je dit begrijpt en accepteert.",
 
   "ui.firebase.createGame.noGameID": "Er is geen game-ID ingesteld.",
   "ui.firebase.createGame.idExistsRetry": "Game-ID bestaat al, nieuw ID wordt gegenereerd...",
