@@ -176,4 +176,6 @@ export async function setupPanelPlayerConsent(
   const agreeButton = document.createElement("button");
   agreeButton.className = "btn";
   setI18n(agreeButton, "ui.panel-player-consent.button.agree");
+
+  panel.footer.appendChild(agreeButton);
 }
