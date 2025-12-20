@@ -311,7 +311,7 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
     const val = parseInt(rollsInput.input.value, 10);
     settings.rolls = Number.isFinite(val) && val > 0 ? val : 3;
   });
-  rollsContainer.append(rollsHeader, rollsDesc, rollsInput);
+  rollsContainer.append(rollsHeader, rollsDesc, rollsInput.wrap);
 
   // score to win
   const pointsContainer = container();
