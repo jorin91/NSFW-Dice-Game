@@ -14,6 +14,7 @@ import { createGame } from "./firebase/firebase-game.js";
 import { PLAYER } from "./player.js";
 import { getTaskModel } from "./task.js";
 import { setupPanelGame } from "./panel-game.js";
+import { getClothesModel } from "./clothing.js";
 
 // First step of new game: Player setup
 export function setupPanelNewGame_Player(id = "new-game-player") {
@@ -196,6 +197,42 @@ export function setupPanelNewGame_Clothes(id = "new-game-clothes") {
   // Build body
   panel.body.innerHTML = "";
 
+  const defClothes = getClothesModel();
+
+  for (const clothingKey of Object.keys(defClothes)) {
+    const clothingItem = defClothes[clothingKey];
+
+    // Element
+    const container = document.createElement("div");
+    container.className = "row setting";
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = clothingItem.enabled;
+
+    const label = document.createElement("label");
+    setI18n(label, clothingItem.name);
+
+    const description = document.createElement("span");
+    setI18n(description, clothingItem.desc);
+
+    container.append(checkbox, label, description);
+
+    // Event
+    container.addEventListener("click", (e) => {
+      if (e.target !== checkbox) {
+        checkbox.checked = !checkbox.checked;
+        checkbox.dispatchEvent(new Event("change"));
+      }
+    });
+
+    checkbox.addEventListener("change", () => {
+      clothingItem.enabled = checkbox.checked;
+      PLAYER.game.clothing = defClothes;
+    });
+
+    panel.body.appendChild(container);
+  }
 
   // Build footer
   panel.footer.innerHTML = "";
@@ -243,11 +280,8 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   // Build body
   panel.body.innerHTML = "";
 
-const settings = getSettingsModel();
+  const settings = getSettingsModel();
   const tasks = await getTaskModel();
-
-  // Build footer
-  panel.footer.innerHTML = "";
 
   // Settings container
   const settingsContainer = document.createElement("div");
@@ -287,6 +321,9 @@ const settings = getSettingsModel();
     const settingElement = createSettingElement(key, setting, taskKeys);
     if (settingElement) settingsContainer.appendChild(settingElement);
   }
+
+  // Build footer
+  panel.footer.innerHTML = "";
 
   // Buttons
   const buttonRow = document.createElement("div");
