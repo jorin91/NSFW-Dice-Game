@@ -1,10 +1,10 @@
 // js/panel-joingame.js
 import { setI18n } from "./lang_i18n.js";
 import { listGames } from "./firebase/firebase-game.js";
-import { makeInputField } from "./elementHelpers.js";
+import { makeInputField, getPanel, makePanel } from "./elementHelpers.js";
 
 export async function setupPanelJoinGame(id = "join-game", perRow = 6) {
-  let panel = document.getElementById(id);;
+  let panel = getPanel(id);
   if (!panel) panel = makePanel(id, false);
 
   // Build header
@@ -39,7 +39,7 @@ export async function setupPanelJoinGame(id = "join-game", perRow = 6) {
       { gameID: game.gameID, gameName: game.gameName },
       "text"
     );
-    btn.addEventListener("click", gameButtonClick);
+    // btn.addEventListener("click", gameButtonClick);
     rowEl.appendChild(btn);
     count++;
   }
