@@ -33,12 +33,7 @@ export async function setupPanelJoinGame(id = "join-game", perRow = 6) {
     btn.className = "btn game";
     btn.setAttribute("data-game-id", game.gameID);
     btn.setAttribute("data-game-name", game.gameName);
-    setI18n(
-      btn,
-      "ui.panel-join-game.button.game",
-      { gameID: game.gameID, gameName: game.gameName },
-      "text"
-    );
+    btn.textContent = `${game.gameName} (${game.gameID})`;
     // btn.addEventListener("click", gameButtonClick);
     rowEl.appendChild(btn);
     count++;
