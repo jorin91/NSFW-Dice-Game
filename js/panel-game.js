@@ -173,9 +173,13 @@ export async function setupPanelPlayerConsent(
 
   // Build footer
   panel.footer.innerHTML = "";
+
+  const buttonRow = document.createElement("div");
+  buttonRow.className = "row";
+  panel.footer.appendChild(buttonRow);
+
   const agreeButton = document.createElement("button");
   agreeButton.className = "btn";
   setI18n(agreeButton, "ui.panel-player-consent.button.agree");
-
-  panel.footer.appendChild(agreeButton);
+  buttonRow.appendChild(agreeButton);
 }
