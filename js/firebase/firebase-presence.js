@@ -9,6 +9,7 @@ import {
 
 let _stopConnectedSub = null;
 let _heartbeatTimer = null;
+let _presenceHeartbeatInterval = 30000; // ms
 
 let _boundGameID = null;
 let _boundGameCode = null;
@@ -55,7 +56,7 @@ export function startMyPresence(gameID, gameCode, playerId, meta = {}) {
     if (_heartbeatTimer) clearInterval(_heartbeatTimer);
     _heartbeatTimer = setInterval(() => {
       dbUpdate(myPresencePath, { online: true, lastSeen: Date.now() });
-    }, 5000);
+    }, _presenceHeartbeatInterval);
   });
 }
 
