@@ -3,7 +3,7 @@ import { initPanelNavigation } from "./panelnavigation.js";
 import { firebaseWriteTest } from "./firebase/firebase-test.js";
 import { setupPanelNewGame_Player, setupPanelNewGame_Clothes, setupPanelNewGame_Settings } from "./panel-new-game.js";
 import { set } from "./firebase/firebase-init.js";
-import { setupPanelJoinGame } from "./panel-joingame.js";
+import { setupPanelJoinGame } from "./panel-join-game.js";
 import { setupPanelMenuLanguage } from "./panel-menu-language.js";
 import { setupPanelMainMenu } from "./panel-main-menu.js";
 import { setupPanelGameTask, setupPanelGamePlay, setupPanelPlayerConsent } from "./panel-game.js";
@@ -25,7 +25,7 @@ export async function initPanels() {
   setupPanelNewGame_Player(); // Setup New Game - Player Panel
   setupPanelNewGame_Clothes(); // Setup New Game - Clothes Panel
   await setupPanelNewGame_Settings(); // Setup New Game - Settings Panel
-  setupPanelJoinGame(); // Setup Join Game Panel
+  await setupPanelJoinGame(); // Setup Join Game Panel
   setupPanelGameTask(); // Setup Game Task Panel
   setupPanelGamePlay(); // Setup Game Play Panel
   setupPanelPlayerConsent(); // Setup Player Consent Panel
