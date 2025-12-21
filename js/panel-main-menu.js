@@ -115,7 +115,7 @@ export function setupPanelMainMenu(id = "main-menu") {
     btnJoinGame.className = "btn";
     btnJoinGame.id = `${panel.panelID}.button.joinGame`;
     btnJoinGame.setAttribute("data-panel-hide", "*");
-    btnJoinGame.setAttribute("data-panel-show", "panel-join-game, panel-player-overview");
+    btnJoinGame.setAttribute("data-panel-show", "panel-join-game");
     setI18n(btnJoinGame, "ui.panel-main-menu.button.joinGame");
     btnRow.appendChild(btnJoinGame);
 
