@@ -21,10 +21,10 @@
   "ui.panel-main-menu.button.createGame": "Nieuw Spel",
   "ui.panel-main-menu.button.joinGame": "Deelnemen aan Spel",
 
-  "ui.panel-joingame.header": "Deelnemen aan Spel",
-  "ui.panel-joingame.button.return": "Terug naar Hoofdmenu",
-  "ui.panel-joingame.body.button.gameID": "Spel ID: {gameID}",
-  "ui.panel-joingame.body.code.label": "Voer de code in voor spel {gameID}:",
+  "ui.panel-join-game.header": "Deelnemen aan Spel",
+  "ui.panel-join-game.button.return": "Terug naar Hoofdmenu",
+  "ui.panel-join-game.button.game": "Doe mee met: {gameName} ({gameID})",
+  "ui.panel-join-game.code.label": "Voer de code in voor spel {gameID}:",
 
   "ui.panel-new-game.button.main-menu": "Terug naar Hoofdmenu",
   "ui.panel-new-game.button.back": "Terug",
