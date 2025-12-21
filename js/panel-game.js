@@ -10,6 +10,8 @@ import {
   listGames,
 } from "./firebase/firebase-game.js";
 import { switchPanel } from "./panelnavigation.js";
+import { presenceBindToFirebase } from "./presence.js";
+import { startMyPresence } from "./firebase/firebase-presence.js";
 
 // Panels
 export function setupPanelGameTask(id = "game-task") {
@@ -102,6 +104,13 @@ export async function joinGame(gameCode, gameID) {
     const result = await joinGameFB(gameID, gameCode);
     console.log("joinGame result:", result);
     // return result.success;
+
+    if (result.success) {
+      presenceBindToFirebase(gameID, gameCode);
+      startMyPresence(gameID, gameCode, PLAYER.id, {
+        name: PLAYER.name || null,
+      });
+    }
   }
 }
 
