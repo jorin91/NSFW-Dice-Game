@@ -20,7 +20,7 @@ const GAMESTATE_MODEL = {
     currentPlayerTurnIndex: 0, // index van speler die nu aan de beurt is
     currentPlayerTurnRoll: 0, // huidige worp van de speler die aan de beurt is
     currentTask: null, // huidige taak
-  }
+  },
 };
 
 // Huidige game-code waarmee we aan Firebase gekoppeld zijn
