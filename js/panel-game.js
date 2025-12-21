@@ -182,4 +182,9 @@ export async function setupPanelPlayerConsent(
   agreeButton.className = "btn";
   setI18n(agreeButton, "ui.panel-player-consent.button.agree");
   buttonRow.appendChild(agreeButton);
+
+  agreeButton.addEventListener("click", async (e) => {
+    PLAYER.game.consent = true;
+    await joinGame(gameCode, gameID);
+  });
 }
