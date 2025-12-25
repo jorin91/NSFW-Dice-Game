@@ -38,7 +38,7 @@ export async function setupPanelJoinGame(id = "join-game", perRow = 6) {
     rowEl.appendChild(btn);
 
     btn.addEventListener("click", () => {
-      buttonContainer = btn.parentElement;
+      buttonContainer = btn.parentElement();
       if (!buttonContainer) return;
 
       buttonContainer.innerHTML = "";
