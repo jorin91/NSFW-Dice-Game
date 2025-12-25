@@ -1,7 +1,8 @@
 // js/panel-joingame.js
 import { setI18n } from "./lang_i18n.js";
-import { listGames } from "./firebase/firebase-game.js";
+import { listGames, gameCodeMatches } from "./firebase/firebase-game.js";
 import { makeInputField, getPanel, makePanel } from "./elementHelpers.js";
+import { joinGame } from "./panel-game.js";
 
 export async function setupPanelJoinGame(id = "join-game", perRow = 6) {
   let panel = getPanel(id);
@@ -34,13 +35,47 @@ export async function setupPanelJoinGame(id = "join-game", perRow = 6) {
     btn.setAttribute("data-game-id", game.gameID);
     btn.setAttribute("data-game-name", game.gameName);
     btn.textContent = `${game.gameName} (${game.gameID})`;
-    // btn.addEventListener("click", gameButtonClick);
     rowEl.appendChild(btn);
+
+    btn.addEventListener("click", () => {
+      buttonContainer = btn.parentElement;
+      if (!buttonContainer) return;
+
+      buttonContainer.innerHTML = "";
+      const gameID = btn.getAttribute("data-game-id");
+
+      const inputField = makeInputField(
+        "gamecode",
+        "text",
+        {},
+        { label: "ui.panel-join-game.code.label", labelArgs: { gameID } }
+      );
+
+      buttonContainer.appendChild(inputField.wrap);
+
+      const confirmBtn = document.createElement("button");
+      setI18n(confirmBtn, "ui.panel-join-game.code.confirm-button");
+      confirmBtn.className = "btn";
+
+      confirmBtn.addEventListener("click", () => {
+        const gameCode = inputField.input.value;
+        if (gameCodeMatches(gameID, gameCode)) {
+          // Proceed to join game
+          joinGame(gameCode, gameID);
+        }
+      });
+
+      buttonContainer.appendChild(confirmBtn);
+    });
+
     count++;
   }
 
   // Build footer
   panel.footer.innerHTML = "";
+  const buttonContainer = document.createElement("div");
+  buttonContainer.className = "row";
+  panel.footer.appendChild(buttonContainer);
 }
 
 function gameButtonClick(e) {
