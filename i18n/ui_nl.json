@@ -25,6 +25,7 @@
   "ui.panel-join-game.button.return": "Terug naar Hoofdmenu",
   "ui.panel-join-game.button.game": "Spel: {gameName} ({gameID})",
   "ui.panel-join-game.code.label": "Voer de code in voor spel {gameID}:",
+  "ui.panel-join-game.code.confirm-button": "Speel mee",
 
   "ui.panel-new-game.button.main-menu": "Terug naar Hoofdmenu",
   "ui.panel-new-game.button.back": "Terug",
