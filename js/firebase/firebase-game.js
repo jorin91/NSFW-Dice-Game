@@ -7,7 +7,7 @@ import { randomNumberString } from "../utils.js";
  * Check of een game bestaat in Firebase.
  * Dit checkt alleen of de node `games/{gameID}` bestaat.
  */
-async function gameExists(gameID) {
+export async function gameExists(gameID) {
   const gameRef = ref(firebaseDB, `games/${gameID}`);
   const snapshot = await get(gameRef);
   return snapshot.exists();
@@ -17,7 +17,7 @@ async function gameExists(gameID) {
  * Bestaat deze gameCode binnen dit gameID?
  * Dit checkt of `games/{gameID}/{gameCode}` bestaat.
  */
-async function gameCodeMatches(gameID, gameCode) {
+export async function gameCodeMatches(gameID, gameCode) {
   const codeRef = ref(firebaseDB, `games/${gameID}/${gameCode}`);
   const snapshot = await get(codeRef);
   return snapshot.exists();
