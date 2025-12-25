@@ -38,7 +38,7 @@ export async function setupPanelJoinGame(id = "join-game", perRow = 6) {
     rowEl.appendChild(btn);
 
     btn.addEventListener("click", () => {
-      buttonContainer = btn.parentElement();
+      buttonContainer = document.getElementById("panel-join-game.footer.buttons");
       if (!buttonContainer) return;
 
       buttonContainer.innerHTML = "";
@@ -75,6 +75,7 @@ export async function setupPanelJoinGame(id = "join-game", perRow = 6) {
   panel.footer.innerHTML = "";
   const buttonContainer = document.createElement("div");
   buttonContainer.className = "row";
+  buttonContainer.id = "panel-join-game.footer.buttons";
   panel.footer.appendChild(buttonContainer);
 }
 
