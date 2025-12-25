@@ -110,7 +110,7 @@ export async function joinGame(gameCode, gameID) {
       startMyPresence(gameID, gameCode, PLAYER.id, {
         name: PLAYER.name || null,
       });
-      switchPanel("*", "game-play");
+      switchPanel("*", "panel-game-play");
     }
   }
 }
