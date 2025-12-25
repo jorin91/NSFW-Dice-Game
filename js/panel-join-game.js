@@ -38,7 +38,7 @@ export async function setupPanelJoinGame(id = "join-game", perRow = 6) {
     rowEl.appendChild(btn);
 
     btn.addEventListener("click", () => {
-      buttonContainer = document.getElementById("panel-join-game.footer.buttons");
+      const buttonContainer = document.getElementById("panel-join-game.footer.buttons");
       if (!buttonContainer) return;
 
       buttonContainer.innerHTML = "";
@@ -78,33 +78,3 @@ export async function setupPanelJoinGame(id = "join-game", perRow = 6) {
   buttonContainer.id = "panel-join-game.footer.buttons";
   panel.footer.appendChild(buttonContainer);
 }
-
-function gameButtonClick(e) {
-  const gameID = e.currentTarget.getAttribute("data-game-id");
-
-  let bodyCode = document.getElementById("panel-joingame.body.code");
-  if (bodyCode) {
-    bodyCode.innerHTML = "";
-  } else {
-    const body = document.getElementById("panel-joingame.body");
-    if (!body) return;
-
-    const parent = body.parentElement;
-
-    bodyCode = document.createElement("div");
-    bodyCode.id = "panel-joingame.body.code";
-    bodyCode.className = "row centerWrap centerContent";
-    parent.insertBefore(bodyCode, body.nextSibling);
-  }
-
-  const inputField = makeInputField(
-    "gamecode",
-    "text",
-    {},
-    { label: "ui.panel-joingame.body.code.label", labelArgs: { gameID } }
-  );
-  inputField.wrap.className = "row";
-  bodyCode.appendChild(inputField.wrap);
-}
-
-function codeConfirmClick(e) {}
