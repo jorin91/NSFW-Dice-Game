@@ -3,6 +3,7 @@ import { setI18n } from "./lang_i18n.js";
 import { listGames, gameCodeMatches } from "./firebase/firebase-game.js";
 import { makeInputField, getPanel, makePanel } from "./elementHelpers.js";
 import { joinGame } from "./panel-game.js";
+import { toast } from "./toast.js";
 
 export async function setupPanelJoinGame(id = "join-game", perRow = 6) {
   let panel = getPanel(id);
@@ -62,6 +63,9 @@ export async function setupPanelJoinGame(id = "join-game", perRow = 6) {
         if (gameCodeMatches(gameID, gameCode)) {
           // Proceed to join game
           joinGame(gameCode, gameID);
+        } else {
+          // Show error (could use toast or similar)
+          toast("Invalid game code. Please try again.", true);
         }
       });
 
