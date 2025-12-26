@@ -138,9 +138,7 @@ export async function joinGame(gameCode, gameID) {
       });
 
       // Add self to GAMESTATE players if not already present
-      if (!GAMESTATE.players.find((p) => p.id === PLAYER.id)) {
-        GAMESTATE.players.push(PLAYER);
-      }
+      GAMESTATE.players[PLAYER.id] = PLAYER;
 
       // Show game play panel
       switchPanel("*", "panel-game-play");
@@ -250,7 +248,8 @@ function setupElementPlayers(
     playerRow.innerHTML = "";
   }
 
-  for (const player of players) {
+  for (const player of Object.values(players || {})) {
+
     const playerEl = document.createElement("div");
     playerEl.className = "player-bubble";
 
