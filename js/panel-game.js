@@ -93,7 +93,7 @@ export async function createGame(settings) {
   GAMESTATE.tasks = await getTaskModel(); // await task as last step to ensure settings are ready
 
   const result = await createGameFB();
-  console.log("createGame result:", result);
+  toast(`{${result.message}}`, !result.success, !result.success);
   return result.success;
 }
 
@@ -104,7 +104,7 @@ export async function joinGame(gameCode, gameID) {
   } else {
     const result = await joinGameFB(gameID, gameCode);
     if (result.success) {
-      toast
+      toast(`{${result.message}}`, !result.success, !result.success);
       presenceBindToFirebase(gameID, gameCode);
       startMyPresence(gameID, gameCode, PLAYER.id, {
         name: PLAYER.name || null,
