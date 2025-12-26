@@ -12,6 +12,7 @@ import {
 import { switchPanel } from "./panelnavigation.js";
 import { presenceBindToFirebase } from "./presence.js";
 import { startMyPresence } from "./firebase/firebase-presence.js";
+import { toast } from "./toast.js";
 
 // Panels
 export function setupPanelGameTask(id = "game-task") {
@@ -102,10 +103,8 @@ export async function joinGame(gameCode, gameID) {
     switchPanel("*", "panel-player-consent");
   } else {
     const result = await joinGameFB(gameID, gameCode);
-    console.log("joinGame result:", result);
-    // return result.success;
-
     if (result.success) {
+      toast
       presenceBindToFirebase(gameID, gameCode);
       startMyPresence(gameID, gameCode, PLAYER.id, {
         name: PLAYER.name || null,
