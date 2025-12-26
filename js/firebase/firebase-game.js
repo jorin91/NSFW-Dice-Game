@@ -2,6 +2,7 @@
 import { GAMESTATE, gameBindToFirebase } from "../gamestate.js";
 import { firebaseDB, ref, set, get } from "./firebase-init.js";
 import { randomNumberString } from "../utils.js";
+import { toast } from "../toast.js";
 
 /**
  * Check of een game bestaat in Firebase.
@@ -32,7 +33,7 @@ export async function createGameFB() {
   let gameCode = GAMESTATE.gameCode;
 
   if (!gameID) {
-    return { success: false, message: "ui.firebase.createGame.noGameID" };
+    return { success: false, message: "ui.firebase.game.create.noGameID" };
   }
 
   try {
@@ -50,10 +51,10 @@ export async function createGameFB() {
     // Lokale binding
     gameBindToFirebase(gameID, gameCode);
 
-    return { success: true, message: "ui.firebase.createGame.success" };
+    return { success: true, message: "ui.firebase.game.create.success" };
   } catch (err) {
     console.error("createGame error:", err);
-    return { success: false, message: "ui.firebase.createGame.error" };
+    return { success: false, message: "ui.firebase.game.create.error" };
   }
 }
 
@@ -63,23 +64,23 @@ export async function createGameFB() {
  */
 export async function joinGameFB(gameID, gameCode) {
   if (!gameID || !gameCode) {
-    return { success: false, message: "ui.firebase.joinGame.noGameIDCode" };
+    return { success: false, message: "ui.firebase.join.game.noIDCode" };
   }
 
   try {
     if (!(await gameExists(gameID))) {
-      return { success: false, message: "ui.firebase.joinGame.notFoundID" };
+      return { success: false, message: "ui.firebase.game.join.notFoundID" };
     }
 
     if (!(await gameCodeMatches(gameID, gameCode))) {
-      return { success: false, message: "ui.firebase.joinGame.wrongCode" };
+      return { success: false, message: "ui.firebase.game.join.wrongCode" };
     }
 
     gameBindToFirebase(gameID, gameCode);
-    return { success: true, message: "ui.firebase.joinGame.success" };
+    return { success: true, message: "ui.firebase.game.join.success" };
   } catch (err) {
     console.error("joinGame error:", err);
-    return { success: false, message: "ui.firebase.joinGame.error" };
+    return { success: false, message: "ui.firebase.game.join.error" };
   }
 }
 
@@ -136,19 +137,19 @@ export async function listGames(gameID = null, gameCode = null) {
 
       const exists = await gameExists(id);
       if (!exists) {
-        return { success: false, reason: "game_not_found", gameID: id, gameCode: code };
+        return { success: false, reason: "ui.firebase.game.list.notFoundID", gameID: id, gameCode: code };
       }
 
       const matches = await gameCodeMatches(id, code);
       if (!matches) {
-        return { success: false, reason: "invalid_game_code", gameID: id, gameCode: code };
+        return { success: false, reason: "ui.firebase.game.list.wrongCode", gameID: id, gameCode: code };
       }
 
       const stateRef = ref(firebaseDB, `games/${id}/${code}`);
       const snapshot = await get(stateRef);
 
       if (!snapshot.exists()) {
-        return { success: false, reason: "state_not_found", gameID: id, gameCode: code };
+        return { success: false, reason: "ui.firebase.game.list.notFoundGameState", gameID: id, gameCode: code };
       }
 
       const state = snapshot.val() || {};
@@ -203,7 +204,7 @@ export async function listGames(gameID = null, gameCode = null) {
 
     return list;
   } catch (err) {
-    console.error("listGames error:", err);
+    toast("{ui.firebase.game.list.error}", true, true);
 
     const hasID = gameID != null && String(gameID).trim().length > 0;
     const hasCode = gameCode != null && String(gameCode).trim().length > 0;
@@ -211,7 +212,7 @@ export async function listGames(gameID = null, gameCode = null) {
     if (hasID || hasCode) {
       return {
         success: false,
-        reason: "exception",
+        reason: "ui.firebase.game.list.error",
         gameID: hasID ? String(gameID).trim() : null,
         gameCode: hasCode ? String(gameCode).trim() : null,
       };
