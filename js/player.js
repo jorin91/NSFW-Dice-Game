@@ -14,9 +14,11 @@ const PLAYER_MODEL = {
     points: 0, // gegooide punten in huidige beurt
     rerolls: 0, // aantal resterende rerolls van speler. word gebruikt om iets opnieuw te doen zoals een andere opdracht, mogelijk andere opties.
     safe: false, // speler is veilig in huidige game -> gewonnen
+    loser: false, // speler heeft verloren in huidige game
     playerResultType: null, // Word ingevuld volgens de TASKPLAYERTARGET_ENUM met spelresultaat van de speler in de huidige ronde (zoals loser, winner, other)
     consent: false, // speler stemt in met deelname
     clothing: null, // kledingstukken van de speler
+    rank: 0, // rang van de speler, voor safe spelers, in de huidige game (1e, 2e, etc)
   }
 };
 
