@@ -69,9 +69,6 @@ export function setupPanelGamePlay(id = "game-play") {
 
   // Build footer
   panel.footer.innerHTML = "";
-
-  // Events
-  subscribeGameState("players", setupElementPlayers, { subtree: true });
 }
 
 // Game Functions
@@ -114,12 +111,16 @@ export async function joinGame(gameCode, gameID) {
     const result = await joinGameFB(gameID, gameCode);
     if (result.success) {
       toast(`{${result.message}}`, !result.success, !result.success);
+
+      // Bind presence system to this game
       presenceBindToFirebase(gameID, gameCode);
 
+      // Start presence for self
       startMyPresence(gameID, gameCode, PLAYER.id, {
         name: PLAYER.name || null,
       });
 
+      // Subscribe to presence updates
       _gamePresence = subscribePresenceOnline(gameID, gameCode, (evt) => {
         if (evt.type === "removed") {
           _playerOnline.set(evt.playerId, false);
@@ -133,8 +134,14 @@ export async function joinGame(gameCode, gameID) {
         setupElementPlayers(GAMESTATE.players);
       });
 
-      GAMESTATE.players.push(PLAYER); // add self to gamestate players
+      // Subscribe to GAMESTATE player changes to update UI
+      subscribeGameState("players", setupElementPlayers, { subtree: true });
 
+      // Add self to GAMESTATE players if not already present
+      const existing = GAMESTATE.players.find((p) => p.id === PLAYER.id);
+      if (!existing) GAMESTATE.players.push(PLAYER);
+
+      // Show game play panel
       switchPanel("*", "panel-game-play");
     }
   }
@@ -224,7 +231,12 @@ export async function setupPanelPlayerConsent(
   });
 }
 
-function setupElementPlayers(players, meta, id = "game-play-players-status", panelId = "game-play") {
+function setupElementPlayers(
+  players,
+  meta,
+  id = "game-play-players-status",
+  panelId = "game-play"
+) {
   let panel = getPanel(panelId);
   let playerRow = document.getElementById(id);
   if (!playerRow) {
