@@ -13,6 +13,7 @@ import { PLAYER } from "./player.js";
 import { getTaskModel } from "./task.js";
 import { getClothesModel } from "./clothing.js";
 import { createGame, joinGame } from "./panel-game.js";
+import { toast } from "./toast.js";
 
 // First step of new game: Player setup
 export function setupPanelNewGame_Player(id = "new-game-player") {
@@ -133,21 +134,17 @@ export function setupPanelNewGame_Player(id = "new-game-player") {
   const nextButton = document.createElement("button");
   nextButton.id = `${panel.panelID}.button.next`;
   nextButton.className = "btn";
-  nextButton.setAttribute("data-panel-show", "");
-  nextButton.setAttribute("data-panel-hide", "");
+  nextButton.setAttribute("data-panel-show", "panel-new-game-clothes");
+  nextButton.setAttribute("data-panel-hide", "*");
   setI18n(nextButton, "ui.panel-new-game.button.next");
 
   buttonRow.append(mainMenuButton, nextButton);
   panel.footer.appendChild(buttonRow);
 
   // Local function for incomplete player data warning
-  const warningID = `${panel.panelID}_player-no-data-warning`;
-  updatePlayerDataWarning(); // initial call
+  updatePlayerDataWarning(true); // initial call
 
-  function updatePlayerDataWarning() {
-    // zoek binnen footer, niet globaal
-    let warning = panel.footer.querySelector(`#${warningID}`);
-
+  function updatePlayerDataWarning(initial = false) {
     const missing =
       !PLAYER.name ||
       !PLAYER.age ||
@@ -157,26 +154,14 @@ export function setupPanelNewGame_Player(id = "new-game-player") {
 
     if (missing) {
       // Disable next button
-      nextButton.setAttribute("data-panel-show", "");
-      nextButton.setAttribute("data-panel-hide", "");
       nextButton.disabled = true;
 
-      if (!warning) {
-        warning = document.createElement("span");
-        warning.className = "footer error";
-        warning.id = warningID;
-        setI18n(warning, "ui.panel-new-game-player.missingPlayerData");
-        panel.footer.appendChild(warning);
+      if (!initial) {
+        toast("{ui.panel-new-game-player.missingPlayerData}", true);
       }
     } else if (!missing) {
       // Enable next button
-      nextButton.setAttribute("data-panel-show", "panel-new-game-clothes");
-      nextButton.setAttribute("data-panel-hide", `${panel.panelID}`);
       nextButton.disabled = false;
-
-      if (warning) {
-        warning.remove();
-      }
     }
   }
 }
@@ -537,8 +522,6 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
     settings.playerRerolls = parseInt(playerRerollsInput.input.value, 10);
     settings.loserCount = parseInt(loserCountInput.input.value, 10);
 
-    // zoek binnen footer, niet globaal
-    let warning = panel.footer.querySelector(`#${warningID}`);
     const missing =
       !settings.gameName ||
       !settings.gameCode ||
@@ -556,20 +539,10 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
       // Disable next button
       nextButton.disabled = true;
 
-      if (!warning) {
-        warning = document.createElement("span");
-        warning.className = "footer error";
-        warning.id = warningID;
-        setI18n(warning, "ui.panel-new-game-settings.incompleteSettings");
-        panel.footer.appendChild(warning);
-      }
+      toast("{ui.panel-new-game-settings.incompleteSettings}", true);
     } else if (!missing) {
       // Enable next button
       nextButton.disabled = false;
-
-      if (warning) {
-        warning.remove();
-      }
     }
 
     // console.log(settings);
