@@ -13,7 +13,7 @@ const GAMESTATE_MODEL = {
   gameID: null, // unieke game ID (8-cijferig)
   gameCode: null, // code voor multiplayer Firebase game
   settings: null, // game-instellingen
-  players: [], // spelerslijst
+  players: {}, // spelerslijst
   tasks: null, // takenlijst
   game: {
     currentRound: 0, // huidige ronde
