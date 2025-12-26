@@ -1,11 +1,16 @@
 import { firebaseDB } from "./firebase-init.js";
 import {
-    ref,
-    get,
-    set,
-    update,
-    remove,
-    onValue
+  ref,
+  get,
+  set,
+  update,
+  remove,
+  onValue,
+  onDisconnect,
+  onChildAdded,
+  onChildChanged,
+  onChildRemoved,
+  off,
 } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-database.js";
 
 /**
@@ -14,19 +19,19 @@ import {
  * - of een array van segmenten (["games", gameCode, "players", playerId])
  */
 function dbRef(pathOrSegments) {
-    if (Array.isArray(pathOrSegments)) {
-        const cleaned = pathOrSegments
-            .filter(Boolean)                      // null/undefined/"" eruit
-            .map(p => String(p).trim())          // naar string
-            .join("/");
-        return ref(firebaseDB, cleaned);
-    }
+  if (Array.isArray(pathOrSegments)) {
+    const cleaned = pathOrSegments
+      .filter(Boolean) // null/undefined/"" eruit
+      .map((p) => String(p).trim()) // naar string
+      .join("/");
+    return ref(firebaseDB, cleaned);
+  }
 
-    const path = String(pathOrSegments || "")
-        .replace(/^\/+/, "")  // leading slashes weg
-        .replace(/\/+$/, ""); // trailing slashes weg
+  const path = String(pathOrSegments || "")
+    .replace(/^\/+/, "") // leading slashes weg
+    .replace(/\/+$/, ""); // trailing slashes weg
 
-    return ref(firebaseDB, path || "/");
+  return ref(firebaseDB, path || "/");
 }
 
 /**
@@ -34,7 +39,7 @@ function dbRef(pathOrSegments) {
  * Voorbeeld: dbSet(["games", gameCode], {...})
  */
 export function dbSet(pathOrSegments, value) {
-    return set(dbRef(pathOrSegments), value);
+  return set(dbRef(pathOrSegments), value);
 }
 
 /**
@@ -42,7 +47,7 @@ export function dbSet(pathOrSegments, value) {
  * Voorbeeld: dbUpdate(["games", gameCode], { status: "running" })
  */
 export function dbUpdate(pathOrSegments, partial) {
-    return update(dbRef(pathOrSegments), partial);
+  return update(dbRef(pathOrSegments), partial);
 }
 
 /**
@@ -50,7 +55,7 @@ export function dbUpdate(pathOrSegments, partial) {
  * Voorbeeld: dbRemove(["games", gameCode, "players", playerId])
  */
 export function dbRemove(pathOrSegments) {
-    return remove(dbRef(pathOrSegments));
+  return remove(dbRef(pathOrSegments));
 }
 
 /**
@@ -58,9 +63,9 @@ export function dbRemove(pathOrSegments) {
  * Geeft de "kale" value terug (of null als het niet bestaat).
  */
 export async function dbGet(pathOrSegments) {
-    const snapshot = await get(dbRef(pathOrSegments));
-    if (!snapshot.exists()) return null;
-    return snapshot.val();
+  const snapshot = await get(dbRef(pathOrSegments));
+  if (!snapshot.exists()) return null;
+  return snapshot.val();
 }
 
 /**
@@ -74,12 +79,12 @@ export async function dbGet(pathOrSegments) {
  *   // later: stop();
  */
 export function subscribeValue(pathOrSegments, callback) {
-    const r = dbRef(pathOrSegments);
+  const r = dbRef(pathOrSegments);
 
-    const unsubscribe = onValue(r, (snapshot) => {
-        const value = snapshot.exists() ? snapshot.val() : null;
-        callback(value, snapshot);
-    });
+  const unsubscribe = onValue(r, (snapshot) => {
+    const value = snapshot.exists() ? snapshot.val() : null;
+    callback(value, snapshot);
+  });
 
-    return unsubscribe;
+  return unsubscribe;
 }
