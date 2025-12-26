@@ -1,3 +1,5 @@
+import { setI18n } from "./lang_i18n";
+
 export function toast(msg, logConsole = false) {
   let toastDiv = document.getElementById("toast");
   if (!toastDiv) {
@@ -7,6 +9,7 @@ export function toast(msg, logConsole = false) {
     document.body.appendChild(toastDiv);
   }
   toastDiv.textContent = msg;
+  setI18n(toastDiv, null, null, null, true);
   if (logConsole) console.log(`Toast Message:\n${msg}`);
   toastDiv.style.pointerEvents = "auto";
   toastDiv.style.opacity = "1";
