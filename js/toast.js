@@ -6,13 +6,15 @@ export function toast(msg, isError = false, logConsole = false) {
     toastDiv = document.createElement("div");
     toastDiv.id = "toast";
     toastDiv.className = "toast";
-    
-    if (isError) {
-      toastDiv.classList.add("error");
-    }
-
     document.body.appendChild(toastDiv);
   }
+
+  if (isError) {
+    toastDiv.classList.add("error");
+  } else {
+    toastDiv.classList.remove("error");
+  }
+
   toastDiv.textContent = msg;
   setI18n(toastDiv, msg, null, null, true);
   if (logConsole) console.log(`Toast Message:\n${msg}`);
