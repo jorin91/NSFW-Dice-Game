@@ -206,7 +206,6 @@ body {
 .row.small {
   gap: 8px !important;
 }
-
 /* Collomn Layouts */
 .col.small {
   gap: 8px !important;
@@ -238,4 +237,26 @@ body {
 /* Text Colors */
 .error {
   color: var(--accent4) !important;
+}
+/* Player Card */
+.player-bubble {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1;
+  background: var(--accent7);
+  border: 1px solid var(--accent7);
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: none;
+}
+.player-bubble.safe {
+  border: 1px solid var(--accent5);
+}
+.player-bubble.loser {
+  border: 1px solid var(--accent4);
+}
+.player-bubble.offline {
+  background: var(--accent7-dark) !important;
+  border: 1px dashed var(--accent7-dark) !important;
 }
