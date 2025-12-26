@@ -1,11 +1,16 @@
 import { setI18n } from "./lang_i18n";
 
-export function toast(msg, logConsole = false) {
+export function toast(msg, isError = false, logConsole = false) {
   let toastDiv = document.getElementById("toast");
   if (!toastDiv) {
     toastDiv = document.createElement("div");
     toastDiv.id = "toast";
     toastDiv.className = "toast";
+    
+    if (isError) {
+      toastDiv.classList.add("error");
+    }
+
     document.body.appendChild(toastDiv);
   }
   toastDiv.textContent = msg;
