@@ -243,14 +243,20 @@ function setupElementPlayers(players, meta, id = "game-play-players-status", pan
     const isOnline = _playerOnline.get(player.id) ?? false;
     if (!isOnline) {
       playerEl.classList.add("offline");
+    } else {
+      playerEl.classList.remove("offline");
     }
 
     if (player.game.safe) {
       playerEl.classList.add("safe");
+    } else {
+      playerEl.classList.remove("safe");
     }
 
     if (player.game.loser) {
       playerEl.classList.add("loser");
+    } else {
+      playerEl.classList.remove("loser");
     }
 
     playerEl.innerText = `${player.name}${isOnline ? "" : " (offline)"}`;
