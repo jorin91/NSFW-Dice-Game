@@ -73,14 +73,19 @@
   "ui.settings.gameCode": "Spel Code",
   "ui.settings.gameID": "Spel ID",
 
-  "ui.firebase.createGame.noGameID": "Er is geen game-ID ingesteld.",
-  "ui.firebase.createGame.idExistsRetry": "Game-ID bestaat al, nieuw ID wordt gegenereerd...",
-  "ui.firebase.createGame.success": "De game is succesvol aangemaakt.",
-  "ui.firebase.createGame.error": "Er is een fout opgetreden bij het aanmaken van de game.",
+  "ui.firebase.game.create.noGameID": "Er is geen game-ID ingesteld.",
+  "ui.firebase.game.create.idExistsRetry": "Game-ID bestaat al, nieuw ID wordt gegenereerd...",
+  "ui.firebase.game.create.success": "De game is succesvol aangemaakt.",
+  "ui.firebase.game.create.error": "Er is een fout opgetreden bij het aanmaken van de game.",
 
-  "ui.firebase.joinGame.noGameIDCode": "Geen game-ID of game-code opgegeven.",
-  "ui.firebase.joinGame.notFound": "Deze game bestaat niet.",
-  "ui.firebase.joinGame.wrongCode": "De opgegeven game-code is onjuist.",
-  "ui.firebase.joinGame.success": "Je bent succesvol aangesloten bij de game.",
-  "ui.firebase.joinGame.error": "Er is een fout opgetreden bij het joinen van de game."
+  "ui.firebase.game.join.noIDCode": "Geen game-ID of game-code opgegeven.",
+  "ui.firebase.game.join.notFoundID": "Geen spel gevonden met deze ID.",
+  "ui.firebase.game.join.wrongCode": "Onjuiste code voor dit spel.",
+  "ui.firebase.game.join.success": "Je bent succesvol aangesloten bij de game.",
+  "ui.firebase.game.join.error": "Er is een fout opgetreden bij het deelnemen aan het spel.",
+
+  "ui.firebase.game.list.notFoundID": "Geen spel gevonden met deze ID.",
+  "ui.firebase.game.list.wrongCode": "Onjuiste code voor dit spel.",
+  "ui.firebase.game.list.notFoundGameState": "Geen spelstatus gevonden voor dit spel.",
+  "ui.firebase.game.list.error": "Er is een fout opgetreden bij het ophalen van een lijst met spellen."
 }
