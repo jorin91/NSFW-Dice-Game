@@ -5,6 +5,7 @@ import { makeInputField, getPanel, makePanel } from "./elementHelpers.js";
 import { joinGame } from "./panel-game.js";
 import { toast } from "./toast.js";
 import { switchPanel } from "./panelnavigation.js";
+import { PLAYER } from "./player.js";
 
 export async function setupPanelJoinGame(id = "join-game", perRow = 6) {
   // Check player data first
