@@ -301,7 +301,7 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   );
   gameNameInput.input.addEventListener("change", () => {
     settings.gameName = gameNameInput.input.value;
-    updateIncompleteSettingsWarning();
+    updateIncompleteSettingsWarning(true);
   });
   gameNameContainer.append(gameNameHeader, gameNameInput.wrap);
 
@@ -323,7 +323,7 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   rollsInput.input.addEventListener("change", () => {
     const val = parseInt(rollsInput.input.value, 10);
     settings.rolls = Number.isFinite(val) && val > 0 ? val : 3;
-    updateIncompleteSettingsWarning();
+    updateIncompleteSettingsWarning(true);
   });
   rollsContainer.append(rollsHeader, rollsInput.wrap);
 
@@ -345,7 +345,7 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   pointsInput.input.addEventListener("change", () => {
     const val = parseInt(pointsInput.input.value, 10);
     settings.score = Number.isFinite(val) && val > 0 ? val : 3;
-    updateIncompleteSettingsWarning();
+    updateIncompleteSettingsWarning(true);
   });
   pointsContainer.append(pointsHeader, pointsInput.wrap);
 
@@ -367,7 +367,7 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   dicesInput.input.addEventListener("change", () => {
     const val = parseInt(dicesInput.input.value, 10);
     settings.dices = Number.isFinite(val) && val > 0 ? val : 5;
-    updateIncompleteSettingsWarning();
+    updateIncompleteSettingsWarning(true);
   });
   dicesContainer.append(dicesHeader, dicesInput.wrap);
 
@@ -387,7 +387,7 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   );
   canRerollInput.input.addEventListener("change", () => {
     settings.playersCanReroll = canRerollInput.input.checked;
-    updateIncompleteSettingsWarning();
+    updateIncompleteSettingsWarning(true);
   });
   canRerollContainer.append(canRerollHeader, canRerollInput.wrap);
 
@@ -409,7 +409,7 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   playerRerollsInput.input.addEventListener("change", () => {
     const val = parseInt(playerRerollsInput.input.value, 10);
     settings.playerRerolls = Number.isFinite(val) && val >= 0 ? val : 3;
-    updateIncompleteSettingsWarning();
+    updateIncompleteSettingsWarning(true);
   });
   playerRerollsContainer.append(playerRerollsHeader, playerRerollsInput.wrap);
 
@@ -431,7 +431,7 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   loserCountInput.input.addEventListener("change", () => {
     const val = parseInt(loserCountInput.input.value, 10);
     settings.loserCount = Number.isFinite(val) && val > 0 ? val : 1;
-    updateIncompleteSettingsWarning();
+    updateIncompleteSettingsWarning(true);
   });
   loserCountContainer.append(loserCountHeader, loserCountInput.wrap);
 
@@ -519,7 +519,7 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
   const warningID = `${panel.panelID}_incomplete-settings-warning`;
   // updateIncompleteSettingsWarning(); // initial call
 
-  function updateIncompleteSettingsWarning() {
+  function updateIncompleteSettingsWarning(initial = false) {
     // Update settings to ensure we have latest values
     settings.gameName = gameNameInput.input.value;
     settings.rolls = parseInt(rollsInput.input.value, 10);
@@ -546,7 +546,9 @@ export async function setupPanelNewGame_Settings(id = "new-game-settings") {
       // Disable next button
       nextButton.disabled = true;
 
-      toast("{ui.panel-new-game-settings.incompleteSettings}", true);
+      if (!initial) {
+        toast("{ui.panel-new-game-settings.incompleteSettings}", true);
+      }
     } else if (!missing) {
       // Enable next button
       nextButton.disabled = false;
