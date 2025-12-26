@@ -60,7 +60,7 @@ export async function setupPanelJoinGame(id = "join-game", perRow = 6) {
 
       confirmBtn.addEventListener("click", async () => {
         const gameCode = inputField.input.value;
-        if (await gameCodeMatches(gameID, gameCode)) {
+        if (gameCode && await gameCodeMatches(gameID, gameCode)) {
           // Proceed to join game
           joinGame(gameCode, gameID);
         } else {
