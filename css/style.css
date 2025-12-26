@@ -189,7 +189,8 @@ body {
   background: var(--accent1-dark) !important;
   border: 1px solid var(--accent1-dark) !important;
 }
-.btn.ghost {
+.btn.ghost,
+.btn:disabled {
   background: transparent !important;
   color: var(--text_muted) !important;
 }
