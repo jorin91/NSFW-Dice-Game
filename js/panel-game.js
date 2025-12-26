@@ -97,7 +97,7 @@ export async function createGame(settings) {
   GAMESTATE.gameCode = settings.gameCode;
   GAMESTATE.gameName = settings.gameName;
   GAMESTATE.createdAt = new Date().toISOString();
-  GAMESTATE.players = [PLAYER];
+  // GAMESTATE.players = [PLAYER];
 
   GAMESTATE.tasks = await getTaskModel(); // await task as last step to ensure settings are ready
 
@@ -132,6 +132,8 @@ export async function joinGame(gameCode, gameID) {
         // UI trigger
         setupElementPlayers(GAMESTATE.players);
       });
+
+      GAMESTATE.players.push(PLAYER); // add self to gamestate players
 
       switchPanel("*", "panel-game-play");
     }
@@ -223,10 +225,9 @@ export async function setupPanelPlayerConsent(
 }
 
 function setupElementPlayers(players, meta, id = "game-play-players-status", panelId = "game-play") {
+  let panel = getPanel(panelId);
   let playerRow = document.getElementById(id);
   if (!playerRow) {
-    let panel = getPanel(panelId);
-
     playerRow = document.createElement("div");
     playerRow.className = "row";
     playerRow.id = id;
