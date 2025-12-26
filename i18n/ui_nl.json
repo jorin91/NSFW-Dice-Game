@@ -26,6 +26,7 @@
   "ui.panel-join-game.button.game": "Spel: {gameName} ({gameID})",
   "ui.panel-join-game.code.label": "Voer de code in voor spel {gameID}:",
   "ui.panel-join-game.code.confirm-button": "Speel mee",
+  "ui.panel-join-game.error.wrongCode": "Onjuiste code. Probeer het opnieuw.",
 
   "ui.panel-new-game.button.main-menu": "Terug naar Hoofdmenu",
   "ui.panel-new-game.button.back": "Terug",
