@@ -138,8 +138,9 @@ export async function joinGame(gameCode, gameID) {
       });
 
       // Add self to GAMESTATE players if not already present
-      const existing = GAMESTATE.players.find((p) => p.id === PLAYER.id);
-      if (!existing) GAMESTATE.players.push(PLAYER);
+      if (!GAMESTATE.players.find((p) => p.id === PLAYER.id)) {
+        GAMESTATE.players.push(PLAYER);
+      }
 
       // Show game play panel
       switchPanel("*", "panel-game-play");
@@ -273,5 +274,7 @@ function setupElementPlayers(
     }
 
     playerEl.innerText = `${player.name}${isOnline ? "" : " (offline)"}`;
+
+    playerRow.appendChild(playerEl);
   }
 }
