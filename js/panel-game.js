@@ -1,7 +1,7 @@
 // js/panel-game.js
 import { setI18n, getSupportedLanguages } from "./lang_i18n.js";
 import { makePanel, getPanel } from "./elementHelpers.js";
-import { GAMESTATE } from "./gamestate.js";
+import { GAMESTATE, subscribeGameState } from "./gamestate.js";
 import { PLAYER } from "./player.js";
 import { getTaskModel } from "./task.js";
 import {
@@ -11,8 +11,14 @@ import {
 } from "./firebase/firebase-game.js";
 import { switchPanel } from "./panelnavigation.js";
 import { presenceBindToFirebase } from "./presence.js";
-import { startMyPresence } from "./firebase/firebase-presence.js";
+import {
+  startMyPresence,
+  subscribePresenceOnline,
+} from "./firebase/firebase-presence.js";
 import { toast } from "./toast.js";
+
+export let _gamePresence = null;
+const _playerOnline = new Map();
 
 // Panels
 export function setupPanelGameTask(id = "game-task") {
@@ -63,6 +69,9 @@ export function setupPanelGamePlay(id = "game-play") {
 
   // Build footer
   panel.footer.innerHTML = "";
+
+  // Events
+  subscribeGameState("players", setupElementPlayers, { subtree: true });
 }
 
 // Game Functions
@@ -106,9 +115,24 @@ export async function joinGame(gameCode, gameID) {
     if (result.success) {
       toast(`{${result.message}}`, !result.success, !result.success);
       presenceBindToFirebase(gameID, gameCode);
+
       startMyPresence(gameID, gameCode, PLAYER.id, {
         name: PLAYER.name || null,
       });
+
+      _gamePresence = subscribePresenceOnline(gameID, gameCode, (evt) => {
+        if (evt.type === "removed") {
+          _playerOnline.set(evt.playerId, false);
+        } else if (evt.type === "added") {
+          _playerOnline.set(evt.playerId, true);
+        } else if (evt.type === "online-changed") {
+          _playerOnline.set(evt.playerId, !!evt.online);
+        }
+
+        // UI trigger
+        setupElementPlayers(GAMESTATE.players);
+      });
+
       switchPanel("*", "panel-game-play");
     }
   }
@@ -196,4 +220,39 @@ export async function setupPanelPlayerConsent(
     PLAYER.game.consent = true;
     await joinGame(gameCode, gameID);
   });
+}
+
+function setupElementPlayers(players, meta, id = "game-play-players-status", panelId = "game-play") {
+  let playerRow = document.getElementById(id);
+  if (!playerRow) {
+    let panel = getPanel(panelId);
+
+    playerRow = document.createElement("div");
+    playerRow.className = "row";
+    playerRow.id = id;
+
+    panel.body.appendChild(playerRow);
+  } else {
+    playerRow.innerHTML = "";
+  }
+
+  for (const player of players) {
+    const playerEl = document.createElement("div");
+    playerEl.className = "player-bubble";
+
+    const isOnline = _playerOnline.get(player.id) ?? false;
+    if (!isOnline) {
+      playerEl.classList.add("offline");
+    }
+
+    if (player.game.safe) {
+      playerEl.classList.add("safe");
+    }
+
+    if (player.game.loser) {
+      playerEl.classList.add("loser");
+    }
+
+    playerEl.innerText = `${player.name}${isOnline ? "" : " (offline)"}`;
+  }
 }
