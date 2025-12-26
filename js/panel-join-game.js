@@ -8,19 +8,6 @@ import { switchPanel } from "./panelnavigation.js";
 import { PLAYER } from "./player.js";
 
 export async function setupPanelJoinGame(id = "join-game", perRow = 6) {
-  // Check player data first
-  const missing =
-    !PLAYER.name ||
-    !PLAYER.age ||
-    PLAYER.age <= 0 ||
-    !PLAYER.sex ||
-    !PLAYER.sexTarget;
-
-  if (missing) {
-    switchPanel("*", "join-game-player");
-    return;
-  }
-
   let panel = getPanel(id);
   if (!panel) panel = makePanel(id, false);
 
@@ -76,6 +63,18 @@ export async function setupPanelJoinGame(id = "join-game", perRow = 6) {
       confirmBtn.className = "btn";
 
       confirmBtn.addEventListener("click", async () => {
+        const missing =
+          !PLAYER.name ||
+          !PLAYER.age ||
+          PLAYER.age <= 0 ||
+          !PLAYER.sex ||
+          !PLAYER.sexTarget;
+
+        if (missing) {
+          switchPanel("*", "join-game-player");
+          return;
+        }
+
         const gameCode = inputField.input.value;
         if (gameCode && (await gameCodeMatches(gameID, gameCode))) {
           // Proceed to join game
