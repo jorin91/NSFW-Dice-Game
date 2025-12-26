@@ -65,7 +65,7 @@ export async function setupPanelJoinGame(id = "join-game", perRow = 6) {
           joinGame(gameCode, gameID);
         } else {
           // Show error (could use toast or similar)
-          toast("Invalid game code. Please try again.", true);
+          toast("{ui.panel-join-game.error.wrongCode}", true);
         }
       });
 
