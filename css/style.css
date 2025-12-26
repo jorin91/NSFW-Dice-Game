@@ -4,6 +4,7 @@
   --panel_header_bg_color: #2a2f3a;
   --panel_border: 1px solid #2a2f3a;
   --panel_border_radius: 14px;
+  --panel_shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
   --text: #e8eaf0;
   --text_muted: #aab0bd;
   --accent1: #5865f2; /* Blurple (Discord stijl) */
@@ -40,6 +41,22 @@ body {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  max-width: 500px;
+  background: var(--panel_header_bg_color);
+  padding: 10px 12px;
+  border: var(--panel_border);
+  border-radius: var(--panel_border_radius);
+  box-shadow: var(--panel_shadow);
+  white-space: pre-wrap;
+  z-index: 99999;
+  opacity: 0;
+  transition: opacity 1s ease;
+  pointer-events: none;
 }
 /* Panel Styles */
 .panel {
