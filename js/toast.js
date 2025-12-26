@@ -1,4 +1,4 @@
-import { setI18n } from "./lang_i18n";
+import { setI18n } from "./lang_i18n.js";
 
 export function toast(msg, isError = false, logConsole = false) {
   let toastDiv = document.getElementById("toast");
