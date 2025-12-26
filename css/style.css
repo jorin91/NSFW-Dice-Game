@@ -248,7 +248,7 @@ body {
   border: 1px solid var(--accent7);
   padding: 8px 12px;
   border-radius: 10px;
-  cursor: none;
+  color: var(--text);
 }
 .player-bubble.safe {
   border: 1px solid var(--accent5);
