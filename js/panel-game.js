@@ -115,11 +115,6 @@ export async function joinGame(gameCode, gameID) {
       // Bind presence system to this game
       presenceBindToFirebase(gameID, gameCode);
 
-      // Start presence for self
-      startMyPresence(gameID, gameCode, PLAYER.id, {
-        name: PLAYER.name || null,
-      });
-
       // Subscribe to presence updates
       _gamePresence = subscribePresenceOnline(gameID, gameCode, (evt) => {
         if (evt.type === "removed") {
@@ -136,6 +131,11 @@ export async function joinGame(gameCode, gameID) {
 
       // Subscribe to GAMESTATE player changes to update UI
       subscribeGameState("players", setupElementPlayers, { subtree: true });
+
+      // Start presence for self
+      startMyPresence(gameID, gameCode, PLAYER.id, {
+        name: PLAYER.name || null,
+      });
 
       // Add self to GAMESTATE players if not already present
       const existing = GAMESTATE.players.find((p) => p.id === PLAYER.id);
