@@ -14,6 +14,7 @@ import { getTaskModel } from "./task.js";
 import { getClothesModel } from "./clothing.js";
 import { createGame, joinGame } from "./panel-game.js";
 import { toast } from "./toast.js";
+import { switchPanel } from "./panelnavigation.js";
 
 // First step of new game: Player setup
 export function setupPanelNewGame_Player(id = "new-game-player") {
@@ -46,7 +47,7 @@ export function setupPanelNewGame_Player(id = "new-game-player") {
   nameInput.addEventListener("input", () => {
     const nameVal = nameInput.value.trim();
     PLAYER.name = nameVal || null;
-    updatePlayerDataWarning();
+    updatePlayerDataWarning(true);
   });
 
   // Leeftijd
@@ -65,7 +66,7 @@ export function setupPanelNewGame_Player(id = "new-game-player") {
   ageInput.addEventListener("input", () => {
     const ageVal = parseInt(ageInput.value, 10);
     PLAYER.age = Number.isFinite(ageVal) && ageVal > 0 ? ageVal : null;
-    updatePlayerDataWarning();
+    updatePlayerDataWarning(true);
   });
 
   // Geslacht (self)
@@ -88,7 +89,7 @@ export function setupPanelNewGame_Player(id = "new-game-player") {
   sexSelect.addEventListener("change", () => {
     const sexVal = sexSelect.value;
     PLAYER.sex = sexVal || null;
-    updatePlayerDataWarning();
+    updatePlayerDataWarning(true);
   });
 
   // Geslachtsvoorkeur (target)
@@ -111,7 +112,7 @@ export function setupPanelNewGame_Player(id = "new-game-player") {
   sexTargetSelect.addEventListener("change", () => {
     const sexTargetVal = sexTargetSelect.value;
     PLAYER.sexTarget = sexTargetVal || null;
-    updatePlayerDataWarning();
+    updatePlayerDataWarning(true);
   });
 
   // Add fields to body
@@ -134,9 +135,13 @@ export function setupPanelNewGame_Player(id = "new-game-player") {
   const nextButton = document.createElement("button");
   nextButton.id = `${panel.panelID}.button.next`;
   nextButton.className = "btn";
-  nextButton.setAttribute("data-panel-show", "panel-new-game-clothes");
-  nextButton.setAttribute("data-panel-hide", "*");
   setI18n(nextButton, "ui.panel-new-game.button.next");
+
+  nextButton.addEventListener("click", async (e) => {
+    if (updatePlayerDataWarning()) {
+      switchPanel("*", "panel-new-game-clothes");
+    }
+  });
 
   buttonRow.append(mainMenuButton, nextButton);
   panel.footer.appendChild(buttonRow);
@@ -163,6 +168,8 @@ export function setupPanelNewGame_Player(id = "new-game-player") {
       // Enable next button
       nextButton.disabled = false;
     }
+
+    return !missing;
   }
 }
 
